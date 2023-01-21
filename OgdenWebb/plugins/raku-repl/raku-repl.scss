@@ -1,0 +1,116 @@
+#raku-repl {
+    position: fixed;
+    bottom: 0;
+    left: 1vw;
+    width: 98vw;
+    z-index: 40;
+    opacity: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    justify-content: stretch;
+    grid-template-areas:
+        "input input"
+        "stdout stderr"
+}
+#Camelia-code {
+    visibility: hidden;
+	width: 100px;
+	height: 48px;
+	grid-area: input-start;
+}
+#raku-input {
+    display: flex;
+    flex-direction: row;
+    grid-area: input;
+    gap: 5px;
+}
+#raku-code {
+    border-color: darkblue;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: ridge;
+    visibility: inherit;
+    background-color: whitesmoke;
+}
+#raku-evaluate {
+    border-radius: 10px;
+    color: whitesmoke;
+    background-color: darkblue;
+    visibility: inherit;
+    border-width: 4px;
+    border-style: ridge;
+    padding: 1em;
+    font-weight: bold;
+    &:not([disabled]):hover {
+        border-color: red;
+    }
+    &:disabled {
+        background-color: grey;
+    }
+}
+#raku-hide {
+    visibility: inherit;
+    display: flex;
+    img {
+        width: 45px;
+        position: fixed;
+    }
+    .code-overlay {
+        width: 46px;
+        span {
+            display: block;
+            height: 10px;
+            width: 70px;
+            border-radius: 10px;
+            border-style: double;
+            border-color: red;
+            &:first-child {
+                transform: translate(-12px,19px) rotate(45deg);
+            }
+            &:last-child {
+                transform: translate(-12px,9px) rotate(-45deg);
+            }
+        }
+    }
+}
+#raku-connection {
+    border-style: inset;
+    border-width: 2px;
+    background-color: bisque;
+    padding: 0.3em;
+    align-self: center;
+    color: navy;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+#raku-ws-headout {
+    border-color: deepskyblue;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: ridge;
+    grid-area: stdout;
+    display: flex;
+    justify-content: start;
+    background-color: whitesmoke;
+    visibility: inherit;
+    legend {
+        color: darkblue;
+    visibility: inherit;
+    }
+}
+#raku-ws-headerr {
+    border-color: deeppink;
+    border-width: 2px;
+    border-radius: 10px;
+    border-style: ridge;
+    grid-area: stderr;
+    display: flex;
+    justify-content: start;
+    background-color: whitesmoke;
+    visibility: inherit;
+    legend {
+        color: darkred;
+    }
+}

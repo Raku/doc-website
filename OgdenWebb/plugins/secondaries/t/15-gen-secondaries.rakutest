@@ -1,0 +1,116 @@
+use v6.d;
+use Test;
+use File::Directory::Tree;
+use ProcessedPod;
+use RakuConfig;
+
+plan 15;
+
+my @triples;
+my %processed;
+my %data;
+my %config = get-config;
+my ProcessedPod $pp .= new;
+$pp.templates( 't/test-temps.rakuon' );
+$pp.modify-templates( %config<template-raku> );
+like $pp.tmpl<heading>.( %( :_test , ), {}), / 'secondaries' /, 'template installed';
+my &namespace-check;
+lives-ok { &namespace-check = EVALFILE %config<render> }, 'render callable evaluates';
+my &secondaries;
+lives-ok { &secondaries  = EVALFILE %config<compilation> }, 'compilation callable evaluates';
+my &cleanup;
+lives-ok { &cleanup = EVALFILE %config<transfer> }, 'transfer callable evaluates';
+lives-ok { &namespace-check( $pp, {} ) }, 'render callable lives';
+
+%data = $pp.get-data('heading');
+isa-ok %data<defs>, Associative, 'data structure established';
+
+=begin pod
+=TITLE First
+=SUBTITLE The first file
+
+=head1 First file first head
+
+Some text
+
+=head1 sub mover
+
+A routine in First
+
+=end pod
+
+=begin pod
+=TITLE Second
+=SUBTITLE Second file about class
+
+=head1 method mover
+
+This is in Class something.
+
+=head1 infix soft
+
+A soft infix syntax
+
+=end pod
+
+for ^2 -> $p {
+    my $name = "Synthetic_$p";
+    with $pp {
+        .pod-file.name = $name;
+        .pod-file.path = "doc/sythn/p_$p\.rakudoc";
+        .process-pod( $=pod[$p] );
+        .file-wrap(:filename($name), :dir<html>, :ext<html> );
+        %processed{ $name } = .emit-and-renew-processed-state;
+    }
+}
+is +%processed.keys, 2, 'two files in processed';
+lives-ok { @triples = &secondaries($pp,%processed, %() ) }, 'gen-secondaries lives';
+is @triples.elems,2, 'some secondaries generated';
+
+=begin pod
+=TITLE Difficult Heads
+=SUBTITLE complex pod in headers
+
+=head1 infix X<C«and»|Operators,and>
+
+Header with Indexing in title
+
+=head1 infix C«...»
+X<|Infix operators,...>X<|Infix operators,...^>X<|Infix operators,^...>X<|Infix operators,^...^>
+X<|Infix operators,…>X<|Infix operators,…^>X<|Infix operators,^…>X<|Infix operators,^…^>
+
+header with zero indexing afterwards
+
+=head2 method proc
+
+header with just name
+
+=end pod
+
+%processed = Empty;
+$pp .= new;
+$pp.templates( 't/test-temps.rakuon' );
+$pp.modify-templates( %config<template-raku> );
+&namespace-check( $pp, {} );
+%data = $pp.get-data('heading');
+my $name = 'Complex_headers';
+with $pp {
+    .pod-file.name = $name;
+    .pod-file.path = "doc/sythn/p_3\.rakudoc";
+    .process-pod( $=pod[2] );
+    .file-wrap(:filename($name), :dir<html>, :ext<html> );
+    %processed{ $name } = .emit-and-renew-processed-state;
+}
+
+@triples = &secondaries($pp,%processed, %() );
+my @expected = <routine/and.html routine/....html routine/proc.html>;
+is @triples.elems,@expected.elems, 'two secondaries generated';
+is @triples[0][0], any(@expected), 'got 1 right file';
+is @triples[1][0], any(@expected), 'got 2 right file';
+is @triples[2][0], any(@expected), 'got 3 right file';
+
+&cleanup($pp, %(), %() );
+is 'html/routine'.IO.dir( test => *.ends-with('html') ), (), 'routine directory emptied';
+is 'html/syntax'.IO.dir( test => *.ends-with('html') ), (), 'syntax directory emptied';
+
+done-testing;

@@ -1,0 +1,152 @@
+// Responsiveness
+@include from($navbar-breakpoint) {
+  .navbar-menu .navbar-start {
+    // NOTE: Does not work on Firefox yet. But since .navbar-search-wrapper's position is absolute, it may not matter.
+    &:has(~ .navbar-search-wrapper #query:focus) {
+      display: none;
+    }
+  }
+
+  #query {
+    transition: width 0.2s ease-out;
+
+    &:focus {
+      width: $search-query-input-width-expanded;
+    }
+  }
+}
+
+@include until($navbar-breakpoint) {
+  .navbar-search-wrapper {
+    top: 12%;
+  }
+}
+
+@include mobile {
+  body {
+    overflow-x: hidden;
+  }
+
+  .section {
+    padding: $size-6 $size-7;
+  }
+
+  // Navbar search
+  .navbar-item span {
+    display: block;
+    overflow: hidden;
+    padding: 0 5px 0 0;
+  }
+
+  // .navbar-item .control {
+  //   width: inherit;
+  // }
+
+  #query {
+    width: 100%;
+  }
+
+  .navbar-item .field .control:first-child {
+    width: 90%;
+  }
+
+  .navbar-item input {
+    width: 100%;
+  }
+
+  .footer {
+    height: auto;
+    padding: $size-6;
+    background-color: $grey-lightest;
+  }
+
+  .footer .level {
+    height: auto;
+  }
+
+  .raku.page-content {
+    padding: 1rem 0.75rem;
+  }
+
+  .tabcontent table td:nth-child(3) {
+    word-break: break-word;
+  }
+
+  a.raku-anchor,
+  .raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
+    visibility: visible;
+  }
+
+  .navbar-search-autocomplete {
+    width: calc(100% - 40px);
+  }
+
+  .error-icon {
+    position: relative;
+    right: 0;
+
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  .error-icon, error-content {
+    display: block;
+  }
+
+  .error-title,
+  .error-content .subtitle {
+    text-align: center;
+  }
+
+  .error-content .subtitle {
+    max-width: unset;
+  }
+
+  .error-content {
+    .level {
+      margin: 5rem auto;
+    }
+  }
+
+  .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+    max-height: calc(100vh - 250px);
+  }
+
+  .navbar-search-autocomplete {
+    display: block;
+    position: static;
+
+  }
+}
+
+@media only screen and (min-width: $tablet) and (max-width: $navbar-breakpoint) {
+  #query {
+    width: $search-query-input-width-tablet;
+  }
+}
+
+/* Smartphones (portrait) */
+@include until($smartphone-portrait) {
+  .navbar-search-autocomplete {
+    left: 0;
+    width: 100%;
+  }
+
+  .navbar.is-fixed-top .navbar-menu, .navbar.is-fixed-top-touch .navbar-menu {
+    max-height: calc(100vh - 50px);
+  }
+
+  .raku.page-header .page-edit {
+    position: relative;
+  }
+
+  .page-generated {
+    padding: 0.75rem;
+  }
+
+  .footer {
+    padding: 0.75rem 0.5rem;
+  }
+}

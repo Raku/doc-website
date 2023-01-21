@@ -1,0 +1,11 @@
+
+=begin pod
+=TITLE cro-run plugin for Collection
+
+This is a completion stage plugin for Collection.
+
+It simply serves the static html files generated in the output directory.
+
+The host and port can be configured using the mode configuration parameters.
+
+=end pod

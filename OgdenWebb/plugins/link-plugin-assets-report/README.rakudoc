@@ -1,0 +1,6 @@
+=begin pod
+=TITLE Test Link Report plugin for Collection
+
+More to do. Currently outputs four reports for links, plugins, templates, and assets.
+
+=end pod

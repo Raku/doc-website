@@ -1,0 +1,25 @@
+use Test;
+use Collection;
+use Pod::From::Cache;
+use File::Directory::Tree;
+plan 3;
+
+mktree 't/s/Language';
+'t/s/one.pod6'.IO.spurt: "=pod\nSome stuff\n";
+'t/s/Language/two.pod6'.IO.spurt: "=pod\nSome other stuff\n";
+
+my $cache = Pod::From::Cache.new(:extensions<pod6 pm6>, :doc-source<t/s>, :cache-path<t/c>, :progress(Nil))
+        but Post-cache;
+
+my &callable;
+lives-ok { &callable = EVALFILE 'raku-doc-change-routes.raku' }, 'got callable';
+
+&callable($cache, Pod::From::Cache, True, 's', '', {}, {} );
+my $rv = $cache.pod('t/s/language/two.pod6');
+isa-ok $rv[0], Pod::Block, 'got cache contents';
+like $rv[0].raku, / 'other stuff' /, 'got two.pod6';
+
+rmtree 't/s';
+rmtree 't/c';
+
+done-testing;

@@ -1,0 +1,71 @@
+use v6.d;
+use Test;
+use File::Directory::Tree;
+use ProcessedPod;
+use RakuConfig;
+plan 9;
+
+my @triples;
+my %data;
+my %config = get-config;
+my ProcessedPod $pp .= new;
+
+my &render-callable;
+lives-ok { &render-callable = EVALFILE %config<render> }, 'render callable evaluates';
+#my &compilation-callable;
+#lives-ok { &compilation-callable  = EVALFILE %config<compilation> }, 'compilation callable evaluates';
+my &cleanup-callable;
+lives-ok { &cleanup-callable = EVALFILE %config<transfer> }, 'transfer callable evaluates';
+
+# prepare test data
+%data = (
+:n1(%( :path<t>, :js-script<one-1.js>, :jquery<one-2.js>,)),
+# simple strings
+:n2(%( :path<t>, :js-script<two-1-1.js two-1-2.js>, :jquery<two-2-1.js two-2-2.js>,)),
+# arrays of str
+:n3(%( :js-link('hyper one', 'hyper two', 'hyper three',),)),
+# array of links
+:n4(%( :js-link('hyper four'),)),
+# one link
+:n5(%( :js-script( ['five.js', 1] ), )),
+# one order element
+:n6(%( :js-script( 'six-1.js', [ 'six-2.js',2] ) )),
+# one str and one order
+:n7(%( :jquery( ['seven-1.js', 3], 'seven-2.js', 'seven-3.js', ['seven-4.js',4]), )),
+# mixed elements, starting with an order
+);
+# set up local files
+my @names = <one-1 one-2 two-1-1 two-1-2 two-2-1 two-2-2 five six-1 six-2 seven-1 seven-2 seven-3 seven-4 >;
+for @names {
+    ("t/$_\.js").IO.spurt("data for test file $_")
+};
+# add data namespaces to pp
+for %data.kv -> $ns, %d {
+    $pp.add-data($ns, %d)
+}
+$pp.add-data('mode-name', 'testing-mode');
+# add js-jq namespace data
+$pp.add-data('gather-js-jq', %( :jquery-lib<JQUERY>, ) );
+
+lives-ok { @triples = &render-callable($pp, %()) }, 'compilation callable lives';
+is @triples.elems, @names.elems, 'all named files to be moved';
+my @files = 'assets/scripts/' <<~>> @names <<~>> '.js';
+subtest 'all files to be moved are names in triples', {
+    for ^@names.elems {
+        is @triples[$_][0], any(@files);
+    }
+};
+
+ok %config<template-raku>.IO ~~ :e & :f, 'template is created';
+my %temps;
+lives-ok { %temps = EVALFILE %config<template-raku> }, 'template evaluates to a hash';
+@files.append: "hyper one", "hyper two", "hyper three", "hyper four";
+like %temps<js>.({},{}), /
+    ['script' .+? @files .+] ** 3
+/, 'template seems ok';
+
+.unlink for 't/'.IO.dir(:test( *.ends-with('.js')));
+&cleanup-callable($pp, %(), %() );
+nok %config<template-raku>.IO ~~ :e, 'template gone';
+
+done-testing;

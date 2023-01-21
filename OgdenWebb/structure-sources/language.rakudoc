@@ -1,0 +1,24 @@
+=begin pod :no-glossary :page-content-columns
+=TITLE Raku Language Documentation
+
+Tutorials, general reference, migration guides and meta pages for the Raku language.
+
+=for ListFiles :select<kind=Language, category=beginning>
+At the beginning
+
+=for ListFiles :select<kind=Language, category=migration>
+Migration guides
+
+=for ListFiles :select<kind=Language, category=tutorial>
+Tutorials
+
+=for ListFiles :select<kind=Language, category=fundamental>
+Fundamental topics
+
+=for ListFiles :select<kind=Language, category=reference>
+General reference
+
+=for ListFiles :select<kind=Language, category=advanced>
+Advanced topics
+
+=end pod

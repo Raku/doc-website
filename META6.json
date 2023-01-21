@@ -1,0 +1,33 @@
+{
+  "name": "Raku-Official-Documentation",
+  "description": "Tool chain for creating the Raku official documentation site",
+  "version": "0.1.0",
+  "perl": "6.d",
+  "authors": [
+    "Richard Hainsworth, aka finanalyst"
+  ],
+  "auth": "zef:raku",
+  "depends": [
+    "Raku::Pod::Render",
+    "Pod::From::Cache",
+    "RakuConfig",
+    "Collection",
+    "Terminal::ANSIColor",
+    "Perl6::TypeGraph",
+    "Perl6::TypeGraph::Viz"
+  ],
+  "build-depends": [],
+  "test-depends": [],
+  "provides": {},
+  "resources": [],
+  "support": {
+    "bugtracker": "https://github.com/raku/doc-website/issues",
+    "source": "https://github.com/raku/doc-website.git"
+  },
+  "license": "Artistic-2.0",
+  "source-url": "git://github.com/raku/doc-website.git",
+  "bin": [
+    "bin_files/build-site"
+  ],
+  "source-type": "git"
+}

@@ -1,0 +1,10 @@
+=begin pod :no-toc :no-glossary
+
+=TITLE Error report
+
+These are errors associated with links in the content files.
+
+=for LinkErrorTest
+The following are files with links and responses
+
+=end pod

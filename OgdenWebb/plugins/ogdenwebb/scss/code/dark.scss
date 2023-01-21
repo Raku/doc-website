@@ -1,0 +1,59 @@
+@import "../../bulma/sass/utilities/functions.sass";
+
+/* Basic code colors */
+$code-background: #212426;
+$code-foreground: #f2f2f2;
+$code-selection: lighten($code-background, 10);
+
+$code-callable-color: #978DEB;
+$code-comment-color:  #6C7292;
+$code-keyword-color:  #8DE1EB;
+$code-number-color:   #6295E3;
+$code-operator-color: #E05C4C;
+$code-string-color:   #68F3CA;
+$code-type-color:     #E04C86;
+$code-variable-color: #EED891;
+
+/* Dark color theme */
+.cm-s-ayaya.CodeMirror {
+  background: $code-background;
+  color: $code-foreground;
+}
+
+.CodeMirror-gutters {
+  background-color: $code-background;
+  color: $code-comment-color;
+  border-right: 0;
+}
+
+.CodeMirror-linenumber {
+  color: $code-foreground;
+}
+
+
+.CodeMirror-selected,
+.CodeMirror-focused .CodeMirror-selected {
+  background: $code-selection;
+}
+
+.cm-s-ayaya {
+  span.cm-atom, span.function, span.routine { color: $code-callable-color; }
+  span.cm-comment, span.comment { color: $code-comment-color; }
+  span.cm-number, span.numeric { color: $code-number-color; }
+
+  span.cm-comment.cm-type { color: #5998a6; }
+
+  span.cm-keyword, span.keyword, span.declarator { color: $code-keyword-color; }
+  span.cm-string, span.string { color: $code-string-color; }
+
+  span.cm-variable, span.variable { color: $code-variable-color; }
+  span.cm-variable-2 { color: $code-variable-color; }
+  span.cm-variable-3 { color: $code-variable-color; }
+  span.cm-type, span.type { color: $code-type-color; }
+  span.cm-def { color: $code-keyword-color; }
+  span.cm-operator, span.assignment, span.operator { color: $code-operator-color; }
+}
+
+// Fix selection background
+textarea::-moz-selection { background: $code-background; }
+textarea::selection { background: $code-background; }

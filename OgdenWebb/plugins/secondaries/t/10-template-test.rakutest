@@ -1,0 +1,69 @@
+use v6.d;
+use Test;
+use RenderPod::Templating;
+plan 17;
+
+my %tml is LinkedVals;
+my $rv;
+
+lives-ok { %tml = EVALFILE 'header-templates.raku' }, 'hash is returned';
+bail-out 'no templates' unless %tml.elems;
+isa-ok %tml<heading>, Callable, 'got a callable in header template';
+%tml<escaped> = sub ($s) {
+    $s.uc
+};
+my %data = :heading( %(defs => {},) ), ;
+my %params = %(
+    text => 'Some text',
+    target => 'A_header',
+    top => '__TOP',
+    config => %( :name<testf>, :path<this/dir> ),
+    heading => %data<heading>,
+);
+ok %params<heading><defs> ~~ Associative, 'defs ok';
+lives-ok { $rv = %tml<heading>.(%params, %tml) }, 'closure lives';
+like $rv, /
+    '<h1 id="' .+
+    { %params<text> }
+    .+ '</h1>'
+    /, 'A simple header';
+is %data<heading><defs>.keys.Int,0, 'no change to defs';
+%params<text> = 'method coerce_type';
+$rv = %tml<heading>.(%params, %tml);
+is %data<heading><defs>.keys.Int, 1, 'new file with defn';
+isa-ok %data<heading><defs><testf>, Associative, 'a file/target Hash found';
+is %data<heading><defs><testf><A_HEADER><kind>, 'routine', 'kind correct';
+is %data<heading><defs><testf><A_HEADER><subkind>, 'method', 'subkind correct';
+is %data<heading><defs><testf><A_HEADER><category>, 'method', 'category correct';
+%params = %(
+    text => 'sub move-over',
+    target => 'moveover_header',
+    top => '__TOP',
+    config => %( :name<testf>, :path<this/dir> ),
+    heading => %data<heading>,
+);
+$rv = %tml<heading>.(%params, %tml);
+is %data<heading><defs>.elems,1, 'same file definition';
+%params = %(
+    text => 'sub move-over',
+    target => 'moveover_header',
+    top => '__TOP',
+    config => %( :name<testf2>, :path<this/dir> ),
+    heading => %data<heading>,
+);
+$rv = %tml<heading>.(%params, %tml);
+is %data<heading><defs>.elems,2, 'new file definition';
+%params = %(
+    text => 'The <code>*</code> twigil',
+    target => 'The_*_twigil',
+    top => '__TOP',
+    config => %( :name<testf>, :path<this/dir> ),
+    heading => %data<heading>,
+);
+$rv = %tml<heading>.(%params, %tml);
+is %data<heading><defs><testf>.elems, 3, 'another new definition in same file';
+is %data<heading><defs><testf><THE_*_TWIGIL><kind>, 'syntax', 'kind correct';
+is %data<heading><defs><testf><THE_*_TWIGIL><subkind>, 'twigil', 'subkind correct';
+is %data<heading><defs><testf><THE_*_TWIGIL><category>, 'twigil', 'category correct';
+
+done-testing;

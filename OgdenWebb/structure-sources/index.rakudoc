@@ -1,0 +1,80 @@
+=begin pod :no-toc :no-glossary :no-meta
+=TITLE Raku Documentation
+
+=Camelia
+
+Welcome to the I<alternative>N<put together with Collection> official documentation of the L<Raku|https://raku.org>
+programming language!
+
+Besides online browsing and searching, you can also
+L<contribute|https://github.com/Raku/doc>
+by reporting issues or sending patches.
+
+=for HR :class<yellowish-dots>
+
+=begin item :class<defn-item>
+L<Language Reference & Tutorials|language>
+
+A collection of documents describing, in detail, the various
+conceptual parts of the language.
+=end item
+=begin item  :class<defn-item>
+L<Website table of contents|toc>
+
+A Table of Contents for all the files in this documentation.
+
+=end item
+=begin item  :class<defn-item>
+L<Website itemized index|glossary>
+
+An index (or glossary) of all the items indexed in each of the documentation files.
+=end item
+
+=begin item  :class<defn-item>
+L<Type Reference|types>
+
+Index of built-in classes, roles and enums.
+
+=end item
+
+=begin item  :class<defn-item>
+L<Raku Programs|programs>
+
+A collection of documents describing the variables that affect the the Raku executable,
+how to run the p6doc documentation front-end,
+how to debug Raku programs, and how to hack on Raku
+source code.
+
+=end item
+
+=begin item :class<defn-item>
+L<FAQs (Frequently Asked Questions)|language/faq>
+
+A collection of questions that have cropped up often, along with answers.
+
+=end item
+
+=begin item  :class<defn-item>
+L<Community|language/community>
+
+Information about the Raku development community, email lists, IRC and IRC bots, and blogs
+
+=end item
+
+=for HR :class<bluish-dots>
+
+The Raku homepage offers L<a comprehensive list of Raku resources|https://raku.org/resources/>,
+including tutorials, and how-tos.
+
+You may be interested in the L<Community|https://raku.org/community/> page on the
+main Raku website.
+
+Raku compiler developers may also be interested in
+L<The RakuSpecification|https://github.com/Raku/roast>.
+
+=for HR :class<greenish-dots>
+
+Part of this official documentation has been translated into Chinese. Here's the
+L<index to the pages that have been translated|https://github.com/ohmycloud/perl6doc-zh/blob/master/index.adoc>.
+
+=end pod

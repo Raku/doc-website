@@ -1,0 +1,67 @@
+use v6.d;
+use Test;
+use File::Directory::Tree;
+use ProcessedPod;
+use RakuConfig;
+
+plan 13;
+
+my @triples;
+my %data;
+my %config = get-config;
+my ProcessedPod $pp .= new;
+
+my &render-callable;
+lives-ok { &render-callable = EVALFILE %config<render> }, 'render callable evaluates';
+#my &compilation-callable;
+#lives-ok { &compilation-callable  = EVALFILE %config<compilation> }, 'compilation callable evaluates';
+my &cleanup-callable;
+lives-ok { &cleanup-callable = EVALFILE %config<transfer> }, 'transfer callable evaluates';
+
+# prepare test data
+%data = (
+:n1(%( :path<t>, :css<one.css>, :add-css<one-2.css>,)),
+# simple strings
+:n2(%( :path<t>, :css<two-1-1.css two-1-2.css>, :add-css<two-2-1.css two-2-2.css>,)),
+# arrays of str
+:n3(%( :css-link('hyper one', 'hyper two', 'hyper three',),)),
+# array of links
+:n4(%( :css-link('hyper four'),)),
+# one link
+
+);
+# set up local files
+for %data<n1>.kv {
+    next if $^a eq 'path';
+    ('t/' ~ $^b).IO.spurt('data for name n1 field ' ~ $^a)
+};
+for %data<n2>.kv -> $f, $fs {
+    next unless $fs ~~ Positional;
+    for $fs.list { ('t/' ~ $_).IO.spurt("data for ns n2 field $f") }
+}
+# add data namespaces to pp
+for %data.kv -> $ns, %d {
+    $pp.add-data($ns, %d)
+}
+$pp.add-data('mode-name', 'testing-mode');
+lives-ok { @triples = &render-callable($pp, %()) }, 'compilation callable lives';
+is @triples.elems, 4, 'four files for moving';
+my @files = <assets/css/one-2.css assets/css/two-2-1.css assets/css/two-2-2.css assets/css/testing-mode.css>;
+is @triples[0][0] , any(@files) , 'got 1/ four';
+is @triples[1][0] , any(@files) , 'got 2/ four';
+is @triples[2][0] , any(@files) , 'got 3/ four';
+is @triples[3][0] , any(@files) , 'got 4/ four';
+is +('t/'.IO.dir(test => *.ends-with('.css'))), 6, 't has 6 css files';
+ok %config<template-raku>.IO ~~ :e & :f, 'template is created';
+my %temps;
+lives-ok { %temps = EVALFILE %config<template-raku> }, 'template evaluates to a hash';
+@files.append: "hyper one", "hyper two", "hyper three", "hyper four";
+like %temps<css>.({},{}), /
+    ['link' .+? 'stylesheet' .+? @files .+] ** 8
+/, 'template seems ok';
+
+.unlink for 't/'.IO.dir(:test( *.ends-with('.css')));
+&cleanup-callable($pp, %(), %() );
+nok %config<template-raku>.IO ~~ :e, 'template gone';
+
+done-testing;

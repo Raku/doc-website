@@ -1,0 +1,62 @@
+
+=begin pod
+=TITLE Simple Extras
+=Description Collection Render Plugin
+
+Some simple extra Pod::Block names and their templates
+
+=head1 Usage
+
+In a Pod6 content file, just use as
+
+=begin code
+    =XXXX Contents of Block if any
+
+    where XXX is a Block name given below, and no extra configuration is needed.
+
+    =for XXXX :class<some-class-as-specified-below>
+    Contents of Block if any
+=end code
+
+=head1 Block names
+
+=item B<HR> Generates a Horizontal rule. No class generates a plain C<<hr/>>.
+
+The following classes exist for C<HR> | C<Hr> | C<hr>
+=end item
+=item2 yellowish-dots
+=item2 bluish-dots
+=item2 lilac-dots
+=item2 greenish-dots
+
+=head1 Templates
+
+=begin item
+B<defn-item>
+Is a template for an item block because C<=defn> blocks do not (at time of writing)
+properly handle internal Pod FormatCodes.
+
+Use as
+=begin code
+    =begin item :template<defn-item>
+    some text
+
+    in paragraphs
+    =end item
+
+Or
+    =for item :template<defn-item>
+    Some text, no paragraphs
+
+=end code
+=end item
+
+=begin item
+B<quote>
+Is a template for a paragraph, so that the quoted contents are indented, and optional items are included:
+=item2 author : the authour of the quoation
+=item2 citation: the place where the quotation can be found
+
+=end item
+
+=end pod

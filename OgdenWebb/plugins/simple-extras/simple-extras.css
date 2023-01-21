@@ -1,0 +1,42 @@
+hr.bluish-dots, .yellowish-dots, .greenish-dots, .reddish-dots {
+  border: none;
+  margin: 0 3em;
+  padding: 0;
+  height: 20px;
+  background-color: transparent;
+  background-size: 25px 25px;
+  background-repeat: round no-repeat;
+  background-position: 0 center;
+}
+
+hr.bluish-dots {
+  background-image: radial-gradient(#76b8ed 30%, transparent 30%);
+}
+
+hr.yellowish-dots {
+  background-image: radial-gradient(#eded76 30%, transparent 30%);
+}
+
+hr.greenish-dots {
+  background-image: radial-gradient(#76ed87 30%, transparent 30%);
+}
+
+hr.reddish-dots {
+  background-image: radial-gradient(#ff4000 30%, transparent 30%);
+}
+
+p.quotation {
+  margin-left: 10vh;
+}
+p.quotation .author {
+  margin-left: 15vh;
+  font-weight: bold;
+}
+p.quotation .citation {
+  margin-left: 15vh;
+  font-style: italic;
+}
+
+div.flex-container {
+  display: flex;
+}
