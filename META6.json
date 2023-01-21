@@ -1,7 +1,7 @@
 {
   "name": "Raku-Official-Documentation",
   "description": "Tool chain for creating the Raku official documentation site",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "perl": "6.d",
   "authors": [
     "Richard Hainsworth, aka finanalyst"
