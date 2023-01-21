@@ -28,13 +28,14 @@ in the cloned directory should work.
 
 Generic build steps:
 =item clone this repo to C<raku-doc-website/>
-=item clone the Raku documentation sources at C<github.com/raku/doc/doc> to
-C<local_raku_docs/doc/>
+=item2 No need to clone the Raku documentation sources at C<github.com/raku/doc/doc> to
+C<local_raku_docs/doc/> as this is done automatically by the final step. However, if you
+already have a local C<raku/doc> repo, then change the relevant key in C<config.raku>. It
+should be intuitive what is required.
 
-=item2 Note that local_raku_docs could be simply a clone of C<github.com/raku/doc>
-=item2 Note also the '_' character in the directory name. This is important for Collection
-but should not matter here as there is only one 'Mode' (see Collection documentation
-for more information on modes)
+=item2 Note also the '_' character in the default directory name. This is important for Collection
+if the document sources are under the C<raku-doc-website> because Collection treats directories
+without '_' as C<mode> directories.
 
 =item assume the rendered html will be built in C<rendered_html>
 
@@ -52,9 +53,9 @@ include a '_' in its name to be a 'Mode'.
 For this reason, documentation sources for this repo are in C<repo_docs> and the
 binaries are in C<bin_files>.
 
-This may prove unnecessary.
+This may eventually prove unnecessary, but I suggest the convention is kept for the time being.
 
-However, I think there should be another Mode in this repository in due course that
+Futher, I think there should be another Mode in this repository in due course that
 generates an epub output.
 
 =head1 Plugins and Templates
@@ -64,15 +65,50 @@ a similar way to Raku Modules. However, for the Raku documentation system, it se
 pragmatic at the start for the plugins to be tailored specifically for this site.
 
 Consequently, the plugins are directly copied into the OgdenWebb directory, rather than
-use the refresh functionality. This comment may seem odd but I include it to preclude questions
+using Collection's C<refresh> functionality. This comment may seem odd but I include it to preclude questions
 that will arise when reading the documentation for C<Collection>.
 
-The Templates were originally developed to mimic Moritz Lenz's Raku site. Relevant template
-keys are modified in the C<ogdenwebb> plugin. I would expect this to change over time.
+The Templates were originally developed to mimic B<Moritz Lenz's> Raku site (the one we are used to).
+Relevant template keys are modified in the C<ogdenwebb> plugin.
+I would expect this to change over time, and for the default templates to change
+to the OgdenWebb templates. But I would suggest this is done incrementally.
 
 =head1 Running site
 
 Whilst this repo is being developed, a running on-line site can be found at
 L<new-raku|https://new-raku.finanalyst.org>.
+
+=head1 Working on Collection plugins
+
+Collection uses plugins - they can be found under the directory C< OdgenWebb/plugins/ > - which
+contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc,
+and manipulate data.
+
+The best way, at present, to tweak plugins and see how they affect the website, is to install
+the distribution C<raku-collection-plugin-development>. The plugin SCSS (for example) can be changed, then
+updated into CSS using C<./update-css <plugin-name> >. The plugins can be tested using
+C<test-all-collection-plugins>. This utility runs each of the tests under the plugin directories.
+
+(All Collection plugins must adhere to some rules that include having a README.rakudoc file, a C<t/>
+directory, and various other keys, as defined in the Collection documentation). Collection is being
+designed to run multiple Collections, each of which may use different plugins, and that new plugins
+can be developed as alternatives for existing plugins, but with greater functionality. In addition,
+a developer can retain an older version of a plugin for a specific collection if a newer version
+breaks a website. This implements a <version>.<improvement>.<patch> versionning system for all
+plugins.
+
+The effect of a tweaked plugin on the website can be tested using C<run-collection-trial OgdenWebb>. The trial subdirectory
+has a (very) few Rakudoc (aka POD6) files from the raku/doc rep. The Rakudoc sources
+include the most troublesome. The new website is then served to C<localhost:5000>.
+
+If there is a problem with one source, then use
+
+        run-collection-trial --with-only='language.rakudoc other-source and-so-on' OgdenWebb
+
+Collection will then only render files that match one of the elements in the space-delimited list
+provided with C<--with-only>. 'language.rakudoc' is a useful index file to link to other files.
+
+There are a bunch of other options to help debugging, and they can be found in the Collection
+documentation.
 
 =end pod
