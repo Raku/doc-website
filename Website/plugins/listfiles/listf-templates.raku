@@ -1,5 +1,4 @@
 use v6.d;
-use PrettyDump;
 my regex s-pair {
     (\S+?) \s* \= \s* (\S+)
 };

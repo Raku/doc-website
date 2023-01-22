@@ -14,6 +14,7 @@ sub ( $pp, %processed, %options ) {
         %( :category("Syntax"), :value("#` multi-line comment"), :url("/language/syntax.html#Multi-line_/_embedded_comments") ),
         %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature.html#index-entry-Long_Names") )
     ;
+    my $categories = <Syntax Signature>.SetHash;
     # collect info stored from parsing headers
     my %defns = $pp.get-data('heading')<defs>;
     # structure of %defns is <file name as in processed> => %( <target> => %info )
@@ -36,11 +37,13 @@ sub ( $pp, %processed, %options ) {
             :value( escape( $podf.title )) ,
             :url( escape-json( '/' ~ $fn ~ '.html' ))
         );
+        $categories{ $podf.pod-config-data<kind>.tc }++
     }
     for %defns.kv -> $fn, %targets {
         for %targets.kv -> $targ, %info {
             my $category = %info<category>.tc ;
             $category = %info<subkind>.tc ~ ' operator' if $category eq 'Operator';
+            $categories{ $category }++;
             @entries.push: %(
                 :$category,
                 :value( escape( %info<name> ) ),
@@ -48,10 +51,14 @@ sub ( $pp, %processed, %options ) {
             )
         }
     }
+    $pp.add-data('extendedsearch', $categories.keys);
     'js/search.js'.IO.spurt:
         'var items = '
         ~ to-json( @entries )
         ~ ";\n"
         ~ 'search-temp.js'.IO.slurp;
-    [[ 'assets/scripts/js/search.js', 'myself', 'js/search.js' ],]
+    [
+        [ 'assets/scripts/js/search.js', 'myself', 'js/search.js' ],
+        [ 'assets/scripts/js/extended-search.js', 'myself', 'js/extended-search.js' ]
+    ]
 }
