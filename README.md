@@ -33,7 +33,7 @@ Generic build steps:
 
 	*  No need to clone the Raku documentation sources at `github.com/raku/doc/doc` to `local_raku_docs/doc/` as this is done automatically by the final step. However, if you already have a local `raku/doc` repo, then change the relevant key in `config.raku`. It should be intuitive what is required.
 
-	*  Note also the '_' character in the default directory name. This is important for Collection if the document sources are under the `raku-doc-website` because Collection treats directories without '_' as `mode` directories.
+	*  Note also the `'_'` character in the default directory name. This is important for Collection if the document sources are under the `raku-doc-website` because Collection treats directories without `'_'` as `mode` directories.
 
 *  assume the rendered html will be built in `rendered_html`
 
@@ -96,4 +96,4 @@ There are a bunch of other options to help debugging, and they can be found in t
 
 
 ----
-Rendered from README at 2023-01-22T21:04:51Z
+Rendered from README at 2023-01-22T21:08:34Z

@@ -33,9 +33,9 @@ C<local_raku_docs/doc/> as this is done automatically by the final step. However
 already have a local C<raku/doc> repo, then change the relevant key in C<config.raku>. It
 should be intuitive what is required.
 
-=item2 Note also the '_' character in the default directory name. This is important for Collection
+=item2 Note also the C<'_'> character in the default directory name. This is important for Collection
 if the document sources are under the C<raku-doc-website> because Collection treats directories
-without '_' as C<mode> directories.
+without C<'_'> as C<mode> directories.
 
 =item assume the rendered html will be built in C<rendered_html>
 
