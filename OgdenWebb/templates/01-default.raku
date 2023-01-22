@@ -226,7 +226,7 @@ use ProcessedPod;
     'edit-page' => sub (%prm, %tml) {
         return '' unless %prm<config><path> ~~ / ^ .+ 'docs/' ( .+) $ /;
         "\n" ~ '<button title="Edit this page" class="edit-raku-doc" '
-            ~ 'onclick="location=\'https://github.com/Raku/doc/edit/master/' ~ %tml<escaped>(~$0) ~ '\'">'
+            ~ 'onclick="location=\'https://github.com/Raku/doc/edit/main/' ~ %tml<escaped>(~$0) ~ '\'">'
             ~ '<img src="/assets/images/pencil.svg" >'
             ~ '</button>'
     },
@@ -299,12 +299,13 @@ use ProcessedPod;
                 "<div id=\"_Footnotes\" class=\"footnotes\">\n"
                     ~ [~] .map({ '<div class="footnote" id="' ~ %tml<escaped>($_<fnTarget>) ~ '">'
                     ~ ('<span class="footnote-number">' ~ ($_<fnNumber> // '') ~ '</span>')
-                    ~ ($_<text> // '')
                     ~ '<a class="footnote-linkback" href="#'
                     ~ %tml<escaped>($_<retTarget>)
-                    ~ "\"> « Back »</a></div>\n"
+                    ~ '"> [↑] </a>'
+                    ~ ($_<text> // '')
+                    ~ "</div>\n"
                 })
-                    ~ "\n</div>\n"
+                ~ "\n</div>\n"
             }
             else { '' }
         }

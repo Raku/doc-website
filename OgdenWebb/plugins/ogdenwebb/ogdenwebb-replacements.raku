@@ -230,10 +230,6 @@ use v6.d;
     },
     'end-block' => sub (%prm, %tml) {
         qq:to/BLOCK/
-        <script
-            defer=""
-            src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
-        </script>
         <div
             role="status"
             aria-live="assertive"
