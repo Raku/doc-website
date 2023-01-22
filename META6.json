@@ -8,11 +8,11 @@
   ],
   "auth": "zef:raku",
   "depends": [
-    "Raku::Pod::Render",
-    "Pod::From::Cache",
-    "RakuConfig",
-    "Collection",
-    "Terminal::ANSIColor",
+    "Raku::Pod::Render:ver<4.3.4+>",
+    "Pod::From::Cache:ver<0.4.6+>",
+    "RakuConfig:ver<0.7.3+>",
+    "Collection:ver<0.14.0+>",
+    "Terminal::ANSIColor:ver<0.9+>:auth<zef:lizmat>",
     "Perl6::TypeGraph",
     "Perl6::TypeGraph::Viz"
   ],

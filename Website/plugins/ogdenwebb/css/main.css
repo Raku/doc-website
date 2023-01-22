@@ -279,16 +279,16 @@ body {
 }
 */
 /* For Collection */
-.raku .container .columns {
+.raku .container .columns.listing {
   column-count: 2;
   display: block;
 }
-.raku .container .columns > p {
+.raku .container .columns.listing > p {
   column-span: all;
   margin: 0 0 2em;
   text-align: center;
 }
-.raku .container .columns .listf-container {
+.raku .container .columns.listing .listf-container {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.25rem;
@@ -296,27 +296,27 @@ body {
   font-weight: 500;
   line-height: 1.5;
 }
-.raku .container .columns .listf-container div:nth-of-type(4n-2) {
+.raku .container .columns.listing .listf-container div:nth-of-type(4n-2) {
   background-color: inherit;
 }
-.raku .container .columns .listf-container div:nth-of-type(4n-1) {
+.raku .container .columns.listing .listf-container div:nth-of-type(4n-1) {
   background-color: inherit;
 }
-.raku .container .columns .listf-container .listf-caption {
+.raku .container .columns.listing .listf-container .listf-caption {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   display: flex;
   justify-content: center;
 }
-.raku .container .columns .listf-container .listf-file {
+.raku .container .columns.listing .listf-container .listf-file {
   padding-top: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   border-top: 1px;
 }
-.raku .container .columns .listf-container .listf-desc {
+.raku .container .columns.listing .listf-container .listf-desc {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
@@ -324,7 +324,7 @@ body {
   margin-bottom: 0.25rem;
   align-self: normal;
 }
-.raku .container .columns .listf-container .listf-desc > p {
+.raku .container .columns.listing .listf-container .listf-desc > p {
   padding: inherit;
   margin: inherit;
 }

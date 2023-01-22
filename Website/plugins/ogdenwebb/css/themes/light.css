@@ -7,17 +7,17 @@ a.button.is-primary .icon {
 }
 
 /* Collection */
-.raku .container .columns .listf-container {
+.raku .container .columns.listing .listf-container {
   border: 1px solid #cccccc;
   border-bottom: 5px solid #d9d9d9;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
 }
-.raku .container .columns .listf-container .listf-caption {
+.raku .container .columns.listing .listf-container .listf-caption {
   background: #f2f2f2;
   border-bottom: 1px solid #cccccc;
   color: #83858D;
 }
-.raku .container .columns .listf-container .listf-desc:not(:last-of-type) {
+.raku .container .columns.listing .listf-container .listf-desc:not(:last-of-type) {
   border-bottom: 1px solid #cccccc;
 }
 

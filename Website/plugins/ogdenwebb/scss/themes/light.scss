@@ -138,7 +138,7 @@ a.button.is-primary .icon {
   color: $scheme-main-ter;
 }
 /* Collection */
-.raku .container .columns .listf-container {
+.raku .container .columns.listing .listf-container {
     border: 1px solid $border;
     border-bottom: 5px solid $border-light;
     box-shadow: $shadow-below;

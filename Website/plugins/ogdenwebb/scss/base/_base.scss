@@ -311,7 +311,7 @@ body {
 */
 
 /* For Collection */
-.raku .container .columns {
+.raku .container .columns.listing {
     column-count: 2;
     display: block;
     > p {
