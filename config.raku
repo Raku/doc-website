@@ -15,7 +15,7 @@ use v6.d;
     :!without-processing, # process all files if possible
     :!no-refresh, # call the refresh step after initiation
     :!recompile, # if true, force a recompilation of the source files when refresh is called
-    :mode<OgdenWebb>, # the default mode, which must exist
+    :mode<Website>, # the default mode, which must exist
     :ignore< 404.pod6 HomePage.pod6 >,
     :extensions< rakudoc pod pod6 raku p6 pm pm6 rakumod >,
     :asset-basename<asset_base>, # using _ so that it is not a valid Mode name
