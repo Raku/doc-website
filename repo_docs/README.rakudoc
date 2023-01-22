@@ -48,14 +48,14 @@ Now run
 =head1 Directory naming
 
 As mentioned in the items above, Collection expects a sub-directory that does not
-include a '_' in its name to be a 'Mode'.
+include a C<'_'> in its name to be a 'Mode'.
 
 For this reason, documentation sources for this repo are in C<repo_docs> and the
 binaries are in C<bin_files>.
 
-This may eventually prove unnecessary, but I suggest the convention is kept for the time being.
+This may eventually prove unnecessary, but it is a reasonable convention is kept for the time being.
 
-Futher, I think there should be another Mode in this repository in due course that
+Further, in the future, another Mode may be useful in this repository in due course that
 generates an epub output.
 
 =head1 Plugins and Templates
@@ -104,7 +104,7 @@ directory, and various other keys, as defined in the Collection documentation). 
 designed to run multiple Collections, each of which may use different plugins, and that new plugins
 can be developed as alternatives for existing plugins, but with greater functionality. In addition,
 a developer can retain an older version of a plugin for a specific collection if a newer version
-breaks a website. This implements a <version>.<improvement>.<patch> versionning system for all
+breaks a website. This implements a C<<version>.<improvement>.<patch>> versioning system for all
 plugins.
 
 The effect of a tweaked plugin on the website can be tested using C<run-collection-trial OgdenWebb>. The trial subdirectory

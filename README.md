@@ -45,13 +45,13 @@ Now run
 bin_files/build-site
 ```
 # Directory naming
-As mentioned in the items above, Collection expects a sub-directory that does not include a '_' in its name to be a 'Mode'.
+As mentioned in the items above, Collection expects a sub-directory that does not include a `'_'` in its name to be a 'Mode'.
 
 For this reason, documentation sources for this repo are in `repo_docs` and the binaries are in `bin_files`.
 
-This may eventually prove unnecessary, but I suggest the convention is kept for the time being.
+This may eventually prove unnecessary, but it is a reasonable convention is kept for the time being.
 
-Futher, I think there should be another Mode in this repository in due course that generates an epub output.
+Further, in the future, another Mode may be useful in this repository in due course that generates an epub output.
 
 # Plugins and Templates
 Collection is designed to handle multiple Modes, and for plugins to be contributed in a similar way to Raku Modules. However, for the Raku documentation system, it seems pragmatic at the start for the plugins to be tailored specifically for this site.
@@ -66,9 +66,17 @@ Whilst this repo is being developed, a running on-line site can be found at [new
 # Working on Collection plugins
 Collection uses plugins - they can be found under the directory `OdgenWebb/plugins/ ` - which contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc, and manipulate data.
 
+Whilst the best way to work on the plugins is, as described below, to use the dedicated plugins distribution, it increases the learning curve and also means that there is an extra step in directly importing Collection plugins to the Raku Documentation repo (as mentioned above, the 'refresh' functionality of Collection is not used here).
+
+However, to make development here easier, there are two utilities which directly affect this distribution:
+
+*  `update-css` which is a Bash file and takes the name of a plugin as its argument.
+
+*  `bin_files/test-all-plugins` This runs all the test files in all the plugins
+
 The best way, at present, to tweak plugins and see how they affect the website, is to install the distribution `raku-collection-plugin-development`. The plugin SCSS (for example) can be changed, then updated into CSS using `./update-css <plugin-name> `. The plugins can be tested using `test-all-collection-plugins`. This utility runs each of the tests under the plugin directories.
 
-(All Collection plugins must adhere to some rules that include having a README.rakudoc file, a `t/` directory, and various other keys, as defined in the Collection documentation). Collection is being designed to run multiple Collections, each of which may use different plugins, and that new plugins can be developed as alternatives for existing plugins, but with greater functionality. In addition, a developer can retain an older version of a plugin for a specific collection if a newer version breaks a website. This implements a <version>.<improvement>.<patch> versionning system for all plugins.
+(All Collection plugins must adhere to some rules that include having a README.rakudoc file, a `t/` directory, and various other keys, as defined in the Collection documentation). Collection is being designed to run multiple Collections, each of which may use different plugins, and that new plugins can be developed as alternatives for existing plugins, but with greater functionality. In addition, a developer can retain an older version of a plugin for a specific collection if a newer version breaks a website. This implements a `version>.<improvement>.<patch` versioning system for all plugins.
 
 The effect of a tweaked plugin on the website can be tested using `run-collection-trial OgdenWebb`. The trial subdirectory has a (very) few Rakudoc (aka POD6) files from the raku/doc rep. The Rakudoc sources include the most troublesome. The new website is then served to `localhost:5000`.
 
@@ -88,4 +96,4 @@ There are a bunch of other options to help debugging, and they can be found in t
 
 
 ----
-Rendered from README at 2023-01-21T15:32:07Z
+Rendered from README at 2023-01-22T21:04:51Z
