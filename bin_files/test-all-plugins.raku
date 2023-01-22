@@ -2,7 +2,7 @@
 use v6.d;
 # the code is adapted from Liz's runtests routine in Rak.
 multi sub MAIN() is export {
-    MAIN("OgdenWebb/plugins")
+    MAIN("Website/plugins")
 }
 multi sub MAIN($path) is export {
     say run(<raku --version>, :out).out.slurp.chomp;

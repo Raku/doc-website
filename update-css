@@ -4,10 +4,10 @@ if [ $# -eq 0 ]
     echo "No arguments supplied"
     exit
 fi
-echo OgdenWebb/plugins/$1
-if [ -d OgdenWebb/plugins/$1/scss ];
+echo Website/plugins/$1
+if [ -d Website/plugins/$1/scss ];
 then
-    sass --update --no-source-map OgdenWebb/plugins/$1/scss:OgdenWebb/plugins/$1/css
+    sass --update --no-source-map Website/plugins/$1/scss:Website/plugins/$1/css
 else
-    sass --update --no-source-map OgdenWebb/plugins/$1:OgdenWebb/plugins/$1
+    sass --update --no-source-map Website/plugins/$1:Website/plugins/$1
 fi
