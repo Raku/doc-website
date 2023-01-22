@@ -320,12 +320,13 @@ body {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
-  padding: 0 0.5rem;
+  padding: 0 0.3rem 0 0.3rem;
   margin-bottom: 0.25rem;
   align-self: normal;
 }
 .raku .container .columns .listf-container .listf-desc > p {
   padding: inherit;
+  margin: inherit;
 }
 
 /* Programs page template */

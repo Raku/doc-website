@@ -7,7 +7,7 @@
 	:custom-raku(),
 	:license<Artistic-2.0>,
 	:name<deprecate-span>,
-	:template-raku<deprecation-template.raku>,
-	:version<0.1.0>,
 	:render,
+	:template-raku<deprecation-template.raku>,
+	:version<0.1.1>,
 )

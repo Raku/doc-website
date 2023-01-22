@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+    exit
+fi
+echo OgdenWebb/plugins/$1
+if [ -d OgdenWebb/plugins/$1/scss ];
+then
+    sass --update --no-source-map OgdenWebb/plugins/$1/scss:OgdenWebb/plugins/$1/css
+else
+    sass --update --no-source-map OgdenWebb/plugins/$1:OgdenWebb/plugins/$1
+fi

@@ -1,4 +1,5 @@
 %(
+	:add-css<typegraph-styling.css>,
 	:auth<collection>,
 	:authors(
 		"finanalyst",
@@ -8,6 +9,5 @@
 	:name<typegraph>,
 	:render<add-type-graph.raku>,
 	:template-raku<tp-template.raku>,
-	:add-css<typegraph-styling.css>,
-	:version<0.2.2>,
+	:version<0.2.3>,
 )

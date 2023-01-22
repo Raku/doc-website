@@ -12,5 +12,5 @@
 	:!no-remote,
 	:render,
 	:template-raku<let-templates.raku>,
-	:version<0.3.4>,
+	:version<0.3.5>,
 )

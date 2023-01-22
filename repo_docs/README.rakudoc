@@ -84,6 +84,16 @@ Collection uses plugins - they can be found under the directory C< OdgenWebb/plu
 contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc,
 and manipulate data.
 
+Whilst the best way to work on the plugins is, as described below, to use the dedicated
+plugins distribution, it increases the learning curve and also means that there is an
+extra step in directly importing Collection plugins to the Raku Documentation repo (as
+mentioned above, the 'refresh' functionality of Collection is not used here).
+
+However, to make development here easier, there are two utilities which directly affect
+this distribution:
+=item C<update-css> which is a Bash file and takes the name of a plugin as its argument.
+=item C<bin_files/test-all-plugins> This runs all the test files in all the plugins
+
 The best way, at present, to tweak plugins and see how they affect the website, is to install
 the distribution C<raku-collection-plugin-development>. The plugin SCSS (for example) can be changed, then
 updated into CSS using C<./update-css <plugin-name> >. The plugins can be tested using

@@ -350,10 +350,13 @@ body {
             font-size: $size-6;
             font-weight: $weight-medium;
             line-height: 1.5;
-            padding: 0 0.5rem;
+            padding: 0 0.3rem 0 0.3rem;
             margin-bottom: 0.25rem;
             align-self: normal;
-            > p { padding: inherit; }
+            > p {
+                padding: inherit;
+                margin: inherit;
+            }
         }
     }
 }
