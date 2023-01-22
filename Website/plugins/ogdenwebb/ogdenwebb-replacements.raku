@@ -52,7 +52,7 @@ use v6.d;
                 <a class="navbar-item" href="https://raku.org">
                   Raku Homepage
                 </a>
-                <a class="navbar-item" href="https://webchat.freenode.net/?channels=#raku">
+                <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku">
                   Chat with us
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
