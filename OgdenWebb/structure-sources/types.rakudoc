@@ -5,16 +5,11 @@
 This is a list of the built-in types that are documented, sorted by class/enum/module/role
 and by categories.
 
-=begin filterlines :headlevel(0) :placeholder<Search in filename lines ... >
-
 =for ListFiles  :select<kind=Type, subkind=class, category=basic>
 Basic classes
 
 =for ListFiles  :select<kind=Type, subkind=class, category=composite>
 Composite classes
-
-=for ListFiles  :select<kind=Type, subkind=class, category=basic>
-Basic classes
 
 =for ListFiles :select<kind=Type, subkind=enum, category=basic>
 Basic enums
@@ -39,8 +34,5 @@ Exception roles
 
 =for ListFiles :select<kind=Type, subkind=role, category=metamodel>
 Metamodel roles
-
-
-=end filterlines
 
 =end pod
