@@ -201,7 +201,7 @@
               <div class="column">
                 <p class="head">Explore</p>
                 <ul>
-                  <li><a href="https://pl6anet.org/">Raku Blog Aggregator</a></li>
+                  <li><a href="https://planet.raku.org/">Raku Blog Aggregator</a></li>
                   <li><a href="https://rakudoweekly.blog/">Rakudo Weekly</a></li>
                   <li><a href="https://perlweeklychallenge.org/">The Weekly Challenge</a></li>
                   <li><a href="https://raku-advent.blog/">Raku Advent Calendar</a></li>
