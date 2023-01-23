@@ -18,13 +18,13 @@ $(document).ready( function() {
             });
         });
     };
-    var theme = cookie.get('color-scheme', undefined);
-    if (theme === undefined) {
-        cookie.set({ 'color-scheme': 'light' }, { expires: 30, path: '/', sameSite: 'lax', secure: true });
+    var theme = localStorage.getItem('color-scheme');
+    if (theme == null) {
+        localStorage.setItem('color-scheme', 'light');
     }
     $('#toggle-theme').click(function () {
-            var theme = cookie.get('color-scheme', 'light');
-            cookie.set({ 'color-scheme': theme === 'light' ? 'dark' : 'light' }, { expires: 30, path: '/', sameSite: 'lax', secure: true });
+            var theme = localStorage.getItem('color-scheme') || 'light';
+            localStorage.setItem('color-scheme', theme === 'light' ? 'dark' : 'light');
             let links = document.getElementsByTagName('link');
             for (let i = 0; i < links.length; i++) {
                 if (links[i].getAttribute('rel') == 'stylesheet') {
@@ -163,3 +163,19 @@ $(document).ready(function() {
         $('#navMenu').removeClass('navbar-autocomplete-active');
     });
 });
+
+(function enforceCurrentTheme() {
+    var theme = localStorage.getItem('color-scheme') || 'light';
+    var cssLinks = $('link[rel="stylesheet"]');
+    var toDelete = [];
+    for (var i = 0; i < cssLinks.length; i++) {
+        let href = cssLinks[i].getAttribute('href');
+        if (!href.includes('light.css') && !href.includes('dark.css'))
+            continue;
+        if (!href.includes(theme))
+            toDelete.push(cssLinks[i]);
+    }
+    for (var i = 0; i < toDelete.length; i++) {
+        toDelete[i].parentNode.removeChild(toDelete[i]);
+    }
+})(); // Invoke this right away because it modifies metadata
