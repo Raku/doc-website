@@ -95,16 +95,16 @@ use v6.d;
             ~ "\n$bookmark\n"
         }
         else { # no previous header, so here's a generic one in case
-            "\n<h" ~ $level
-                ~ ' id="'
-                ~ $target
-                ~ '"><a href="#'
-                ~ %tml<escaped>(%prm<top>)
-                ~ '" class="u" title="Go to top">'
-                ~ $text
-                ~ '</a></h'
-                ~ $level
-                ~ ">\n$bookmark\n"
+            my $index-parse = $text ~~ /
+                ( '<a name="index-entry-' .+? '</a>' )
+                '<span class="glossary-entry">' ( .+? ) '</span>'
+            /;
+            my $h = 'h' ~ (%prm<level> // '1');
+            qq[[\n<$h id="{ %tml<escaped>.(%prm<target>) }">]]
+                ~ ( $index-parse.so ?? $index-parse[0] !! '' )
+                ~ qq[[<a href="#{ %tml<escaped>.(%prm<top>) }" class="u" title="go to top of document">]]
+                ~ ( $index-parse.so ?? $index-parse[1] !! $text )
+                ~ qq[[</a></$h>\n]]
         }
     },
 );

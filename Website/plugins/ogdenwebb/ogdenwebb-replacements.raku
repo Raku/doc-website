@@ -199,9 +199,9 @@ use v6.d;
           <div class="container px-4">
             <nav class="level">
                 <div class="level-left">
-                  <div class="level-item">
+                    <div class="level-item">
                       <a href="/about.html">About</a>
-                   </div>
+                    </div>
                     <div class="level-item">
                       <a id="toggle-theme">Toggle theme</a>
                     </div>
@@ -219,7 +219,7 @@ use v6.d;
         </footer>
         BLOCK
     },
-    'page-edit' => sub (%prm, %tml) {
+    page-edit => sub (%prm, %tml) {
         return '' unless %prm<config><path> ~~ / ^ .+ 'docs/' ( .+) $ /;
         qq:to/BLOCK/
         <div class="page-edit">
@@ -233,7 +233,7 @@ use v6.d;
           </div>
         BLOCK
     },
-    'end-block' => sub (%prm, %tml) {
+    end-block => sub (%prm, %tml) {
         qq:to/BLOCK/
         <div
             role="status"
@@ -244,31 +244,32 @@ use v6.d;
         BLOCK
     },
     #placeholder
-    'block-code' => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
+    block-code => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
         my $hl = %tml.prior('block-code').(%prm, %tml);
         $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
         '<div class="raku-code raku-lang">'
             ~ $hl
             ~ '</div>'
     },
-    'heading' => sub (%prm, %tml) {
+    heading => sub (%prm, %tml) {
+        my $txt = %prm<text> // '';
+        my $index-parse = $txt ~~ /
+            ( '<a name="index-entry-' .+? '</a>' )
+            '<span class="glossary-entry">' ( .+? ) '</span>'
+        /;
         my $h = 'h' ~ (%prm<level> // '1');
-        "\n<$h"
-            ~ ' id="'
-            ~ %tml<escaped>.(%prm<target>)
-            ~ '" '
-            ~ "class=\"raku-$h\">"
-            ~ '<a href="#'
-            ~ %tml<escaped>.(%prm<top>)
-            ~ '" class="u" title="go to top of document">'
-            ~ (%prm<text> // '')
-            ~ "</a></$h>\n"
+        qq[[\n<$h id="{ %tml<escaped>.(%prm<target>) }"]]
+            ~ qq[[ class="raku-$h">]]
+            ~ ( $index-parse.so ?? $index-parse[0] !! '' )
+            ~ qq[[<a href="#{ %tml<escaped>.(%prm<top>) }" class="u" title="go to top of document">]]
+            ~ ( $index-parse.so ?? $index-parse[1] !! $txt )
+            ~ qq[[</a></$h>\n]]
     },
     table => sub (%prm, %tml) {
         my $tb = %tml.prior('table').(%prm, %tml);
         $tb.subst(/ '<table class="' /, '<table class="table is-bordered centered ')
     },
-    'toc' => sub (%prm, %tml) {
+    toc => sub (%prm, %tml) {
         if %prm<toc>.defined and %prm<toc>.keys {
             my $rv = "<ul class=\"menu-list\">\n";
             my Bool $sub-list = False;
@@ -308,7 +309,7 @@ use v6.d;
     },
     extendedsearch => sub (%prm, %tml) {
         return q:to/ERROR/ without %prm<extendedsearch>;
-            <div class="listf-error">ListFiles has no collected data,
+            <div class="listf-error">ExtendedSearch has no collected data,
             is ｢extendedsearch｣ in the Mode's ｢plugins-required<compilation>｣ list?
             </div>
             ERROR
