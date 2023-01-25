@@ -1,0 +1,65 @@
+=begin pod
+=TITLE tablemanager is a plugin for Collection
+=SUBTITLE The plugin exposes the tablemanger JQuery plugin
+
+The plugin adds a namespace at the render stage, but it expects data to be
+made available during the render stage and for it to be used during the compilation
+stage.
+
+It is important and assumed that C<tablemanager> comes before the plugin generating the data in the
+plugins required list for the render milestone. When C<tablemanager> plugin is encountered, its name-space
+is also established. The namespace is used by the data-providing plugin.
+
+Credit is due to L<Pietr Antonio | https://www.jqueryscript.net/plus/search.php?keyword=pietrantonio91 >
+for the JQuery code.
+
+The data should be in form of a hash, with keys to be accessed using the metadata key C<data>,
+see Custom blocks.
+
+Within the C<tablemanager> namespace, the dataset key will point to the data structure as follows:
+
+The structure is required to be an array:
+=item first (zeroth) element is an array of strings that will be used as the headers
+=item2 An empty string can be used to create an empty header.
+=item2 It is assumed there will always be a header row.
+=item2 Only one header row is assumed.
+=item subsequent elements will be data in rows.
+=item it is required there is at least one data row.
+=item if more data is in a row than in a header, it will be ignored
+=item if less data is in a row than in a header, empty cell(s) will be added to the row
+
+=head1 TableManager options
+
+TableManager has several option, which are explained at L<JQuery explanation | https://www.jqueryscript.net/table/pagination-sort-filter-manager.html>.
+
+The following are implemented here:
+=item firstSort
+=item disable
+=item appendFilterby
+=item pagination
+=item showrows
+=item disableFilterBy
+
+=head1 Custom blocks
+
+The block is C< =tablemanager> and requires the meta data C<:data>, eg
+=begin code
+    =for TableManager :data<routines>
+    = firstSort('[[2,0]]')
+    = disable('["last"]')
+    = appendFilterby('true')
+    = vocabulary
+    = pagination('true')
+    = showrows('[10,20,30,50]')
+    = disableFilterBy('[4]')
+    Text that will be used in the table caption
+=end code
+
+=head1 Improvements
+
+=item Only one table per data-set per page is assumed.
+=item2 Multiple tables each for a differently named dataset are possible on one page
+=item2 If more than one table for a single dataset is needed, then plugin will need to be enhanced.
+=item2 Easy fix would be to allow user to specify ID in the block meta data.
+
+=end pod

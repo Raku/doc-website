@@ -32,13 +32,16 @@ sub ($pp, %processed, %options) {
         return $name;
     }
     my %data = $pp.get-data('heading');
+    #| get the definitions stored after parsing a header
+    my %definitions = %data<defs>;
     #| each of the things we want to group in a file
     my %things = %( routine => {}, syntax => {});
+    #| templates hash in ProcessedPod instance
     my %templates := $pp.tmpl;
-    # templates hash in ProcessedPod instance
+    #|this is for the triples describing the files to be transferred once created
     my @transfers;
-    #this is for the triples describing the files
-    my %definitions = %data<defs>;
+    #| container for tablesearch plugin
+    my @routines = [ ['Category', 'Name' , 'Type', 'Where documented'] , ];
     counter(:items(%definitions.keys), :header('Generating secondaries'));
     for %definitions.kv -> $fn, %targets {
         counter(:dec);
@@ -89,12 +92,16 @@ sub ($pp, %processed, %options) {
                 ), %templates);
                 $body ~= %templates<para>.(%(
                    :contents(qq:to/CONT/)
-                        See <a href="{
-                       '/' ~ .<source> ~ '.html' ~ '#' ~ .<target>
-                        }">Original text</a> in context
+                        See <a href="/{ .<source> }.html#{ .<target> }">Original text</a> in context
                     CONT
                 ), %templates);
-                $body ~= .<body>
+                $body ~= .<body>;
+                @routines.push: [
+                    .<category>.tc,
+                    $dn,
+                    .<subkind>,
+                    qq[[<a href="/{ .<source> }.html#{ .<target> }">{ .<source> }</a>]]
+                ];
             }
             # Construct TOC
             # No TOC for the time being
@@ -116,5 +123,12 @@ sub ($pp, %processed, %options) {
             @transfers.push: ["$fn-name\.html", 'myself', "html/$fn-name\.html"]
         }
     }
+    my %ns;
+    if 'tablemanager' ~~ any( $pp.plugin-datakeys ) {
+        %ns := $pp.get-data('tablemanager');
+        %ns<dataset> = {} without %ns<dataset>;
+        %ns<dataset><routines> = @routines;
+    }
+
     @transfers
 }

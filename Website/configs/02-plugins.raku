@@ -5,7 +5,7 @@
         :setup<raku-doc-setup>,
         :render<
             ogdenwebb camelia simple-extras listfiles images deprecate-span filterlines
-            secondaries typegraph
+            tablemanager secondaries typegraph
             link-error-test
             gather-js-jq gather-css
         >,
