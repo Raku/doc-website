@@ -20,7 +20,7 @@ $(document).ready( function() {
     };
     var theme = localStorage.getItem('color-scheme');
     if (theme == null) {
-        localStorage.setItem('color-scheme', 'light');
+        localStorage.setItem('color-scheme', window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     }
     $('#toggle-theme').click(function () {
             var theme = localStorage.getItem('color-scheme') || 'light';
