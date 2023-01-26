@@ -13,8 +13,8 @@
     "RakuConfig:ver<0.7.3+>",
     "Collection:ver<0.14.0+>",
     "Terminal::ANSIColor:ver<0.9+>:auth<zef:lizmat>",
-    "Perl6::TypeGraph",
-    "Perl6::TypeGraph::Viz"
+    "Doc::TypeGraph:ver<2.2.1.1+>",
+    "Doc::TypeGraph::Viz:ver<2.2.1.1+>"
   ],
   "build-depends": [],
   "test-depends": [],
