@@ -1,12 +1,17 @@
 use v6.d;
-use Perl6::TypeGraph;
-use Perl6::TypeGraph::Viz;
+use Doc::TypeGraph;
+use Doc::TypeGraph::Viz;
+use Collection::Progress;
 
 sub ($pp, %options) {
-    unless 'typegraphs'.IO ~~ :e & :d and 'type-graph.txt'.IO.modified le 'typegraphs'.IO.modified {
+    unless 'typegraphs'.IO ~~ :e & :d
+        and 'type-graph.txt'.IO.modified le 'typegraphs'.IO.modified
+        and +'typegraphs'.IO.dir
+    {
+        note 'Generating Typegraphs' unless %options<no-status>;
         mkdir 'typegraphs' unless 'typegraphs'.IO ~~ :e & :d;
-        my $viz = Perl6::TypeGraph::Viz.new;
-        my $tg = Perl6::TypeGraph.new-from-file('type-graph.txt');
+        my $viz =Doc::TypeGraph::Viz.new;
+        my $tg = Doc::TypeGraph.new-from-file('type-graph.txt');
         $viz.write-type-graph-images(path => "typegraphs",
             :force,
             type-graph => $tg);
@@ -18,7 +23,9 @@ sub ($pp, %options) {
     my %ns;
     my @files = 'typegraphs'.IO.dir(test => *.ends-with('.svg'))>>.relative('typegraphs')>>.IO>>.extension('');
     for @files {
-        %ns<typegraphs>{ $_ } = "typegraphs/$_\.svg".IO.slurp.subst( / ^ .+? <?before '<svg'> /, '')
+        my $s = "typegraphs/$_\.svg".IO.slurp.subst( / ^ .+? <?before '<svg'> /, '');
+        $s ~~ s:g/ 'href=' \" ~ \" (.+?) / href="$0.html" /;
+        %ns<typegraphs>{ $_ } = $s;
     }
     if 'pod' ~~ $pp.plugin-datakeys {
         my %ns-ex := $pp.get-data('pod');
