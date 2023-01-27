@@ -1,0 +1,26 @@
+.typegraph #graph0 {
+	& * {
+		fill: #fff;
+	}
+
+	& > polygon:first-of-type {
+		fill: none;
+	}
+
+	& text {
+		fill: #1b1d1e;
+	}
+
+	& path {
+		fill: none;
+	}
+
+	& path[stroke="#000000"] {
+		stroke: lightgray;
+	}
+
+	& polygon[stroke="#000000"] {
+		stroke: lightgray;
+		fill: lightgray;
+	}
+}
