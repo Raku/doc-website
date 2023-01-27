@@ -4,6 +4,7 @@
 	:auth<collection>,
 	:authors(
 		"finanalyst",
+		"rawleyfowler"
 	),
 	:custom-raku(),
 	:license<Artistic-2.0>,
