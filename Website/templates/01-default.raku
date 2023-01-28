@@ -98,22 +98,28 @@ use ProcessedPod;
     'para' => sub (%prm, %tml) {
         '<p>' ~ %prm<contents> ~ '</p>'
     },
-    'format-l' => sub (%prm, %tml) {
-        # local: <link-label> -> <target>.html#<place> | <target>.html
-        # internal: <link-label> -> #<place>
-        # external: <link-label> -> <target>
-        my $trg = %prm<target>;
-        if %prm<local> {
-            $trg ~= '.html';
-            $trg ~= '#' ~ %prm<place> if %prm<place>
+    'format-l' => sub ( %prm, %tml ) { say %prm;
+        # type = local: <link-label> -> <target>.html#<place> | <target>.html
+        # type = internal: <link-label> -> #<place>
+        # type = external: <link-label> -> <target>
+        my $trg;
+        given %prm<type> {
+            when 'local' {
+                $trg = %prm<target> ~ '.html';
+                $trg ~= '#' ~ %prm<place> if %prm<place>;
+                $trg = 'href="' ~ $trg ~ '"'
+            }
+            when 'internal' {
+                $trg = 'href="#' ~ %prm<place> ~ '"'
+            }
+            default {
+                $trg = 'href="' ~ %prm<target> ~ '"'
+            }
         }
-        elsif %prm<internal> {
-            $trg = '#' ~ %prm<place>
-        }
-        '<a href="'
+        '<a '
             ~ $trg
-            ~ '">'
-            ~ (%prm<link-label> // '')
+            ~ '>'
+            ~ ( %prm<link-label> // '')
             ~ '</a>'
     },
     'format-n' => sub (%prm, %tml) {
