@@ -1,6 +1,6 @@
 /.idea/
 /.precomp/
-/OgdenWebb/plugins/typegraph/typegraphs/*.svg
+/Website/plugins/typegraph/typegraphs/*.svg
 /doc_cache/
 /rendered_html/
 /local_raku_docs/
