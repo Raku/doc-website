@@ -2,6 +2,7 @@
 	:auth<collection>,
 	:authors(
 		"finanalyst",
+		"rawleyfowler"
 	),
 	:custom-raku<tm-blocks.raku>,
 	:license<Artistic-2.0>,
