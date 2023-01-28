@@ -1,0 +1,21 @@
+
+=begin pod
+=TITLE Fontawesome plugin for Collection
+
+Plugin provides Fontawesome icons when the C< F<> > FormatCode is encountered in Pod6 content files.
+
+The FormatCode has the form C< F<name|other classes> > which render as
+
+    <span class="fa name other classes"></span>
+
+The other classes can be found in the FontAwesome documentation
+
+=head1 Fontawesome files
+
+The files here are from the free download section of the Fontawesome v5 site.
+
+Updated to Fontawesome 5.15.4-web. Only those files needed for the plugin have
+been included in the Fontawesome5_15_4 directory. The all.min.js and all.min.css files
+are moved to the plugin root.
+
+=end pod

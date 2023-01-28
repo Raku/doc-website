@@ -33,7 +33,6 @@
 		['src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
 			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			crossorigin="anonymous"', 1],
-		['src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"', 2],
 	),
 	:information<add-css jquery jquery-link>,
 )
