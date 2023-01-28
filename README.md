@@ -56,7 +56,7 @@ Further, in the future, another Mode may be useful in this repository in due cou
 # Plugins and Templates
 Collection is designed to handle multiple Modes, and for plugins to be contributed in a similar way to Raku Modules. However, for the Raku documentation system, it seems pragmatic at the start for the plugins to be tailored specifically for this site.
 
-Consequently, the plugins are directly copied into the OgdenWebb directory, rather than using Collection's `refresh` functionality. This comment may seem odd but I include it to preclude questions that will arise when reading the documentation for `Collection`.
+Consequently, the plugins are directly copied into the Website directory, rather than using Collection's `refresh` functionality. This comment may seem odd but I include it to preclude questions that will arise when reading the documentation for `Collection`.
 
 The Templates were originally developed to mimic **Moritz Lenz's** Raku site (the one we are used to). Relevant template keys are modified in the `ogdenwebb` plugin. I would expect this to change over time, and for the default templates to change to the OgdenWebb templates. But I would suggest this is done incrementally.
 
@@ -64,7 +64,7 @@ The Templates were originally developed to mimic **Moritz Lenz's** Raku site (th
 Whilst this repo is being developed, a running on-line site can be found at [new-raku](https://new-raku.finanalyst.org).
 
 # Working on Collection plugins
-Collection uses plugins - they can be found under the directory `OdgenWebb/plugins/ ` - which contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc, and manipulate data.
+Collection uses plugins - they can be found under the directory `Website/plugins/ ` - which contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc, and manipulate data.
 
 Whilst the best way to work on the plugins is, as described below, to use the dedicated plugins distribution, it increases the learning curve and also means that there is an extra step in directly importing Collection plugins to the Raku Documentation repo (as mentioned above, the 'refresh' functionality of Collection is not used here).
 
@@ -78,12 +78,12 @@ The best way, at present, to tweak plugins and see how they affect the website, 
 
 (All Collection plugins must adhere to some rules that include having a README.rakudoc file, a `t/` directory, and various other keys, as defined in the Collection documentation). Collection is being designed to run multiple Collections, each of which may use different plugins, and that new plugins can be developed as alternatives for existing plugins, but with greater functionality. In addition, a developer can retain an older version of a plugin for a specific collection if a newer version breaks a website. This implements a `version>.<improvement>.<patch` versioning system for all plugins.
 
-The effect of a tweaked plugin on the website can be tested using `run-collection-trial OgdenWebb`. The trial subdirectory has a (very) few Rakudoc (aka POD6) files from the raku/doc rep. The Rakudoc sources include the most troublesome. The new website is then served to `localhost:5000`.
+The effect of a tweaked plugin on the website can be tested using `run-collection-trial Website`. The trial subdirectory has a (very) few Rakudoc (aka POD6) files from the raku/doc rep. The Rakudoc sources include the most troublesome. The new website is then served to `localhost:5000`.
 
 If there is a problem with one source, then use
 
 ```
-run-collection-trial --with-only='language.rakudoc other-source and-so-on' OgdenWebb
+run-collection-trial --with-only='language.rakudoc other-source and-so-on' Website
 ```
 Collection will then only render files that match one of the elements in the space-delimited list provided with `--with-only`. 'language.rakudoc' is a useful index file to link to other files.
 
