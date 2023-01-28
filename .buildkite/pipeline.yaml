@@ -1,0 +1,21 @@
+agents:
+  queue: raku-doc
+steps:
+  - label: "Build site"
+    key: build
+    commands:
+      - "zef install . --deps-only"
+      - "./bin_files/build-site --without-completion"
+      - "./.buildkite/archive.sh"
+      - "buildkite-agent artifact upload ./raku-doc-website.tar.gz"
+      - rm ./raku-doc-website.tar.gz
+
+  - label: "Containerize static assets"
+    key: container
+    if: build.source != 'schedule' && build.branch == 'main'
+    depends_on:
+      - build
+    commands:
+      - buildkite-agent artifact download --step build raku-doc-website.tar.gz .
+      - ./.buildkite/container.sh
+
