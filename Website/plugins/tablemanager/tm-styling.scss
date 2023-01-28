@@ -9,19 +9,12 @@
         margin-bottom: 20px;
     }
     table, th, td {
-       border: 1px solid #bbb;
        text-align: left;
     }
     tr:nth-child(even) {
         background-color: #f2f2f2;
-        .dark {
-            background-color: #574a4a;
-        }
     }
-    th {
-        background-color: #ddd;
-    }
-    th,td {
+   	th,td {
         padding: 5px;
     }
     button {

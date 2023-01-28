@@ -14,17 +14,10 @@
   margin-bottom: 20px;
 }
 .raku .container .tablemanager-collection table, .raku .container .tablemanager-collection th, .raku .container .tablemanager-collection td {
-  border: 1px solid #bbb;
   text-align: left;
 }
 .raku .container .tablemanager-collection tr:nth-child(even) {
   background-color: #f2f2f2;
-}
-.raku .container .tablemanager-collection tr:nth-child(even) .dark {
-  background-color: #574a4a;
-}
-.raku .container .tablemanager-collection th {
-  background-color: #ddd;
 }
 .raku .container .tablemanager-collection th, .raku .container .tablemanager-collection td {
   padding: 5px;

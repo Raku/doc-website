@@ -1,3 +1,19 @@
-.raku .container .tablemanager-collection tr:nth-child(even) {
-  background-color: #574a4a;
+.tablemanager-collection {
+	table, th, td {
+		border: 1px solid #3a3d4e;
+	}
+
+	& td {
+		color: #fff;
+		background-color: #212426;
+	}
+
+	& tr:nth-of-type(even) td {
+		background-color: #1b1d1e;
+	}
+
+	& th {
+		color: #eed891;
+		background-color: #171717;
+	}
 }
