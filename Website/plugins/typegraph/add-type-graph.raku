@@ -10,8 +10,8 @@ sub ($pp, %options) {
     {
         note 'Generating Typegraphs' unless %options<no-status>;
         mkdir 'typegraphs' unless 'typegraphs'.IO ~~ :e & :d;
-        my $viz =Doc::TypeGraph::Viz.new;
-        my $tg = Doc::TypeGraph.new-from-file('type-graph.txt');
+        my $viz = Doc::TypeGraph::Viz.new;
+        my $tg  = Doc::TypeGraph.new-from-file('type-graph.txt');
         $viz.write-type-graph-images(path => "typegraphs",
             :force,
             type-graph => $tg);

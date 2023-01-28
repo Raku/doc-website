@@ -1,8 +1,10 @@
 %(
-	:add-css<typegraph-styling.css>,
+	:add-css<typegraph-styling.css 
+			 typegraph-dark.css typegraph-light.css>,
 	:auth<collection>,
 	:authors(
 		"finanalyst",
+		"rawleyfowler"
 	),
 	:custom-raku(),
 	:license<Artistic-2.0>,
