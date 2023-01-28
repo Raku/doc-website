@@ -8,6 +8,8 @@
   ],
   "auth": "zef:raku",
   "depends": [
+    "Cro",
+    "Cro::HTTP",
     "Raku::Pod::Render:ver<4.4.0+>",
     "Pod::From::Cache:ver<0.4.6+>",
     "RakuConfig:ver<0.7.3+>",
