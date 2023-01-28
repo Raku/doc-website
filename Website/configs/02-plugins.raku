@@ -4,7 +4,7 @@
     plugins-required => %(
         :setup<raku-doc-setup>,
         :render<
-            fontawesome ogdenwebb camelia simple-extras listfiles images deprecate-span filterlines
+            font-awesome ogdenwebb camelia simple-extras listfiles images deprecate-span filterlines
             tablemanager secondaries typegraph
             link-error-test
             gather-js-jq gather-css
