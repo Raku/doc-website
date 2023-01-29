@@ -54,17 +54,16 @@ const connect = function() {
 const isOpen = function(ws) {
     return ws.readyState === ws.OPEN
 }
-// functions to use cookie to manage status of Repl bar
-// adapted from Javascript.info, function returns the value of replBarIsOpen cookie,
-// or true if not found
-function getReplCookie() {
-  let matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + "replBarIsOpen" + "=([^;]*)"
-  ));
-  return matches ? decodeURIComponent(matches[1]) : "open";
+function getReplState() {
+  replBarStatus = localStorage.getItem('replBarState');
+  if (replBarStatus === null) {
+    replBarStatus = 'close';
+    setReplState( replBarStatus );
+  }
+  return replBarStatus;
 }
-function setReplCookie(status) {
-    document.cookie = "replBarIsOpen=" + status + ";samesite=strict;path=/";
+function setReplState(status) {
+    localStorage.setItem('replBarState', replBarStatus);
 }
 function openReplBar(status) {
     let barOpen = status == "open" ? 'visible' : 'hidden';
@@ -72,7 +71,15 @@ function openReplBar(status) {
     document.getElementById('raku-input').style.visibility = barOpen;
     document.getElementById('raku-ws-headout').style.visibility = barOpen;
     document.getElementById('raku-ws-headerr').style.visibility = barOpen;
-    document.getElementById('Camelia-code').style.visibility = imgClose;
+    document.getElementById('raku-code-icon').style.visibility = imgClose;
+}
+function sendCode() {
+    let code = document.getElementById('raku-code').value;
+    if(isOpen(socket)) {
+        socket.send(JSON.stringify({
+            "code" : code
+        }))
+    }
 }
 // When the document has loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -80,19 +87,18 @@ document.addEventListener('DOMContentLoaded', function() {
     connect();
     // Add elements for output and error messages
     const codeSection = `
-        <img id="Camelia-code" title="Click to get Raku evaluation bar"
-            src="/assets/images/Camelia.svg"/>
+        <div id="raku-code-icon" title="Click to get Raku evaluation bar">
+            <i class="fas fa-laptop-code fa-2x"></i>
+        </div>
         <div id="raku-input">
-            <textarea rows="2" cols="40" id="raku-code" placeholder="Type some Raku code and Click 'Run'"></textarea>
+            <textarea rows="1" cols="40" id="raku-code" placeholder="Type some Raku code and Click 'Run'"></textarea>
             <button id="raku-evaluate" title="Evaluate Raku code" disabled>Run</button>
             <button id="raku-hide" title="Close evaluation bar">
-                <img src="/assets/images/Camelia.svg"/>
-                <div class="code-overlay">
-                    <span></span>
-                    <span></span>
-                </div>
+                <i class="far fa-times-circle fa-2x"></i>
             </button>
-            <label id="raku-connection">Waiting for connection</label>
+            <div id="raku-connection" title="Waiting for connection">
+                <i class="fas fa-sync fa-spin fa-2x fa-fw"></i>
+            </div>
         </div>
         <fieldset id="raku-ws-headout"><legend>Output</legend>
             <div id="raku-ws-stdout"></div>
@@ -103,23 +109,23 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.getElementById('raku-repl').innerHTML = codeSection;
     // manage Repl status
-    openReplBar( getReplCookie() );
+    openReplBar( getReplState() );
 
     // And add our event listeners
     document.getElementById('raku-hide').addEventListener('click' , function(e) {
         openReplBar("close");
-        setReplCookie("close");
+        setReplState("close");
     });
-    document.getElementById('Camelia-code').addEventListener('click' , function(e) {
+    document.getElementById('raku-code-icon').addEventListener('click' , function(e) {
         openReplBar("open");
-        setReplCookie("open");
+        setReplState("open");
     });
     document.getElementById('raku-evaluate').addEventListener('click', function(e) {
-        let code = document.getElementById('raku-code').value;
-        if(isOpen(socket)) {
-            socket.send(JSON.stringify({
-                "code" : code
-            }))
-        }
+        sendCode();
     });
+    document.getElementById('raku-code').addEventListener('keydown', function(event, ui) {
+        if (event.keyCode == 13) {
+         sendCode();
+        }
+  });
 });

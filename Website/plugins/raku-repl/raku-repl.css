@@ -1,9 +1,9 @@
 #raku-repl {
   position: fixed;
-  bottom: 0;
+  bottom: 15vh;
   left: 1vw;
   width: 98vw;
-  z-index: 40;
+  z-index: 60;
   opacity: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -12,11 +12,18 @@
   grid-template-areas: "input input" "stdout stderr";
 }
 
-#Camelia-code {
+#raku-code-icon {
   visibility: hidden;
-  width: 100px;
+  width: 48px;
   height: 48px;
   grid-area: input-start;
+  background-color: #004FB3;
+  color: #fff;
+  cursor: pointer;
+  border-width: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #raku-input {
@@ -36,17 +43,17 @@
 }
 
 #raku-evaluate {
-  border-radius: 10px;
-  color: whitesmoke;
-  background-color: darkblue;
   visibility: inherit;
-  border-width: 4px;
-  border-style: ridge;
+  border-width: 1px;
   padding: 1em;
   font-weight: bold;
+  background-color: #004FB3;
+  color: #fff;
+  cursor: pointer;
+  border-width: 1px;
 }
 #raku-evaluate:not([disabled]):hover {
-  border-color: red;
+  color: red;
 }
 #raku-evaluate:disabled {
   background-color: grey;
@@ -54,39 +61,21 @@
 
 #raku-hide {
   visibility: inherit;
-  display: flex;
+  background-color: #004FB3;
+  color: #fff;
 }
 #raku-hide img {
   width: 45px;
   position: fixed;
 }
-#raku-hide .code-overlay {
-  width: 46px;
-}
-#raku-hide .code-overlay span {
-  display: block;
-  height: 10px;
-  width: 70px;
-  border-radius: 10px;
-  border-style: double;
-  border-color: red;
-}
-#raku-hide .code-overlay span:first-child {
-  transform: translate(-12px, 19px) rotate(45deg);
-}
-#raku-hide .code-overlay span:last-child {
-  transform: translate(-12px, 9px) rotate(-45deg);
-}
 
 #raku-connection {
-  border-style: inset;
-  border-width: 2px;
-  background-color: bisque;
+  border-width: 1px;
   padding: 0.3em;
   align-self: center;
-  color: navy;
   font-weight: bold;
-  border-radius: 10px;
+  background-color: #004FB3;
+  color: #fff;
 }
 
 #raku-ws-headout {

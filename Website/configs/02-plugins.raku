@@ -6,12 +6,12 @@
         :render<
             font-awesome ogdenwebb camelia simple-extras listfiles images deprecate-span filterlines
             tablemanager secondaries typegraph
-            link-error-test
+            raku-repl
             gather-js-jq gather-css
         >,
         :report<link-plugin-assets-report>,
         :transfer<secondaries gather-js-jq gather-css images ogdenwebb>,
-        :compilation<secondaries listfiles link-error-test ogdenwebb>,
+        :compilation<secondaries listfiles ogdenwebb>,
         :completion<cro-app>,
     ),
 )
