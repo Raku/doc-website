@@ -1,19 +1,15 @@
-=pod
+Following in the steps of other open source projects that
+eventually take over the world, here is a partial list
+of people who have contributed to this documentation tooling repo.
+It is sorted by name and formatted to allow easy
+grepping and beautification by scripts.
+The fields are: name (N), email (E), web-address (W),
+description (D), GitHub username (U) and snail-mail
+address (S).
 
-    Following in the steps of other open source projects that
-    eventually take over the world, here is the partial list
-    of people who have contributed to this documentation.
-    It is sorted by name and formatted to allow easy
-    grepping and beautification by scripts.
-    The fields are: name (N), email (E), web-address (W),
-    description (D), GitHub username (U) and snail-mail
-    address (S).
+Thanks,
 
-        Thanks,
-
-        The Raku/doc Team
-        PS: Yes, this looks remarkably like the Linux CREDITS format
-        PPS: This file is encoded in UTF-8
+The Raku/doc Team
 
 ----------
 
@@ -21,8 +17,10 @@ U: 2colours
 
 U: Altai-man
 
-U: finanlyst
+N: Richard Hainsworth
+U: finanalyst
 E: rnhainsworth@gmail.com
+D: Raku::Pod::Render & Collection,
 
 N: JJ Merelo
 N: Juan Julián Merelo Guervós
@@ -35,6 +33,7 @@ U: moritz
 D: Initial p6doc development, documentation
 
 U: rawleyfowler
+E: rawleyfowler@proton.me
 
 U: WhistlingZephyr
 
@@ -42,4 +41,3 @@ N: Will Coleda
 U: coke
 E: will@coleda.com
 
-=cut

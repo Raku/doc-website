@@ -1,0 +1,25 @@
+=begin pod
+=TITLE credits-page is a plugin for Collection
+
+The plugin is for the 'render' and 'setup' milestone
+
+A new document is added to the collection from the text CREDITS file in the main directory
+
+=head1 Custom blocks
+No custom block is needed because it plugin provides a template for the whole Rakudoc block
+
+=head1 Templates
+
+Standard pod templates
+
+=head1 Expect format
+
+Some preliminary text
+C<--------------------------------->
+    then contributors with fields as follows:
+    name (N), email (E), web-address (W),
+    description (D), GitHub username (U),
+    and snail-mail address (S).
+    Each contributor is separated by a single empty line
+
+=end pod
