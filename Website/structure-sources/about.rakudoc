@@ -4,21 +4,21 @@
 The B<Raku programming language> is a very flexible, modern programming language.
 
 This website is dedicated to be a good I<viewer> for its documentation.
+
 Many people have contributed to writing the documentation and tooling, and a separate credits page
 can be found L<here|https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
 
+This particular website is a fraction of effort standing on the shoulders of the giants.
+
 Some of the people who helped create this I< website > are:
-=item L<Ogden Webb | https://github.com/ogdenwebb > - the author of the website design.
+=item L<Ogden Webb | https://github.com/ogdenwebb> - the author of the website design.
 =item L<Aleks-Daniel Jakimenko-Aleksejev | https://github.com/AlexDaniel> - provided invaluable feedback.
 
 =item L<Juan Julián Merelo Guervós | https://github.com/JJ> - led work on Raku documentation and refactored
-resulting in L<Documentable| https://github.com/Raku/Documentable> creation.
+resulting in L<Documentable|https://github.com/Raku/Documentable> creation.
 
-=item L<Richard Nabil Hainsworth, aka finanalyst | https://github.com/finanalyst> - adapted website to Collection toolchain.
+=item L<Richard Nabil Hainsworth, aka finanalyst | http://github.com/finanalyst> - adapted website to Collection toolchain.
 
-Many other people have contributed, and often the smallest contribution can have a significant
-effect. The Raku community is grateful to them all.
-
-L<Every contributor can add their name and some details to the CREDITS file| /credits>.
+The website is continuously being improved by community members, L<who are listed here|/credits>.
 
 =end pod
