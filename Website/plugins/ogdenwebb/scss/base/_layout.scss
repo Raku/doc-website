@@ -20,6 +20,11 @@
   .navbar-search-wrapper {
     top: 12%;
   }
+
+  .navbar-search-autocomplete {
+	  top: 42px;
+	  left: 10px;
+  }
 }
 
 @include mobile {
@@ -116,8 +121,7 @@
 
   .navbar-search-autocomplete {
     display: block;
-    position: static;
-
+    position: absolute;
   }
 }
 
