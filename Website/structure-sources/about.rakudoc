@@ -3,9 +3,8 @@
 
 The B<Raku programming language> is a very flexible, modern programming language.
 
-This website is a newer, more modern I<viewer> for the Raku documentation.
-
-Many people have contributed to writing the documentation and tooling, and a separate credits page is
+This website is dedicated to be a good I<viewer> for its documentation.
+Many people have contributed to writing the documentation and tooling, and a separate credits page
 can be found L<here|https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
 
 Some of the people who helped create this I< website > are:
