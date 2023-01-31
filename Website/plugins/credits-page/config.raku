@@ -8,6 +8,6 @@
 	:name<credits-page>,
 	:render,
 	:setup<setup-callable.raku>,
-	:template-raku<credits-template.raku>,
+	:template-raku(),
 	:version<0.1.0>,
 )
