@@ -58,32 +58,18 @@ $(document).ready( function() {
     });
     function move_sidebar( show ) {
         var el = $('#raku-sidebar');
-        var svg = $(el).find('svg')[0];
+        var icon_container = $(el).find('.icon')[0];
         if ( show === 'open' ) {
             $("#mainSidebar").css('width', '');
             $("#mainSidebar").css('display', 'block');
             $(el).css('left', '');
-//            if (svg !== undefined) {
-                svg.setAttribute('data-icon', 'chevron-left');
-//            }
-//            else {
-//                var i_icon = $(el).find('i')[0];
-//                $(i).removeClass('fa-chevron-right');
-//                $(i).addClass('fa-chevron-left');
-//            }
+            $(icon_container).html(FontAwesome.icon({prefix: 'fas', iconName: 'chevron-left'}).html[0]);
         }
         else {
             $("#mainSidebar").css('width', '0');
             $("#mainSidebar").css('display', 'none');
             $(el).css('left', '-5px');
-//            if (svg !== undefined) {
-                svg.setAttribute('data-icon', 'chevron-right');
-//            }
-//            else {
-//                var i_icon = $(el).find('i')[0];
-//                $(i).removeClass('fa-chevron-left');
-//                $(i).addClass('fa-chevron-right');
-//            }
+            $(icon_container).html(FontAwesome.icon({prefix: 'fas', iconName: 'chevron-right'}).html[0]);
         }
     };
 

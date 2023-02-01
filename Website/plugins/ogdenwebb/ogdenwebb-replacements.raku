@@ -102,7 +102,7 @@ use v6.d;
         <div id="raku-sidebar" class="raku-sidebar-toggle" style="">
           <a class="button is-primary">
             <span class="icon">
-              <i class="fas fa-chevron-left is-medium"></i>
+            <!-- This is where the chevron arrow will be loaded in the right direction -->
             </span>
           </a>
         </div>
