@@ -51,6 +51,9 @@ $(function(){
             .attr('class', 'enter-prompt')
             .css('display', 'none')
             .html('Enter to select');
+        var info_element = $('<span>')
+            .attr('class', 'item-info')
+            .html( item.info );
         var regex = new RegExp('('
             + current_search.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
             + ')', 'ig');
@@ -66,7 +69,7 @@ $(function(){
             enter_text.addClass('default-selection');
         }
         return $( "<li>" )
-            .append( $( "<div>" ).html(text).append(enter_text) )
+            .append( $( "<div>" ).html(text).append(info_element).append(enter_text) )
             .appendTo( ul )
             .hover(
                 function() {
