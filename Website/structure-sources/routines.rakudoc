@@ -9,7 +9,7 @@ below for routines that have been documented.
 = :disable('["last"]')
 = :appendFilterby('true')
 = :pagination('true')
-= :showrows('[10,20,30,50]')
+= :showrows('[10,20,30,50,9999]')
 = :disableFilterBy('["last"]')
 
 =end pod
