@@ -12,7 +12,7 @@
 	:compilation<add-search.raku>,
 	:transfer<cleanup.raku>,
 	:template-raku<ogdenwebb-replacements.raku>,
-	:version<0.1.14>,
+	:version<0.2.5>,
 	:add-css<
 		css/main.css
 		css/themes/dark.css css/themes/light.css

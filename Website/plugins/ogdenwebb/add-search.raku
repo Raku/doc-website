@@ -19,7 +19,7 @@ sub ( $pp, %processed, %options ) {
     my %defns = $pp.get-data('heading')<defs>;
     # structure of %defns is <file name as in processed> => %( <target> => %info )
     # %info = :name, :kind, :subkind, :category
-    exit note 'data needed from parsed headings' unless +%defns;
+    note 'no data from parsed headings' unless +%defns;
     # structure of processed
     # <filename> => %( :config-data => :kind, @sub-kind, @category )
     # Helper functions as in Documentable
@@ -34,7 +34,8 @@ sub ( $pp, %processed, %options ) {
     for %processed.kv -> $fn, $podf {
         @entries.push: %(
             :category( $podf.pod-config-data<kind>.tc ),
-            :value( escape( $podf.title )) ,
+            :value( escape( $podf.title )),
+            :info( 'is source file name' ),
             :url( escape-json( '/' ~ $fn ~ '.html' ))
         );
         $categories{ $podf.pod-config-data<kind>.tc }++
@@ -47,6 +48,7 @@ sub ( $pp, %processed, %options ) {
             @entries.push: %(
                 :$category,
                 :value( escape( %info<name> ) ),
+                :info( escape-json('｢' ~ %info<subkind> ~ '｣' ~ ' in file <b>' ~ $fn ~ '</b>') ),
                 :url( escape-json( "/$fn\.html\#$targ" ) )
             )
         }
