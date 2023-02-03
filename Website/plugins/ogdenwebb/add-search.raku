@@ -48,7 +48,7 @@ sub ( $pp, %processed, %options ) {
             @entries.push: %(
                 :$category,
                 :value( escape( %info<name> ) ),
-                :info( escape-json('｢' ~ %info<subkind> ~ '｣' ~ ' in file <b>' ~ $fn ~ '</b>') ),
+                :info( escape-json('in file <b>' ~ $fn ~ '</b>') ),
                 :url( escape-json( "/$fn\.html\#$targ" ) )
             )
         }
