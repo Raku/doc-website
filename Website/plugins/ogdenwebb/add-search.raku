@@ -31,35 +31,6 @@ sub ( $pp, %processed, %options ) {
     sub escape-json(Str $s) is export {
         $s.subst(｢\｣, ｢%5c｣, :g).subst('"', '\"', :g).subst(｢?｣, ｢%3F｣, :g)
     }
-    for %processed.kv -> $fn, $podf {
-        @entries.push: %(
-            :category( $podf.pod-config-data<kind>.tc ),
-            :value( escape( $podf.title )),
-            :info( ': file title' ),
-            :url( escape-json( '/' ~ $fn ~ '.html' ))
-        );
-        for $podf.raw-toc.grep({ !(.<is-title>) }) {
-            @entries.push: %(
-                :category<Heading>,
-                :value( escape( .<text> ) ),
-                :info( ': section in <b>' ~ $podf.title ~ '</b>' ),
-                :url( escape-json( '/' ~ $fn ~ '.html#' ~ .<target> ) )
-            )
-        }
-        ## glossary data is poor quality in POD6 sources. Not useful
-#        # raw glossary is a hash of entry strings -> places in text
-#        for $podf.raw-glossary.kv -> $entry, $targets {
-#            for $targets.list {
-#                @entries.push: %(
-#                    :category<Glossary>,
-#                    :value( escape( $entry ) ),
-#                    :info( ': index-entry in <b>' ~ $podf.title ~ '</b>' ),
-#                    :url( escape-json( '/' ~ $fn ~ '.html#' ~ $_ ) )
-#                )
-#            }
-#        }
-        $categories{ $podf.pod-config-data<kind>.tc }++
-    }
     for %defns.kv -> $fn, %targets {
         for %targets.kv -> $targ, %info {
             my $category = %info<category>.tc ;
@@ -68,10 +39,27 @@ sub ( $pp, %processed, %options ) {
             @entries.push: %(
                 :$category,
                 :value( escape( %info<name> ) ),
-                :info( escape(': in <b>' ~ $fn ~ '</b>') ),
+                :info( ': in <b>' ~ escape-json($fn) ~ '</b>' ),
                 :url( escape-json( "/$fn\.html\#$targ" ) )
             )
         }
+    }
+    for %processed.kv -> $fn, $podf {
+        @entries.push: %(
+            :category( $podf.pod-config-data<kind>.tc ),
+            :value( escape-json( $podf.title )),
+            :info( ': file title' ),
+            :url( escape-json( '/' ~ $fn ~ '.html' ))
+        );
+        for $podf.raw-toc.grep({ !(.<is-title>) }) {
+            @entries.push: %(
+                :category<Heading>,
+                :value( escape( .<text> ) ),
+                :info( ': section in <b>' ~ escape-json( $podf.title ) ~ '</b>' ),
+                :url( escape-json( '/' ~ $fn ~ '.html#' ~ .<target> ) )
+            )
+        }
+        $categories{ $podf.pod-config-data<kind>.tc }++
     }
     # try to file out duplicates by looking for only unique urls
     @entries .= unique(:as( *.<url> ) );
