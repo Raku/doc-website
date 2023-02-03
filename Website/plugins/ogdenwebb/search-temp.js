@@ -104,6 +104,10 @@ $(function(){
         // will happen only on non-5to6 items
         var a_cat = a.category.toLowerCase();
         var b_cat = b.category.toLowerCase();
+        // put category Heading at the end
+        if (a_cat == 'heading' && b_cat != 'heading') {return 1}
+        if (a_cat != 'heading' && b_cat == 'heading') {return -1}
+        // now sort normally
         if ( a_cat < b_cat ) {return -1}
         if ( a_cat > b_cat ) {return  1}
 

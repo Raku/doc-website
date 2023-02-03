@@ -35,28 +35,29 @@ sub ( $pp, %processed, %options ) {
         @entries.push: %(
             :category( $podf.pod-config-data<kind>.tc ),
             :value( escape( $podf.title )),
-            :info( 'is source file name' ),
+            :info( ': file title' ),
             :url( escape-json( '/' ~ $fn ~ '.html' ))
         );
         for $podf.raw-toc.grep({ !(.<is-title>) }) {
             @entries.push: %(
                 :category<Heading>,
                 :value( escape( .<text> ) ),
-                :info( 'in file <b>' ~ $podf.title ~ '</b>' ),
+                :info( ': section in <b>' ~ $podf.title ~ '</b>' ),
                 :url( escape-json( '/' ~ $fn ~ '.html#' ~ .<target> ) )
             )
         }
-        # raw glossary is a hash of entry strings -> places in text
-        for $podf.raw-glossary.kv -> $entry, $targets {
-            for $targets.list {
-                @entries.push: %(
-                    :category<Glossary>,
-                    :value( escape( $entry ) ),
-                    :info( 'in file <b>' ~ $podf.title ~ '</b>' ),
-                    :url( escape-json( '/' ~ $fn ~ '.html#' ~ $_ ) )
-                )
-            }
-        }
+        ## glossary data is poor quality in POD6 sources. Not useful
+#        # raw glossary is a hash of entry strings -> places in text
+#        for $podf.raw-glossary.kv -> $entry, $targets {
+#            for $targets.list {
+#                @entries.push: %(
+#                    :category<Glossary>,
+#                    :value( escape( $entry ) ),
+#                    :info( ': index-entry in <b>' ~ $podf.title ~ '</b>' ),
+#                    :url( escape-json( '/' ~ $fn ~ '.html#' ~ $_ ) )
+#                )
+#            }
+#        }
         $categories{ $podf.pod-config-data<kind>.tc }++
     }
     for %defns.kv -> $fn, %targets {
@@ -67,11 +68,13 @@ sub ( $pp, %processed, %options ) {
             @entries.push: %(
                 :$category,
                 :value( escape( %info<name> ) ),
-                :info( escape-json('in file <b>' ~ $fn ~ '</b>') ),
+                :info( escape(': in <b>' ~ $fn ~ '</b>') ),
                 :url( escape-json( "/$fn\.html\#$targ" ) )
             )
         }
     }
+    # try to file out duplicates by looking for only unique urls
+    @entries .= unique(:as( *.<url> ) );
     $pp.add-data('extendedsearch', $categories.keys);
     'js/search.js'.IO.spurt:
         'var items = '
