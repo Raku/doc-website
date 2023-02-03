@@ -113,6 +113,11 @@ body {
     top: 0 !important;
     left: 0 !important;
   }
+
+  & li.ui-autocomplete-category:hover {
+      background-color: inherit;
+      cursor: default;
+  }
 }
 
 .navbar-search-autocomplete[hidden],
