@@ -1,0 +1,1 @@
+// This is a placeholder file for gather-js-jq, which is overwritten in compilation stage

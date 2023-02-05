@@ -19,82 +19,75 @@ use v6.d;
         BLOCK
     },
     'header' => sub (%prm, %tml) {
-        q:to/BLOCK/
+        qq:to/BLOCK/
         <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
           <div class="container">
-            <div class="navbar-brand navbar-logo">
-              <div class="navbar-logo">
-                <a class="navbar-item" href="/">
-                  <img src="/assets/images/camelia-recoloured.png" alt="Raku" width="52.83" height="38">
-                </a>
-                <div class="navbar-logo-tm">tm</div>
-              </div>
-              <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-              </a>
-            </div>
+            { %tml<head-brand>.( %prm, %tml) }
             <div id="navMenu" class="navbar-menu">
-              <div class="navbar-start">
-                  <a class="navbar-item" href="/language.html">
-                    Language
-                  </a>
-                  <a class="navbar-item" href="/types.html">
-                    Types
-                  </a>
-                  <a class="navbar-item" href="/routines.html">
-                    Routines
-                  </a>
-                  <a class="navbar-item" href="/programs.html">
-                    Programs
-                  </a>
-                <a class="navbar-item" href="https://raku.org">
-                  Raku Homepage
-                </a>
-                <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku">
-                  Chat with us
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                  <a class="navbar-link">
-                    More
-                  </a>
-                  <div class="navbar-dropdown">
-                    <a class="navbar-item" href="/search.html">
-                      Extended Search
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="/about.html">
-                      About
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            <div class="navbar-end navbar-search-wrapper">
-                <div class="navbar-item">
-                  <div class="field has-addons">
-                    <div id="search" class="control">
-                      <input id="query" class="input ui-autocomplete-input" type="text" placeholder="🔍" autocomplete="off">
-                    </div>
-                    <div class="control">
-                      <a class="button is-primary">
-                        <span class="icon">
-                          <i class="fas fa-search "></i>
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div id="navbar-search" class="navbar-search-autocomplete" style="display: none;">
-                    <ul id="ui-id-1" tabindex="0" class="ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" style="display: none;"></ul>
-                </div>
-              </div>
+                { %tml<head-topbar>.( %prm, %tml) }
+                { %tml<head-search>.( %prm, %tml) }
             </div>
           </div>
         </nav>
         BLOCK
+    },
+    'head-brand' => sub (%prm, %tml ) {
+        q:to/BLOCK/
+        <div class="navbar-brand navbar-logo">
+          <div class="navbar-logo">
+            <a class="navbar-item" href="/">
+              <img src="/assets/images/camelia-recoloured.png" alt="Raku" width="52.83" height="38">
+            </a>
+            <div class="navbar-logo-tm">tm</div>
+          </div>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        BLOCK
+    },
+    'head-topbar' => sub ( %prm, %tml ) {
+        q:to/BLOCK/
+          <div class="navbar-start">
+            <a class="navbar-item" href="/language.html">
+                Language
+            </a>
+            <a class="navbar-item" href="/types.html">
+                Types
+            </a>
+            <a class="navbar-item" href="/routines.html">
+                Routines
+            </a>
+            <a class="navbar-item" href="/programs.html">
+                Programs
+            </a>
+            <a class="navbar-item" href="https://raku.org">
+                Raku Homepage
+            </a>
+            <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku">
+                Chat with us
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="/search.html">
+                  Extended Search
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="/about.html">
+                  About
+                </a>
+              </div>
+            </div>
+          </div>
+        BLOCK
+    },
+    'head-search' => sub (%prm, %tml ) { # placeholder here. Should be modified by search-bar plugin
+	    '<div class="navbar-end navbar-search-wrapper"></div>'
     },
     'sidebar' => sub (%prm, %tml) {
         return '' unless %prm<toc>;
@@ -302,52 +295,5 @@ use v6.d;
             }
         }
         else { '' }
-    },
-    extendedsearch => sub (%prm, %tml) {
-        return q:to/ERROR/ without %prm<extendedsearch>;
-            <div class="listf-error">ExtendedSearch has no collected data,
-            is ｢extendedsearch｣ in the Mode's ｢plugins-required<compilation>｣ list?
-            </div>
-            ERROR
-        qq:to/SEARCH/;
-          <div class="container px-4">
-            <div class="search-form mb-4">
-              <div class="field">
-                <div class="control has-icons-right">
-                  <input id="search-input" class="input" type="text" placeholder="Search">
-                  <span class="icon is-small is-right">
-                    <i class="fas fa-search"></i>
-                  </span>
-                </div>
-              </div>
-              <nav class="level">
-                <!-- Left side -->
-                <div class="level-left">
-                  <div class="level-item">
-                    <div class="field">
-                      <div class="control">
-                        <div class="select">
-                          <select id="search-category-select">
-                            <option value="All">All</option>
-                            { %prm<extendedsearch>.map(
-                                { '<option value="' ~ $_ ~ '">' ~ $_ ~ '</option>' }
-                            ) }
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="level-right">
-                  <div class="level-item">
-                    <div id="search-count" class="raku search-result-amount">Type in a Search string</div>
-                  </div>
-                </div>
-              </nav>
-            </div>
-            <div class="raku-search results"></div>
-          </div>
-        <script defer="" src="/assets/scripts/js/extended-search.js"></script>
-        SEARCH
     },
 );
