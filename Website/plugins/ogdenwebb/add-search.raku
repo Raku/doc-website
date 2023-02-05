@@ -14,7 +14,7 @@ sub ( $pp, %processed, %options ) {
         %( :category("Syntax"), :value("#` multi-line comment"), :url("/language/syntax.html#Multi-line_/_embedded_comments") ),
         %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature.html#index-entry-Long_Names") )
     ;
-    my $categories = <Syntax Signature>.SetHash;
+    my $categories = <Syntax Signature Heading Glossary>.SetHash;
     # collect info stored from parsing headers
     my %defns = $pp.get-data('heading')<defs>;
     # structure of %defns is <file name as in processed> => %( <target> => %info )
@@ -31,15 +31,6 @@ sub ( $pp, %processed, %options ) {
     sub escape-json(Str $s) is export {
         $s.subst(｢\｣, ｢%5c｣, :g).subst('"', '\"', :g).subst(｢?｣, ｢%3F｣, :g)
     }
-    for %processed.kv -> $fn, $podf {
-        @entries.push: %(
-            :category( $podf.pod-config-data<kind>.tc ),
-            :value( escape( $podf.title )),
-            :info( 'is source file name' ),
-            :url( escape-json( '/' ~ $fn ~ '.html' ))
-        );
-        $categories{ $podf.pod-config-data<kind>.tc }++
-    }
     for %defns.kv -> $fn, %targets {
         for %targets.kv -> $targ, %info {
             my $category = %info<category>.tc ;
@@ -48,11 +39,30 @@ sub ( $pp, %processed, %options ) {
             @entries.push: %(
                 :$category,
                 :value( escape( %info<name> ) ),
-                :info( escape-json('in file <b>' ~ $fn ~ '</b>') ),
+                :info( ': in <b>' ~ escape-json($fn) ~ '</b>' ),
                 :url( escape-json( "/$fn\.html\#$targ" ) )
             )
         }
     }
+    for %processed.kv -> $fn, $podf {
+        @entries.push: %(
+            :category( $podf.pod-config-data<kind>.tc ),
+            :value( escape-json( $podf.title )),
+            :info( ': file title' ),
+            :url( escape-json( '/' ~ $fn ~ '.html' ))
+        );
+        for $podf.raw-toc.grep({ !(.<is-title>) }) {
+            @entries.push: %(
+                :category<Heading>,
+                :value( escape( .<text> ) ),
+                :info( ': section in <b>' ~ escape-json( $podf.title ) ~ '</b>' ),
+                :url( escape-json( '/' ~ $fn ~ '.html#' ~ .<target> ) )
+            )
+        }
+        $categories{ $podf.pod-config-data<kind>.tc }++
+    }
+    # try to file out duplicates by looking for only unique urls
+    @entries .= unique(:as( *.<url> ) );
     $pp.add-data('extendedsearch', $categories.keys);
     'js/search.js'.IO.spurt:
         'var items = '
