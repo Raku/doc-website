@@ -8,36 +8,47 @@
 .cm-s-ayaya span.cm-atom, .cm-s-ayaya span.function, .cm-s-ayaya span.routine {
   color: #005C43;
 }
+
 .cm-s-ayaya span.cm-comment, .cm-s-ayaya span.comment {
   color: #6D4F4B;
 }
+
 .cm-s-ayaya span.cm-number, .cm-s-ayaya span.numeric {
   color: #1C6301;
 }
+
 .cm-s-ayaya span.cm-comment.cm-type {
   color: #5998a6;
 }
+
 .cm-s-ayaya span.cm-keyword, .cm-s-ayaya span.keyword, .cm-s-ayaya span.declarator {
   color: #223B9E;
 }
+
 .cm-s-ayaya span.cm-string, .cm-s-ayaya span.string {
   color: #004FB3;
 }
+
 .cm-s-ayaya span.cm-variable, .cm-s-ayaya span.variable {
   color: #5503B3;
 }
+
 .cm-s-ayaya span.cm-variable-2 {
   color: #5503B3;
 }
+
 .cm-s-ayaya span.cm-variable-3 {
   color: #5503B3;
 }
+
 .cm-s-ayaya span.cm-type, .cm-s-ayaya span.type {
   color: #A3004F;
 }
+
 .cm-s-ayaya span.cm-def {
   color: #223B9E;
 }
+
 .cm-s-ayaya span.cm-operator, .cm-s-ayaya span.assignment {
   color: #C01823;
 }
