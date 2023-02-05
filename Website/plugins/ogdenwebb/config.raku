@@ -16,7 +16,6 @@
 		css/themes/dark.css css/themes/light.css
 		css/code/dark.css css/code/light.css
 	>, # order of files is important
-	# css/lib/codemirror.min.css
 	:jquery( ['core.js', 3], ),
 	:information<add-css jquery>,
 )
