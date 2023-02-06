@@ -11,5 +11,8 @@
             :websocket-host<finanalyst.org>,
             :websocket-port<443>,
         ),
+        search-bar => %(
+            :search-site<new-raku.finanalyst.org>,
+        ),
     ),
 )

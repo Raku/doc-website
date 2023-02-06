@@ -1,4 +1,5 @@
 //ITEMs to be added
+// var searchSite to be added
 var current_search = "";
 var category_search = (function() {
     var method_sign = new RegExp(/^(\.)(\w[\w\-]+)/);
@@ -299,7 +300,7 @@ $.extend( $.ui.autocomplete, {
 } );
 
 function siteSearchUrl( keywords ) {
-    return 'https://www.google.com/search?q=site%3Adocs.raku.org+' + encodeURIComponent( keywords );
+    return 'https://www.google.com/search?q=site%3A' + searchSite + '+' + encodeURIComponent( keywords );
 }
 
 /*
