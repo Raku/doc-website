@@ -4,6 +4,7 @@ use JSON::Fast;
 use ProcessedPod;
 
 sub ( $pp, %processed, %options ) {
+    my $search-site = $pp.get-data('search-bar')<search-site>;
     # This routine creates the JS data structure to be added to the JS query function
     # The data structure is an array of hashes :category, :value, :url
     # Category is used to split up items, value is what is searched for, url is where it is to be found.
@@ -68,6 +69,7 @@ sub ( $pp, %processed, %options ) {
         'var items = '
         ~ to-json( @entries )
         ~ ";\n"
+        ~ "var searchSite = '$search-site';\n"
         ~ 'search-temp.js'.IO.slurp;
     [
         [ 'assets/scripts/search-bar.js', 'myself', 'search-bar.js' ],

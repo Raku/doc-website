@@ -20,4 +20,5 @@
 			integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 			crossorigin="anonymous"', 1],
 	),
+	:search-site<docs.raku.org>,
 )
