@@ -101,27 +101,6 @@ $(document).ready( function() {
         $matchingListElements.show();
     });
 });
-$(document).ready(function() {
-    $('#query').focus(function () {
-        if ($('.navbar-menu').css('display') == 'flex') {
-            $("#query").stop(true);
-            $('.navbar-start').hide();
-            $("#query").animate({ width: "980px" }, 200, function () { $(".navbar-search-autocomplete").width("980px"); $('#navbar-search').show(); });
-        } else {
-            $('#navbar-search').show();
-        }
-        $('#navMenu').addClass('navbar-autocomplete-active');
-    });
-    $('#query').blur(function () {
-        if ($('.navbar-menu').css('display') == 'flex') {
-            $("#query").stop(true);
-            $("#query").animate({ width: "200px" }, 400, function () { $('.navbar-start').show() });
-        }
-
-        $('#navbar-search').hide();
-        $('#navMenu').removeClass('navbar-autocomplete-active');
-    });
-});
 
 (function enforceCurrentTheme() {
     var theme = localStorage.getItem('color-scheme') || 'light';

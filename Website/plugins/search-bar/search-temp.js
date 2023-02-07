@@ -104,6 +104,10 @@ $(function(){
         // will happen only on non-5to6 items
         const a_cat = a.category.toLowerCase();
         const b_cat = b.category.toLowerCase();
+       // put category Heading at the end
+        if (a_cat == 'heading' && b_cat != 'heading') {return 1}
+        if (a_cat != 'heading' && b_cat == 'heading') {return -1}
+        // now sort normally
         if ( a_cat < b_cat ) {return -1}
         if ( a_cat > b_cat ) {return  1}
 
@@ -295,7 +299,7 @@ $.extend( $.ui.autocomplete, {
 } );
 
 function siteSearchUrl( keywords ) {
-    return 'https://www.google.com/search?q=site%3Adocs.raku.org+' + encodeURIComponent( keywords );
+    return 'https://www.google.com/search?q=site%3A' + searchSite + '+' + encodeURIComponent( keywords );
 }
 
 /*
@@ -399,3 +403,24 @@ function sift4(s1, s2, maxOffset, maxDistance) {
     lcss+=local_cs;
     return Math.round(Math.max(l1,l2)- lcss +trans); //add the cost of transpositions to the final result
 }
+// Code to set up the search bar events
+$(document).ready(function() {
+    $('#query').focus(function () {
+        if ($('.navbar-menu').css('display') == 'flex') {
+            $("#query").stop(true);
+            $('.navbar-start').hide();
+            $("#query").animate({ width: "980px" }, 200, function () { $(".navbar-search-autocomplete").width("980px"); $('#navbar-search').show(); });
+        } else {
+            $('#navbar-search').show();
+        }
+        $('#navMenu').addClass('navbar-autocomplete-active');
+    });
+    $('#query').blur(function () {
+        if ($('.navbar-menu').css('display') == 'flex') {
+            $("#query").stop(true);
+            $("#query").animate({ width: "200px" }, 400, function () { $('.navbar-start').show() });
+        }
+        $('#navbar-search').hide();
+        $('#navMenu').removeClass('navbar-autocomplete-active');
+    });
+});
