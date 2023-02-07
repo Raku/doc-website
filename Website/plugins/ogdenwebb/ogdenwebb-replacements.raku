@@ -74,10 +74,6 @@ use v6.d;
                 More
               </a>
               <div class="navbar-dropdown">
-                <a class="navbar-item" href="/search.html">
-                  Extended Search
-                </a>
-                <hr class="navbar-divider">
                 <a class="navbar-item" href="/about.html">
                   About
                 </a>
