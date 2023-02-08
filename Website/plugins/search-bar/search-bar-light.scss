@@ -1,0 +1,5 @@
+@import "_colors.scss";
+
+.ui-menu-item-wrapper.ui-state-active {
+    background-color: $grey-light;
+}

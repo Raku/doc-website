@@ -87,53 +87,53 @@ $(function(){
       let currentCategory = "";
       $('#navbar-search').attr('data-default-url', '');
       $('#navbar-search').attr('data-search-url', '');
-      function sortBy(a, b) {
-        // We want to place 5to6 docs to the end of the list.
-        // See if either a or b are in 5to6 category.
-        const isp5a = false, isp5b = false;
-        if ( a.category.substr(0,4) == '5to6' ) { isp5a = true; }
-        if ( b.category.substr(0,4) == '5to6' ) { isp5b = true; }
-
-        // If one of the categories is a 5to6 but other isn't,
-        // move 5to6 to be last
-        if ( isp5a  && !isp5b ) {return  1}
-        if ( !isp5a && isp5b  ) {return -1}
-
-        // Sort by category alphabetically; 5to6 items would both have
-        // the same category if we reached this point and category sort
-        // will happen only on non-5to6 items
-        const a_cat = a.category.toLowerCase();
-        const b_cat = b.category.toLowerCase();
-       // put category Heading at the end
-        if (a_cat == 'heading' && b_cat != 'heading') {return 1}
-        if (a_cat != 'heading' && b_cat == 'heading') {return -1}
-        // now sort normally
-        if ( a_cat < b_cat ) {return -1}
-        if ( a_cat > b_cat ) {return  1}
-
-        // We reach this point when categories are the same; so
-        // we sort items by value
-
-        const a_val = a.value.toLowerCase();
-        const b_val = b.value.toLowerCase();
-
-        // exact matches preferred
-        if ( a_val == current_search) {return -1}
-        if ( b_val == current_search) {return  1}
-
-        const a_sw = a_val.startsWith(current_search);
-        const b_sw = b_val.startsWith(current_search);
-        // initial matches preferred
-        if (a_sw && !b_sw) { return -1}
-        if (b_sw && !a_sw) { return  1}
-
-        // default
-        if ( a_val < b_val ) {return -1}
-        if ( a_val > b_val ) {return  1}
-
-        return 0;
-      }
-      const sortedItems = items.sort(sortBy);
+//      function sortBy(a, b) {
+//        // We want to place 5to6 docs to the end of the list.
+//        // See if either a or b are in 5to6 category.
+//        const isp5a = false, isp5b = false;
+//        if ( a.category.substr(0,4) == '5to6' ) { isp5a = true; }
+//        if ( b.category.substr(0,4) == '5to6' ) { isp5b = true; }
+//
+//        // If one of the categories is a 5to6 but other isn't,
+//        // move 5to6 to be last
+//        if ( isp5a  && !isp5b ) {return  1}
+//        if ( !isp5a && isp5b  ) {return -1}
+//
+//        // Sort by category alphabetically; 5to6 items would both have
+//        // the same category if we reached this point and category sort
+//        // will happen only on non-5to6 items
+//        const a_cat = a.category.toLowerCase();
+//        const b_cat = b.category.toLowerCase();
+//       // put category Heading at the end
+//        if (a_cat == 'heading' && b_cat != 'heading') {return 1}
+//        if (a_cat != 'heading' && b_cat == 'heading') {return -1}
+//        // now sort normally
+//        if ( a_cat < b_cat ) {return -1}
+//        if ( a_cat > b_cat ) {return  1}
+//
+//        // We reach this point when categories are the same; so
+//        // we sort items by value
+//
+//        const a_val = a.value.toLowerCase();
+//        const b_val = b.value.toLowerCase();
+//
+//        // exact matches preferred
+//        if ( a_val == current_search) {return -1}
+//        if ( b_val == current_search) {return  1}
+//
+//        const a_sw = a_val.startsWith(current_search);
+//        const b_sw = b_val.startsWith(current_search);
+//        // initial matches preferred
+//        if (a_sw && !b_sw) { return -1}
+//        if (b_sw && !a_sw) { return  1}
+//
+//        // default
+//        if ( a_val < b_val ) {return -1}
+//        if ( a_val > b_val ) {return  1}
+//
+//        return 0;
+//      }
+      const sortedItems = items;//.sort(sortBy);
       const keywords = category_search.strip_sign($("#query").val());
       sortedItems.push({
           category: 'Site Search',
@@ -170,6 +170,7 @@ $(function(){
 
   $("#query").attr('placeholder', '🔍').catcomplete({
       appendTo: "#navbar-search",
+      autoFocus: true,
       response: function(e, ui) {
         if (!ui.content.length) {
             $('#navbar-search-empty').show();
