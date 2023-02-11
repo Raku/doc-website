@@ -77,6 +77,10 @@ use v6.d;
                 <a class="navbar-item" href="/about.html">
                   About
                 </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item" href="/error-report.html">
+                  Anomalous links
+                </a>
               </div>
             </div>
           </div>
