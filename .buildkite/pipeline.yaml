@@ -19,3 +19,9 @@ steps:
       - buildkite-agent artifact download --step build raku-doc-website.tar.gz .
       - ./.buildkite/container.sh
 
+  # Deploys to http://docs-dev.rakulang.site:9101
+  - trigger: deploy-website-dev
+    depends_on:
+      - build
+    if: build.source != 'schedule' && build.branch == 'main'
+
