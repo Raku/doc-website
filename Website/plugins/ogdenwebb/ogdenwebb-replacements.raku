@@ -74,6 +74,10 @@ use v6.d;
                 More
               </a>
               <div class="navbar-dropdown">
+                <a class="navbar-item" href="/search.html">
+                  Extended Search
+                </a>
+                <hr class="navbar-divider">
                 <a class="navbar-item" href="/about.html">
                   About
                 </a>
@@ -124,10 +128,9 @@ use v6.d;
         else {
             qq:to/BLOCK/
             <div id="wrapper">
-            { %tml<page-header>.(%prm, %tml)  }
-            { %tml<page-content>.(%prm, %tml)  }
-            { %tml<page-footnotes>.(%prm, %tml)  }
-            { %tml<page-generated>.(%prm, %tml)  }
+            { %tml<page-header>.(%prm, %tml) }
+            { %tml<page-content>.(%prm, %tml) }
+            { %tml<page-footnotes>.(%prm, %tml) }
             </div>
             BLOCK
         }
@@ -168,45 +171,86 @@ use v6.d;
         </section>
         BLOCK
     },
-    'page-generated' => sub (%prm, %tml) {
-        qq:to/BLOCK/
-        <section class="page-generated">
-            <div class="container has-text-centered">
-              <p> Generated from { %prm<config><path> }
-                at { DateTime(now).truncated-to('second') }</p>
-            </div>
-        </section>
-        BLOCK
-    },
     'pod' => sub (%prm, %tml) {
         (%prm<contents> // '')
         ~ "\n" ~ (%prm<tail> // '') ~ "\n"
     },
     'footer' => sub (%prm, %tml) {
-        q:to/BLOCK/
+        qq:to/BLOCK/
         <footer class="footer main-footer">
           <div class="container px-4">
             <nav class="level">
-                <div class="level-left">
-                    <div class="level-item">
-                      <a href="/about.html">About</a>
-                    </div>
-                    <div class="level-item">
-                      <a id="toggle-theme">Toggle theme</a>
-                    </div>
-                </div>
-                <div class="level-right">
-                  <div class="level-item">
-                    <p>
-                      This website is licensed under
-                      <a href="https://raw.githubusercontent.com/Raku/doc/master/LICENSE">the Artistic License 2.0</a>
-                    </p>
-                  </div>
-                </div>
+            { %tml<footer-left>.(%prm, %tml) }
+            { %tml<page-generated>.(%prm, %tml) }
+            { %tml<footer-right>.(%prm, %tml) }
             </nav>
           </div>
         </footer>
         BLOCK
+    },
+    footer-left => sub (%prm, %tml ) {
+        q:to/FLEFT/
+        <div class="level-left">
+            <div class="level-item">
+              <a href="/about.html">About</a>
+            </div>
+            <div class="level-item">
+              <a id="toggle-theme">Toggle theme</a>
+            </div>
+        </div>
+        FLEFT
+    },
+    'page-generated' => sub (%prm, %tml) {
+        qq:to/BLOCK/
+        <div class="level-item">
+            <div class="dropdown is-up is-hoverable">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="footer-generated">
+                        <span>Generated from</span>
+                        <span class="icon is-small">
+                        <i class="fas fa-angle-up" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="footer-generated" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item generated">
+                            <p>This page is generated from </p>
+                            <p class="file-path">{ %prm<config><path> }</p>
+                            <p>{ 'on ' ~ .yyyy-mm-dd ~ ' at ' ~ .hh-mm-ss with DateTime(now) }</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        BLOCK
+    },
+    footer-right => sub (%prm, %tml ) {
+        q:to/FRIGHT/
+        <div class="level-right">
+          <div class="level-item">
+            <div class="dropdown is-up is-hoverable">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="footer-license">
+                        <span>License</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-up" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="footer-license" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                          <p>This website is licensed under
+                          <a href="https://raw.githubusercontent.com/Raku/doc/master/LICENSE">the Artistic License 2.0</a>
+                          </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        FRIGHT
     },
     page-edit => sub (%prm, %tml) {
         return '' unless %prm<config><path> ~~ / ^ .+ 'docs/' ( .+) $ /;
