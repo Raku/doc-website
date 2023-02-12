@@ -93,7 +93,7 @@ a.navbar-item:focus-within, a.navbar-item.is-active, .navbar-link:focus, .navbar
   border: 1px solid #cccccc;
 }
 .navbar-search-autocomplete li {
-  padding: 8px 5px;
+  padding: 0 5px;
 }
 .navbar-search-autocomplete li.ui-autocomplete-category {
   color: #A30031;
