@@ -4,25 +4,21 @@
 
 =head1 Installation
 
-A fully automatic installation process needs information about the location of the
-Rakudoc (aka POD6) sources and where the rendered html files are to be built.
+The assumption for this README is that the OS is a version of Linux, or that anyone
+wanting to attempt this knows their own OS well enough to understand the differences.
 
-This README is for the first commit, so it is assumed experienced Raku users will be
-using it for the time being.
+This repo can be cloned and the main dependencies can be installed with
 
-When the website is to be built automatically, there will be no need to serve it locally
-so the completion plugin will not be a Cro App, but a transfer process.
-
-The META6.json has most of the dependencies, but NOT Cro, which has been found to fail
-in automatic testing environments. It is best to install Cro directly.
-
-Installing Raku::Pod::Render can be done without the highlighter. But to build the site
-with highlighted raku code requires (for the time being) C<npm>.
-
-So
     zef install . --deps-only
 
-in the cloned directory should work.
+in the cloned directory. There are a couple of C libraries that may need to be installed as well,
+such as OpenSSL and LibArchive (make sure to install the `-dev` versions).
+
+Cro is not in the META6.json file because it can fail in the testing stages in an automatic testing
+environment. However, Cro and Cro::HTTP is needed for serving the rendered files locally.
+
+Syntax highlighting of Raku code in the documentation still requires a `node.js` stack. See the documentation
+for `Raku::Pod::Render` for more information.
 
 =head1 Building the documentation locally
 
@@ -44,6 +40,23 @@ All these names can be changed by changing the relevant parts of the config.raku
 Now run
 
     bin_files/build-site
+
+If Cro and Cro::HTTP have been installed, then C<build-site> will automatically launch a Cro app
+and the whole website will be served on C<localhost:30000>.
+
+=head1 Options for C<build-site>
+
+There are many options for build-site, which is a thin wrapper around the C<collect> sub in C<Collection>.
+
+However, you can run
+
+    bin_files/build-site --help
+
+or
+
+    bin_files/build-site --more-help
+
+for a quick overview.
 
 =head1 Directory naming
 
@@ -80,7 +93,7 @@ L<new-raku|https://new-raku.finanalyst.org>.
 
 =head1 Working on Collection plugins
 
-Collection uses plugins - they can be found under the directory C< OdgenWebb/plugins/ > - which
+Collection uses plugins - they can be found under the directory C< Website/plugins/ > - which
 contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc,
 and manipulate data.
 
@@ -89,36 +102,25 @@ plugins distribution, it increases the learning curve and also means that there 
 extra step in directly importing Collection plugins to the Raku Documentation repo (as
 mentioned above, the 'refresh' functionality of Collection is not used here).
 
-However, to make development here easier, there are two utilities which directly affect
+However, to make development here easier, there are three utilities which directly affect
 this distribution:
 =item C<update-css> which is a Bash file and takes the name of a plugin as its argument.
 =item C<bin_files/test-all-plugins> This runs all the test files in all the plugins
+=item C<bin_files/build-site> By default this will
+=item2 refresh the documents from the contents repository at github/raku/docs
+=item2 cache any changes to the source documents
+=item2 render all the source documents
 
-The best way, at present, to tweak plugins and see how they affect the website, is to install
-the distribution C<raku-collection-plugin-development>. The plugin SCSS (for example) can be changed, then
-updated into CSS using C<./update-css <plugin-name> >. The plugins can be tested using
-C<test-all-collection-plugins>. This utility runs each of the tests under the plugin directories.
+However, if a change to a plugin has been made and it can be seen with only one or two
+source files, then it is quicker to use the C<build-site> option C<with-only>, eg
 
-(All Collection plugins must adhere to some rules that include having a README.rakudoc file, a C<t/>
-directory, and various other keys, as defined in the Collection documentation). Collection is being
-designed to run multiple Collections, each of which may use different plugins, and that new plugins
-can be developed as alternatives for existing plugins, but with greater functionality. In addition,
-a developer can retain an older version of a plugin for a specific collection if a newer version
-breaks a website. This implements a C<<version>.<improvement>.<patch>> versioning system for all
-plugins.
+    bin_files/build-site --with-only='language.rakudoc operators'
 
-The effect of a tweaked plugin on the website can be tested using C<run-collection-trial OgdenWebb>. The trial subdirectory
-has a (very) few Rakudoc (aka POD6) files from the raku/doc rep. The Rakudoc sources
-include the most troublesome. The new website is then served to C<localhost:5000>.
+There is a file in C<Website/structure-sources/language.rakudoc> and a file in the doc sources
+called C<doc/language/operators.pod6>. Any element in the space delimited list following C<--with-only>
+that matches a source file name will be rendered.
 
-If there is a problem with one source, then use
-
-        run-collection-trial --with-only='language.rakudoc other-source and-so-on' OgdenWebb
-
-Collection will then only render files that match one of the elements in the space-delimited list
-provided with C<--with-only>. 'language.rakudoc' is a useful index file to link to other files.
-
-There are a bunch of other options to help debugging, and they can be found in the Collection
-documentation.
+A better way, though, to tweak or add new plugins and see how they affect the website, is to install
+the distribution C<raku-collection-plugin-development>.
 
 =end pod
