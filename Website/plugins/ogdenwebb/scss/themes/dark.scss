@@ -131,6 +131,25 @@ $search-match: $green;
 
 $homepage-gradient: linear-gradient(180deg, #030303 0.2%, #170F44 1%, #35229E 82.29%, #271974 100%);
 
+button.button {
+	color: $white-ter !important;
+	border: 1px solid $grey-darker !important;
+	background-color: $black-ter !important;
+	transition: background-color 500ms linear;
+}
+
+button.button:hover {
+	background-color: $black;
+}
+
+div#footer-generated .dropdown-content, div#footer-license .dropdown-content {
+	background-color: $black-ter;
+	border: 1px solid $grey-darker;
+	& .dropdown-item {
+		color: $white-ter !important;
+	}
+}
+
 a.button strong {
   color: $scheme-main-ter;
 }
