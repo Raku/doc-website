@@ -12,7 +12,7 @@ steps:
 
   - label: "Containerize static assets"
     key: container
-    if: build.source != 'schedule' && build.branch == 'main'
+    if: build.branch == 'main'
     depends_on:
       - build
     commands:
