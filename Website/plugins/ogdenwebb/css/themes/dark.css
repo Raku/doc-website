@@ -1,3 +1,22 @@
+button.button {
+  color: #f5f5f5 !important;
+  border: 1px solid #3A3D4E !important;
+  background-color: #212426 !important;
+  transition: background-color 500ms linear;
+}
+
+button.button:hover {
+  background-color: #030303;
+}
+
+div#footer-generated .dropdown-content, div#footer-license .dropdown-content {
+  background-color: #212426;
+  border: 1px solid #3A3D4E;
+}
+div#footer-generated .dropdown-content .dropdown-item, div#footer-license .dropdown-content .dropdown-item {
+  color: #f5f5f5 !important;
+}
+
 a.button strong {
   color: #282c2e;
 }
