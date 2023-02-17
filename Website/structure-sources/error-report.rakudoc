@@ -31,7 +31,7 @@ the suggested cure.
 The following types of error are common (the examples are illustrations ONLY)
 =item B<external> the link is to an external website, eg. C< L<See this blog| https://someones.xyzzzz.org/wierd_math>>
 =item B<local> the link is to another page in the Documentation, eg C< L<... operator | type/operators#... > >
-=item B<internal> the link is to another place in the same web-page, eg C< L< see funcky stuff | #funky_stuff > >
+=item B<internal> the link is to another place in the same web-page, eg C< L< see funky stuff | #funky_stuff > >
 
 =head1 Glitches found
 
