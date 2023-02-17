@@ -17,9 +17,9 @@ A fully automatic installation process needs information about the location of t
 
 This README is for the first commit, so it is assumed experienced Raku users will be using it for the time being.
 
-When the website is to be built automatically, there will be no need to serve it locally so the completion plugin will not be a Cro App, but a transfer process.
+When the website is to be built automatically, there will be no need to serve it locally so the completion plugin will not be a cro application, but a transfer process.
 
-The META6.json has most of the dependencies, but NOT Cro, which has been found to fail in automatic testing environments. It is best to install Cro directly.
+Note that while cro is listed as a dependency in META6.json, several developers have noted they preferred to install it separately.
 
 Installing Raku::Pod::Render can be done without the highlighter. But to build the site with highlighted raku code requires (for the time being) `npm`.
 
