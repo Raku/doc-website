@@ -22,7 +22,7 @@ zef install . --deps-only
 ```
 in the cloned directory. There are a couple of C libraries that may need to be installed as well, such as OpenSSL and LibArchive (make sure to install the ``-dev`` versions).
 
-Cro is not in the META6.json file because it can fail in the testing stages in an automatic testing environment. However, Cro and Cro::HTTP is needed for serving the rendered files locally.
+Cro is needed for serving the rendered files locally. You may wish to install it separately. 
 
 Syntax highlighting of Raku code in the documentation still requires a ``node.js`` stack. See the documentation for ``Raku::Pod::Render`` for more information.
 

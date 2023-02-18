@@ -14,7 +14,8 @@
     "Collection:ver<0.14.2+>",
     "Terminal::ANSIColor:ver<0.9+>:auth<zef:lizmat>",
     "Doc::TypeGraph:ver<2.2.1.1+>",
-    "Doc::TypeGraph::Viz:ver<2.2.1.1+>"
+    "Doc::TypeGraph::Viz:ver<2.2.1.1+>",
+    "Cro::HTTP:ver<0.8.9>:auth<zef:cro>"
   ],
   "build-depends": [],
   "test-depends": [],
