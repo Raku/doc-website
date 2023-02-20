@@ -23,7 +23,7 @@ sub ( $destination, $landing, $ext, %p-config, %options ) {
         Cro::HTTP::Log::File.new(logs => $*OUT, errors => $*ERR)
     ]
     );
-    say "Serving $landing on $host\:$port" unless %options<no-status>;
+    say "Serving $landing on http://$host\:$port" unless %options<no-status>;
     $http.start;
     react {
         whenever signal(SIGINT) {
