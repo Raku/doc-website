@@ -7,7 +7,7 @@ sub ($source-cache, $mode-cache, Bool $full-render,  $source-root, $mode-root, %
     'reflog.raku'.IO.spurt(qq:to/TEMP/);
     \%(
         git-reflog => sub (\%prm, \%tml) \{
-            '\<p>Raku source files upto commit ｢$reflog｣, see <a href="https://github.com/Raku/doc/tree/$reflog">github.com/Raku/doc/tree/$reflog\</a>\</p>'
+            '\<p>from <a href="https://github.com/Raku/doc/tree/$reflog">github.com/Raku/doc/tree/$reflog\</a>\</p>'
         },
     );
     TEMP
