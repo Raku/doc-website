@@ -291,12 +291,17 @@ use v6.d;
             '<span class="glossary-entry">' ( .+? ) '</span>'
         /;
         my $h = 'h' ~ (%prm<level> // '1');
-        qq[[\n<$h id="{ %tml<escaped>.(%prm<target>) }"]]
-            ~ qq[[ class="raku-$h">]]
-            ~ ( $index-parse.so ?? $index-parse[0] !! '' )
-            ~ qq[[<a href="#{ %tml<escaped>.(%prm<top>) }" class="u" title="go to top of document">]]
-            ~ ( $index-parse.so ?? $index-parse[1] !! $txt )
-            ~ qq[[</a></$h>\n]]
+        my $escaped-target = %tml<escaped>.(%prm.<target>);
+        qq:to/HTML/
+
+        <$h id="$escaped-target" class="raku-$h">
+        {$index-parse.so ?? $index-parse[0] !! ''}
+        <a class="u raku-h-anchor">
+        {$index-parse.so ?? $index-parse[1] !! $txt}
+        </a>
+        </$h>
+
+        HTML
     },
     table => sub (%prm, %tml) {
         my $tb = %tml.prior('table').(%prm, %tml);
@@ -323,12 +328,13 @@ use v6.d;
                         }
                     }
                 }
-                $rv ~= '<li>'
-                    ~ '<a href="#'
-                    ~ %tml<escaped>.($el.<target>)
-                    ~ '">'
-                    ~ %tml<escaped>.($el.<text> // '')
-                    ~ '</a>';
+                my $escaped-target = %tml<escaped>.($el.<target>);
+                $rv ~= qq:to/HTML/;
+                <li>
+                <a href="#$escaped-target" id="link-to-$escaped-target">
+                {%tml<escaped>.($el.<text> // '')}
+                </a>
+                HTML
                 $last-level = $el.<level>;
             }
             if $last-level eq 1 {
