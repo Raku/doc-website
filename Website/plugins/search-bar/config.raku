@@ -11,7 +11,7 @@
 	:name<search-bar>,
 	:render,
 	:template-raku<search-templates.raku>,
-	:version<0.1.9>,
+	:version<0.1.11>,
 	:jquery( ['search-bar.js',2], ), # ['extended-search.js', 2]
 	:information<jquery jquery-link add-css search-site>,
 	:add-css<search-bar.css search-bar-light.css search-bar-dark.css>,
