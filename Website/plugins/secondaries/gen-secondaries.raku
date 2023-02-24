@@ -42,9 +42,9 @@ sub ($pp, %processed, %options) {
     my @transfers;
     #| container for tablesearch plugin
     my @routines = [ ['Category', 'Name' , 'Type', 'Where documented'] , ];
-    counter(:items(%definitions.keys), :header('Generating secondaries'));
+    counter(:items(%definitions.keys), :header('Gen secondaries stage 1 ')) unless %options<no-status>;
     for %definitions.kv -> $fn, %targets {
-        counter(:dec);
+        counter(:dec) unless %options<no-status>;
         my $html = %processed{$fn}.pod-output;
         my $parsed = $html ~~ / [<defnmark> .*?]+ $ /;
         for $parsed<defnmark> {
@@ -63,7 +63,9 @@ sub ($pp, %processed, %options) {
             %things{$kind}{%attr<name>}.push: %attr;
         }
     }
+    counter(:items(%things.keys), :header('Gen secondaries stage 2')) unless %options<no-status>;
     for %things.kv -> $kind, %defns {
+        counter(:dec) unless %options<no-status>;
         for %defns.kv -> $dn, @dn-data {
             # my $url = "/{$kind.Str.lc}/{good-name($name)}";
             my $fn-name = "{ $kind.Str.lc }/{ good-name($dn) }";
@@ -72,8 +74,8 @@ sub ($pp, %processed, %options) {
             my @subkind;
             my @category;
             my $podf = PodFile.new(
-                name => $fn-name,
-                :pod-config-data(%( :$kind,)),
+                name => $dn,
+                :pod-config-data(%( :$kind, :subkind<Composite> )),
                 :$title,
                 :path('synthetic documentation'),
                 );

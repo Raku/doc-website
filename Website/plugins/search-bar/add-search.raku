@@ -46,9 +46,11 @@ sub ( $pp, %processed, %options ) {
         }
     }
     for %processed.kv -> $fn, $podf {
+        next unless $podf.pod-config-data<subkind>:exists;
+        my $value = $podf.name ~~ / ^ 'type/' (.+) $ / ?? ~$/[0] !! $podf.name;
         @entries.push: %(
-            :category( $podf.pod-config-data<kind>.tc ),
-            :value( escape-json( $podf.title )),
+            :category( $podf.pod-config-data<subkind>.tc ),
+            :value( escape-json( $value )),
             :info( ' ' ),
             :url( escape-json( '/' ~ $fn ~ '.html' ))
         );
@@ -64,6 +66,21 @@ sub ( $pp, %processed, %options ) {
     }
     # try to file out duplicates by looking for only unique urls
     @entries .= unique(:as( *.<url> ) );
+    # now sort so js only does filtering.
+    sub head-or-fivesix( $a, $b ) { # heading and 5to6 are independent
+        return Order::Same unless $a ~~ Str:D and $b ~~ Str:D;
+        my $a-h = $a.contains('heading',:i);
+        my $b-h = $b.contains('heading',:i);
+        my $a5 = $a.contains('5to6');
+        my $b5 = $b.contains('5to6');
+        return Order::Same if ($a-h and $b-h) or ($a5 and $b5);
+        return Order::More if $a-h or $a5;
+        return Order::Less if $b-h or $b5;
+        return $a cmp $b
+    }
+    @entries .= sort({ &head-or-fivesix( $^a.<category>, $^b.<category> ) })
+        .sort({ &head-or-fivesix( $^a.<url>, $^b.<url> ) })
+        .sort({ $^a.<value> cmp $^b.<value> });
     $pp.add-data('extendedsearch', $categories.keys);
     'search-bar.js'.IO.spurt:
         'var items = '
