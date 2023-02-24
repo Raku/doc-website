@@ -12,7 +12,7 @@
             :websocket-port<443>,
         ),
         search-bar => %(
-            :search-site<new-raku.finanalyst.org>,
+            :search-site<docs.raku.org>,
         ),
     ),
 )
