@@ -8,7 +8,7 @@
   ],
   "auth": "zef:raku",
   "depends": [
-    "Raku::Pod::Render:ver<4.4.0+>",
+    "Raku::Pod::Render:ver<4.4.1+>",
     "Pod::From::Cache:ver<0.4.6+>",
     "RakuConfig:ver<0.7.3+>",
     "Collection:ver<0.14.2+>",
