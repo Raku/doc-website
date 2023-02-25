@@ -384,7 +384,7 @@ use ProcessedPod;
             ~ '<a class="error-report" href="/error-report.html">Errors</a>'
             ~ '<a class="extra" href="/collection-examples.html">Collection</a>'
             ~ '<div class="menu">' ~ "\n"
-            ~ '<a href="https://raku.org"><div class="menu-item">Raku homepage</div></a>'
+            ~ '<a href="https://raku.org"><div class="menu-item">Raku™ homepage</div></a>'
             ~ '<a href="/language.html"><div class="menu-item">Language</div></a>'
             ~ '<a href="/search.html"><div class="menu-item">Search Site</div></a>'
             ~ '<a href="/types.html"><div class="menu-item">Types</div></a>'
