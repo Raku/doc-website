@@ -1,7 +1,7 @@
 %(
     :mode-sources<structure-sources>, # content for the website structure
     :mode-cache<structure-cache>, # cache for the above
-    :mode-ignore('search.rakudoc',), # files to ignore
+    :mode-ignore<search.rakudoc error-report.rakudoc>, # files to ignore
     :mode-obtain(), # not a remote repository
     :mode-refresh(), # ditto
     :mode-extensions<rakudoc pod6>, # only use these for content
