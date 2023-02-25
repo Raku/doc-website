@@ -1,19 +1,34 @@
 =begin pod :kinds<intro>
 =TITLE About the docs.raku.org website
 
-The B<Raku programming language> is a very flexible, modern programming language.
+This web site has been reworked to take advantage of more
+contemporary design, styling and tooling. The underlying content about
+the Raku™ language and the most current Rakudo™ compiler remains the same.
+However, the repositories for content and for visualization of content
+have been separated.
 
-This website is dedicated to be a good I<viewer> for its documentation.
-Many people have contributed to writing the documentation and tooling, and a separate credits page
-can be found L<here|https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
+A project of this size cannot be completed or maintained without the
+input and contributions of many individuals, and the initiative and
+persistence of a core group. At the time this website goes live, the
+following have contributed significantly to the project:
 
-This particular website is a fraction of effort standing on the shoulders of the giants.
+Alexander Kiryuhin L<@Altai-man | https://github.com/Altai-man>, who adapted a web design
+by L<Ogden Webb | https://github.com/ogdenwebb > to the Raku documentation using the
+Documentable tool kit.
 
-Some of the people who helped create this I< website > are:
-=item L<Ogden Webb | https://github.com/ogdenwebb > - the author of the website design.
+Richard Nabil Hainsworth L<@finanalyst | https://github.com/finanalyst>, who ported the work of
+@Altai-man to L<Collection| https://github.com/finanalyst/collection>.
 
-=item L<Juan Julián Merelo Guervós | https://github.com/JJ> - led work on Raku documentation and refactored
-resulting in L<Documentable| https://github.com/Raku/Documentable> creation.
+Coleman McFarland L<@dontlaugh| https://github.com/dontlaugh>, who created the web
+infrastructure to serve the web pages and automate updates.
 
-=item L<Richard Nabil Hainsworth, aka finanalyst | https://github.com/finanalyst> - adapted website to Collection toolchain.
+Will Coleda L<@coke| https://github.com/coke >, who has managed the process and brought the
+website on line.
+
+The previous website, from which this visualization has borrowed
+heavily, was designed and maintained by many people, though we mention
+Moritz Lenz L<@moritz | https://github.com/Moritz > and JJ Merelo L<@JJ | https://github.com/JJ> in
+particular. The many other people who have contributed to writing the documentation and tooling
+can be found in this L<Credits file | https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
+
 =end pod
