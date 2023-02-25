@@ -64,7 +64,7 @@ use v6.d;
                 Programs
             </a>
             <a class="navbar-item" href="https://raku.org">
-                Raku Homepage
+                Raku™ Homepage
             </a>
             <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku">
                 Chat with us
