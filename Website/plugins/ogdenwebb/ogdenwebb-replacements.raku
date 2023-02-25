@@ -74,16 +74,13 @@ use v6.d;
                 More
               </a>
               <div class="navbar-dropdown">
-                <a class="navbar-item" href="/search.html">
-                  Extended Search
-                </a>
                 <hr class="navbar-divider">
                 <a class="navbar-item" href="/about.html">
                   About
                 </a>
                 <hr class="navbar-divider">
-                <a class="navbar-item" href="/error-report.html">
-                  Anomalous links
+                <a class="navbar-item has-text-red" href="https://github.com/raku/doc-website/issues">
+                  Report an issue with this site
                 </a>
               </div>
             </div>
