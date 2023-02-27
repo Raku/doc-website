@@ -40,7 +40,8 @@ sub ($pp, %options) {
     }
     else { $template ~= ' "" ' } # Template is describing a subroutine that emits a string, which must be started by css
     for @adds {
-        $template ~= "\n" ~ '~ "\n" ~ ' ~ "'<link rel=\"stylesheet\" href=\"/assets/css/{ $_[1] }\"/>'";
+        my $link-title  = do given $_[1] { when /light/ { ' title="light"' }; when /dark/ { ' title="dark"' }; default { "" }};
+        $template ~= "\n" ~ '~ "\n" ~ ' ~ "'<link rel=\"stylesheet\" href=\"/assets/css/{ $_[1] }\"{ $link-title }/>'";
         @move-dest.push( ('assets/css/' ~ $_[1], $_[0], $_[1], ) )
     }
     for @links {

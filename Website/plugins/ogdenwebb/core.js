@@ -1,4 +1,50 @@
 var sidebar_is_shown;
+var change_theme = function (theme) { return false; };
+var persisted_theme = function () { return localStorage.getItem('color-scheme') };
+var persist_theme = function (theme) { localStorage.setItem('color-scheme', theme) };
+
+(function generateColorSchemes() {
+    const theme_links = {};
+    const change_themes = {};
+    for (const link of document.querySelectorAll('link[rel="stylesheet"]')) {
+        const title = link.getAttribute("title");
+        if (!title)
+            continue;
+        link.disabled = true;
+        (theme_links[title] ||= []).push(link);
+    }
+    const links_by_filter = (predicate) => Array.prototype.concat.apply([], Object.entries(theme_links).filter(k => predicate({ theme: k[0] })).map(e => e[1]));
+    for (const theme in theme_links) {
+        const links_to_disable = links_by_filter(e => e.theme != theme);
+        const links_to_enable = links_by_filter(e => e.theme == theme);
+        change_themes[theme] = function () {
+            for (const link of links_to_disable)
+                link.disabled = true;
+            for (const link of links_to_enable)
+                link.disabled = false;
+        }
+    }
+    change_theme = function (theme) {
+        let change = change_themes[theme];
+        if (change) {
+            change();
+            return true;
+        } else {
+            console.error("Could not set theme", theme);
+            return false;
+        }
+    }
+})();
+
+(function () {
+    let theme = persisted_theme();
+    if (theme && change_theme(theme)) {
+        return;
+    }
+    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    change_theme(theme);
+    persist_theme(theme);
+})();
 
 // Open navbar menu via burger button on mobiles
 $(document).ready( function() {
@@ -18,29 +64,13 @@ $(document).ready( function() {
             });
         });
     };
-    var theme = localStorage.getItem('color-scheme');
-    if (theme == null) {
-        localStorage.setItem('color-scheme', window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    }
+
     $('#toggle-theme').click(function () {
-            var theme = localStorage.getItem('color-scheme') || 'light';
-            localStorage.setItem('color-scheme', theme === 'light' ? 'dark' : 'light');
-            let links = document.getElementsByTagName('link');
-            for (let i = 0; i < links.length; i++) {
-                if (links[i].getAttribute('rel') == 'stylesheet') {
-                    let href = links[i].getAttribute('href');
-                    var replacer = undefined;
-                    if (href.includes('light')) {
-                        replacer = href.replace('light', 'dark');
-                    } else if (href.includes('dark')) {
-                        replacer = href.replace('dark', 'light');
-                    }
-                    if (replacer !== undefined)
-                        links[i].setAttribute('href', replacer);
-                }
-            }
-        });
+        var theme = persisted_theme() === 'light' ? 'dark' : 'light';
+        change_theme(theme);
+        persist_theme(theme);
     });
+});
 
 $(document).ready( function() {
     var sidebar_is_shown = localStorage.getItem('sidebarIsShown');;
@@ -102,18 +132,3 @@ $(document).ready( function() {
     });
 });
 
-(function enforceCurrentTheme() {
-    var theme = localStorage.getItem('color-scheme') || 'light';
-    var cssLinks = $('link[rel="stylesheet"]');
-    var toDelete = [];
-    for (var i = 0; i < cssLinks.length; i++) {
-        let href = cssLinks[i].getAttribute('href');
-        if (!href.includes('light.css') && !href.includes('dark.css'))
-            continue;
-        if (!href.includes(theme))
-            toDelete.push(cssLinks[i]);
-    }
-    for (var i = 0; i < toDelete.length; i++) {
-        toDelete[i].parentNode.removeChild(toDelete[i]);
-    }
-})(); // Invoke this right away because it modifies metadata
