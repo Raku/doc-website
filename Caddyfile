@@ -3,14 +3,9 @@
 
 
 :80 {
-	# Set this path to your site's directory.
-    @htmlext {
-        path_regexp static (/.*)\.(html?)$
-    }
 
 	root * /usr/share/caddy
-    try_files {path}.html {path} 
-
+	try_files {path}.html {path} 
 
 	# Enable the static file server.
 	file_server
@@ -18,4 +13,3 @@
 
 # Refer to the Caddy docs for more information:
 # https://caddyserver.com/docs/caddyfile
-
