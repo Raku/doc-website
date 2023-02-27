@@ -32,4 +32,8 @@
     margin-bottom: 0.5rem;
   }
 
+  .section {
+    /* https://github.com/Raku/doc-website/issues/144 */
+    padding: 0rem;
+  }
 }
