@@ -102,6 +102,26 @@ $(document).ready( function() {
     });
 });
 
+
+
+$(document).ready( function() {
+    function getCorrespondingLinkElement(anchorElement) {
+        var correspondingLink = 'link-to-' + anchorElement.parentNode.id;
+        return document.getElementById(correspondingLink);
+    }
+    $('.raku-h-anchor').hover(
+        function() {
+            var link = getCorrespondingLinkElement(this);
+            link.scrollIntoView();
+            $(link).css('font-weight', 'bold');
+        },
+        function() {
+            var link = getCorrespondingLinkElement(this);
+            $(link).css('font-weight', 'initial');
+        }
+    );
+});
+
 (function enforceCurrentTheme() {
     var theme = localStorage.getItem('color-scheme') || 'light';
     var cssLinks = $('link[rel="stylesheet"]');
