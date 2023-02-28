@@ -86,7 +86,7 @@ sub ( $pp, %processed, %options ) {
         'var items = '
         ~ to-json( @entries )
         ~ ";\n"
-        ~ "var searchSite = '$search-site';\n"
+#        ~ "var searchSite = '$search-site';\n"
         ~ 'search-temp.js'.IO.slurp;
     [
         [ 'assets/scripts/search-bar.js', 'myself', 'search-bar.js' ],
