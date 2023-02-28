@@ -1,4 +1,5 @@
 //ITEMs to be added
+let searchSite = window.location.hostname;
 let current_search = "";
 const category_search = (function() {
     const method_sign = new RegExp(/^(\.)(\w[\w\-]+)/);
