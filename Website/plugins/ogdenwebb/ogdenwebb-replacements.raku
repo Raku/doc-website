@@ -238,7 +238,7 @@ use v6.d;
                         <div class="dropdown-item generated">
                             <p>This page is generated from </p>
                             <p class="file-path">{ %prm<config><path> }</p>
-                            <p>{ 'on ' ~ .yyyy-mm-dd ~ ' at ' ~ .hh-mm-ss with DateTime(now) }</p>
+                            <p>{ 'on ' ~ .yyyy-mm-dd ~ ' at ' ~ .hh-mm-ss ~ ' (time zone UTC+' ~ .timezone ~ ')' with DateTime(now) }</p>
                             { %tml<git-reflog>.(%prm, %tml) if %tml<git-reflog>:exists }
                         </div>
                     </div>
