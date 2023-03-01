@@ -1,22 +1,17 @@
 =begin pod :no-toc :no-glossary :class<content_404>
 
-=TITLE 404 Response
+=TITLE 404
 
 =CameliaShadow
 
 =head2 404: Page Not Found
 
-We're sorry, but the resource (content page) you tried to reach cannot be found.
+We're sorry, but the content you tried to reach wasn't found.
 
-=item If you got here by following
-a link on this site or as a result of searching on it, please report it
-L<on our GitHub repository|https://github.com/Raku/doc/issues/>
-so we can fix it!
+While we do review server logs to catch these issues, we recently deployed a new
+version of the site, so please feel free to
+L<report any issues|https://github.com/Raku/doc-website/issues/>.
 
-=item If a search engine sent you here, the link might have disappeared due to site reorganization.
-We still encourage you to report it as above, but it will eventually disappear from search engines too.
-
-=item If you came following a link from some site or blog, we would still want to know about that;
-you might want to report the blog or website author too.
+Thanks!
 
 =end pod
