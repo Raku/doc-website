@@ -178,36 +178,11 @@ use v6.d;
           <div class="container px-4">
             <nav class="level">
             { %tml<footer-left>.(%prm, %tml) }
-            { %tml<page-generated>.(%prm, %tml) }
-            { %tml<raku-tm>.(%prm, %tml) }
             { %tml<footer-right>.(%prm, %tml) }
             </nav>
           </div>
         </footer>
         BLOCK
-    },
-    raku-tm => sub (%prm, %tml ){
-        q:to/RAKUTM/
-        <div class="level-item">
-            <div class="dropdown is-up is-hoverable">
-                <div class="dropdown-trigger">
-                    <button class="button" aria-haspopup="true" aria-controls="rakutm">
-                        <span>Raku™</span>
-                        <span class="icon is-small">
-                        <i class="fas fa-angle-up" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-                <div class="dropdown-menu" id="rakutm" role="menu">
-                    <div class="dropdown-content">
-                        <div class="dropdown-item generated">
-                            <p>Raku is a trademark for the Raku programming language</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        RAKUTM
     },
     footer-left => sub (%prm, %tml ) {
         q:to/FLEFT/
