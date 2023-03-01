@@ -89,6 +89,10 @@ However, to make development here easier, there are three utilities which direct
 
 *  `update-css` which is a Bash file and takes the name of a plugin as its argument.
 
+    * This expects the Node.js version of `sass` to be installed in your path.
+
+    * Installation instructions can be found [here](https://sass-lang.com/install).
+
 *  `bin_files/test-all-plugins` This runs all the test files in all the plugins
 
 *  `bin_files/build-site` By default this will
