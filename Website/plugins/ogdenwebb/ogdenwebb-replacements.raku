@@ -36,9 +36,9 @@ use v6.d;
         <div class="navbar-brand navbar-logo">
           <div class="navbar-logo">
             <a class="navbar-item" href="/">
-              <img src="/assets/images/camelia-recoloured.png" alt="Raku" width="52.83" height="38">
+              <img src="/assets/images/camelia-recoloured.png" alt="Raku™" width="52.83" height="38">
             </a>
-            <div class="navbar-logo-tm">tm</div>
+            <div class="navbar-logo-tm">™</div>
           </div>
           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
             <span aria-hidden="true"></span>
