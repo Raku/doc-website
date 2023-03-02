@@ -15,8 +15,20 @@ use v6.d;
         <div id="raku-repl"></div>
         { %tml<footer>.(%prm, %tml)  }
         { %tml<js-bottom>.({}, {}) }
-        { %tml<end-block>.(%prm, %tml) }
+        </body>
+        </html>
         BLOCK
+    },
+    'head-block' => sub (%prm, %tml) {
+        "\<head>\n"
+            ~ '<title>' ~ %tml<escaped>.(%prm<title>) ~ " | Raku Documentation\</title>\n"
+            ~ '<meta charset="UTF-8" />' ~ "\n"
+            ~ %tml<favicon>.({}, {})
+            ~ (%prm<metadata> // '')
+            ~ %tml<css>.({}, {})
+            ~ %tml<jq-lib>.({}, {})
+            ~ %tml<js>.({}, {})
+            ~ "\</head>\n"
     },
     'header' => sub (%prm, %tml) {
         qq:to/BLOCK/
@@ -261,16 +273,6 @@ use v6.d;
               </span>
             </a>
           </div>
-        BLOCK
-    },
-    end-block => sub (%prm, %tml) {
-        qq:to/BLOCK/
-        <div
-            role="status"
-            aria-live="assertive"
-            aria-relevant="additions"
-            class="ui-helper-hidden-accessible">
-        </div>
         BLOCK
     },
     #placeholder
