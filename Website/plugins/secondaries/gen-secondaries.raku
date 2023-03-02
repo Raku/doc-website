@@ -70,7 +70,7 @@ sub ($pp, %processed, %options) {
             # my $url = "/{$kind.Str.lc}/{good-name($name)}";
             my $fn-name = "{ $kind.Str.lc }/{ good-name($dn) }";
             my $title = $dn;
-            my $subtitle = 'Synthesised documentation from ';
+            my $subtitle = 'Combined from primary sources listed below.';
             my @subkind;
             my @category;
             my $podf = PodFile.new(
@@ -84,7 +84,6 @@ sub ($pp, %processed, %options) {
                 # Construct body
                 @subkind.append: .<subkind>;
                 @category.append: .<category>;
-                $subtitle ~= ' ' ~ .<source>;
                 $body ~= %templates<heading>.(%(
                   :1level,
                   :skip-parse,
@@ -94,7 +93,9 @@ sub ($pp, %processed, %options) {
                 ), %templates);
                 $body ~= %templates<para>.(%(
                    :contents(qq:to/CONT/)
-                        See <a href="/{ .<source> }.html#{ .<target> }">Original text</a> in context
+                        See primary documentation
+                        <a href="/{ .<source> }.html#{ .<target> }">in context\</a>
+                        for <b>{ .<target>.subst( / '_' / , ' ', :g ) }</b>
                     CONT
                 ), %templates);
                 $body ~= .<body>;
