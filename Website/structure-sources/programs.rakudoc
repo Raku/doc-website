@@ -1,7 +1,6 @@
-=begin pod :no-glossary :page-content-columns
+=begin pod :no-glossary :no-toc
 =TITLE Raku Programs Documentation
 
 =for ListFiles :select<kind=Programs>
-Programs that support Raku development
 
 =end pod
