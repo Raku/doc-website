@@ -208,55 +208,11 @@ use v6.d;
         </div>
         FLEFT
     },
-    'page-generated' => sub (%prm, %tml) {
-        qq:to/BLOCK/
-        <div class="level-item">
-            <div class="dropdown is-up is-hoverable">
-                <div class="dropdown-trigger">
-                    <button class="button" aria-haspopup="true" aria-controls="footer-generated">
-                        <span>Generated from</span>
-                        <span class="icon is-small">
-                        <i class="fas fa-angle-up" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-                <div class="dropdown-menu" id="footer-generated" role="menu">
-                    <div class="dropdown-content">
-                        <div class="dropdown-item generated">
-                            <p>This page is generated from </p>
-                            <p class="file-path">{ %prm<config><path> }</p>
-                            <p>{ 'on ' ~ .yyyy-mm-dd ~ ' at ' ~ .hh-mm-ss with DateTime(now) }</p>
-                            { %tml<git-reflog>.(%prm, %tml) if %tml<git-reflog>:exists }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        BLOCK
-    },
     footer-right => sub (%prm, %tml ) {
         q:to/FRIGHT/
         <div class="level-right">
           <div class="level-item">
-            <div class="dropdown is-up is-hoverable">
-                <div class="dropdown-trigger">
-                    <button class="button" aria-haspopup="true" aria-controls="footer-license">
-                        <span>License</span>
-                        <span class="icon is-small">
-                            <i class="fas fa-angle-up" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-                <div class="dropdown-menu" id="footer-license" role="menu">
-                    <div class="dropdown-content">
-                        <div class="dropdown-item">
-                          <p>This website is licensed under
-                          <a href="https://raw.githubusercontent.com/Raku/doc/master/LICENSE">the Artistic License 2.0</a>
-                          </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              <a href="/license.html">License</a>
           </div>
         </div>
         FRIGHT
