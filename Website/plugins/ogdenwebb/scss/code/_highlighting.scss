@@ -24,6 +24,10 @@
     padding: $size-7 $size-5;
   }
 
+  .control {
+    font-size: inherit;
+  }
+
   .code-output-title {
     font-size: $size-6;
     font-weight: $weight-medium;
