@@ -1,0 +1,13 @@
+%(
+	:add-css<deprecate-span.css>,
+	:auth<collection>,
+	:authors(
+		"finanalyst",
+	),
+	:custom-raku(),
+	:license<Artistic-2.0>,
+	:name<deprecate-span>,
+	:render,
+	:template-raku<deprecation-template.raku>,
+	:version<0.1.1>,
+)

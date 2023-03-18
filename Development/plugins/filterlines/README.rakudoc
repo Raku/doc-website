@@ -1,0 +1,25 @@
+=begin pod
+=TITLE Filterlines plugin for Collection
+
+This is a C<render> stage plugin to filter lines within it.
+
+=head1 Useage
+
+Use the PodBlock C<Filterlines> with option C<selector>
+=begin code
+=begin Filterlines :selector< .ws-glossary-place *> :placeholder<Search in lines>
+
+Something that generates lots of lines.
+=end Filterlines
+=end code
+
+The B<selector> option is optional, but if it appears it is a selector passed to the
+JQuery filter function. The syntax and semantics of the selector string is determined by
+the filter function, not Raku regex.
+
+HTML elements matching the selector remain visible, those
+not matching are hidden.
+
+B<placeholder> puts the string inside the search box when it is empty.
+
+=end pod

@@ -1,0 +1,12 @@
+.image-container {
+  display: flex;
+  width: 100%;
+  height: auto; }
+  .image-container.justify-center {
+    justify-content: center; }
+  .image-container.justify-left {
+    justify-content: start; }
+  .image-container.justify-right {
+    justify-content: end; }
+
+/*# sourceMappingURL=image-styling.css.map */

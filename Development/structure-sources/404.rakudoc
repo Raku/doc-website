@@ -1,0 +1,17 @@
+=begin pod :no-toc :no-glossary :class<content_404>
+
+=TITLE 404
+
+=CameliaShadow
+
+=head2 404: Page Not Found
+
+We're sorry, but the content you tried to reach wasn't found.
+
+While we do review server logs to catch these issues, we recently deployed a new
+version of the site, so please feel free to
+L<report any issues|https://github.com/Raku/doc-website/issues/>.
+
+Thanks!
+
+=end pod

@@ -1,0 +1,76 @@
+=begin pod
+=TITLE Documentation on gather-js-jq plugin for Collection
+
+=DESCRIPTION Looks for C<js-script>/C<js-link> & C<jquery>/<jquery-link> key in other plugins.
+Creates template entries that are referenced in the generic source-wrap template.
+
+=head1 Usage
+
+Other C<render> plugins will provide custom javascript (aka ECMA) or C<JQuery> files to be served with an html page.
+This plugin takes those files/links and deals with them so that they can be served with the HTML in the
+content files. This requires modification of the templates, and js files in the plugin directory
+will need to be copied to the correct
+output directory.
+
+In addition, the order in which JS / ECMA libraries are loaded may be important, eg., leaflet-providers.js must
+load after the leaflet library. This is enabled by supplying an ordering parameter.
+The default ordering is 0. So
+any ordering a number greater than 0 will go after all 0-order files.
+
+For example, within the C<config.raku> of the C<LeafletMap> plugin, we have
+=begin code
+
+    :js-link(q:to/JS/),
+        src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""
+        JS
+    :js-script(['leaflet-providers.js',1],),
+=end code
+
+The Array has the name of a local (see below) js file that has an ordering parameter of 1.
+
+Multiple JS/JQ entries are possible by listing each item. A list as the first item is ambiguous because it
+could be either a duplet with an order parameter, or a list of items. The ambiguity is resolved by looking at the
+second element.
+
+=head2 Local javascript files
+
+The C<js-script> key in the other plugin's config file is assumed to be a filename containing text that is to be
+copied into the C<destination> folder.
+
+This plugin copies all script files to the appropriate
+sub-directory of the destination directory, and configures the templates to serve them.
+
+The C< <script> ... </script> > tags will be added by the plugin.
+
+=head2 Remote javascript
+
+The C<js-link> key in the other plugin's config file is taken to be the URL of the remote source. The plugin
+configures the templates to access the source.
+
+When a C<js-link> (or C<jquery-link>) is given in the config, the whole of the string is included inside
+C< <script ... > >, so it is necessary to provide the C<src="..."> as well. This is to allow for a link
+string to have other attributes, such as cross-origin and integrity.
+
+=head2 Local JQuery
+
+The C<jquery> key in the other plugin's config file is assumed to be the filename of the local source.
+See local javascript files.
+
+=head2 Remote JQuery
+
+The C<jquery-link> key in the other plugin's config file is assumed to be the URL to a JQuery source.
+
+If any C<jquery> or C<jquery-link> key is found, then this plugin will load the
+jquery lib specified in the config file for this plugin. (If another plugin requires a different, eg. later,
+version of JQuery, then the config for this plugin must be updated manually).
+
+=head2 Bottom
+
+If there is any reason to put a script at the bottom of the page, then use the key C<js-bottom>. This
+is assumed only to apply to local JS scripts because
+=item A script link need only be at the top.
+=item A JQuery plugin can be loaded before the DOM is loaded but activated only afterwards.
+
+=end pod

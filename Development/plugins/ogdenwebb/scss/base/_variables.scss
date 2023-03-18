@@ -1,0 +1,80 @@
+@import "../../bulma/sass/utilities/functions.sass";
+
+
+// Sizes & Weight
+$size-1: 3rem;
+$size-2: 2.5rem;
+$size-3: 2rem;
+$size-4: 1.5rem; // 24px
+$size-5: 1.25rem; // 20px
+$size-6: 1rem; // 16px
+$size-7: 0.75rem;
+
+$weight-light: 300;
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+// Spacing
+$block-spacing: 1.5rem;
+
+// Responsiveness
+// The container horizontal gap, which acts as the offset for breakpoints
+$gap: 32px;
+$smartphone-portrait: 480px;
+// 960, 1152, and 1344 have been chosen because they are divisible by both 12 and 16
+$tablet: 769px;
+// 960px container + 4rem
+// $desktop: 960px + (2 * $gap);
+$desktop: 1140px + (2 * $gap);
+// 1152px container + 4rem
+$widescreen: 1152px + (2 * $gap);
+$widescreen-enabled: true;
+// 1344px container + 4rem
+$fullhd: 1344px + (2 * $gap);
+
+$fullhd-enabled: false;
+$widescreen-enabled: false;
+
+// Typography
+$family-sans-serif: "Inter", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-monospace: monospace;
+$render-mode: optimizeLegibility;
+
+$family-primary: $family-sans-serif;
+// $family-secondary: $family-sans-serif;
+$family-secondary: "Lato", BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-code: $family-monospace;
+
+$size-small: $size-7;
+$size-normal: $size-6;
+$size-medium: $size-5;
+$size-large: $size-4;
+
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7;
+
+// Sort
+$hero-body-padding-medium: 6rem 0.5rem;
+$icon-dimensions-large: 6rem;
+$body-line-height: 1.5;
+
+$footer-padding: 0;
+
+$navbar-height: 3.75rem;
+$search-query-input-width-tablet: 500px;
+$search-query-input-width-expanded: 992px;
+
+$menu-label-font-size: 0.75rem;
+
+$menu-item-radius: 0px;
+$menu-list-line-height: 1.05;
+$menu-nested-list-padding-left: 0.5em;
+$menu-nested-list-margin: 0.5em;
+$menu-list-link-padding: 0.5em 0.5em;
+
+$section-padding: $size-4 $size-4;
+$control-radius: 3px;
+
+// Code
+$code-padding: 0.25em 0.25em 0.25em 0.25em !default

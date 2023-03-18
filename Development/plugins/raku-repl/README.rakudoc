@@ -1,0 +1,19 @@
+=begin pod
+=TITLE raku-repl is a plugin for Collection
+
+The plugin is for the render milestone to ensure the data space is created.  The render callable
+changes the js script to include the websocket host/port from the configuration.
+
+Place the following in the page to enable the Repl bar.
+
+     <div id="raku-repl"></div>
+
+=head1 Custom blocks
+
+None
+
+=head1 Templates
+
+None
+
+=end pod

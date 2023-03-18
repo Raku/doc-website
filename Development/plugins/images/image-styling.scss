@@ -1,0 +1,15 @@
+
+.image-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    &.justify-center {
+        justify-content: center;
+    }
+    &.justify-left {
+        justify-content: start;
+    }
+    &.justify-right {
+        justify-content: end;
+    }
+}

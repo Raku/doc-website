@@ -1,0 +1,54 @@
+.raku .container .tablemanager-collection {
+  /*Initial style sort*/
+  /*Style sort desc*/
+  /*Style sort asc*/
+  /*Style disabled*/
+}
+.raku .container .tablemanager-collection a {
+  text-decoration: none;
+}
+.raku .container .tablemanager-collection table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.raku .container .tablemanager-collection table, .raku .container .tablemanager-collection th, .raku .container .tablemanager-collection td {
+  text-align: left;
+}
+.raku .container .tablemanager-collection tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.raku .container .tablemanager-collection th, .raku .container .tablemanager-collection td {
+  padding: 5px;
+}
+.raku .container .tablemanager-collection button {
+  cursor: pointer;
+}
+.raku .container .tablemanager-collection .tablemanager th.sorterHeader {
+  cursor: pointer;
+}
+.raku .container .tablemanager-collection .tablemanager th.sorterHeader:after {
+  content: " \f0dc";
+  font-family: "FontAwesome";
+}
+.raku .container .tablemanager-collection .tablemanager th.sortingDesc:after {
+  content: " \f0dd";
+  font-family: "FontAwesome";
+}
+.raku .container .tablemanager-collection .tablemanager th.sortingAsc:after {
+  content: " \f0de";
+  font-family: "FontAwesome";
+}
+.raku .container .tablemanager-collection #for_numrows {
+  padding: 10px;
+  float: left;
+}
+.raku .container .tablemanager-collection #for_filter_by {
+  padding: 10px;
+  float: right;
+}
+.raku .container .tablemanager-collection #pagesControllers {
+  display: block;
+  text-align: center;
+}

@@ -1,0 +1,14 @@
+.tablemanager-collection table, .tablemanager-collection th, .tablemanager-collection td {
+  border: 1px solid #3a3d4e;
+}
+.tablemanager-collection td {
+  color: #fff;
+  background-color: #212426;
+}
+.tablemanager-collection tr:nth-of-type(even) td {
+  background-color: #1b1d1e;
+}
+.tablemanager-collection th {
+  color: #eed891;
+  background-color: #171717;
+}

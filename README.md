@@ -5,6 +5,7 @@
 ## Table of Contents
 [Installation](#installation)  
 [Building the documentation locally](#building-the-documentation-locally)  
+[Building the Development mode](#building-the-development-mode)  
 [Options for build-site](#options-for-build-site)  
 [Directory naming](#directory-naming)  
 [Plugins and Templates](#plugins-and-templates)  
@@ -22,11 +23,17 @@ zef install . --deps-only
 ```
 in the cloned directory. There are a couple of C libraries that may need to be installed as well, such as OpenSSL and LibArchive (make sure to install the ``-dev`` versions).
 
-Cro is needed for serving the rendered files locally. You may wish to install it separately. 
+Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
 Syntax highlighting of Raku code in the documentation still requires a ``node.js`` stack. See the documentation for ``Raku::Pod::Render`` for more information.
 
 # Building the documentation locally
+Two 'Modes' are contained in the distribution under their own directories:
+
+*  **Website** This is the production mode used to build `docs.raku.org`
+
+*  **Development** This is the development mode, used to test functionality of UX before being adopted for **Website**. If a developer wishes to propose changes, they should first be made to **Development**.
+
 Generic build steps:
 
 *  clone this repo to `raku-doc-website/`
@@ -35,7 +42,9 @@ Generic build steps:
 
 	*  Note also the `'_'` character in the default directory name. This is important for Collection if the document sources are under the `raku-doc-website` because Collection treats directories without `'_'` as `mode` directories.
 
-*  assume the rendered html will be built in `rendered_html`
+*  assume that the **Website** mode is being built. The default mode (Website) is given as a key in `doc-website/config.raku`.
+
+	*  assume the rendered html will be built in `rendered_html`
 
 All these names can be changed by changing the relevant parts of the config.raku file
 
@@ -45,6 +54,16 @@ Now run
 bin_files/build-site
 ```
 If Cro and Cro::HTTP have been installed, then `build-site` will automatically launch a Cro app and the whole website will be served on `localhost:30000`.
+
+## Building the Development mode
+Run
+
+```
+bin_files/build-site Development
+```
+The whole website will be served as before on `localhost:30000`
+
+The html will be generated in `development_rendered_html`
 
 # Options for `build-site`
 There are many options for build-site, which is a thin wrapper around the `collect` sub in `Collection`.
@@ -89,9 +108,9 @@ However, to make development here easier, there are three utilities which direct
 
 *  `update-css` which is a Bash file and takes the name of a plugin as its argument.
 
-    * This expects the Node.js version of `sass` to be installed in your path.
+	*  This expects the Node.js version of `sass` to be installed in your path.
 
-    * Installation instructions can be found [here](https://sass-lang.com/install).
+	*  Installation instructions can be found [here](https://sass-lang.com/install).
 
 *  `bin_files/test-all-plugins` This runs all the test files in all the plugins
 
@@ -119,4 +138,4 @@ A better way, though, to tweak or add new plugins and see how they affect the we
 
 
 ----
-Rendered from README at 2023-02-13T00:17:07Z
+Rendered from README at 2023-03-18T09:07:43Z

@@ -1,0 +1,176 @@
+// Dark raku theme
+
+// Colors
+$black:         #030303;
+$black-bis:     #1B1D1E;
+$black-ter:     #212426;
+
+$grey-darker:   #3A3D4E;
+$grey-dark:     #83858D;
+$grey:          #cccccc;
+$grey-light:    #d8d8d8;
+$grey-lighter:  #e5e5e5;
+$grey-lightest: #f2f2f2;
+
+$white-ter:     #f5f5f5;
+$white-bis:     #f7f7f7;
+$white:         #fafafa;
+
+$orange:       hsl(14,  100%, 53%);
+$yellow:       #EED891;
+$green:        #1C6301;
+$turquoise:    #005C43;
+$cyan:         hsl(204, 71%,  53%);
+// $blue:         #004FB3;
+$blue:         #8DB2EB;
+$purple:       #8378E8;
+$red:          #f00048;
+
+// Bulma Variables
+$light: $grey-light;
+$dark: $grey-darker;
+
+$scheme-main: $black-bis;
+$scheme-main-bis: $black-ter;
+$scheme-main-ter: lighten($black-ter, 3);
+$scheme-invert: $white;
+$scheme-invert-bis: $white-bis;
+$scheme-invert-ter: $white-ter;
+
+$body-background-color: $black-bis;
+$background: $black-bis;
+
+$border: $grey-darker;
+$border-hover: $grey-dark;
+$border-light: lighten($border, 5);
+$border-light-hover: $grey-light;
+
+$primary: $blue;
+$primary-invert: findColorInvert($primary);
+$primary-light: lighten($primary, 10);
+$primary-dark: darken($primary, 15);
+
+// Text colors
+$text: $white-ter;
+$text-invert: $black-ter;
+$text-light: lighten($text, 10);
+$text-dark: darken($text, 10);
+$text-strong: darken($text, 5);
+
+// Code colors
+$code: $red;
+$code-background: $background;
+
+$pre: $text;
+$pre-background: $background;
+
+// Link colors
+$link: $primary;
+$link-hover: darken($primary, 15);
+$link-visited: $primary;
+
+// Shadow
+$shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.07 );
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+
+$card-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+
+
+$hr-background-color: $grey-lighter;
+
+$footer-background-color: $black-ter;
+$input-placeholder-color: $grey-dark;
+
+$navbar-background-color: $black-ter;
+$navbar-item-hover-background-color: lighten($black-ter, 5);
+
+$navbar-dropdown-item-hover-background-color: $grey-darker;
+$navbar-dropdown-arrow: $primary;
+
+$navbar-dropdown-background-color: $scheme-main-bis;
+$navbar-dropdown-border-top: 2px solid $border;
+
+$navbar-divider-background-color: $background;
+$navbar-dropdown-item-hover-color: $text;
+
+$menu-label-color: $black;
+
+$menu-item-hover-color: $black;
+$menu-item-hover-background-color: $grey-darker;
+$menu-list-border-left: 1px solid $grey;
+$menu-item-active-background-color: darken($grey-darker, 5);
+
+$table-color: $text-strong;
+$table-head-cell-color: $text-strong;
+$table-head-background-color: $grey-lightest;
+$table-cell-border: $border;
+
+$label-color: $grey-light;
+
+// Tabs
+$tabs-link-color: $text;
+$tabs-border-bottom-color: $border;
+$tabs-boxed-link-active-background-color: $scheme-main;
+$tabs-link-active-color: $text-dark;
+$tabs-link-hover-color: $text-strong;
+
+$tabs-boxed-link-hover-background-color: $grey-darker;
+
+// Raku vars
+$heading: $yellow;
+$heading-mono: $grey;
+$form-background: lighten($black-ter, 5);
+
+$block-heading-background: $black-ter;
+
+$code-background: $scheme-main-bis;
+$code-foreground: $text;
+$code-output-background: $scheme-main-ter;
+
+$search-match: $green;
+
+$homepage-gradient: linear-gradient(180deg, #030303 0.2%, #170F44 1%, #35229E 82.29%, #271974 100%);
+
+button.button {
+	color: $white-ter !important;
+	border: 1px solid $grey-darker !important;
+	background-color: $black-ter !important;
+	transition: background-color 500ms linear;
+}
+
+button.button:hover {
+	background-color: $black;
+}
+
+div#footer-generated .dropdown-content, div#footer-license .dropdown-content {
+	background-color: $black-ter;
+	border: 1px solid $grey-darker;
+	& .dropdown-item {
+		color: $white-ter !important;
+	}
+}
+
+a.button strong {
+  color: $scheme-main-ter;
+}
+
+a.button.is-primary .icon {
+  color: $scheme-main-ter;
+}
+
+/* Collection */
+.raku .container .columns.listing .listf-container {
+    border: 1px solid $border;
+    border-bottom: 5px solid $border-light;
+    box-shadow: $shadow-below;
+    .listf-caption {
+        background: $block-heading-background;
+        border-bottom: 1px solid $border;
+        color: $grey-dark;
+    }
+    .listf-desc:not(:last-of-type) {
+        border-bottom: 1px solid $border;
+    }
+}
+
+@import "./_themes-template-common.scss";

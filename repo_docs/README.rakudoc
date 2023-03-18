@@ -14,13 +14,18 @@ This repo can be cloned and the main dependencies can be installed with
 in the cloned directory. There are a couple of C libraries that may need to be installed as well,
 such as OpenSSL and LibArchive (make sure to install the `-dev` versions).
 
-Cro is not in the META6.json file because it can fail in the testing stages in an automatic testing
-environment. However, Cro and Cro::HTTP is needed for serving the rendered files locally.
+Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
 Syntax highlighting of Raku code in the documentation still requires a `node.js` stack. See the documentation
 for `Raku::Pod::Render` for more information.
 
 =head1 Building the documentation locally
+
+Two 'Modes' are contained in the distribution under their own directories:
+=item B<Website> This is the production mode used to build C<docs.raku.org>
+=item B<Development> This is the development mode, used to test functionality of UX before
+being adopted for B<Website>. If a developer wishes to propose changes, they should
+first be made to B<Development>.
 
 Generic build steps:
 =item clone this repo to C<raku-doc-website/>
@@ -33,7 +38,10 @@ should be intuitive what is required.
 if the document sources are under the C<raku-doc-website> because Collection treats directories
 without C<'_'> as C<mode> directories.
 
-=item assume the rendered html will be built in C<rendered_html>
+=item assume that the B<Website> mode is being built. The default mode (Website) is given as a key in
+C<doc-website/config.raku>.
+
+=item2 assume the rendered html will be built in C<rendered_html>
 
 All these names can be changed by changing the relevant parts of the config.raku file
 
@@ -43,6 +51,16 @@ Now run
 
 If Cro and Cro::HTTP have been installed, then C<build-site> will automatically launch a Cro app
 and the whole website will be served on C<localhost:30000>.
+
+=head2 Building the Development mode
+
+Run
+
+    bin_files/build-site Development
+
+The whole website will be served as before on C<localhost:30000>
+
+The html will be generated in C<development_rendered_html>
 
 =head1 Options for C<build-site>
 
@@ -105,6 +123,8 @@ mentioned above, the 'refresh' functionality of Collection is not used here).
 However, to make development here easier, there are three utilities which directly affect
 this distribution:
 =item C<update-css> which is a Bash file and takes the name of a plugin as its argument.
+=item2 This expects the Node.js version of C<sass> to be installed in your path.
+=item2 Installation instructions can be found L<here|https://sass-lang.com/install>.
 =item C<bin_files/test-all-plugins> This runs all the test files in all the plugins
 =item C<bin_files/build-site> By default this will
 =item2 refresh the documents from the contents repository at github/raku/docs

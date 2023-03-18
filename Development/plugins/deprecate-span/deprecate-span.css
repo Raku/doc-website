@@ -1,0 +1,7 @@
+.raku-deprecation {
+	background-color: bisque;
+	border-block-color: blue;
+	border-width: 1px;
+	border-style: dashed;
+	border-radius: 5px;
+}

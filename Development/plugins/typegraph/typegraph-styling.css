@@ -1,0 +1,13 @@
+figure.typegraph {
+  display: grid;
+  justify-items: center;
+}
+figure.typegraph figcaption {
+  grid-row: 1;
+}
+figure.typegraph figcaption code {
+  font-weight: bold;
+}
+figure.typegraph svg {
+  grid-row: 2;
+}

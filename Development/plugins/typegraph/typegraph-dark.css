@@ -1,0 +1,35 @@
+.typegraph #graph0 * {
+  fill: #fff;
+}
+.typegraph #graph0 > polygon:first-of-type {
+  fill: none;
+}
+.typegraph #graph0 ellipse {
+  fill: #212426;
+  stroke: #3a3d4e;
+}
+.typegraph #graph0 path {
+  fill: none;
+}
+.typegraph #graph0 path[stroke="#6666ff"] {
+  stroke: #eed891;
+}
+.typegraph #graph0 path[stroke="#000000"] {
+  stroke: lightgray;
+}
+.typegraph #graph0 polygon[stroke="#6666ff"] {
+  fill: #eed891;
+  stroke: #eed891;
+}
+.typegraph #graph0 polygon[stroke="#000000"] {
+  stroke: lightgray;
+  fill: lightgray;
+}
+.typegraph #graph0 text[fill="#6666ff"] {
+  color: #eed891;
+  fill: #eed891;
+}
+.typegraph #graph0 text[fill="#000000"] {
+  color: #fff;
+  fill: #fff;
+}

@@ -1,0 +1,18 @@
+=begin pod
+=TITLE search-bar is a plugin for Collection
+
+The plugin is for the render & compilation milestones.
+
+Spun out of OgdenWebb plugin. To enable the search bar at the top of each normal
+web page.
+
+Also to power the Extended search page.
+
+=head1 Custom blocks
+=item ExtendedSearch
+
+=head1 Templates
+=item head-search
+=item ExtendedSearch
+
+=end pod

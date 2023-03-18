@@ -1,0 +1,43 @@
+// Raku code highlighting
+.raku-code {
+  position: relative;
+  margin: $size-6 0;
+  // box-shadow: $shadow-below;
+
+  .code-name {
+    padding-top: $size-7;
+    padding-left: $size-5;
+    // color: $red;
+    font-weight: $weight-medium;
+  }
+
+  .code-button {
+    // position: absolute;
+    // top: $size-7;
+    // right: $size-5;
+    height: 2em;
+  }
+
+  .code-output {
+    font-size: $size-7;
+    font-family: $family-monospace;
+    padding: $size-7 $size-5;
+  }
+
+  .control {
+    font-size: inherit;
+  }
+
+  .code-output-title {
+    font-size: $size-6;
+    font-weight: $weight-medium;
+
+    padding: 0.25rem 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .section {
+    /* https://github.com/Raku/doc-website/issues/144 */
+    padding: 0rem;
+  }
+}

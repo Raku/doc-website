@@ -1,0 +1,77 @@
+=begin pod
+=TITLE List File plugin for Collection
+=DESCRIPTION Provides the B<=ListFiles> Pod::Block that lists all files in a B<Collection>
+that have associated meta data.
+
+In many cases, it is desirable to write a content file that has an annotated overview of all or some
+of the files in the collection, showing the C<Title> together with the C<Subtitle>.
+
+This list should be amenable to separate styling, so that long lists can be folded, or put into tabs.
+
+Since C<Raku::Pod::Render> captures all the meta (or configuration) information associated with the
+first Pod::Block named C<pod> in a file, this information can be extracted and used to list these
+files in the Compilation stage.
+
+=head1 USAGE
+
+Place C<listfiles> in the C<plugins-required<compilation>> B<and> C<plugins-required<render>> configuration keys.
+
+Place the C<=for ListFiles :select<...> > in the Pod6 content file. See L<below for select|ListFiles block>.
+
+In the content files that need to be listed, place meta data in the C<=begin pod> line, eg.
+=begin code
+    =begin pod :kind<Language> :category<tutorial>
+=end code
+
+The key names and the key values are arbitrary and depend only on the collection designer/writer.
+
+=head1 ListFiles block
+
+The basic usage is
+=begin code
+    =for ListFiles :select<key-name-1=key-value-1, key-name-2=key-value-2, ...> :no-desc<Nothing found> :no-files<aint got nothing>
+    Some text for the caption in a single paragraph
+
+Another way
+    =begin ListFiles :select< ... > :no-desc<No description found>
+    Some text in several paragraphs
+
+    more caption text
+    =end ListFiles
+=end code
+
+While C<ListFiles> is used here, C<Listfiles> and C<listfiles> are also possible.
+
+=head2 The I<select>key is mandatory
+
+If a ListFiles block is used without a C<select> key, then a C< <div> > with an error message is output.
+
+If the C<select> key does not parse correctly, then an error div is also output.
+
+It must have the form C<:select< ... > > so that the contents are a string. (Pod6 allows other
+forms, which may be used so long as the argument is a string).
+
+B<select> contains one, or a comma-separated list of, key/value pair(s) with the form C<\S+\s*=\s*\S+>.
+
+The template will use the C<select> information to gather the files that meet the meta data criteria,
+access the C<=TITLE> and C<=SUBTITLE> information in the Pod file, and list the files in alpahbetical
+order.
+
+This plugin only allows for a simple select semantic, such that files are selected when each key/value pair
+is true. Other more complex select semantics could be considered in time.
+
+If no C<=TITLE> block is found in the content file, the content filename is used instead.
+
+=head2 The I<no-desc> key is optional
+
+If no C<=SUBTITLE> block is found, then the content of the C<no-desc> key is used. This allows for multilingual use.
+
+If none of the alternatives are given, then the words 'no description' is used.
+
+=head2 The I<no-files> key is optional
+
+If there are no files that meet the C<select> criteria, then the text in C<no-files> is used.
+
+If the option is not given, then the words 'No files meet the criteria' are used.
+
+=end pod

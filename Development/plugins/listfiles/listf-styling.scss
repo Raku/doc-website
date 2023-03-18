@@ -1,0 +1,44 @@
+
+.listf-container {
+    display: grid;
+    grid-template-rows: 3em auto;
+    grid-template-columns: 2% 30% auto;
+    justify-content: left;
+    row-gap: 0.05em;
+    div:nth-of-type(4n-2) {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+    div:nth-of-type(4n-1) {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+}
+.listf-caption {
+    justify-self: left;
+    grid-row: 1/1;
+    grid-column: 1/-1;
+    font-size: x-large;
+    font-weight: bolder;
+    font-family: sans-serif;
+}
+.listf-link {
+    grid-column: 2 / -1;
+    align-self: stretch;
+    justify-self: stretch;
+}
+.listf-file {
+    justify-self: left;
+    align-self: center;
+    grid-column: 2 / 3;
+}
+.listf-desc {
+    justify-self: left;
+    align-self: center;
+    grid-column: 3 / -1;
+    > p {
+        margin: 5px;
+    }
+}
+.listf-error {
+    color: red;
+    font-size: xlarge;
+}

@@ -1,0 +1,90 @@
+use v6.d;
+use Test;
+use ProcessedPod;
+plan 16;
+
+my %config;
+lives-ok { %config = EVALFILE 'config.raku' }, 'config exists';
+
+my %templates;
+lives-ok { %templates = EVALFILE %config<template-raku> }, 'templates load ok';
+ok %templates<listfiles>:exists, 'required template is there';
+
+my %pm = :select("kind=lang, s-kind=basic"),
+         :no-desc('not all there'),
+         :listfiles( %(
+            :meta( %(
+                file1 => %( :config(%(:kind<lang>, :s-kind<basic>,)),
+                    :title('Some file1'), :desc('A bit file1')
+                ),
+                file2 => %( :config( %(:kind<lang>, :s-kind<new>, )),
+                    :title('Some file2'), :desc('A bit file2')
+                ),
+                file3 => %( :config(%(:kind<class>, :s-kind<basic>, )),
+                    :title('Some file3'), :desc('A bit file3')
+                ),
+                'file4.pod6' => %( :config(%(:category<role>, :s-kind<basic>, :kind<lang>, )),
+                    :title(''), :desc('')
+                ),
+                file5 => %( :config(%(:kind<lang>, :s-kind<base-class>, )),
+                            :title('Some file5'), :desc('A bit file5')
+                ),
+            ) ),
+         ) );
+my $rv = %templates<listfiles>.( %pm, {} );
+like $rv,
+        /
+        'file1' .+ 'file4'
+        /, 'template lists expected two files in alphabetical order';
+unlike $rv,
+        /
+        'file2' | 'file3'
+        /, 'does not list unselected files';
+like $rv,
+        /
+        'listf-file'
+        .+ 'Some file1'
+        .+ 'listf-desc'
+        .+ 'A bit file1'
+        /, 'Name and Description OK for file1';
+like $rv,
+        /
+        .+ 'file4.pod6'
+        .+ 'listf-desc'
+        .+ 'not all there'
+        /, 'Title and contents of no-desc given for file4';
+%pm<select> = 'kind=enum';
+%pm<no-files> = 'Cannot find any';
+$rv = %templates<listfiles>.( %pm, {} );
+like $rv,
+        /
+        'Cannot find any'
+        /, 'no matching files and used option';
+%pm<select> = 'kind=lang, s-kind=bas.*';
+
+$rv = %templates<listfiles>.( %pm, {} );
+like $rv,
+        /
+        'listf-file'
+        .+ 'Some file5'
+        .+ 'listf-desc'
+        .+ 'A bit file5'
+        /, 'regex in value worked';
+
+my &callable;
+lives-ok { &callable = EVALFILE %config<compilation> }, 'callable loads ok';
+my %processed = %( afile => PodFile.new(:title('Good Title'), :subtitle('A subtitle'), :pod-config-data( :one<two>, :three<four> )),
+        bfile => PodFile.new(:title(''),:subtitle(''), :pod-config-data( :one<two>, :three<four> ) ),
+);
+my $pr = ProcessedPod.new;
+$pr.add-data('listfiles', %config);
+&callable($pr, %processed, {} );
+$rv = $pr.get-data('listfiles');
+ok $rv<meta>:exists, 'data added';
+is-deeply $rv<meta>.keys.sort, <afile bfile>, 'files  returned in correct place';
+is $rv<meta><afile><title>, 'Good Title', 'got title';
+is $rv<meta><afile><desc>, 'A subtitle', 'got subtitle';
+is $rv<meta><afile><config><one>, 'two', 'got pod config data';
+is $rv<meta><bfile><title>, '', 'filename is title when none given';
+
+done-testing

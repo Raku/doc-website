@@ -1,0 +1,518 @@
+// Custom CSS
+
+/* Camelia Spinner Container */
+#code-run-spinner-container {
+  visibility: hidden;
+}
+
+/* Display as flex and center */
+#code-run-spinner {
+  display: flex;
+  justify-content: center;
+}
+
+/* Camelia img */
+#camelia-spinner {
+  display: inline-block;
+  animation: spinner 1.25s infinite;
+  border: 5px black;
+  border-radius: 10px black;
+}
+
+/* Keyframes for camelia spinner */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+// Titles
+h1,h2,h3,h4,h5,h6 {
+  font-family: $family-secondary;
+}
+
+.button, .title {
+  font-family: $family-secondary;
+}
+
+.card .button {
+  width: 200px;
+}
+
+.card-home {
+  box-shadow: unset !important;
+}
+
+
+// Common parts
+// html, body {
+//   height: 100%;
+// }
+
+body {
+  display: flex;
+  flex-direction: column;
+  // min-height: 100vh;
+  min-height: calc(100vh - 1px); // We need it to hide scrollbar when body is short
+}
+
+
+#wrapper {
+  // flex: 1 0 auto;
+  flex: 1;
+}
+
+
+/* Site header */
+.navbar-brand .navbar-item img {
+  max-height: 100%;
+}
+
+.navbar-logo {
+  position: relative;
+}
+
+.navbar-logo-tm {
+  position: absolute;
+  z-index: 35;
+  top: 0.35rem;
+  right: -0.35rem;
+  font-size: $size-7;
+}
+
+
+// Site footer
+.footer {
+  height: 50px;
+  padding: 0;
+}
+
+.main-footer {
+  font-size: 0.875rem;
+}
+
+.footer .level {
+  height: 50px;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.icon-large {
+  font-size: 96px;
+}
+
+// for the page generated content
+.dropdown-item.generated {
+    width: 30vw;
+    .file-path {
+        font-weight: 600;
+    }
+}
+
+// Custom classes
+.has-background-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.raku.links-block {
+  .head {
+    font-family: $family-secondary;
+    font-size: $size-6;
+    font-weight: $weight-semibold;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    font-family: $family-secondary;
+    font-size: $size-6;
+    font-weight: $weight-bold;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  .level-item {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  .card {
+    background-color: unset;
+  }
+
+}
+
+// Raku page template
+.raku.page-title,
+.raku.page-subtitle {
+  font-family: $family-secondary;
+}
+
+.page-generated {
+  padding: $size-7;
+}
+
+.raku.page-title {
+  font-size: $size-4;
+  font-weight: $weight-semibold;
+}
+
+.raku.page-subtitle {
+  font-size: $size-6;
+}
+
+.raku.page-header {
+  margin-top: $size-6;
+  position: relative;
+}
+
+.raku.page-header,
+.raku.page-content {
+  padding: 1rem 1.5rem;
+}
+
+.raku.page-header .page-edit {
+  position: absolute;
+  right: $size-6;
+  top: $size-7;
+
+  .page-edit-button {
+    height: 30px;
+  }
+}
+
+.page-footnotes {
+  margin-left: $size-3;
+}
+
+// Raku search page
+.raku-search {
+
+  .search-item {
+    margin-top: $size-5;
+    margin-bottom: $size-5;
+  }
+
+  .search-item-title {
+    font-weight: $weight-medium;
+    margin-bottom: 0.25rem;
+  }
+
+  .search-category-title {
+    font-weight: $weight-medium;
+    padding-bottom: $size-7;
+  }
+}
+
+/* Categories */
+/* original
+.raku-category.category-block {
+  margin-bottom: $size-5;
+}
+
+.raku-category {
+
+  .category-header {
+    padding: 0.35rem;
+  }
+
+  .category-items {
+    padding-top: 0.25rem;
+    padding-bottom: $size-7;
+  }
+
+  .category-item {
+    font-weight: $weight-medium;
+    padding: $size-6 $size-3;
+  }
+
+  .category-item-title {
+    margin-bottom: 0.25rem;
+  }
+}
+*/
+
+/* For Collection */
+.raku .container .columns.listing {
+    column-count: 2;
+    display: block;
+    > p {
+        column-span: all;
+        margin: 0 0 2em;
+        text-align: center;
+    }
+    .listf-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $size-5;
+        font-size: $size-6;
+        font-weight: $weight-medium;
+        line-height: 1.5;
+        div:nth-of-type(4n-2) {
+            background-color: inherit;
+        }
+        div:nth-of-type(4n-1) {
+            background-color: inherit;
+        }
+        .listf-caption {
+            font-size: $size-6;
+            font-weight: $weight-medium;
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+        }
+        .listf-file {
+            padding-top: 0.25rem;
+            font-size: $size-6;
+            font-weight: $weight-medium;
+            line-height: 1.5;
+            border-top: 1px;
+        }
+        .listf-desc {
+            font-size: $size-6;
+            font-weight: $weight-medium;
+            line-height: 1.5;
+            padding: 0 0.3rem 0 0.3rem;
+            margin-bottom: 0.25rem;
+            align-self: normal;
+            > p {
+                padding: inherit;
+                margin: inherit;
+            }
+        }
+    }
+}
+/* Programs page template */
+.raku-programs {
+
+  .programs-items {
+    padding-top: 0.25rem;
+    padding-bottom: $size-7;
+  }
+
+  .programs-item {
+    font-weight: $weight-medium;
+    padding: $size-6 $size-4;
+  }
+
+  .programs-item-title {
+    font-size: $size-5;
+    font-weight: $weight-medium;
+  }
+}
+
+// Raku page headings
+.raku-h1 {
+  font-size: 1.375rem; // 22px
+  font-weight: $weight-medium;
+  padding: 0.35rem;
+  text-align: center;
+  margin-top: $size-7;
+  margin-bottom: 1rem;
+
+  scroll-margin-top: 4.625rem;
+}
+
+
+.raku-h2 {
+  font-size: 1.375rem; // 22px
+  font-weight: $weight-medium;
+  padding: 0.25rem;
+  margin-top: $size-7;
+  margin-bottom: 1rem;
+
+  scroll-margin-top: 4rem;
+}
+
+.raku-h3 {
+  font-size: $size-5; // 20px
+  font-weight: $weight-medium;
+  margin-top: $size-7;
+  margin-bottom: 1rem;
+
+  scroll-margin-top: 4rem;
+}
+
+.raku-h4 {
+  font-size: $size-6;
+  font-weight: $weight-medium;
+  margin-bottom: 1rem;
+
+  scroll-margin-top: 4rem;
+}
+
+.raku-h5 {
+  font-size: 0.875rem;
+  font-weight: $weight-medium;
+  margin-bottom: 1rem;
+
+  scroll-margin-top: 3rem;
+}
+
+.raku-h6 {
+  font-size: $size-7;
+  font-weight: $weight-semibold;
+  margin-bottom: 1rem;
+
+  scroll-margin-top: 3rem;
+}
+
+.raku-anchor {
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+
+a.raku-anchor,
+.raku-h1 a.raku-anchor, .raku-h2 a.raku-anchor, .raku-h3 a.raku-anchor, .raku-h4 a.raku-anchor, .raku-h5 a.raku-anchor, .raku-h6 a.raku-anchor {
+  text-decoration: none;
+
+  visibility: hidden;
+}
+
+.raku-h1:hover a.raku-anchor, .raku-h2:hover a.raku-anchor, .raku-h3:hover a.raku-anchor, .raku-h4:hover a.raku-anchor, .raku-h5:hover a.raku-anchor, .raku-h6:hover a.raku-anchor {
+  visibility: visible;
+}
+
+/* Version note */
+.raku.version-note {
+  margin: $size-6 0;
+  padding: $size-5;
+}
+
+.version-note-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.25;
+  padding-bottom: 0.5em;
+  position: relative;
+}
+
+.version-related-to {
+  position: absolute;
+  right: $size-6;
+}
+
+.version-note-header {
+  font-weight: $weight-medium;
+}
+
+// Tables
+table.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table {
+  margin: $size-7 0;
+
+  caption {
+    padding-bottom: 0.5rem;
+  }
+}
+
+// About page
+.raku-about .card {
+  margin: $size-5 0;
+  border-radius: 3px;
+}
+
+.raku-about.minor-list {
+  li {
+    margin: $size-7 0;
+
+  }
+}
+
+.raku-about-major .user-info,
+.raku-about-minor .user-info {
+  margin-bottom: 0.25rem;
+}
+
+
+// Tabs
+.raku.tabs {
+  &.is-boxed a {
+    border: unset;
+    border-radius: unset;
+    padding: 0.5em 1.25em;
+  }
+}
+
+.raku.tabcontent {
+  display: none;
+}
+
+// Text & other stuff
+.content li:not(:only-child) {
+  padding: 0.25rem 0;
+}
+
+p {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
+// Error pages.
+h1.error-title {
+  font-size: 168px;
+}
+
+.error-content .subtitle {
+  max-width: 600px;
+}
+
+.error-icon {
+  font-size: 240px;
+  position: absolute;
+  // top: 125px;
+  right: 5%;
+}
+
+.error-icon img {
+  margin-top: 25px;
+  width: 400px;
+}
+
+.error-content {
+  .level {
+    width: 400px;
+  }
+
+  .level-item {
+    justify-content: start;
+  }
+}
+
+.ui-helper-hidden-accessible { position: absolute; left:-999em; }
+
+.enter-prompt {
+  padding-left: 10px;
+  color: grey;
+}
+
+@media only screen and (min-width: 1210px) {
+	.navbar-search-autocomplete {
+		top: 35px;
+		left: 10px;
+	}
+}

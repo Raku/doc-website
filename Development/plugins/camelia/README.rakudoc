@@ -1,0 +1,19 @@
+
+=begin pod
+=TITLE Camelia plugin for Collection
+=DESCRIPTION Provides Camelia favicon and Camelia block
+
+=head1 Templates
+
+=item B<camelia> is the template for C<Camelia> block
+=item B<favicon> provides a favicon template and uses the BIN source provided here
+=item B<camelia-img> provides the svg for use in the header of default file-wrap.
+
+=head1 Blocks
+
+=item B<Camelia> Generates an image of the Camelia bug, with a default class.
+Inline styling of HTML containers is not supported. All styling should be done by supplying
+css. Add new classes to any css file.
+
+=end pod
+
