@@ -246,11 +246,13 @@ use v6.d;
             '<span class="glossary-entry">' ( .+? ) '</span>'
         /;
         my $h = 'h' ~ (%prm<level> // '1');
-        qq[[\n<$h id="{ %tml<escaped>.(%prm<target>) }"]]
+        my $targ = %tml<escaped>.(%prm<target>);
+        qq[[\n<$h id="$targ"]]
             ~ qq[[ class="raku-$h">]]
             ~ ( $index-parse.so ?? $index-parse[0] !! '' )
-            ~ qq[[<a href="#{ %tml<escaped>.(%prm<top>) }" class="u" title="go to top of document">]]
+            ~ qq[[<a href="#{ %tml<escaped>.(%prm<top>) }" title="go to top of document">]]
             ~ ( $index-parse.so ?? $index-parse[1] !! $txt )
+            ~ qq[[<a class="raku-anchor" title="direct link" href="#$targ">§</a>]]
             ~ qq[[</a></$h>\n]]
     },
     table => sub (%prm, %tml) {
