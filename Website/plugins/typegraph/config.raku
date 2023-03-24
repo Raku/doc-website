@@ -11,5 +11,7 @@
 	:name<typegraph>,
 	:render<add-type-graph.raku>,
 	:template-raku<tp-template.raku>,
-	:version<0.2.3>,
-)
+	:information<add-css>,
+	:version<0.3.3>,
+);
+

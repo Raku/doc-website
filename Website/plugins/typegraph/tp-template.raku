@@ -1,9 +1,17 @@
 %(
     pod => sub (%prm, %tml) {
         my $rv = %tml.prior('pod').(%prm, %tml);
-        if (%prm<config><path> ~~ / 'doc/Type/' $<doc> = (.+) '.pod6' /)
+        if (%prm<config><path> ~~ / 'doc/Type/' $<doc> = (.+) '.' <alnum>+ /)
             and %prm<pod><typegraphs>:exists {
-            with %prm<pod><typegraphs>{ $<doc> } {
+            my $doc = $<doc>
+                .subst( / [ '.rakudoc' || '.pod6' ] $ /, '')
+                .subst( / '/' /, '', :g )
+                .subst( / \:\: /, '', :g );
+            say $doc;
+            with %prm<pod><typegraphs>{ $doc } {
+                my $name =  %prm<config><name>
+                    .subst( / ^ 'type/' /, '')
+                    .subst( / '/' /, '::', :g ) ;
                 $rv ~= %tml<heading>.(
                     %( %prm ,
                         :skip-parse,
@@ -13,12 +21,12 @@
                        ), %tml);
                 $rv ~= qq:to/TYPEG/;
                     <figure class="typegraph" >
-                      <figcaption>Type relations for <code>{ %prm<config><name> }</code></figcaption>
+                      <figcaption>Type relations for <code>$name\</code>\</figcaption>
                       $_
                         <p class="fallback">
-                            <a rel="alternate" href="/assets/typegraphs/$<doc>.svg">
+                            <a rel="alternate" href="/assets/typegraphs/$doc.svg">
                             Expand chart above
-                        </a></p>
+                        </a>\</p>
                     </figure>
                     TYPEG
             }
