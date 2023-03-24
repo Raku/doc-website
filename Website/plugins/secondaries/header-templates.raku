@@ -54,45 +54,77 @@ use v6.d;
     #}
         # get the heading information structure
         my $text = %prm<text> // '';
-        # Normalize text for searching for routines
-        my $n-text = $text
-            .subst(/ '<a' ~ '/a>' .+? / , '', :g)
-            .subst(/ \< ~ \> .+? / , '', :g)
-            .trim;
         my $target = %tml<escaped>(%prm<target>);
-        my $level = %prm<level> // '1';
         my $bookmark = '';
         unless %prm<skip-parse> {
-            my $parsed = $n-text ~~ / <TOP> /;
-            if $parsed {
-                my $kind;
-                my $category;
-                my $name;
-                my $subkind;
-                my $fn = %prm<config><name>;
-                with $parsed<TOP><infix-foo> { $name = .<name>.Str; $subkind = .<subkind>.Str }
-                with $parsed<TOP><the-foo-infix> { $name = .<single-name>.Str ; $subkind = .<subkind>.Str }
-                with $parsed<TOP><infix-foo><subkind><routine> { $kind = 'routine'; $category = .Str }
-                with $parsed<TOP><infix-foo><subkind><syntax> { $kind = 'syntax'; $category = .Str }
-                with $parsed<TOP><infix-foo><subkind><operator> { $kind = 'routine'; $category = 'operator' }
-                with $parsed<TOP><the-foo-infix><subkind><routine> { $kind = 'routine'; $category = .Str }
-                with $parsed<TOP><the-foo-infix><subkind><syntax> { $kind = 'syntax'; $category = .Str }
-                with $parsed<TOP><the-foo-infix><subkind><operator> { $kind = 'routine'; $category = 'operator' }
+            my $fn = %prm<config><name>;
+            my $indirect = $text ~~ /
+                ^
+                '<a name="index-entry-Syntax_'
+                ( .+? ) '-' .+?
+                '"></a><span class="glossary-entry">'
+                ( .+? )
+                '</span>'
+            /;
+            if $indirect {
+#                Code in Documentable that's to be reverse engineered.
+#                my $fc = @header.first;
+#                return %() if $fc.type ne "X";
+#
+#                my @meta = $fc.meta[0]:v.flat.cache;
+#                my $name = (@meta > 1) ?? @meta[1]
+#                                    !! textify-pod($fc.contents[0], '');
+#
+#                %attr = name       => $name.trim,
+#                        kind       => Kind::Syntax,
+#                        subkinds   => @meta || (),
+#                        categories => @meta || ();
+
                 %prm<heading><defs>{ $fn } = {} unless %prm<heading><defs>{ $fn }:exists;
                 %prm<heading><defs>{ $fn }{ $target } = %(
-                    :$name,
-                    :$kind,
-                    :$subkind,
-                    :$category, # only one category per defn
+                    :name( ~ $indirect[0] ),
+                    :kind<syntax>,
+                    :subkind( ~ $indirect[1] ),
+                    :category<Syntax>, # only one category per defn
                 );
-                $bookmark = "<!-- defnmark $target -->";
+                $bookmark = "\n<!-- defnmark $target -->\n";
+            }
+            else {
+                # Normalize text for searching for routines
+                my $n-text = $text
+                    .subst(/ '<a' ~ '/a>' .+? / , '', :g)
+                    .subst(/ \< ~ \> .+? / , '', :g)
+                    .trim;
+                my $parsed = $n-text ~~ / <TOP> /;
+                if $parsed {
+                    my $kind;
+                    my $category;
+                    my $name;
+                    my $subkind;
+                    with $parsed<TOP><infix-foo> { $name = .<name>.Str; $subkind = .<subkind>.Str }
+                    with $parsed<TOP><the-foo-infix> { $name = .<single-name>.Str ; $subkind = .<subkind>.Str }
+                    with $parsed<TOP><infix-foo><subkind><routine> { $kind = 'routine'; $category = .Str }
+                    with $parsed<TOP><infix-foo><subkind><syntax> { $kind = 'syntax'; $category = .Str }
+                    with $parsed<TOP><infix-foo><subkind><operator> { $kind = 'routine'; $category = 'operator' }
+                    with $parsed<TOP><the-foo-infix><subkind><routine> { $kind = 'routine'; $category = .Str }
+                    with $parsed<TOP><the-foo-infix><subkind><syntax> { $kind = 'syntax'; $category = .Str }
+                    with $parsed<TOP><the-foo-infix><subkind><operator> { $kind = 'routine'; $category = 'operator' }
+                    %prm<heading><defs>{ $fn } = {} unless %prm<heading><defs>{ $fn }:exists;
+                    %prm<heading><defs>{ $fn }{ $target } = %(
+                        :$name,
+                        :$kind,
+                        :$subkind,
+                        :$category, # only one category per defn
+                    );
+                    $bookmark = "\n<!-- defnmark $target -->\n";
+                }
             }
         }
-        # now output the header + book
-        # if it exists output the header using the previous header formattingmark
+        # now output the header + bookmark
+        # if it exists output the header using the previous header formatting
         with %tml.prior('heading') {
             $_.( %prm, %tml )
-            ~ "\n$bookmark\n"
+            ~ $bookmark
         }
         else { # no previous header, so here's a generic one in case
             my $index-parse = $text ~~ /
@@ -105,6 +137,7 @@ use v6.d;
                 ~ qq[[<a href="#{ %tml<escaped>.(%prm<top>) }" class="u" title="go to top of document">]]
                 ~ ( $index-parse.so ?? $index-parse[1] !! $text )
                 ~ qq[[</a></$h>\n]]
+            ~ $bookmark
         }
     },
 );

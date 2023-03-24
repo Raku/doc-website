@@ -10,5 +10,5 @@
 	:render<namespace-check.raku>,
 	:template-raku<header-templates.raku>,
 	:transfer<cleanup.raku>,
-	:version<0.1.16>,
+	:version<0.2.4>,
 )

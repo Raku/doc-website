@@ -59,7 +59,7 @@ my regex select {
                 FIRST
 
         for  @sel-files.sort(*.[0]) -> ($nm, $desc, $path) {
-            $rv ~= '<div class="listf-file"><a class="listf-link" href="' ~ $path ~ '.html">' ~ $nm ~ '</a></div>'
+            $rv ~= '<div class="listf-file"><a class="listf-link" href="' ~ $path ~ '">' ~ $nm ~ '</a></div>'
                     ~ '<div class="listf-desc">' ~ $desc ~ '</div>'
         }
         unless +@sel-files {
