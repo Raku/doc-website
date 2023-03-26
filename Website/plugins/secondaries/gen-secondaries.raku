@@ -125,7 +125,7 @@ sub ($pp, %processed, %options) {
                 :meta(''),
                 :footnotes(''),
             ), %templates);
-            @transfers.push: ["$fn-name\.html", 'myself', "html/$fn-name.html"]
+            @transfers.push: ["$fn-name\.html", 'myself', "html/$fn-name\.html"]
         }
     }
     my %ns;

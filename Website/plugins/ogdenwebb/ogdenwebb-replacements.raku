@@ -210,7 +210,7 @@ use v6.d;
     },
     footer-right => sub (%prm, %tml ) {
         q:to/FRIGHT/
-        <div class="level-left">
+        <div class="level-right">
             <div class="level-item">
               <a href="/license">License</a>
             </div>
