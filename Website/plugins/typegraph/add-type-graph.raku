@@ -4,9 +4,11 @@ use Doc::TypeGraph::Viz;
 use Collection::Progress;
 
 sub ($pp, %options) {
-    unless 'typegraphs'.IO ~~ :e & :d
-        and 'type-graph.txt'.IO.modified le 'typegraphs'.IO.modified
-        and +'typegraphs'.IO.dir
+    unless (
+        ('typegraphs'.IO ~~ :e & :d)
+        and ( 'type-graph.txt'.IO.modified le 'typegraphs'.IO.modified )
+        and ( +'typegraphs'.IO.dir > 1 )
+        )
     {
         note 'Generating Typegraphs' unless %options<no-status>;
         mkdir 'typegraphs' unless 'typegraphs'.IO ~~ :e & :d;
