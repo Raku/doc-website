@@ -25,7 +25,6 @@ sub ($pp, %processed, %options) {
         $name .= trans(qw｢ &lt; &gt; &amp; &quot; ｣ => qw｢ <    >    &   " ｣);
         $name .= subst(@badchars[0], @goodchars[0], :g);
         $name .= subst(@badchars[1], @goodchars[1], :g);
-        $name .= subst( / '_' /, '%20', :g );
         # if it contains escaped sequences (like %20) we do not
         # escape %
         if (!($name ~~ /\%<xdigit> ** 2/)) {
@@ -86,6 +85,7 @@ sub ($pp, %processed, %options) {
                 # Construct body
                 @subkind.append: .<subkind>;
                 @category.append: .<category>;
+                $subtitle ~= ' ' ~ .<source>;
                 $body ~= %templates<heading>.(%(
                   :1level,
                   :skip-parse,
