@@ -1,6 +1,6 @@
 #!/usr/bin/env perl6
-use PrettyDump;
 %(
+
     linkerrortest => sub (%prm, %tml) {
         my $rv = '';
         if %prm<linkerrortest>:exists and +%prm<linkerrortest>.keys {
@@ -13,7 +13,8 @@ use PrettyDump;
                         'Remote http/s links with bad host or 404';
             for <remote no-target unknown no-file> -> $type {
                 my %object = $data{$type};
-                next if ! %object.elems or ( $type eq 'remote' and %object.elems eq 1 );
+                next if (! %object.elems)
+                    or ( $type eq 'remote' and ! %object<no_test> and %object.elems eq 1 );
                 $rv ~= '<h2 class="raku-h2">' ~ %titles{$type} ~ "</h2>\n";
                 given $type {
                     when 'remote' {
@@ -64,7 +65,7 @@ use PrettyDump;
                 }
                 unless %object<no_test> {
                     for %object.sort.grep( { .value ~~ Positional } ).map(|*.kv) -> $fn, $resp {
-                        $rv ~= '<div class="let-file"><div>' ~ $fn ~ '<a class="let-clickable" href="' ~ $fn ~ '.html" target="_blank" rel="noopener noreferrer">Clickable</a></div>';
+                        $rv ~= '<div class="let-file"><div>' ~ $fn ~ '<a class="let-clickable" href="' ~ $fn ~ '" target="_blank" rel="noopener noreferrer">Clickable</a></div>';
                         when $type eq 'no-file' {
                             for $resp.list -> %info {
                                 $rv ~= '<div class="let-link-text">' ~ %tml<escaped>( %info<link-label> )
@@ -99,7 +100,7 @@ use PrettyDump;
                                 $rv ~= '<div class="let-link-text">' ~ %tml<escaped>( %info<link-label> )
                                     ~ '<div class="let-link-file"><div>'
                                     ~ %tml<escaped>( %info<file> )
-                                    ~ '<a class="let-clickable" href="' ~ %tml<escaped>( %info<file> ) ~ '.html" target="_blank" rel="noopener noreferrer">Clickable</a></div>'
+                                    ~ '<a class="let-clickable" href="' ~ %tml<escaped>( %info<file> ) ~ '" target="_blank" rel="noopener noreferrer">Clickable</a></div>'
                                     ~ %info<targets>.map( {
                                         '<div class="let-link-target">'
                                         ~ %tml<escaped>( $_ )

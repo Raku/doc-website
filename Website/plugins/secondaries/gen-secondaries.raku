@@ -21,24 +21,25 @@ sub ($pp, %processed, %options) {
         my @goodchars = @badchars
             .map({ '$' ~ .uniname })
             .map({ .subst(' ', '_', :g) });
-        $name = $name.subst(@badchars[0], @goodchars[0], :g);
-        $name = $name.subst(@badchars[1], @goodchars[1], :g);
-
+        # de-HTML-escape name, change bad to good, make _ into %20
+        $name .= trans(qw｢ &lt; &gt; &amp; &quot; ｣ => qw｢ <    >    &   " ｣);
+        $name .= subst(@badchars[0], @goodchars[0], :g);
+        $name .= subst(@badchars[1], @goodchars[1], :g);
         # if it contains escaped sequences (like %20) we do not
         # escape %
         if (!($name ~~ /\%<xdigit> ** 2/)) {
-            $name = $name.subst(@badchars[2], @goodchars[2], :g);
+            $name .= subst(@badchars[2], @goodchars[2], :g);
         }
-        return $name;
+        $name;
     }
     my %data = $pp.get-data('heading');
-    #| get the definitions stored after parsing a header
+    #| get the definitions stored after parsing headers
     my %definitions = %data<defs>;
     #| each of the things we want to group in a file
     my %things = %( routine => {}, syntax => {});
     #| templates hash in ProcessedPod instance
     my %templates := $pp.tmpl;
-    #|this is for the triples describing the files to be transferred once created
+    #| container for the triples describing the files to be transferred once created
     my @transfers;
     #| container for tablesearch plugin
     my @routines = [ ['Category', 'Name' , 'Type', 'Where documented'] , ];
@@ -84,6 +85,7 @@ sub ($pp, %processed, %options) {
                 # Construct body
                 @subkind.append: .<subkind>;
                 @category.append: .<category>;
+                $subtitle ~= ' ' ~ .<source>;
                 $body ~= %templates<heading>.(%(
                   :1level,
                   :skip-parse,
@@ -94,7 +96,7 @@ sub ($pp, %processed, %options) {
                 $body ~= %templates<para>.(%(
                    :contents(qq:to/CONT/)
                         See primary documentation
-                        <a href="/{ .<source> }.html#{ .<target> }">in context\</a>
+                        <a href="/{ .<source> }#{ .<target> }">in context\</a>
                         for <b>{ .<target>.subst( / '_' / , ' ', :g ) }</b>
                     CONT
                 ), %templates);
@@ -103,7 +105,7 @@ sub ($pp, %processed, %options) {
                     .<category>.tc,
                     $dn,
                     .<subkind>,
-                    qq[[<a href="/{ .<source> }.html#{ .<target> }">{ .<source> }</a>]]
+                    qq[[<a href="/{ .<source> }#{ .<target> }">{ .<source> }</a>]]
                 ];
             }
             # Construct TOC

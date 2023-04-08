@@ -24,7 +24,6 @@ sub ($pp, %options) {
     my @files = 'typegraphs'.IO.dir(test => *.ends-with('.svg'))>>.relative('typegraphs')>>.IO>>.extension('');
     for @files {
         my $s = "typegraphs/$_\.svg".IO.slurp.subst( / ^ .+? <?before '<svg'> /, '');
-        $s ~~ s:g/ 'href=' \" ~ \" (.+?) / href="$0.html" /;
         %ns<typegraphs>{ $_ } = $s;
     }
     if 'pod' ~~ $pp.plugin-datakeys {

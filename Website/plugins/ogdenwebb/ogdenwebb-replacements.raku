@@ -63,16 +63,16 @@ use v6.d;
     'head-topbar' => sub ( %prm, %tml ) {
         q:to/BLOCK/
           <div class="navbar-start">
-            <a class="navbar-item" href="/language.html">
+            <a class="navbar-item" href="/language">
                 Language
             </a>
-            <a class="navbar-item" href="/types.html">
+            <a class="navbar-item" href="/types">
                 Types
             </a>
-            <a class="navbar-item" href="/routines.html">
+            <a class="navbar-item" href="/routines">
                 Routines
             </a>
-            <a class="navbar-item" href="/programs.html">
+            <a class="navbar-item" href="/programs">
                 Programs
             </a>
             <a class="navbar-item" href="https://raku.org">
@@ -87,7 +87,7 @@ use v6.d;
               </a>
               <div class="navbar-dropdown">
                 <hr class="navbar-divider">
-                <a class="navbar-item" href="/about.html">
+                <a class="navbar-item" href="/about">
                   About
                 </a>
                 <hr class="navbar-divider">
@@ -204,7 +204,7 @@ use v6.d;
         q:to/FLEFT/
         <div class="level-left">
             <div class="level-item">
-              <a href="/about.html">About</a>
+              <a href="/about">About</a>
             </div>
             <div class="level-item">
               <a id="toggle-theme">Toggle theme</a>
@@ -215,9 +215,9 @@ use v6.d;
     footer-right => sub (%prm, %tml ) {
         q:to/FRIGHT/
         <div class="level-right">
-          <div class="level-item">
-              <a href="/license.html">License</a>
-          </div>
+            <div class="level-item">
+              <a href="/license">License</a>
+            </div>
         </div>
         FRIGHT
     },

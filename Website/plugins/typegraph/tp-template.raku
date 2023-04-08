@@ -7,7 +7,6 @@
                 .subst( / [ '.rakudoc' || '.pod6' ] $ /, '')
                 .subst( / '/' /, '', :g )
                 .subst( / \:\: /, '', :g );
-            say $doc;
             with %prm<pod><typegraphs>{ $doc } {
                 my $name =  %prm<config><name>
                     .subst( / ^ 'type/' /, '')

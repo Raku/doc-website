@@ -20,11 +20,27 @@ During the transfer stage, the secondary files are deleted from the plugin's dir
 
 =head1 Secondary files
 
-Raku documentation contains many C<=head> blocks that define routines (methods, roles, subs etc)
-and syntax (infix postfix etc). These items may be defined and documented separately for different Types.
+Raku documentation contains many C<=head> blocks (called headings below)
+that define routines (methods, roles, subs etc)
+operators, and syntax (infix postfix etc).
+
+Items with the same name (eg., say) may be defined and documented separately for different Types.
 It makes sense to gather the same method name into a separate page.
 
-The headers are analysed when the template is composed.
+As the documentation was written, two types of headings were created:
+=item direct headings, such as C<=head1 sub say>
+=item indirect headings, such as C<=head2 X<Multi-dispatch|Syntax,multi> >
+
+Direct headings are created in the directories C<routine/ and type/>.
+Indirect headings are created in the directories C<syntax/>.
+
+The header blocks are analysed when the template is rendered.
+In order to avoid parsing each source file twice to handle header blocks, the parsing is done
+when the header block is rendered, by which time C<X<>> markup has already been rendered
+into HTML. So to pick up indirect heading definitions, the HTML has to be examined.
+
+Indirect headings will have text starting with an anchor C< <a ...> >, direct headings will have
+ambient text.
 
 The files are generated during the compilation stage.
 

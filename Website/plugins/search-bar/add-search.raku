@@ -11,9 +11,9 @@ sub ( $pp, %processed, %options ) {
     # eg { "category": "Types", "value": "Distribution::Hash", "url": "/type/Distribution::Hash" }
     # The first three items are supplied for some reason.
     my @entries =
-        %( :category("Syntax"), :value("# single-line comment"), :url("/language/syntax.html#Single-line_comments") ),
-        %( :category("Syntax"), :value("#` multi-line comment"), :url("/language/syntax.html#Multi-line_/_embedded_comments") ),
-        %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature.html#index-entry-Long_Names") )
+        %( :category("Syntax"), :value("# single-line comment"), :url("/language/syntax#Single-line_comments") ),
+        %( :category("Syntax"), :value("#` multi-line comment"), :url("/language/syntax#Multi-line_/_embedded_comments") ),
+        %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature#index-entry-Long_Names") )
     ;
     my $categories = <Syntax Signature Heading Glossary>.SetHash;
     # collect info stored from parsing headers
@@ -41,7 +41,7 @@ sub ( $pp, %processed, %options ) {
                 :$category,
                 :value( escape( %info<name> ) ),
                 :info( ': in <b>' ~ escape-json($fn) ~ '</b>' ),
-                :url( escape-json( "/$fn\.html\#$targ" ) )
+                :url( escape-json( "/$fn\#$targ" ) )
             )
         }
     }
@@ -52,14 +52,14 @@ sub ( $pp, %processed, %options ) {
             :category( $podf.pod-config-data<subkind>.tc ),
             :value( escape-json( $value )),
             :info( ' ' ),
-            :url( escape-json( '/' ~ $fn ~ '.html' ))
+            :url( escape-json( '/' ~ $fn ))
         );
         for $podf.raw-toc.grep({ !(.<is-title>) }) {
             @entries.push: %(
                 :category<Heading>,
                 :value( escape( .<text> ) ),
                 :info( ': section in <b>' ~ escape-json( $podf.title ) ~ '</b>' ),
-                :url( escape-json( '/' ~ $fn ~ '.html#' ~ .<target> ) )
+                :url( escape-json( '/' ~ $fn ~ '#' ~ .<target> ) )
             )
         }
         $categories{ $podf.pod-config-data<kind>.tc }++
@@ -86,7 +86,6 @@ sub ( $pp, %processed, %options ) {
         'var items = '
         ~ to-json( @entries )
         ~ ";\n"
-#        ~ "var searchSite = '$search-site';\n"
         ~ 'search-temp.js'.IO.slurp;
     [
         [ 'assets/scripts/search-bar.js', 'myself', 'search-bar.js' ],
