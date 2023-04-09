@@ -4,6 +4,8 @@ steps:
   - label: "Build site"
     key: build
     commands:
+      - "echo Test change to build"
+      - df -h   # look at disk space
       - "zef install . --deps-only"
       - "./bin_files/build-site --without-completion --no-status"
       - "./.buildkite/archive.sh"
