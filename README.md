@@ -8,10 +8,12 @@
 [Options for build-site](#options-for-build-site)  
 [Directory naming](#directory-naming)  
 [Plugins and Templates](#plugins-and-templates)  
-[Running site](#running-site)  
 [Working on Collection plugins](#working-on-collection-plugins)  
+[Deployment of website](#deployment-of-website)  
 
 ----
+(The README.md version is generated from `repo_docs/README.rakdoc`)
+
 # Installation
 The assumption for this README is that the OS is a version of Linux, or that anyone wanting to attempt this knows their own OS well enough to understand the differences.
 
@@ -22,7 +24,7 @@ zef install . --deps-only
 ```
 in the cloned directory. There are a couple of C libraries that may need to be installed as well, such as OpenSSL and LibArchive (make sure to install the ``-dev`` versions).
 
-Cro is needed for serving the rendered files locally. You may wish to install it separately. 
+Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
 Syntax highlighting of Raku code in the documentation still requires a ``node.js`` stack. See the documentation for ``Raku::Pod::Render`` for more information.
 
@@ -77,9 +79,6 @@ Consequently, the plugins are directly copied into the OgdenWebb directory, rath
 
 The Templates were originally developed to mimic **Moritz Lenz's** Raku site (the one we are used to). Relevant template keys are modified in the `ogdenwebb` plugin. I would expect this to change over time, and for the default templates to change to the OgdenWebb templates. But I would suggest this is done incrementally.
 
-# Running site
-Whilst this repo is being developed, a running on-line site can be found at [new-raku](https://new-raku.finanalyst.org).
-
 # Working on Collection plugins
 Collection uses plugins - they can be found under the directory `Website/plugins/ ` - which contain both callables that set up templates, associate CSS (defined using SCSS) with classes etc, and manipulate data.
 
@@ -88,10 +87,6 @@ Whilst the best way to work on the plugins is, as described below, to use the de
 However, to make development here easier, there are three utilities which directly affect this distribution:
 
 *  `update-css` which is a Bash file and takes the name of a plugin as its argument.
-
-    * This expects the Node.js version of `sass` to be installed in your path.
-
-    * Installation instructions can be found [here](https://sass-lang.com/install).
 
 *  `bin_files/test-all-plugins` This runs all the test files in all the plugins
 
@@ -112,6 +107,43 @@ There is a file in `Website/structure-sources/language.rakudoc` and a file in th
 
 A better way, though, to tweak or add new plugins and see how they affect the website, is to install the distribution `raku-collection-plugin-development`.
 
+# Deployment of website
+The Production version of the website is at `docs.raku.org`. A regularly updated version is at `docs-dev.raku.org`.
+
+Here's how deployment works right now:
+
+After a PR to the doc-website repository is reviewed, it's merged to `main` The very fact that it is a merge to main is important metadata for the CI pipeline. See also the Buildkite docs on using conditionals in pipeline steps.
+
+What this means in practice is that the container is only built if the changes are happening on main:
+
+*  A merge to main from a PR
+
+*  A periodic scheduled build against main (every two hours);
+
+	*  We need this one so we can pick up content changes from the other repo.
+
+*  The Raku scripts clone Raku/doc as a part of their build process.
+
+Here is how the container build works:
+
+*  We start from a caddy base image
+
+*  The tarball of generated static source code is downloaded from Buildkite's temporary storage
+
+*  This tarball is added and unarchived inside the container
+
+*  The "Caddyfile" at the root of this repo is also added
+
+*  The container is "committed", tagged, and pushed to the quay.io container registry
+
+	*  The tag that we use is quay.io/colemanx/raku-doc-website:latest
+
+	*  The fact that we are overwriting "latest" every two hours on a periodic build can be seen [here](https://quay.io/repository/colemanx/raku-doc-website?tab=history)
+
+*  Completely independent of this process is a cron job running on the dev server. This job simply pulls the latest container image and swaps out what's running. If this is working properly, the website at `https://docs-dev.raku.org` is updated at most every two hours with the latest content, and the latest changes from this repo.
+
+Deployment to Production is similar, but not automatic. The site maintainer activates an agent running on the production server that pulls the latest container image and swaps out what's running.
+
 
 
 
@@ -119,4 +151,4 @@ A better way, though, to tweak or add new plugins and see how they affect the we
 
 
 ----
-Rendered from README at 2023-02-13T00:17:07Z
+Rendered from README at 2023-04-13T17:56:32Z

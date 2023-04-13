@@ -2,6 +2,8 @@
 =TITLE Raku Documentation
 =SUBTITLE The Collection files for the Raku Documentation site.
 
+(The README.md version is generated from C<repo_docs/README.rakdoc>)
+
 =head1 Installation
 
 The assumption for this README is that the OS is a version of Linux, or that anyone
@@ -14,8 +16,7 @@ This repo can be cloned and the main dependencies can be installed with
 in the cloned directory. There are a couple of C libraries that may need to be installed as well,
 such as OpenSSL and LibArchive (make sure to install the `-dev` versions).
 
-Cro is not in the META6.json file because it can fail in the testing stages in an automatic testing
-environment. However, Cro and Cro::HTTP is needed for serving the rendered files locally.
+Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
 Syntax highlighting of Raku code in the documentation still requires a `node.js` stack. See the documentation
 for `Raku::Pod::Render` for more information.
@@ -86,11 +87,6 @@ Relevant template keys are modified in the C<ogdenwebb> plugin.
 I would expect this to change over time, and for the default templates to change
 to the OgdenWebb templates. But I would suggest this is done incrementally.
 
-=head1 Running site
-
-Whilst this repo is being developed, a running on-line site can be found at
-L<new-raku|https://new-raku.finanalyst.org>.
-
 =head1 Working on Collection plugins
 
 Collection uses plugins - they can be found under the directory C< Website/plugins/ > - which
@@ -122,5 +118,45 @@ that matches a source file name will be rendered.
 
 A better way, though, to tweak or add new plugins and see how they affect the website, is to install
 the distribution C<raku-collection-plugin-development>.
+
+=head1 Deployment of website
+
+The Production version of the website is at C<docs.raku.org>. A regularly updated
+version is at C<docs-dev.raku.org>.
+
+Here's how deployment works right now:
+
+After a PR to the doc-website repository is reviewed, it's merged to C<main>
+The very fact that it is a merge to main is important metadata for the CI pipeline.
+See also the Buildkite docs on using conditionals in pipeline steps.
+
+What this means in practice is that the container is only built
+if the changes are happening on main:
+=item A merge to main from a PR
+=item A periodic scheduled build against main (every two hours);
+=item2 We need this one so we can pick up content changes from the other repo.
+=item The Raku scripts clone Raku/doc as a part of their build process.
+
+Here is how the container build works:
+=item We start from a caddy base image
+=item The tarball of generated static source code is downloaded from Buildkite's
+temporary storage
+
+=item This tarball is added and unarchived inside the container
+=item The "Caddyfile" at the root of this repo is also added
+=item The container is "committed", tagged, and pushed to the quay.io container registry
+=item2 The tag that we use is quay.io/colemanx/raku-doc-website:latest
+=item2 The fact that we are overwriting "latest" every two hours on a
+periodic build can be seen L<here|https://quay.io/repository/colemanx/raku-doc-website?tab=history>
+
+=item Completely independent of this process is a cron job running on the
+dev server. This job simply pulls the latest container image and swaps out
+what's running. If this is working properly, the website at
+C<https://docs-dev.raku.org> is updated at most every two hours with the
+latest content, and the latest changes from this repo.
+
+Deployment to Production is similar, but not automatic. The site maintainer
+activates an agent running on the production server that pulls the latest
+container image and swaps out what's running.
 
 =end pod
