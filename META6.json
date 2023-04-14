@@ -9,9 +9,9 @@
   "auth": "zef:raku",
   "depends": [
     "Raku::Pod::Render:ver<4.4.2+>",
-    "Pod::From::Cache:ver<0.4.6+>",
+    "Pod::From::Cache:ver<0.5.0+>",
     "RakuConfig:ver<0.7.3+>",
-    "Collection:ver<0.14.6+>",
+    "Collection:ver<0.15.1+>",
     "Terminal::ANSIColor:ver<0.9+>:auth<zef:lizmat>",
     "Doc::TypeGraph:ver<2.2.1.1+>",
     "Doc::TypeGraph::Viz:ver<2.2.1.1+>",
