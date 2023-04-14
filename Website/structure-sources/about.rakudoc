@@ -31,4 +31,7 @@ Moritz Lenz L<@moritz | https://github.com/Moritz > and JJ Merelo L<@JJ | https:
 particular. The many other people who have contributed to writing the documentation and tooling
 can be found in this L<Credits file | https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
 
+=for Generated  :headlevel(0)
+The web site was generated as follows:
+
 =end pod
