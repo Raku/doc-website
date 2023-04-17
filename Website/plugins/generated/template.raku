@@ -1,7 +1,7 @@
 #!/usr/bin/env raku
 use v6.d;
 %(
-    generated => sub (%prm, %tml) { say %prm.keys;
+    generated => sub (%prm, %tml) {
         qq[[
         <div class="collection-generated">
         { %prm<raw-contents> // '' }
