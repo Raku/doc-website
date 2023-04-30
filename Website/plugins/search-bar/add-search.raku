@@ -3,24 +3,23 @@ use v6.d;
 use JSON::Fast;
 use ProcessedPod;
 
-sub ( $pp, %processed, %options ) {
-    my $search-site = $pp.get-data('search-bar')<search-site>;
+sub ($pp, %processed, %options) {
     # This routine creates the JS data structure to be added to the JS query function
     # The data structure is an array of hashes :category, :value, :url
     # Category is used to split up items, value is what is searched for, url is where it is to be found.
     # eg { "category": "Types", "value": "Distribution::Hash", "url": "/type/Distribution::Hash" }
     # The first three items are supplied for some reason.
     my @entries =
-        %( :category("Syntax"), :value("# single-line comment"), :url("/language/syntax#Single-line_comments") ),
-        %( :category("Syntax"), :value("#` multi-line comment"), :url("/language/syntax#Multi-line_/_embedded_comments") ),
-        %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature#index-entry-Long_Names") )
-    ;
+        %( :category("Syntax"), :value("# single-line comment"), :url("/language/syntax#Single-line_comments")),
+        %( :category("Syntax"), :value("#` multi-line comment"),
+           :url("/language/syntax#Multi-line_/_embedded_comments")),
+        %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature#index-entry-Long_Names"));
     my $categories = <Syntax Signature Heading Glossary>.SetHash;
     # collect info stored from parsing headers
-    my %defns = $pp.get-data('heading')<defs>;
+#    my %defns = $pp.get-data('heading')<defs>;
     # structure of %defns is <file name as in processed> => %( <target> => %info )
     # %info = :name, :kind, :subkind, :category
-    note 'no data from parsed headings' unless +%defns;
+#    note 'no data from parsed headings' unless +%defns;
     # structure of processed
     # <filename> => %( :config-data => :kind, @sub-kind, @category )
     # Helper functions as in Documentable
@@ -30,36 +29,35 @@ sub ( $pp, %processed, %options ) {
         $s.trans([</ \\ ">] => [<\\/ \\\\ \\">]);
     }
     sub escape-json(Str $s) is export {
-        $s.subst(｢\｣, ｢%5c｣, :g).subst('"', '\"', :g).subst(｢?｣, ｢%3F｣, :g)
+        $s.subst(｢\｣, ｢%5C｣, :g).subst('"', '\"', :g).subst(｢?｣, ｢%3F｣, :g)
     }
-    for %defns.kv -> $fn, %targets {
-        for %targets.kv -> $targ, %info {
-            my $category = %info<category>.tc ;
-            $category = %info<subkind>.tc ~ ' operator' if $category eq 'Operator';
-            $categories{ $category }++;
-            @entries.push: %(
-                :$category,
-                :value( escape( %info<name> ) ),
-                :info( ': in <b>' ~ escape-json($fn) ~ '</b>' ),
-                :url( escape-json( "/$fn\#$targ" ) )
-            )
-        }
-    }
+    #    for %defns.kv -> $fn, %targets {
+    #        for %targets.kv -> $targ, %info {
+    #            my $category = %info<category>.tc ;
+    #            $category = %info<subkind>.tc ~ ' operator' if $category eq 'Operator';
+    #            $categories{ $category }++;
+    #            @entries.push: %(
+    #                :$category,
+    #                :value( escape( %info<name> ) ),
+    #                :info( ': in <b>' ~ escape-json($fn) ~ '</b>' ),
+    #                :url( escape-json( "/$fn\#$targ" ) )
+    #            )
+    #        }
+    #    }
     for %processed.kv -> $fn, $podf {
-        next unless $podf.pod-config-data<subkind>:exists;
         my $value = $podf.name ~~ / ^ 'type/' (.+) $ / ?? ~$/[0] !! $podf.name;
         @entries.push: %(
-            :category( $podf.pod-config-data<subkind>.tc ),
-            :value( escape-json( $value )),
-            :info( ' ' ),
-            :url( escape-json( '/' ~ $fn ))
+            :category($podf.pod-config-data<subkind>.tc),
+            :$value,
+            :info(' '),
+            :url(escape-json('/' ~ $fn))
         );
         for $podf.raw-toc.grep({ !(.<is-title>) }) {
             @entries.push: %(
                 :category<Heading>,
-                :value( escape( .<text> ) ),
-                :info( ': section in <b>' ~ escape-json( $podf.title ) ~ '</b>' ),
-                :url( escape-json( '/' ~ $fn ~ '#' ~ .<target> ) )
+                :value(.<text>),
+                :info(': section in <b>' ~ escape-json($podf.title) ~ '</b>'),
+                :url(escape-json('/' ~ $fn ~ '#' ~ .<target>))
             )
         }
         $categories{ $podf.pod-config-data<kind>.tc }++
@@ -84,8 +82,9 @@ sub ( $pp, %processed, %options ) {
     $pp.add-data('extendedsearch', $categories.keys);
     'search-bar.js'.IO.spurt:
         'var items = '
-        ~ to-json( @entries )
-        ~ ";\n"
+            ~ JSON::Fast::to-json(@entries)
+            ~ ";
+    \n"
         ~ 'search-temp.js'.IO.slurp;
     [
         [ 'assets/scripts/search-bar.js', 'myself', 'search-bar.js' ],

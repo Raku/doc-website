@@ -10,5 +10,7 @@
 	:render<namespace-check.raku>,
 	:template-raku<header-templates.raku>,
 	:transfer<cleanup.raku>,
-	:version<0.2.4>,
+	:hash-urls,
+	:information('hash-urls',),
+	:version<0.4.1>,
 )

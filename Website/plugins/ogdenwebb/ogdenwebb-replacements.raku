@@ -12,7 +12,6 @@ use v6.d;
         { %tml<header>.(%prm, %tml)  }
         { %tml<sidebar>.(%prm, %tml)  }
         { %tml<wrapper>.(%prm, %tml)  }
-        <div id="raku-repl"></div>
         { %tml<footer>.(%prm, %tml)  }
         { %tml<js-bottom>.({}, {}) }
         </body>
@@ -300,5 +299,15 @@ use v6.d;
             }
         }
         else { '' }
+    },
+    'format-x' => sub (%prm, %tml) {
+        my $indexedheader = %prm<meta>.elems ?? %prm<meta>[0].join(';') !! %prm<text>;
+        qq[
+            <a name="{ %prm<target> // ''}" class="index-entry"
+            data-indexedheader="{ $indexedheader }"></a>
+            { (%prm<text>.defined and %prm<text> ne '') ??
+                '<span class="glossary-entry">' ~ %prm<text> ~ '</span>'
+            !!  '' }
+        ]
     },
 );

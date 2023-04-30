@@ -91,9 +91,15 @@ use v6;
                 ~ (%prm<contents> // '').=trans(['<pre>', '</pre>'] => ['&lt;pre&gt;', '&lt;/pre&gt;'])
                 ~ "</pre></div>\n"
     },
-    'format-x' => sub ( %prm, %tml ) {
-        '<a name="' ~ (%prm<target> // '') ~ '"></a>'
-        ~ ( ( %prm<text>:exists and %prm<text> ne '' ) ?? '<span class="glossary-entry">' ~ %prm<text> ~ '</span>' !! '')
+    'format-x' => sub (%prm, %tml) {
+        my $indexedheader = %prm<meta>.elems ?? %prm<meta>[0].join(';') !! %prm<text>;
+        qq[
+            <a name="{ %prm<target> // ''}" class="index-entry"
+            data-indexedheader="{ $indexedheader }"></a>
+            { (%prm<text>.defined and %prm<text> ne '') ??
+                '<span class="glossary-entry">' ~ %prm<text> ~ '</span>'
+            !!  '' }
+        ]
     },
     'heading' => sub ( %prm, %tml ) {
         "\n" ~ '<h' ~ (%prm<level> // '1')
@@ -191,10 +197,10 @@ use v6;
                 ~ "\t<body class=\"pod\">\n"
                 ~ %tml<header>(%prm, %tml)
                 ~ '<div class="pod-content">'
-                ~ ( %prm<toc> ne '' or %prm<glossary> ne '' ?? '<nav>' !! '')
+                ~ ( (%prm<toc> ne '' or %prm<glossary> ne '') ?? '<nav>' !! '')
                 ~ %prm<toc>
                 ~ %prm<glossary>
-                ~ ( %prm<toc> ne '' or %prm<glossary> ne '' ?? '</nav>' !! '')
+                ~ (( %prm<toc> ne '' or %prm<glossary> ne '') ?? '</nav>' !! '')
                 ~ %tml<top-of-page>(%prm, %tml)
                 ~ %tml<subtitle>(%prm, %tml)
                 ~ '<div class="pod-body' ~ ( %prm<toc> ne '' ?? '' !! ' no-toc') ~ '">'
