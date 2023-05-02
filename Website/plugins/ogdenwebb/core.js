@@ -130,5 +130,28 @@ $(document).ready( function() {
         });
         $matchingListElements.show();
     });
+    // copy code block to clipboard
+    $('.copy-raku-code').on('click', function(){
+        var codeElement = $(this).next();
+        var container = document.createElement('div');
+        container.innerHTML = codeElement.html();
+        container.style.position = 'fixed';
+        container.style.pointerEvents = 'none';
+        container.style.opacity = 0;
+        // Detect all style sheets of the page
+        var activeSheets = Array.prototype.slice.call(document.styleSheets)
+          .filter(function (sheet) {
+            return !sheet.disabled;
+          });
+        document.body.appendChild(container);
+        window.getSelection().removeAllRanges();
+        var range = document.createRange();
+        range.selectNode(container);
+        window.getSelection().addRange(range);
+        //for (var i = 0; i < activeSheets.length; i++) activeSheets[i].disabled = true;
+        document.execCommand("copy", false);
+        //for (var i = 0; i < activeSheets.length; i++) activeSheets[i].disabled = false;
+        document.body.removeChild(container);
+    });
 });
 
