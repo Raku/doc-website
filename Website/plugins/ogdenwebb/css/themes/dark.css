@@ -392,6 +392,7 @@ dl dd {
 
 ul.rakudoc-item {
   list-style: disc;
+  padding: 0 0 0 1.5rem;
 }
 ul.rakudoc-item > ul {
   margin-left: 2em;
@@ -404,4 +405,11 @@ ul.rakudoc-item > ul > ul {
 ul.rakudoc-item > ul > ul > ul {
   margin-left: 2em;
   list-style: disclosure-closed;
+}
+
+button.copy-raku-code {
+  cursor: pointer;
+  opacity: 0.5;
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  position: absolute;
 }
