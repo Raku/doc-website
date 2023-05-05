@@ -23,24 +23,14 @@ sub (ProcessedPod $pp, %processed, %options) {
         >
     }
     sub good-name($name is copy --> Str) is export {
-    # these chars cannot appear in a unix filesystem path
-        # Documentable code
+        # Documentable substitutes Filesystem unsafe chars with
         # / => $SOLIDUS
         # % => $PERCENT_SIGN
         # ^ => $CIRCUMFLEX_ACCENT
         # # => $NUMBER_SIGN
-        #    my @badchars  = ["/", "^", "%"];
-        #    my @goodchars = @badchars
-        #                    .map({ '$' ~ .uniname      })
-        #                    .map({ .subst(' ', '_', :g)});
-        #
-        #    $name = $name.subst(@badchars[0], @goodchars[0], :g);
-        #    $name = $name.subst(@badchars[1], @goodchars[1], :g);
-        #    # if it contains escaped sequences (like %20) we do not
-        #    # escape %
-        #    if ( ! ($name ~~ /\%<xdigit>**2/) ) {
-        #        $name = $name.subst(@badchars[2], @goodchars[2], :g);
-        #    }
+        # So, we need to generate psuedo-urls that will also point to hashed files using
+        # the same algorithm as Documentable. If these are used in anchors in sources, they
+        # will be correctly mapped as well.
         my @badchars = ["/", "^", "%"];
         my @goodchars = @badchars
             .map({ '$' ~ .uniname })
@@ -80,8 +70,7 @@ sub (ProcessedPod $pp, %processed, %options) {
             given $/<defnmark> {
                 my $targ = .<target>.Str;
                 unless %targets{ $targ }:exists and $targ {
-                    note "Error in secondaries, target ｢$targ｣ not found in definitions but in file ｢$fn｣ as ｢$_｣";
-                    next
+                    die "Error in secondaries, target ｢$targ｣ not found in definitions but in file ｢$fn｣ as ｢$_｣";
                 }
                 my %attr = %targets{ $targ }.clone;
                 my $kind = %attr<kind>:delete;

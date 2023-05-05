@@ -16,34 +16,15 @@ sub ($pp, %processed, %options) {
         %( :category("Signature"), :value(";; (long name)"), :url("/type/Signature#index-entry-Long_Names"));
     my $categories = <Syntax Signature Heading Glossary>.SetHash;
     # collect info stored from parsing headers
-#    my %defns = $pp.get-data('heading')<defs>;
-    # structure of %defns is <file name as in processed> => %( <target> => %info )
-    # %info = :name, :kind, :subkind, :category
-#    note 'no data from parsed headings' unless +%defns;
     # structure of processed
     # <filename> => %( :config-data => :kind, @sub-kind, @category )
     # Helper functions as in Documentable
-    #| We need to escape names like \. Otherwise, if we convert them to JSON, we
-    #| would have "\", and " would be escaped.
     sub escape(Str $s) is export {
         $s.trans([</ \\ ">] => [<\\/ \\\\ \\">]);
     }
     sub escape-json(Str $s) is export {
         $s.subst(｢\｣, ｢%5C｣, :g).subst('"', '\"', :g).subst(｢?｣, ｢%3F｣, :g)
     }
-    #    for %defns.kv -> $fn, %targets {
-    #        for %targets.kv -> $targ, %info {
-    #            my $category = %info<category>.tc ;
-    #            $category = %info<subkind>.tc ~ ' operator' if $category eq 'Operator';
-    #            $categories{ $category }++;
-    #            @entries.push: %(
-    #                :$category,
-    #                :value( escape( %info<name> ) ),
-    #                :info( ': in <b>' ~ escape-json($fn) ~ '</b>' ),
-    #                :url( escape-json( "/$fn\#$targ" ) )
-    #            )
-    #        }
-    #    }
     for %processed.kv -> $fn, $podf {
         my $value = $podf.name ~~ / ^ 'type/' (.+) $ / ?? ~$/[0] !! $podf.name;
         @entries.push: %(
