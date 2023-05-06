@@ -52,7 +52,6 @@ sub test-highlighter( Str $hilite-path --> Bool ) {
         my token tag { '<' ~ '>' [ '/'? <-[ > ]>+ ] }
         my @tokens;
         my $rv = &highlight(%prm<contents>.subst(/ <tag> / , { @tokens.push( ~$/ ); "\xFF\xFF" }, :g));
-        say @tokens;
         $rv.subst( / "\xFF\xFF" /, { @tokens.shift }, :g )
     }
 )
