@@ -236,7 +236,12 @@ use v6.d;
     },
     #placeholder
     block-code => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
+        my token tag { <?after <-[ B C E I K L N P R T U V X Z ]> > '<' ~ '>' [ '/'? <-[ > ]>+ ] }
+        my @tokens;
+        %prm<contents> .= subst(/ <tag> / , { @tokens.push( ~$/ ); "\xFF\xFF" }, :g );
         my $hl = %tml.prior('block-code').(%prm, %tml);
+        $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
+        $hl .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
         $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
         qq[
             <div class="raku-code raku-lang">
