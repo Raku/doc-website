@@ -99,13 +99,13 @@ use ProcessedPod;
         '<p>' ~ %prm<contents> ~ '</p>'
     },
     'format-l' => sub ( %prm, %tml ) {
-        # type = local: <link-label> -> <target>.html#<place> | <target>.html
+        # type = local: <link-label> -> <target>#<place> | <target>.html
         # type = internal: <link-label> -> #<place>
         # type = external: <link-label> -> <target>
         my $trg;
         given %prm<type> {
             when 'local' {
-                $trg = %prm<target> ~ '.html';
+                $trg = %prm<target>;
                 $trg ~= '#' ~ %prm<place> if %prm<place>;
                 $trg = 'href="' ~ $trg ~ '"'
             }
