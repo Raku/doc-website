@@ -130,5 +130,23 @@ $(document).ready( function() {
         });
         $matchingListElements.show();
     });
+    // copy code block to clipboard adapted from solution at
+    // https://stackoverflow.com/questions/34191780/javascript-copy-string-to-clipboard-as-text-html
+    // if behaviour problems with different browsers add stylesheet code from that solution.
+    $('.copy-raku-code').on('click', function(){
+        var codeElement = $(this).next();
+        var container = document.createElement('div');
+        container.innerHTML = codeElement.html();
+        container.style.position = 'fixed';
+        container.style.pointerEvents = 'none';
+        container.style.opacity = 0;
+        document.body.appendChild(container);
+        window.getSelection().removeAllRanges();
+        var range = document.createRange();
+        range.selectNode(container);
+        window.getSelection().addRange(range);
+        document.execCommand("copy", false);
+        document.body.removeChild(container);
+    });
 });
 

@@ -238,9 +238,14 @@ use v6.d;
     block-code => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
         my $hl = %tml.prior('block-code').(%prm, %tml);
         $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
-        '<div class="raku-code raku-lang">'
-            ~ $hl
-            ~ '</div>'
+        qq[
+            <div class="raku-code raku-lang">
+                <button class="copy-raku-code" title="Copy code"><i class="far fa-clipboard"></i></button>
+                <div>
+                    $hl
+                </div>
+            </div>
+        ]
     },
     heading => sub (%prm, %tml) {
         my $txt = %prm<text> // '';
@@ -308,6 +313,13 @@ use v6.d;
             { (%prm<text>.defined and %prm<text> ne '') ??
                 '<span class="glossary-entry">' ~ %prm<text> ~ '</span>'
             !!  '' }
+        ]
+    },
+    'list' => sub (%prm, %tml) {
+        qq[
+        <ul{ %prm<nesting> == 0 ?? ' class="rakudoc-item"' !! ''}>
+           { %prm<items>.join }
+        </ul>
         ]
     },
 );
