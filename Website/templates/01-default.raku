@@ -99,7 +99,7 @@ use ProcessedPod;
         '<p>' ~ %prm<contents> ~ '</p>'
     },
     'format-l' => sub ( %prm, %tml ) {
-        # type = local: <link-label> -> <target>#<place> | <target>.html
+        # type = local: <link-label> -> <target>#<place> | <target>
         # type = internal: <link-label> -> #<place>
         # type = external: <link-label> -> <target>
         my $trg;
@@ -130,7 +130,7 @@ use ProcessedPod;
             ~ "]</a></sup>\n"
     },
     'format-p' => sub (%prm, %tml) {
-        '<div><pre>'
+        '<div class="pod-placement"><pre>'
             ~ (%prm<contents> // '').=trans(['<pre>', '</pre>'] => ['&lt;pre&gt;', '&lt;/pre&gt;'])
             ~ "</pre></div>\n"
     },
@@ -193,6 +193,12 @@ use ProcessedPod;
     },
     'output' => sub (%prm, %tml) {
         '<pre class="pod-output">' ~ (%prm<contents> // '') ~ '</pre>'
+    },
+    'input' => sub (%prm, %tml) {
+        '<pre class="pod-input">' ~ (%prm<contents> // '') ~ '</pre>'
+    },
+    'nested' => sub (%prm, %tml) {
+        '<div class="pod-nested">' ~ (%prm<contents> // '') ~ '</div>'
     },
     'page-top' => sub (%prm, %tml) {
         '<div class="pod-content ' ~ (%prm<page-config><class> // '') ~ '">'
