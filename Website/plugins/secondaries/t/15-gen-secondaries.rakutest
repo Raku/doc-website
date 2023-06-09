@@ -3,8 +3,9 @@ use Test;
 use File::Directory::Tree;
 use ProcessedPod;
 use RakuConfig;
+use nqp;
 
-plan 15;
+plan 23;
 
 my @triples;
 my %processed;
@@ -64,7 +65,8 @@ for ^2 -> $p {
     }
 }
 is +%processed.keys, 2, 'two files in processed';
-lives-ok { @triples = &secondaries($pp,%processed, %() ) }, 'gen-secondaries lives';
+$pp.add-data('secondaries', %( :!hash-urls ) );
+lives-ok { @triples = &secondaries($pp,%processed, %(:no-status,) ) }, 'gen-secondaries lives';
 is @triples.elems,2, 'some secondaries generated';
 
 =begin pod
@@ -91,6 +93,7 @@ header with just name
 $pp .= new;
 $pp.templates( 't/test-temps.rakuon' );
 $pp.modify-templates( %config<template-raku> );
+$pp.add-data('secondaries', %( :!hash-urls ) );
 &namespace-check( $pp, {} );
 %data = $pp.get-data('heading');
 my $name = 'Complex_headers';
@@ -102,9 +105,77 @@ with $pp {
     %processed{ $name } = .emit-and-renew-processed-state;
 }
 
-@triples = &secondaries($pp,%processed, %() );
-my @expected = <routine/and.html routine/....html routine/proc.html>;
-is @triples.elems,@expected.elems, 'two secondaries generated';
+@triples = &secondaries($pp,%processed, %(:no-status,) );
+# heading with proc is eaten by ...
+my @expected = <routine/and.html routine/....html>;
+is @triples.elems,@expected.elems, 'correct no secondaries generated';
+is @triples[0][0], any(@expected), 'got 1 right file';
+is @triples[1][0], any(@expected), 'got 2 right file';
+
+=begin pod
+=TITLE Syntax file Heads
+=SUBTITLE headers that should generate C<syntax/file> files.
+
+=head1 X<Classes|Syntax,class>
+
+Classes are declared using the C<class> keyword, typically followed by a
+name.
+
+
+=head1 X<C<self>|Syntax,self>
+
+Inside a method, the term C<self> is available and bound to the invocant
+
+=head1 X<Multi-dispatch|Syntax,multi>
+
+Raku allows for writing several routines with the same name but different
+signatures.
+
+=end pod
+
+%processed = Empty;
+$pp .= new;
+$pp.templates( 't/test-temps.rakuon' );
+$pp.modify-templates( %config<template-raku> );
+$pp.add-data('secondaries', %( :!hash-urls ) );
+&namespace-check( $pp, {} );
+%data = $pp.get-data('heading');
+$name = 'Syntax_headers';
+with $pp {
+    .pod-file.name = $name;
+    .pod-file.path = "doc/sythn/p_4\.rakudoc";
+    .process-pod( $=pod[3] );
+    .file-wrap(:filename($name), :dir<html>, :ext<html> );
+    %processed{ $name } = .emit-and-renew-processed-state;
+}
+
+@triples = &secondaries($pp,%processed, %(:no-status,) );
+@expected = <syntax/self.html syntax/class.html syntax/multi.html>;
+is @triples.elems,@expected.elems, 'correct syntax secondaries generated';
+is @triples[0][0], any(@expected), 'got 1 syntax file';
+is @triples[1][0], any(@expected), 'got 2 syntax file';
+is @triples[2][0], any(@expected), 'got 3 syntax file';
+
+%processed = Empty;
+$pp .= new;
+$pp.templates( 't/test-temps.rakuon' );
+$pp.modify-templates( %config<template-raku> );
+&namespace-check( $pp, {} );
+%data = $pp.get-data('heading');
+$name = 'Complex_headers_hashed';
+with $pp {
+    .pod-file.name = $name;
+    .pod-file.path = "doc/sythn/p_3\.rakudoc";
+    .process-pod( $=pod[2] );
+    .file-wrap(:filename($name), :dir<html>, :ext<html> );
+    %processed{ $name } = .emit-and-renew-processed-state;
+}
+
+# generate hashed files
+@triples = &secondaries($pp,%processed, %(:no-status,) );
+@expected = <and ...>.map( { 'hashed/' ~ nqp::sha1($_ ) ~ '.html' } ) ;
+@expected.push: 'assets/prettyurls';
+is @triples.elems,@expected.elems, 'correct no of hashed secondaries generated';
 is @triples[0][0], any(@expected), 'got 1 right file';
 is @triples[1][0], any(@expected), 'got 2 right file';
 is @triples[2][0], any(@expected), 'got 3 right file';
@@ -112,5 +183,6 @@ is @triples[2][0], any(@expected), 'got 3 right file';
 &cleanup($pp, %(), %() );
 is 'html/routine'.IO.dir( test => *.ends-with('html') ), (), 'routine directory emptied';
 is 'html/syntax'.IO.dir( test => *.ends-with('html') ), (), 'syntax directory emptied';
+is 'html/hashed'.IO.dir( test => *.ends-with('html') ), (), 'syntax directory emptied';
 
 done-testing;
