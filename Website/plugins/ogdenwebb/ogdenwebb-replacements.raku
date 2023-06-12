@@ -236,7 +236,28 @@ use v6.d;
     },
     #placeholder
     block-code => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
-        my $hl = %tml.prior('block-code').(%prm, %tml);
+        my regex marker {
+            "\xFF\xFF" ~ "\xFF\xFF" $<content> = (.+?)
+        };
+        my $hl;
+        my @tokens;
+        my $t;
+        my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
+        if $parsed {
+            for $parsed.chunks -> $c {
+                if $c.key eq 'marker' {
+                    $t ~= "\xFF\xFF";
+                    @tokens.push: $c.value<content>.Str;
+                }
+                else {
+                    $t ~= $c.value
+                }
+            }
+            %prm<contents> = $t;
+        }
+        $hl = %tml.prior('block-code').(%prm, %tml);
+        $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
+        $hl .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
         $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
         qq[
             <div class="raku-code raku-lang">
@@ -305,21 +326,144 @@ use v6.d;
         }
         else { '' }
     },
-    'format-x' => sub (%prm, %tml) {
-        my $indexedheader = %prm<meta>.elems ?? %prm<meta>[0].join(';') !! %prm<text>;
-        qq[
-            <a name="{ %prm<target> // ''}" class="index-entry"
-            data-indexedheader="{ $indexedheader }"></a>
-            { (%prm<text>.defined and %prm<text> ne '') ??
-                '<span class="glossary-entry">' ~ %prm<text> ~ '</span>'
-            !!  '' }
-        ]
-    },
     'list' => sub (%prm, %tml) {
         qq[
         <ul{ %prm<nesting> == 0 ?? ' class="rakudoc-item"' !! ''}>
            { %prm<items>.join }
         </ul>
         ]
+    },
+
+
+    'format-b' => sub (%prm, %tml) {
+        my $beg = '<strong>';
+        my $end = '</strong>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-c' => sub (%prm, %tml) {
+        my $beg = '<code>';
+        my $end = '</code>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-i' => sub (%prm, %tml) {
+        my $beg = '<em>';
+        my $end = '</em>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-k' => sub (%prm, %tml) {
+        my $beg = '<kbd>';
+        my $end = '</kbd>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-r' => sub (%prm, %tml) {
+        my $beg = '<var>';
+        my $end = '</var>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-t' => sub (%prm, %tml) {
+        my $beg = '<samp>';
+        my $end = '</samp>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-u' => sub (%prm, %tml) {
+        my $beg = '<u>';
+        my $end = '</u>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ %prm<contents> ~ $end
+    },
+    'format-l' => sub ( %prm, %tml ) {
+        # type = local: <link-label> -> <target>#<place> | <target>
+        # type = internal: <link-label> -> #<place>
+        # type = external: <link-label> -> <target>
+        my $trg;
+        given %prm<type> {
+            when 'local' {
+                $trg = %prm<target>;
+                $trg ~= '#' ~ %prm<place> if %prm<place>;
+                $trg = 'href="' ~ $trg ~ '"'
+            }
+            when 'internal' {
+                $trg = 'href="#' ~ %prm<place> ~ '"'
+            }
+            default {
+                $trg = 'href="' ~ %prm<target> ~ '"'
+            }
+        }
+        my $beg = '<a ' ~ $trg ~ '>';
+        my $end =  '</a>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ ( %prm<link-label> // '' ) ~ $end;
+    },
+    'format-n' => sub (%prm, %tml) {
+        my $beg = '<sup class="content-footnote"><a name="'
+                ~ %tml<escaped>.(%prm<retTarget>)
+                ~ '" href="#' ~ %tml<escaped>.(%prm<fnTarget>)
+                ~ '">';
+        my $end = "</a></sup>\n";
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        $beg ~ '[' ~ %tml<escaped>.(%prm<fnNumber>) ~ ']' ~ $end
+    },
+    'format-p' => sub (%prm, %tml) {
+        '<div class="pod-placement"><pre>'
+                ~ (%prm<contents> // '').=trans(['<pre>', '</pre>'] => ['&lt;pre&gt;', '&lt;/pre&gt;'])
+                ~ "</pre></div>\n"
+    },
+    'format-x' => sub (%prm, %tml) {
+        my $indexedheader = %prm<meta>.elems ?? %prm<meta>[0].join(';') !! %prm<text>;
+        my $beg = qq[
+            <a name="{ %prm<target> // ''}" class="index-entry"
+            data-indexedheader="{ $indexedheader }"></a>
+            { (%prm<text>.defined and %prm<text> ne '') ?? '<span class="glossary-entry">' !! '' }
+        ];
+        my $end = '</span>';
+        my $mark = "\xFF\xFF";
+        if %prm<context>.Str eq 'InCodeBlock' {
+            $beg = $mark ~ $beg ~ $mark;
+            $end = $mark ~ $end ~ $mark;
+        }
+        # if there is indexedheader but no text, must still return beg. If indexh.. but text, then end
+        $beg ~ ( (%prm<text>.defined and %prm<text> ne '') ?? %prm<text> ~ $end !! '' )
     },
 );
