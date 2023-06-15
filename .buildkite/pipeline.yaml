@@ -2,10 +2,12 @@ agents:
   queue: raku-doc
 steps:
   - label: "Build site"
+    env:
+      PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/builder/MoarVM/install/bin:/home/builder/MoarVM/install/share/perl6/site/bin"
     key: build
     commands:
-      - POD_RENDER_HIGHLIGHTER=1 zef --force-install install Raku::Pod::Render
-      - raku-pod-render-install-highlighter
+      - POD_RENDER_FORCE_HIGHLIGHTER_REFRESH=1 POD_RENDER_HIGHLIGHTER=1 zef --force-install install Raku::Pod::Render
+      # - raku-pod-render-install-highlighter
       - echo 'Assert highlighting dependency' && command -v atom-perl-highlighter
       - "zef install . --deps-only"
       - "./bin_files/build-site --without-completion --no-status"
