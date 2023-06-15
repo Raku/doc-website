@@ -4,7 +4,6 @@ steps:
   - label: "Build site"
     key: build
     commands:
-      - echo 'Assert highlighting dependency' && command -v atom-perl-highlighter
       - "zef install . --deps-only"
       - "./bin_files/build-site --without-completion --no-status"
       - "./.buildkite/archive.sh"
