@@ -4,6 +4,8 @@ steps:
   - label: "Build site"
     key: build
     commands:
+      - POD_RENDER_HIGHLIGHTER=1 zef --force-install install Raku::Pod::Render
+      - raku-pod-render-install-highlighter
       - echo 'Assert highlighting dependency' && command -v atom-perl-highlighter
       - "zef install . --deps-only"
       - "./bin_files/build-site --without-completion --no-status"
