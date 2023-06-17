@@ -239,32 +239,42 @@ use v6.d;
         my regex marker {
             "\xFF\xFF" ~ "\xFF\xFF" $<content> = (.+?)
         };
-        my $hl;
-        my @tokens;
-        my $t;
-        my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
-        if $parsed {
-            for $parsed.chunks -> $c {
-                if $c.key eq 'marker' {
-                    $t ~= "\xFF\xFF";
-                    @tokens.push: $c.value<content>.Str;
-                }
-                else {
-                    $t ~= $c.value
-                }
-            }
-            %prm<contents> = $t;
+        # if :lang is set != raku / rakudoc, then enable highlightjs
+        # otherwise pass through Raku syntax highlighter.
+        my $code;
+        my $syntax-label;
+        if %prm<lang>:exists and %prm<lang> ne any(<raku rakudoc Raku Rakudoc>) {
+            $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
+            $code = qq:to/NOTRAKU/;
+            <pre class="browser-hl"><code class="language-{ %prm<lang> }">{ %prm<contents> }</code></pre>
+            NOTRAKU
         }
-        $hl = %tml.prior('block-code').(%prm, %tml);
-        $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
-        $hl .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
-        $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
+        else {
+            my @tokens;
+            my $t;
+            my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
+            if $parsed {
+                for $parsed.chunks -> $c {
+                    if $c.key eq 'marker' {
+                        $t ~= "\xFF\xFF";
+                        @tokens.push: $c.value<content>.Str;
+                    }
+                    else {
+                        $t ~= $c.value
+                    }
+                }
+                %prm<contents> = $t;
+            }
+            $syntax-label = (%prm<lang> // 'Raku').tc ~ ' highlighting';
+            $code = %tml.prior('block-code').(%prm, %tml);
+            $code .= subst( / '<pre class="' /, '<pre class="nohighlights cm-s-ayaya ');
+            $code .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
+        }
         qq[
             <div class="raku-code raku-lang">
-                <button class="copy-raku-code" title="Copy code"><i class="far fa-clipboard"></i></button>
-                <div>
-                    $hl
-                </div>
+                <button class="copy-code" title="Copy code"><i class="far fa-clipboard"></i></button>
+                <label>$syntax-label\</label>
+                <div>$code\</div>
             </div>
         ]
     },
