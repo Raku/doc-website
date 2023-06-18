@@ -1,0 +1,12 @@
+%(
+	:auth<collection>,
+	:authors(
+		"finanalyst",
+	),
+	:custom-raku(),
+	:license<Artistic-2.0>,
+	:name<hiliter>,
+	:render,
+	:template-raku<template.raku>,
+	:version<0.1.0>,
+)
