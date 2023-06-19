@@ -46,8 +46,49 @@ sub set-highlight-basedir( --> Str ) {
 sub test-highlighter( Str $hilite-path --> Bool ) {
     ?("$hilite-path/package-lock.json".IO.f and "$hilite-path/atom-language-perl6".IO.d)
 }
+# Callable returns a hash
 %(
-    'block-code' => sub ( %prm, %tml ) {
-        &highlight(%prm<contents>)
-    }
+    block-code => sub (%prm, %tml) {
+        my regex marker {
+            "\xFF\xFF" ~ "\xFF\xFF" $<content> = (.+?)
+        };
+        # if :lang is set != raku / rakudoc, then enable highlightjs
+        # otherwise pass through Raku syntax highlighter.
+        my $code;
+        my $syntax-label;
+        if %prm<lang>:exists and %prm<lang> ne any(<raku rakudoc Raku Rakudoc>) {
+            $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
+            $code = qq:to/NOTRAKU/;
+                <pre class="browser-hl"><code class="language-{ %prm<lang> }">{ %prm<contents> }</code></pre>
+                NOTRAKU
+            }
+        else {
+            my @tokens;
+            my $t;
+            my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
+            if $parsed {
+                for $parsed.chunks -> $c {
+                    if $c.key eq 'marker' {
+                        $t ~= "\xFF\xFF";
+                        @tokens.push: $c.value<content>.Str;
+                    }
+                    else {
+                        $t ~= $c.value
+                    }
+                }
+                %prm<contents> = $t;
+            }
+            $syntax-label = (%prm<lang> // 'Raku').tc ~ ' highlighting';
+            $code = &highlight(%prm<contents>);
+            $code .= subst( / '<pre class="' /, '<pre class="nohighlights cm-s-ayaya ');
+            $code .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
+        }
+        qq[
+                <div class="raku-code raku-lang">
+                    <button class="copy-code" title="Copy code"><i class="far fa-clipboard"></i></button>
+                    <label>$syntax-label\</label>
+                    <div>$code\</div>
+                </div>
+            ]
+    },
 )

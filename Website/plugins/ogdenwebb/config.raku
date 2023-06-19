@@ -12,11 +12,10 @@
 	:template-raku<ogdenwebb-replacements.raku>,
 	:error-report,
 	:!extended-search,
-	:version<0.3.8>,
+	:version<0.3.20>,
 	:add-css<
 		css/main.css
 		css/themes/dark.css css/themes/light.css
-		css/code/dark.css css/code/light.css
 	>, # order of css files is important
 	:jquery( ['core.js', 3], ),
 	:information<add-css jquery>,

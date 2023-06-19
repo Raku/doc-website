@@ -1,6 +1,9 @@
-@import "../../bulma/sass/utilities/functions.sass";
-
 /* Basic code colors */
+@import '_themes-colors.scss';
+$border:  $grey-darker;
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+$heading: $yellow;
+
 $code-background: #212426;
 $code-foreground: #f2f2f2;
 $code-selection: lighten($code-background, 10);
@@ -57,3 +60,5 @@ $code-variable-color: #EED891;
 // Fix selection background
 textarea::-moz-selection { background: $code-background; }
 textarea::selection { background: $code-background; }
+
+@import '_highlighting.scss';

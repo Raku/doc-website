@@ -234,40 +234,6 @@ use v6.d;
           </div>
         BLOCK
     },
-    #placeholder
-    block-code => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
-        my regex marker {
-            "\xFF\xFF" ~ "\xFF\xFF" $<content> = (.+?)
-        };
-        my $hl;
-        my @tokens;
-        my $t;
-        my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
-        if $parsed {
-            for $parsed.chunks -> $c {
-                if $c.key eq 'marker' {
-                    $t ~= "\xFF\xFF";
-                    @tokens.push: $c.value<content>.Str;
-                }
-                else {
-                    $t ~= $c.value
-                }
-            }
-            %prm<contents> = $t;
-        }
-        $hl = %tml.prior('block-code').(%prm, %tml);
-        $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
-        $hl .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
-        $hl .= subst( / '<pre class="' /, '<pre class="cm-s-ayaya ');
-        qq[
-            <div class="raku-code raku-lang">
-                <button class="copy-raku-code" title="Copy code"><i class="far fa-clipboard"></i></button>
-                <div>
-                    $hl
-                </div>
-            </div>
-        ]
-    },
     heading => sub (%prm, %tml) {
         my $txt = %prm<text> // '';
         my $index-parse = $txt ~~ /
