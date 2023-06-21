@@ -18,5 +18,6 @@
 		css/themes/dark.css css/themes/light.css
 	>, # order of css files is important
 	:jquery( ['core.js', 3], ),
-	:information<add-css jquery>,
-)
+	:information<add-css jquery css-link js-link>,
+);
+

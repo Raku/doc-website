@@ -498,10 +498,18 @@ code {
   color: $heading;
 }
 
+pre.browser-hl { padding: 0; }
+
 .raku-code {
   border-bottom: 3px solid $border;
   box-shadow: $shadow-below;
   border: 1px solid $border;
+
+  label {
+    float: right;
+    font-size: xx-small;
+    font-style: italic;
+  }
 
   .code-button {
     background: $primary;

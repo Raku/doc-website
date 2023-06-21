@@ -73,6 +73,8 @@ $(document).ready( function() {
 });
 
 $(document).ready( function() {
+    // trigger the highlighter
+    hljs.highlightAll();
     var sidebar_is_shown = localStorage.getItem('sidebarIsShown');;
     if (sidebar_is_shown === null) {
         // If the screen is not wide enough and the sidebar overlaps content -
