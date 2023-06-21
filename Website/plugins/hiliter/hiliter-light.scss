@@ -1,4 +1,8 @@
 /* Basic code colors */
+@import '_themes-colors.scss';
+$border: $grey;
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+$heading: $red;
 $code-background: #fafafa;
 $code-foreground: #030303;
 
@@ -34,3 +38,4 @@ $code-variable-color: #5503B3;
   span.cm-def { color: $code-keyword-color; }
   span.cm-operator, span.assignment { color: $code-operator-color; }
 }
+@import '_highlighting.scss';

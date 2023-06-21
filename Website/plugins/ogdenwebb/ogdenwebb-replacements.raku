@@ -234,50 +234,6 @@ use v6.d;
           </div>
         BLOCK
     },
-    #placeholder
-    block-code => sub (%prm, %tml) { # previous block-code is set by 02-highlighter
-        my regex marker {
-            "\xFF\xFF" ~ "\xFF\xFF" $<content> = (.+?)
-        };
-        # if :lang is set != raku / rakudoc, then enable highlightjs
-        # otherwise pass through Raku syntax highlighter.
-        my $code;
-        my $syntax-label;
-        if %prm<lang>:exists and %prm<lang> ne any(<raku rakudoc Raku Rakudoc>) {
-            $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
-            $code = qq:to/NOTRAKU/;
-            <pre class="browser-hl"><code class="language-{ %prm<lang> }">{ %prm<contents> }</code></pre>
-            NOTRAKU
-        }
-        else {
-            my @tokens;
-            my $t;
-            my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
-            if $parsed {
-                for $parsed.chunks -> $c {
-                    if $c.key eq 'marker' {
-                        $t ~= "\xFF\xFF";
-                        @tokens.push: $c.value<content>.Str;
-                    }
-                    else {
-                        $t ~= $c.value
-                    }
-                }
-                %prm<contents> = $t;
-            }
-            $syntax-label = (%prm<lang> // 'Raku').tc ~ ' highlighting';
-            $code = %tml.prior('block-code').(%prm, %tml);
-            $code .= subst( / '<pre class="' /, '<pre class="nohighlights cm-s-ayaya ');
-            $code .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
-        }
-        qq[
-            <div class="raku-code raku-lang">
-                <button class="copy-code" title="Copy code"><i class="far fa-clipboard"></i></button>
-                <label>$syntax-label\</label>
-                <div>$code\</div>
-            </div>
-        ]
-    },
     heading => sub (%prm, %tml) {
         my $txt = %prm<text> // '';
         my $index-parse = $txt ~~ /

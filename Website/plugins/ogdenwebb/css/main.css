@@ -569,37 +569,6 @@ h1.error-title {
   font-size: 0;
 }
 
-.raku-code {
-  position: relative;
-  margin: 1rem 0;
-}
-.raku-code .code-name {
-  padding-top: 0.75rem;
-  padding-left: 1.25rem;
-  font-weight: 500;
-}
-.raku-code .code-button {
-  height: 2em;
-}
-.raku-code .code-output {
-  font-size: 0.75rem;
-  font-family: monospace;
-  padding: 0.75rem 1.25rem;
-}
-.raku-code .control {
-  font-size: inherit;
-}
-.raku-code .code-output-title {
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.25rem 0;
-  margin-bottom: 0.5rem;
-}
-.raku-code .section {
-  /* https://github.com/Raku/doc-website/issues/144 */
-  padding: 0rem;
-}
-
 /* Bulma Utilities */
 .file-cta,
 .file-name, .select select, .textarea, .input, .button {
