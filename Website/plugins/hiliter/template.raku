@@ -46,6 +46,44 @@ sub set-highlight-basedir( --> Str ) {
 sub test-highlighter( Str $hilite-path --> Bool ) {
     ?("$hilite-path/package-lock.json".IO.f and "$hilite-path/atom-language-perl6".IO.d)
 }
+
+my %hilight-langs = %(
+    'HTML' => 'xml',
+    'XML' => 'xml',
+    'Bash' => 'bash',
+    'C++' => 'cpp',
+    'C#' => 'csharp',
+    'CSS' => 'css',
+    'Markdown' => 'markdown',
+    'Diff' => 'diff',
+    'Ruby' => 'ruby',
+    'Go' => 'go',
+    'TOML, also INI' => 'ini',
+    'Java' => 'java',
+    'JavaScript' => 'javascript',
+    'JSON' => 'json',
+    'Kotlin' => 'kotlin',
+    'Less' => 'less',
+    'Lua' => 'lua',
+    'Makefile' => 'makefile',
+    'Perl' => 'perl',
+    'Objective-C' => 'objectivec',
+    'PHP' => 'php',
+    'PHP Template' => 'php-template',
+    'Python' => 'python',
+    'Python REPL' => 'python-repl',
+    'R' => 'r',
+    'Rust' => 'rust',
+    'SCSS' => 'scss',
+    'Shell Session' => 'shell',
+    'SQL' => 'sql',
+    'Swift' => 'swift',
+    'YAML' => 'yaml',
+    'TypeScript' => 'typescript',
+    'Visual Basic .NET' => 'vbnet',
+    'Haskell' => 'haskell',
+);
+
 # Callable returns a hash
 %(
     block-code => sub (%prm, %tml) {
@@ -56,13 +94,31 @@ sub test-highlighter( Str $hilite-path --> Bool ) {
         # otherwise pass through Raku syntax highlighter.
         my $code;
         my $syntax-label;
-        if %prm<lang>:exists and %prm<lang> ne any(<raku rakudoc Raku Rakudoc>) {
-            $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
-            $code = qq:to/NOTRAKU/;
-                <pre class="browser-hl"><code class="language-{ %prm<lang> }">{ %prm<contents> }</code></pre>
-                NOTRAKU
+        if %prm<lang>:exists {
+            if %prm<lang> ~~ any( %hilight-langs.keys ) {
+                $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
+                $code = qq:to/HILIGHT/;
+                    <pre class="browser-hl">
+                    <code class="language-{ %hilight-langs{ %prm<lang> } }">{ %prm<contents> }
+                    </code></pre>
+                    HILIGHT
             }
+            elsif %prm<lang> ~~ any( <Raku Rakudoc raku rakudoc> ) {
+                $syntax-label = %prm<lang>.tc ~ ' highlighting';
+            }
+            else {
+                $syntax-label = "｢{ %prm<lang> }｣ without highlighting";
+                $code = qq:to/NOHIGHS/;
+                    <pre class="nohighlights">
+                    { %prm<contents> }
+                    </pre>
+                    NOHIGHS
+            }
+        }
         else {
+            $syntax-label = 'Raku highlighting';
+        }
+        without $code {
             my @tokens;
             my $t;
             my $parsed = %prm<contents> ~~ / ^ .*? [<marker> .*?]+ $/;
@@ -84,11 +140,11 @@ sub test-highlighter( Str $hilite-path --> Bool ) {
             $code .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
         }
         qq[
-                <div class="raku-code raku-lang">
-                    <button class="copy-code" title="Copy code"><i class="far fa-clipboard"></i></button>
-                    <label>$syntax-label\</label>
-                    <div>$code\</div>
-                </div>
-            ]
+            <div class="raku-code raku-lang">
+                <button class="copy-code" title="Copy code"><i class="far fa-clipboard"></i></button>
+                <label>$syntax-label\</label>
+                <div>$code\</div>
+            </div>
+        ]
     },
 )

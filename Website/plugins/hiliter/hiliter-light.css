@@ -51,9 +51,12 @@
 }
 .raku-code button.copy-code {
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0;
   padding: 0 0.25rem 0.25rem 0.25rem;
   position: absolute;
+}
+.raku-code:hover button.copy-code {
+  opacity: 0.5;
 }
 .raku-code label {
   float: right;
