@@ -110,7 +110,7 @@ my %hilight-langs = %(
                 $syntax-label = "｢{ %prm<lang> }｣ without highlighting";
                 $code = qq:to/NOHIGHS/;
                     <pre class="nohighlights">
-                    { %prm<contents> }
+                    { %tml<escaped>( %prm<contents> ) }
                     </pre>
                     NOHIGHS
             }
