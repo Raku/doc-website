@@ -50,38 +50,45 @@ sub test-highlighter( Str $hilite-path --> Bool ) {
 my %hilight-langs = %(
     'HTML' => 'xml',
     'XML' => 'xml',
-    'Bash' => 'bash',
+    'BASH' => 'bash',
     'C++' => 'cpp',
     'C#' => 'csharp',
+    'SCSS' => 'css',
+    'SASS' => 'css',
     'CSS' => 'css',
-    'Markdown' => 'markdown',
-    'Diff' => 'diff',
-    'Ruby' => 'ruby',
-    'Go' => 'go',
-    'TOML, also INI' => 'ini',
-    'Java' => 'java',
-    'JavaScript' => 'javascript',
+    'MARKDOWN' => 'markdown',
+    'DIFF' => 'diff',
+    'RUBY' => 'ruby',
+    'GO' => 'go',
+    'TOML' => 'ini',
+    'INI' => 'ini',
+    'JAVA' => 'java',
+    'JAVASCRIPT' => 'javascript',
     'JSON' => 'json',
-    'Kotlin' => 'kotlin',
-    'Less' => 'less',
-    'Lua' => 'lua',
-    'Makefile' => 'makefile',
-    'Perl' => 'perl',
-    'Objective-C' => 'objectivec',
+    'KOTLIN' => 'kotlin',
+    'LESS' => 'less',
+    'LUA' => 'lua',
+    'MAKEFILE' => 'makefile',
+    'PERL' => 'perl',
+    'OBJECTIVE-C' => 'objectivec',
     'PHP' => 'php',
-    'PHP Template' => 'php-template',
-    'Python' => 'python',
-    'Python REPL' => 'python-repl',
+    'PHP-TEMPLATE' => 'php-template',
+    'PHPTEMPLATE' => 'php-template',
+    'PHP_TEMPLATE' => 'php-template',
+    'PYTHON' => 'python',
+    'PYTHON-REPL' => 'python-repl',
+    'PYTHON_REPL' => 'python-repl',
     'R' => 'r',
-    'Rust' => 'rust',
+    'RUST' => 'rust',
     'SCSS' => 'scss',
-    'Shell Session' => 'shell',
+    'SHELL' => 'shell',
     'SQL' => 'sql',
-    'Swift' => 'swift',
+    'SWIFT' => 'swift',
     'YAML' => 'yaml',
-    'TypeScript' => 'typescript',
-    'Visual Basic .NET' => 'vbnet',
-    'Haskell' => 'haskell',
+    'TYPESCRIPT' => 'typescript',
+    'BASIC' => 'vbnet',
+    '.NET' => 'vbnet',
+    'HASKELL' => 'haskell',
 );
 
 # Callable returns a hash
@@ -95,11 +102,11 @@ my %hilight-langs = %(
         my $code;
         my $syntax-label;
         if %prm<lang>:exists {
-            if %prm<lang> ~~ any( %hilight-langs.keys ) {
+            if %prm<lang>.uc ~~ any( %hilight-langs.keys ) {
                 $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
                 $code = qq:to/HILIGHT/;
                     <pre class="browser-hl">
-                    <code class="language-{ %hilight-langs{ %prm<lang> } }">{ %prm<contents> }
+                    <code class="language-{ %hilight-langs{ %prm<lang>.uc } }">{ %tml<escaped>(%prm<contents>) }
                     </code></pre>
                     HILIGHT
             }
@@ -134,7 +141,6 @@ my %hilight-langs = %(
                 }
                 %prm<contents> = $t;
             }
-            $syntax-label = (%prm<lang> // 'Raku').tc ~ ' highlighting';
             $code = &highlight(%prm<contents>);
             $code .= subst( / '<pre class="' /, '<pre class="nohighlights cm-s-ayaya ');
             $code .= subst( / "\xFF\xFF" /, { @tokens.shift }, :g );
