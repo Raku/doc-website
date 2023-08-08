@@ -100,8 +100,9 @@ sub (ProcessedPod $pp, %processed, %options) {
             unless $fn-name-old eq $fn-new {
                 %url-maps{ $fn-name-old.subst(/\"/,'\"',:g) } = $mapped-name
             }
-            my $title = $dn;
+            my $title = $dn.trans(qw｢ &lt; &gt; &amp; &quot; ｣ => qw｢ <    >    &   " ｣);
             my $subtitle = 'Combined from primary sources listed below.';
+            my @sources;
             my @subkind;
             my @category;
             my $podf = PodFile.new(
@@ -111,15 +112,20 @@ sub (ProcessedPod $pp, %processed, %options) {
                 :path('synthetic documentation'),
                 );
             my $body;
+            my @toc;
             for @dn-data {
                 # Construct body
                 @subkind.append: .<subkind>;
                 @category.append: .<category>;
+                @sources.push: .<source>;
+                my $target = $kind ~ .<subkind>;
+                my $text = 'From ' ~ .<source>;
+                @toc.push: %( :1level, :$text, :$target );
                 $body ~= %templates<heading>.(%(
                   :1level,
                   :skip-parse,
-                  :target($kind ~ .<subkind>),
-                  :text('From ' ~ .<source>),
+                  :$target,
+                  :$text,
                   :top($podf.top)
                 ), %templates);
                 $body ~= %templates<para>.(%(
@@ -138,8 +144,10 @@ sub (ProcessedPod $pp, %processed, %options) {
                 ];
             }
             # Construct TOC
-            # No TOC for the time being
-
+            $podf.raw-toc = @toc;
+            my $toc = %templates<toc>.( %( :@toc ) , %templates );
+            # The podf subtitle is used for the search engine
+            $podf.subtitle = 'From: ' ~ @sources.join(', ');
             # Add data to Processed file
             $podf.pod-config-data(:$kind, :@subkind, :@category);
             %processed{$url} = $podf;
@@ -149,7 +157,7 @@ sub (ProcessedPod $pp, %processed, %options) {
                 :$subtitle,
                 :$body,
                 :config(%( :name($dn), :path($url), :lang($podf.lang))),
-                :toc(''),
+                :$toc,
                 :glossary(''),
                 :meta(''),
                 :footnotes(''),
