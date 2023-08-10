@@ -118,8 +118,8 @@ sub (ProcessedPod $pp, %processed, %options) {
                 @subkind.append: .<subkind>;
                 @category.append: .<category>;
                 @sources.push: .<source>;
-                my $target = $kind ~ .<subkind>;
-                my $text = 'From ' ~ .<source>;
+                my $target = .<source> ~ $kind ~ .<subkind>;
+                my $text = 'In ' ~ .<source>;
                 @toc.push: %( :1level, :$text, :$target );
                 $body ~= %templates<heading>.(%(
                   :1level,
