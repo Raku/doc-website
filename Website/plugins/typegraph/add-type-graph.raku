@@ -19,7 +19,12 @@ sub ($pp, %options) {
             type-graph => $tg);
         .unlink for 'typegraphs'.IO.dir( test => *.ends-with('.dot') );
         for 'typegraphs'.IO.dir {
-            .rename: .Str.subst(/ 'type-graph-' /, '').subst(/ \:\: /, '', :g)
+            if .Str ~~ / 'int.svg' / {
+                .rename: .Str.subst(/ 'type-graph-' /, 'native-').subst(/ \:\: /, '', :g)
+            }
+            else {
+                .rename: .Str.subst(/ 'type-graph-' /, '').subst(/ \:\: /, '', :g)
+            }
         }
     }
     my %ns;
