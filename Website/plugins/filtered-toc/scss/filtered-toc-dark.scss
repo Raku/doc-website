@@ -1,0 +1,11 @@
+@import "_themes-colors.scss";
+$scheme-main-bis: $black-ter;
+$border: $grey-darker;
+$text: $white-ter;
+$text-dark: darken($text, 10);
+$text-invert: $black-ter;
+$heading: $yellow;
+$menu-item-hover-background-color: $grey-darker;
+$primary:  $blue;
+
+@import "_filtered-toc-common.scss";
