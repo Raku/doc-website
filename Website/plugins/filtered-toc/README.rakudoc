@@ -1,0 +1,13 @@
+=begin pod
+=TITLE filtered-toc is for Raku Documentation site
+
+This Collection plugin renders the TOC and Index (glossary) for a sidebar in
+the Raku Documentation suite.
+
+It replaces the 'Raku-toc-block' template.
+
+=head1 Custom blocks
+
+=head1 Templates
+
+=end pod

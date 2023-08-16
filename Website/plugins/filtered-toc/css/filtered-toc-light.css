@@ -1,0 +1,40 @@
+.raku-sidebar {
+  background-color: #f2f2f2;
+  border-right: 1px solid #cccccc;
+  border-bottom: 3px solid #cccccc;
+}
+.raku-sidebar .input::placeholder, .raku-sidebar .textarea::placeholder, .raku-sidebar .select select::placeholder {
+  color: black;
+}
+.raku-sidebar .menu-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.raku-sidebar .menu-list ::marker {
+  color: #A30031;
+}
+.raku-sidebar .menu-list > ul {
+  margin-left: 1em;
+  list-style: circle;
+}
+.raku-sidebar .menu-list > ul > ul {
+  margin-left: 1em;
+  list-style: square;
+}
+.raku-sidebar .menu-list > ul > ul > ul {
+  margin-left: 1em;
+  list-style: disclosure-closed;
+}
+.raku-sidebar .menu-list a {
+  color: #030303;
+}
+.raku-sidebar .menu-list a:hover {
+  background: #d8d8d8;
+  text-decoration: none;
+}
+.raku-sidebar .menu-list a.is-active {
+  color: #f7f7f7;
+}
+.raku-sidebar .menu-list a.is-active:hover {
+  background: #004FB3;
+}
