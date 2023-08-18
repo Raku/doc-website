@@ -17,6 +17,9 @@ sub (ProcessedPod $pp, %processed, %options) {
         (.+?)
         <?before
             "<h$level"
+            | "<h{ $level - 1 }"
+            | "<h{ $level - 2 }"
+            | "<h{ $level - 3 }"
             | '</section'
             | '</body'
             | $
