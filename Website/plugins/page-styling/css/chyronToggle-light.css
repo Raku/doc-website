@@ -1,0 +1,38 @@
+label.chyronToggle input[type=checkbox] {
+  display: none;
+}
+label.chyronToggle input[type=checkbox] .text {
+  background: #f2f2f2;
+  color: #004FB3;
+}
+label.chyronToggle .text {
+  color: #004FB3;
+}
+label.chyronToggle.left .text::after {
+  content: ">";
+  color: #004FB3;
+  font-weight: 700;
+  background: #f2f2f2;
+  position: relative;
+  top: 2px;
+  line-height: 2rem;
+  font-size: 1.5rem;
+  margin-left: 0.25rem;
+}
+label.chyronToggle.left input[type=checkbox]:checked + .text::after {
+  content: "<";
+}
+label.chyronToggle.right .text::before {
+  content: "<";
+  color: #004FB3;
+  font-weight: 700;
+  background: #f2f2f2;
+  position: relative;
+  top: 2px;
+  line-height: 2rem;
+  font-size: 1.5rem;
+  margin-right: 0.25rem;
+}
+label.chyronToggle.right input[type=checkbox]:checked + .text::before {
+  content: ">";
+}
