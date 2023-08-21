@@ -464,24 +464,24 @@ a.button.is-primary .icon {
 }
 
 /* For Collection */
-.raku .container .columns {
+.raku:not(.links-block) .container .columns {
   display: block;
 }
-.raku .container .columns.listing {
+.raku:not(.links-block) .container .columns.listing {
   column-count: 2;
 }
-.raku .container .columns.one-col {
+.raku:not(.links-block) .container .columns.one-col {
   column-count: 1;
   width: 55vw;
   margin-left: auto;
   margin-right: auto;
 }
-.raku .container .columns > p {
+.raku:not(.links-block) .container .columns > p {
   column-span: all;
   margin: 0 0 2em;
   text-align: center;
 }
-.raku .container .columns .listf-container {
+.raku:not(.links-block) .container .columns .listf-container {
   display: flex;
   flex-direction: column;
   margin-bottom: 1.25rem;
@@ -489,27 +489,27 @@ a.button.is-primary .icon {
   font-weight: 500;
   line-height: 1.5;
 }
-.raku .container .columns .listf-container div:nth-of-type(4n-2) {
+.raku:not(.links-block) .container .columns .listf-container div:nth-of-type(4n-2) {
   background-color: inherit;
 }
-.raku .container .columns .listf-container div:nth-of-type(4n-1) {
+.raku:not(.links-block) .container .columns .listf-container div:nth-of-type(4n-1) {
   background-color: inherit;
 }
-.raku .container .columns .listf-container .listf-caption {
+.raku:not(.links-block) .container .columns .listf-container .listf-caption {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   display: flex;
   justify-content: center;
 }
-.raku .container .columns .listf-container .listf-file {
+.raku:not(.links-block) .container .columns .listf-container .listf-file {
   padding-top: 0.25rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   border-top: 1px;
 }
-.raku .container .columns .listf-container .listf-desc {
+.raku:not(.links-block) .container .columns .listf-container .listf-desc {
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
@@ -517,7 +517,7 @@ a.button.is-primary .icon {
   margin-bottom: 0.25rem;
   align-self: normal;
 }
-.raku .container .columns .listf-container .listf-desc > p {
+.raku:not(.links-block) .container .columns .listf-container .listf-desc > p {
   padding: inherit;
   margin: inherit;
 }
