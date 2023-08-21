@@ -503,7 +503,7 @@ a.button.is-primary .icon {
     }
 }
 /* For Collection */
-.raku .container .columns {
+.raku:not(.links-block) .container .columns {
     &.listing {
         column-count: 2;
     }
