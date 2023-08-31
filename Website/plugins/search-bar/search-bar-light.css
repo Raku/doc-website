@@ -1,3 +1,88 @@
 .ui-menu-item-wrapper.ui-state-active {
+  background-color: #e5e5e5;
+}
+
+/* Resize search box */
+.navbar-item input {
+  width: 200px;
+}
+
+.navbar-item .button, .navbar-item input {
+  height: 1.85em;
+}
+
+.navbar > .container {
+  margin: 0 auto;
+  max-width: 1140px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.navbar-search-wrapper {
+  position: absolute;
+  top: 10%;
+  right: 3px;
+}
+
+.autocomplete_wrapper {
+  position: relative;
+}
+
+.navbar-search-autocomplete {
+  color: black;
+  background-color: #f5f5f5;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.07);
+  border: 1px solid #cccccc;
+  position: absolute;
+  max-height: 80vh;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  list-style: none;
+}
+.navbar-search-autocomplete ul {
+  top: 0 !important;
+  left: 0 !important;
+}
+.navbar-search-autocomplete li {
+  padding: 0 5px;
+}
+.navbar-search-autocomplete li.ui-autocomplete-category {
+  color: #A30031;
+  font-weight: 600;
+}
+.navbar-search-autocomplete li:hover, .navbar-search-autocomplete li[aria-selected=true] {
+  cursor: pointer;
   background-color: #e8e8e8;
+}
+.navbar-search-autocomplete li mark {
+  background: transparent;
+  color: rgb(255, 122, 122);
+  font-weight: bold;
+}
+.navbar-search-autocomplete .navbar-search-autocomplete[hidden],
+.navbar-search-autocomplete .navbar-search-autocomplete:empty {
+  display: block;
+  opacity: 0;
+  transform: scale(0);
+}
+.navbar-search-autocomplete .autocomplete-result-category {
+  color: #A30031;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.navbar-search-autocomplete .autocomplete-result-category:hover {
+  background-color: unset;
+}
+
+.item-info {
+  padding-left: 2em;
+}
+.item-info > b {
+  font-weight: 600;
 }
