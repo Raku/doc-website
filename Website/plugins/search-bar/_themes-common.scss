@@ -1,4 +1,4 @@
-
+@import "../ogdenwebb/scss/base/_variables.scss";
 /* Resize search box */
 .navbar-item input {
   width: 200px;
@@ -24,8 +24,12 @@
 .autocomplete_wrapper {
   position: relative;
 }
-
+// Autocompletion popup
 .navbar-search-autocomplete {
+  color: darken($text, 10);
+  background-color: $scheme-main-ter;
+  box-shadow: $shadow;
+  border: 1px solid $border;
   position: absolute;
   max-height: 80vh;
   overflow-y: scroll;
@@ -42,11 +46,24 @@
     left: 0 !important;
   }
 
-  & li.ui-autocomplete-category:hover {
-      background-color: inherit;
-      cursor: default;
+  li {
+    padding: 0 5px;
+    &.ui-autocomplete-category {
+        color: $red;
+        font-weight: $weight-semibold;
+    }
+    &:hover, &[aria-selected="true"] {
+      cursor: pointer;
+      background-color: darken($scheme-main-ter, 5);
+    }
+
+    mark {
+      background: transparent;
+      color: rgba(255, 122, 122, 1);
+      font-weight: bold;
+    }
   }
-}
+
 
 .navbar-search-autocomplete[hidden],
 .navbar-search-autocomplete:empty {
@@ -55,33 +72,17 @@
   transform: scale(0);
 }
 
-.autocomplete-result {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin: 0.3rem;
-  padding: 0.3rem 0.5rem;
-  text-align: left;
-  font-size: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  overflow-x: ellipsis;
-  transition: all 0.2s ease;
-}
+  .autocomplete-result-category {
+    color: $heading;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
 
-.autocomplete-result-match {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+    &:hover {
+      background-color: unset;
+    }
+  }
 }
-
-.autocomplete-result-category {
-  font-size: 13px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 // new info element
 .item-info {
     padding-left: 2em;
