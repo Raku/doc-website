@@ -1,0 +1,13 @@
+=begin rakudoc :no-glossary :page-content-columns
+
+=TITLE Raku language documentation
+
+=SUBTITLE Broader explanations of fundamental topics and descriptions of Types and slangs
+
+=for ListFiles :select<kind=Language, category=fundamental>
+Fundamental topics
+
+=for ListFiles :select<kind=Language, category=reference>
+General reference
+
+=end rakudoc

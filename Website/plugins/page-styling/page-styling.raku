@@ -64,7 +64,6 @@ use v6.d;
     'left-bar-toggle' => sub (%prm, %tml ) {
       q:to/BLOCK/
         <div class="left-bar-toggle" title="Toggle Table of Contents (Ctl-a)">
-            <i class="fas fa-cogs"></i>
             <label class="chyronToggle left">
                 <input id="navbar-left-toggle" type="checkbox">
                 <span class="text">Contents</span>
@@ -80,7 +79,6 @@ use v6.d;
                   <input id="navbar-right-toggle" type="checkbox">
                   <span class="text">Search</span>
                 </label>
-                <i class="fas fa-cogs"></i>
             </div>
             BLOCK
        }
@@ -107,23 +105,26 @@ use v6.d;
         qq:to/BLOCK/
           <div id="navMenu" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/language">
-                    Language
+                <a class="navbar-item" href="/introduction" title="Getting started, Tutorials, Migration guides">
+                    Introduction
                 </a>
-                <a class="navbar-item" href="/types">
+                <a class="navbar-item" href="/reference" title="Fundamentals, General reference">
+                    Reference
+                </a>
+                <a class="navbar-item" href="/miscellaneous" title="Programs, Experimental">
+                    Miscellaneous
+                </a>
+                <a class="navbar-item" href="/types" title="The core types (classes) available">
                     Types
                 </a>
-                <a class="navbar-item" href="/routines">
+                <a class="navbar-item" href="/routines" title="Searchable table of routines">
                     Routines
                 </a>
-                <a class="navbar-item" href="/programs">
-                    Programs
+                <a class="navbar-item" href="https://raku.org" title="Home page for community">
+                    Raku™
                 </a>
-                <a class="navbar-item" href="https://raku.org">
-                    Raku™ Homepage
-                </a>
-                <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku">
-                    Chat with us
+                <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku" title="IRC live logs">
+                    Chat
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
                   <a class="navbar-link">
