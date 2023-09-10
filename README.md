@@ -7,6 +7,7 @@
 [Building the documentation locally](#building-the-documentation-locally)  
 [Options for build-site](#options-for-build-site)  
 [Directory naming](#directory-naming)  
+[Deprecated URLs](#deprecated-urls)  
 [Plugins and Templates](#plugins-and-templates)  
 [Working on Collection plugins](#working-on-collection-plugins)  
 [Deployment of website](#deployment-of-website)  
@@ -71,6 +72,9 @@ For this reason, documentation sources for this repo are in `repo_docs` and the 
 This may eventually prove unnecessary, but it is a reasonable convention is kept for the time being.
 
 Further, in the future, another Mode may be useful in this repository in due course that generates an epub output.
+
+# Deprecated URLs
+Occasionally, file names change. This would cause a 404 error if an external webpage, e.g. someone's blog, has a link to a changed file name. To overcome this, a mapping file `deprecated-urls` is kept in `Website/plugins/raku-doc-setup`. The plugin adds this file to ``rendered_html/assets/``, and the Caddy system rewrites routes from the deprecated name to the working alternative.
 
 # Plugins and Templates
 Collection is designed to handle multiple Modes, and for plugins to be contributed in a similar way to Raku Modules. However, for the Raku documentation system, it seems pragmatic at the start for the plugins to be tailored specifically for this site.
@@ -151,4 +155,4 @@ Deployment to Production is similar, but not automatic. The site maintainer acti
 
 
 ----
-Rendered from README at 2023-04-13T17:56:32Z
+Rendered from README at 2023-09-10T19:18:22Z
