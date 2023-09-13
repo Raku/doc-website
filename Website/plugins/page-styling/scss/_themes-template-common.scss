@@ -488,20 +488,7 @@ a.button strong {
 a.button.is-primary .icon {
   color: $scheme-main-ter;
 }
-/* Index pages */
-.raku.page-content .listf-container {
-    border: 1px solid $border;
-    border-bottom: 5px solid $border-light;
-    box-shadow: $shadow-below;
-    .listf-caption {
-        background: $block-heading-background;
-        border-bottom: 1px solid $border;
-        color: $grey-dark;
-    }
-    .listf-desc:not(:last-of-type) {
-        border-bottom: 1px solid $border;
-    }
-}
+
 /* For Collection */
 .raku:not(.links-block) .container .columns {
     &.listing {
@@ -518,45 +505,5 @@ a.button.is-primary .icon {
         column-span: all;
         margin: 0 0 2em;
         text-align: center;
-    }
-    .listf-container {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: $size-5;
-        font-size: $size-6;
-        font-weight: $weight-medium;
-        line-height: 1.5;
-        div:nth-of-type(4n-2) {
-            background-color: inherit;
-        }
-        div:nth-of-type(4n-1) {
-            background-color: inherit;
-        }
-        .listf-caption {
-            font-size: $size-6;
-            font-weight: $weight-medium;
-            line-height: 1.5;
-            display: flex;
-            justify-content: center;
-        }
-        .listf-file {
-            padding-top: 0.25rem;
-            font-size: $size-6;
-            font-weight: $weight-medium;
-            line-height: 1.5;
-            border-top: 1px;
-        }
-        .listf-desc {
-            font-size: $size-6;
-            font-weight: $weight-medium;
-            line-height: 1.5;
-            padding: 0 0.3rem 0 0.3rem;
-            margin-bottom: 0.25rem;
-            align-self: normal;
-            > p {
-                padding: inherit;
-                margin: inherit;
-            }
-        }
     }
 }

@@ -448,21 +448,6 @@ a.button.is-primary .icon {
   color: #f5f5f5;
 }
 
-/* Index pages */
-.raku.page-content .listf-container {
-  border: 1px solid #cccccc;
-  border-bottom: 5px solid #d9d9d9;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
-}
-.raku.page-content .listf-container .listf-caption {
-  background: #f2f2f2;
-  border-bottom: 1px solid #cccccc;
-  color: #83858D;
-}
-.raku.page-content .listf-container .listf-desc:not(:last-of-type) {
-  border-bottom: 1px solid #cccccc;
-}
-
 /* For Collection */
 .raku:not(.links-block) .container .columns {
   display: block;
@@ -480,44 +465,4 @@ a.button.is-primary .icon {
   column-span: all;
   margin: 0 0 2em;
   text-align: center;
-}
-.raku:not(.links-block) .container .columns .listf-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.25rem;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-}
-.raku:not(.links-block) .container .columns .listf-container div:nth-of-type(4n-2) {
-  background-color: inherit;
-}
-.raku:not(.links-block) .container .columns .listf-container div:nth-of-type(4n-1) {
-  background-color: inherit;
-}
-.raku:not(.links-block) .container .columns .listf-container .listf-caption {
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  display: flex;
-  justify-content: center;
-}
-.raku:not(.links-block) .container .columns .listf-container .listf-file {
-  padding-top: 0.25rem;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  border-top: 1px;
-}
-.raku:not(.links-block) .container .columns .listf-container .listf-desc {
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
-  padding: 0 0.3rem 0 0.3rem;
-  margin-bottom: 0.25rem;
-  align-self: normal;
-}
-.raku:not(.links-block) .container .columns .listf-container .listf-desc > p {
-  padding: inherit;
-  margin: inherit;
 }

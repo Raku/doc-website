@@ -1,0 +1,48 @@
+
+.listf-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $size-5;
+    font-size: $size-6;
+    font-weight: $weight-medium;
+    line-height: 1.5;
+    border: 1px solid $border;
+    border-bottom: 5px solid $border-light;
+    box-shadow: $shadow-below;
+    .listf-caption {
+        font-size: $size-6;
+        font-weight: $weight-medium;
+        line-height: 1.5;
+        display: flex;
+        justify-content: center;
+        background: $block-heading-background;
+        border-bottom: 1px solid $border;
+        color: $grey-dark;
+    }
+    .listf-file {
+        display: inline-block;
+        padding-top: 0.25rem;
+        border-top: 1px solid $border;
+        border-bottom: 1px solid $border;
+        break-inside: avoid;
+        .listf-link {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        p {
+            font-size: $size-6;
+            font-weight: $weight-medium;
+            line-height: 1.5;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            margin-bottom: 0.25rem;
+            align-self: normal;
+        }
+    }
+}
+
+.listf-error {
+    color: red;
+    font-size: xlarge;
+}
