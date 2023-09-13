@@ -8,9 +8,10 @@
 
     root * /usr/share/caddy
 
-    map {path} {npath} {
-        import /usr/share/caddy/assets/prettyurls
-    }
+  map {path} {npath} {
+    import /usr/share/caddy/assets/deprecated-urls
+    import /usr/share/caddy/assets/prettyurls
+  }
 
     route {
         error /hashed* 404

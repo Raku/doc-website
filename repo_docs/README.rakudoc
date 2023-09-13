@@ -72,6 +72,14 @@ This may eventually prove unnecessary, but it is a reasonable convention is kept
 Further, in the future, another Mode may be useful in this repository in due course that
 generates an epub output.
 
+=head1 Deprecated URLs
+
+Occasionally, file names change. This would cause a 404 error if an external webpage,
+e.g. someone's blog, has a link to a changed file name. To overcome this, a mapping file
+C<deprecated-urls> is kept in C<Website/plugins/raku-doc-setup>. The plugin adds this file
+to `rendered_html/assets/`, and the Caddy system rewrites routes from the deprecated name
+to the working alternative.
+
 =head1 Plugins and Templates
 
 Collection is designed to handle multiple Modes, and for plugins to be contributed in

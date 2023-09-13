@@ -5,4 +5,6 @@ The plugin is for the setup milestone
 
 Changes source filename starting 'Language', 'Type', 'Program' to lowercase.
 
+Adds a 'deprecated-urls' file to the assets directory for files whose name is changed.
+
 =end pod

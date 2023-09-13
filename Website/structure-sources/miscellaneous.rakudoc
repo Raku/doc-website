@@ -1,0 +1,13 @@
+=begin rakudoc :no-glossary :no-toc  :page-content-one-col
+
+=TITLE Raku language documentation
+
+=SUBTITLE Miscellaneous categories
+
+=for ListFiles :select<kind=Language, category=advanced>
+Advanced topics
+
+=for ListFiles :select<kind=Programs>
+Programs
+
+=end rakudoc

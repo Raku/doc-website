@@ -1,0 +1,16 @@
+=begin rakudoc :no-glossary :page-content-columns
+
+=TITLE Raku language documentation
+
+=SUBTITLE Introductory material, tutorials and migration guides for users familiar with other languages.
+
+=for ListFiles :select<kind=Language, category=beginning>
+Getting started
+
+=for ListFiles :select<kind=Language, category=migration>
+Migration guides
+
+=for ListFiles :select<kind=Language, category=tutorial>
+Tutorials
+
+=end rakudoc
