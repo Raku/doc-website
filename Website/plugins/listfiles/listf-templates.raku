@@ -59,12 +59,12 @@ my regex select {
                 FIRST
 
         for  @sel-files.sort(*.[0]) -> ($nm, $desc, $path) {
-            $rv ~= '<div class="listf-file"><a class="listf-link" href="' ~ $path ~ '">' ~ $nm ~ '</a></div>'
-                    ~ '<div class="listf-desc">' ~ $desc ~ '</div>'
+            $rv ~= '<div class="listf-file"><a class="listf-link" href="' ~ $path ~ '">' ~ $nm ~ '</a>'
+                    ~ $desc ~ '</div>'
         }
         unless +@sel-files {
             $rv ~= '<div class="listf-file">'
-                    ~ (%prm<no-files> ?? %prm<no-files> !! 'No files meet the criteria')
+                    ~ (%prm<no-files> ?? %prm<no-files> !! ('No files meet the criteria ' ~ %criteria.raku ))
                     ~ '</div>'
         }
         $rv ~= '</div>'

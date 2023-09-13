@@ -6,8 +6,4 @@ The plugin is intended to replace the OgdenWebb plugin.
 The principal changes are to put the Table of Contents / Index into a left hand sidebar,
 and the Search into a right-hand sidebar.
 
-=head1 Custom blocks
-
-=head1 Templates
-
 =end pod

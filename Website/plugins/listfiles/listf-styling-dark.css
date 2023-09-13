@@ -1,0 +1,47 @@
+.listf-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border: 1px solid #3A3D4E;
+  border-bottom: 5px solid #45485d;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
+}
+.listf-container .listf-caption {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  background: #212426;
+  border-bottom: 1px solid #3A3D4E;
+  color: #83858D;
+}
+.listf-container .listf-file {
+  display: inline-block;
+  padding-top: 0.25rem;
+  border-top: 1px solid #3A3D4E;
+  border-bottom: 1px solid #3A3D4E;
+  break-inside: avoid;
+}
+.listf-container .listf-file .listf-link {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.listf-container .listf-file p {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-bottom: 0.25rem;
+  align-self: normal;
+}
+
+.listf-error {
+  color: red;
+  font-size: xlarge;
+}
