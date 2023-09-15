@@ -1,0 +1,133 @@
+// Light raku theme
+
+// Colors
+$black:         #030303;
+$black-bis:     #1B1D1E;
+$black-ter:     #212426;
+
+$grey-darker:   #3A3D4E;
+$grey-dark:     #83858D;
+$grey:          #cccccc;
+$grey-light:    #d8d8d8;
+$grey-lighter:  #e5e5e5;
+$grey-lightest: #f2f2f2;
+
+$white-ter:     #f5f5f5;
+$white-bis:     #f7f7f7;
+$white:         #fafafa;
+
+$orange:       hsl(14,  100%, 53%);
+$yellow:       #EED891;
+$green:        #1C6301;
+$turquoise:    #005C43;
+$cyan:         hsl(204, 71%,  53%);
+$blue:         #004FB3;
+$purple:       #5503B3;
+$red:          #A30031;
+
+// Bulma Variables
+$light: $white-ter;
+$dark: $grey-darker;
+
+$scheme-main: $white;
+$scheme-main-bis: $grey-lightest;
+$scheme-main-ter: $white-ter;
+$scheme-invert: $black-bis;
+$scheme-invert-bis: $black-ter;
+$scheme-invert-ter: lighten($black-ter, 3);
+
+
+$body-background-color: $white;
+$background: $white;
+
+$border: $grey;
+$border-hover: $grey-light;
+$border-light: lighten($border, 5);
+$border-light-hover: $grey-light;
+
+$primary: $blue;
+$primary-invert: findColorInvert($primary);
+$primary-light: lighten($primary, 10);
+$primary-dark: darken($primary, 10);
+
+// Text colors
+$text: $black;
+$text-invert: $white-bis;
+$text-light: lighten($text, 10);
+$text-dark: darken($text, 10);
+$text-strong: darken($text, 5);
+
+// Code colors
+$code: $red;
+$code-background: $background;
+
+$pre: $text;
+$pre-background: $background;
+
+// Link colors
+$link: $primary;
+$link-hover: darken($primary, 15);
+$link-visited: $primary;
+
+// Shadow
+$shadow: 1px 2px 2px 0px rgba( 0, 0, 0, 0.07 );
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+
+$card-shadow: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+
+
+$hr-background-color: $grey-lighter;
+
+$footer-background-color: $grey-lightest;
+$input-placeholder-color: $grey-dark;
+
+$navbar-background-color: $scheme-main-bis;
+$navbar-dropdown-arrow: $primary;
+$navbar-item-hover-background-color: darken($navbar-background-color, 5);
+$navbar-dropdown-item-hover-background-color: $grey-lighter;
+
+$navbar-dropdown-background-color: $scheme-main-bis;
+$navbar-dropdown-border-top: 2px solid $border;
+
+$navbar-divider-background-color: $background;
+$navbar-dropdown-item-hover-color: $text;
+
+$menu-label-color: $black;
+
+$menu-item-hover-color: $black;
+$menu-item-hover-background-color: $grey-light;
+$menu-list-border-left: 1px solid $grey;
+$menu-item-active-background-color: $grey-light;
+
+$table-color: $text-strong;
+$table-head-cell-color: $grey-darker;
+$table-head-background-color: $grey-lightest;
+$table-cell-border: $border;
+
+$label-color: $grey-darker;
+
+// Tabs
+$tabs-link-color: $text;
+$tabs-border-bottom-color: $border;
+$tabs-boxed-link-active-background-color: $scheme-main;
+$tabs-link-active-color: $text-dark;
+$tabs-link-hover-color: $text-strong;
+
+$tabs-boxed-link-hover-background-color: $grey-darker;
+
+// Raku vars
+$heading: $red;
+$heading-mono: $grey-dark;
+$form-background: $white;
+
+$block-heading-background: $grey-lightest;
+
+$code-background: $scheme-main;
+$code-foreground: $text;
+$code-output-background: $scheme-main-ter;
+
+$search-match: $yellow;
+
+$homepage-gradient: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
+
+@import "_centreToggle.scss";

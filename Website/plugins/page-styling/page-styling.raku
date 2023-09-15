@@ -37,11 +37,10 @@ use v6.d;
         else { '' }
     },
     'navigation' => sub (%prm, %tml) {
-        my $add-sidebars = %prm<config><direct-wrap>:!exists;
         qq:to/BLOCK/
         <nav class="navbar is-fixed-top is-flex-touch" role="navigation" aria-label="main navigation">
             {
-            qq:to/SIDE/ if $add-sidebars;
+            qq:to/SIDE/ unless %prm<config><direct-wrap>:exists;
                 <div class="navbar-item" style="margin-left: auto;">
                     { %tml<left-bar-toggle>.( %prm, %tml) }
                 </div>
@@ -51,13 +50,6 @@ use v6.d;
                 { %tml<head-brand>.( %prm, %tml) }
                 { %tml<head-topbar>.( %prm, %tml) }
             </div>
-            {
-            qq:to/SIDE/ if $add-sidebars and ! %tml<head-search>.defined;
-                <div class="navbar-item" style="margin-right: auto;">
-                    { %tml<right-bar-toggle>.( %prm, %tml) }
-                </div>
-            SIDE
-            }
         </nav>
         BLOCK
     },
@@ -70,18 +62,6 @@ use v6.d;
             </label>
         </div>
       BLOCK
-    },
-    'right-bar-toggle' => sub (%prm, %tml ) {
-	   without %tml<head-search> { # head-search is provided by search-bar, but not sidebar-search
-           q:to/BLOCK/
-            <div class="right-bar-toggle" title="Toggle search sidebar (Ctl-s">
-                <label class="chyronToggle right">
-                  <input id="navbar-right-toggle" type="checkbox">
-                  <span class="text">Search</span>
-                </label>
-            </div>
-            BLOCK
-       }
     },
     'head-brand' => sub (%prm, %tml ) {
         q:to/BLOCK/
@@ -101,7 +81,6 @@ use v6.d;
         BLOCK
     },
     'head-topbar' => sub ( %prm, %tml ) {
-        my $search-bar = %tml<head-search>.( %prm, %tml) with %tml<head-search>;
         qq:to/BLOCK/
           <div id="navMenu" class="navbar-menu">
             <div class="navbar-start">
@@ -146,9 +125,15 @@ use v6.d;
                   </div>
                 </div>
             </div>
-            { $_ with $search-bar }
+            { %tml<head-search>.( %prm, %tml) }
           </div>
         BLOCK
+    },
+    'head-search' => sub (%prm, %tml) {q:to/BLOCK/
+            <div class="navbar-end navbar-search-wrapper">
+                <div class="navbar-item">No search function</div>
+            </div>
+            BLOCK
     },
     'wrapper' => sub (%prm, %tml) {
         with %prm<config><direct-wrap> {
@@ -167,18 +152,9 @@ use v6.d;
                         { %tml<page-main>.(%prm, %tml) }
                     </div>
                 </div>
-                <div id="right-column" class="tile is-parent is-3 is-hidden">
-                    <div style="height: 90vh; overflow-y: scroll;">
-                        { %tml<search-sidebar>.(%prm, %tml)  }
-                    </div>
-                </div>
             </div>
             BLOCK
         }
-    },
-    'search-sidebar' => sub (%prm, %tml ) {
-	    if %tml<raku-search-block>:exists { %tml<raku-search-block>.(%prm, %tml) }
-        else { 'No search function' }
     },
     'toc-sidebar' => sub (%prm, %tml) {
         if %tml<raku-toc-block>:exists { %tml<raku-toc-block>.(%prm, %tml) }

@@ -1,0 +1,17 @@
+=begin pod
+=TITLE pop-search is a plugin for Collection
+
+This is a replacement for the search-bar plugin. It is almost the same as
+sidebar-search in terms of JS, but mimics search-bar as the UI
+
+C<search-bar> creates a single js function together with the data
+that is delivered to each page, and because
+the data is extensive, there is a delay in delivering it, and caching it.
+
+The search has other options can be selected,
+such as a Google search of the site, fuzzy search, selection of categories.
+
+The search bar should be keyboard directed. A key stoke (Alt-S) to get the pop-up.
+Use tabs to navigate between fields. All candidates can be seen and navigated to.
+
+=end pod

@@ -1,0 +1,55 @@
+.navbar-item input {
+  width: 200px;
+  padding: 0 0 0 0.5rem;
+}
+
+.navbar-item .button, .navbar-item input {
+  height: 1.85em;
+}
+
+.autoComplete_options .autoComplete_wrapper > input {
+  background-color: #2d3134;
+  border-color: #3A3D4E;
+  color: #f5f5f5;
+  width: 100%;
+  height: 1.85em;
+  border-radius: 4px 0 0 4px;
+  background-image: unset;
+  padding: 0 0 0 0.5rem;
+}
+.autoComplete_options .autoComplete_wrapper > input:focus {
+  color: #f5f5f5;
+  border-color: #3A3D4E;
+}
+.autoComplete_options .autoComplete_wrapper > ul {
+  z-index: 2;
+  background-color: #282c2e;
+  color: gainsboro;
+  left: -30vw;
+  padding: 0 0 0 0.5rem;
+  max-height: 60vh;
+}
+@media screen and (max-width: 1023px) {
+  .autoComplete_options .autoComplete_wrapper > ul {
+    left: 0;
+  }
+}
+.autoComplete_options .autoComplete_wrapper > ul > li {
+  background-color: #282c2e;
+  color: gainsboro;
+}
+
+.autoComplete_result {
+  display: grid;
+}
+.autoComplete_result .autoComplete-result-category {
+  color: #f00048;
+  font-weight: 600;
+  justify-self: center;
+}
+.autoComplete_result .autoComplete-result-extra {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  margin: 5px;
+  font-style: oblique;
+}
