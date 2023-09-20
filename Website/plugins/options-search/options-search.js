@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "indexed": false,
             "primary": true,
             "composite": true,
-            "newtab": true,
+            "newtab": false,
             "extra": true
         };
         persist_searchOptions( searchOptions );
