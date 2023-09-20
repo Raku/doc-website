@@ -13,7 +13,7 @@ use v6.d;
                         <a class="button is-primary js-modal-trigger"
                             data-target="options-search-info">
                             <span class="icon">
-                                <i class="fas fa-info"></i>
+                                <i class="fas fa-cogs"></i>
                             </span>
                         </a>
                     </div>
