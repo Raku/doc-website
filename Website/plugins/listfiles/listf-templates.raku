@@ -53,19 +53,24 @@ my regex select {
             ];
         }
         my $rv = qq:to/FIRST/;
-                <div class="listf-container">
-                <div { %prm<target> ?? ('id="' ~ %tml<escaped>(%prm<target>) ~ '"') !! '' }
-                  class="listf-caption">{ %prm<contents> // '' }</div>
+                <div class="listf-container" { %prm<target> ?? ('id="' ~ %tml<escaped>(%prm<target>) ~ '"') !! '' }>
                 FIRST
-
+        my $cap = qq:to/CAP/;
+                <p class="listf-caption">{ %prm<raw-contents> // '' }</p>
+                CAP
         for  @sel-files.sort(*.[0]) -> ($nm, $desc, $path) {
-            $rv ~= '<div class="listf-file"><a class="listf-link" href="' ~ $path ~ '">' ~ $nm ~ '</a>'
-                    ~ $desc ~ '</div>'
+            $rv ~= '<div class="listf-file">'
+                    ~ ($cap // '')
+                    ~ '<a class="listf-link" href="' ~ $path ~ '">' ~ $nm ~ '</a>'
+                    ~ $desc ~ '</div>';
+            $cap = Nil;
         }
         unless +@sel-files {
             $rv ~= '<div class="listf-file">'
-                    ~ (%prm<no-files> ?? %prm<no-files> !! ('No files meet the criteria ' ~ %criteria.raku ))
-                    ~ '</div>'
+                    ~ ($cap // '')
+                    ~ (%prm<no-files> ?? %prm<no-files> !! ('No files meet the criteria: ' ~ %criteria.raku ))
+                    ~ '</div>';
+            $cap = Nil;
         }
         $rv ~= '</div>'
     },

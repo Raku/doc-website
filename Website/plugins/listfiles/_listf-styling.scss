@@ -21,7 +21,6 @@
     }
     .listf-file {
         display: inline-block;
-        padding-top: 0.25rem;
         border-top: 1px solid $border;
         border-bottom: 1px solid $border;
         break-inside: avoid;
@@ -29,6 +28,7 @@
             display: inline-block;
             width: 100%;
             text-align: center;
+            padding-top: 0.25rem;
         }
         p {
             font-size: $size-6;
@@ -37,7 +37,6 @@
             padding-left: 0.5rem;
             padding-right: 0.5rem;
             margin-bottom: 0.25rem;
-            align-self: normal;
         }
     }
 }
