@@ -148,12 +148,7 @@ $(document).ready( function() {
     });
     // keyboard events to open / close sidebars
     document.addEventListener('keydown', e => {
-      if (e.ctrlKey && e.key === 's') {
-        // Prevent the Save dialog to open
-        e.preventDefault();
-        $('#navbar-right-toggle').trigger('click');
-      }
-      if (e.ctrlKey && e.key === 'a') {
+      if (e.altKey && e.key === 't') {
         // Prevent the Save dialog to open
         e.preventDefault();
         $('#navbar-left-toggle').trigger('click');

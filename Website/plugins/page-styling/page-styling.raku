@@ -63,7 +63,7 @@ use v6.d;
     },
     'left-bar-toggle' => sub (%prm, %tml ) {
       q:to/BLOCK/
-        <div class="left-bar-toggle" title="Toggle Table of Contents (Ctl-a)">
+        <div class="left-bar-toggle" title="Toggle Table of Contents (Alt-T)">
             <label class="chyronToggle left">
                 <input id="navbar-left-toggle" type="checkbox">
                 <span class="text">Contents</span>
