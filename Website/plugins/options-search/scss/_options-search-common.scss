@@ -11,6 +11,12 @@ $weight-bold: 700;
   padding: 0 0 0 0.5rem;
 }
 
+.navbar-search-wrapper {
+	position: absolute;
+	top: 10%;
+	right: 3px;
+}
+
 .navbar-item .button, .navbar-item input {
   height: 1.85em;
 }

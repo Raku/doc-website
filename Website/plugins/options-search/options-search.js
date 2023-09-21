@@ -221,6 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (e.ctrlKey && e.key === 'f' ) {
             e.preventDefault();
+            document.getElementById('navMenu').classList.add('is-active');
             document.getElementById('autoComplete').focus();
         }
     });
