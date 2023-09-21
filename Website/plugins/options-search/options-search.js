@@ -81,9 +81,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     category = '';
                     const info = document.createElement("p");
                     if (data.results.length > 0) {
-                    info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+                        info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
                     } else {
-                    info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+                        info.innerHTML = `Did not find matches for <strong>"${data.query}"</strong>`;
+                        const lastItem = document.createElement("li");
+                        lastItem.innerHTML = `Use Google search on this site for <strong>"${data.query}"</strong>`;
+                        list.append(lastItem);
                     }
                     list.prepend(info);
                 },
@@ -112,14 +115,38 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             events: {
                 input: {
+                    keydown: (event) => {
+                        // Check pressed key
+                        if (event.keyCode === 13 ) {
+                            // Enter
+                            // If cursor moved
+                            if (autoCompleteJS.cursor >= 0) {
+                                autoCompleteJS.select(event);
+                            }
+                            else {
+                                autoCompleteJS.next();
+                                autoCompleteJS.select(event);
+                            }
+                        }
+                    },
                     selection: (event) => {
                         const selection = event.detail.selection.value;
-                        selectedCandidate.innerHTML = selection.url;
-                        if ( searchOptions.newtab ) {
-                            window.open( selection.url, '_blank');
+                        var dest;
+                        if ( selection ) {
+                            selectedCandidate.innerHTML = selection.url;
+                            dest = selection.url;
                         }
                         else {
-                            window.location.href = selection.url;
+                            dest = 'https://www.google.com/search?q=site%3A'
+                            + webSite
+                            + '+'
+                            + encodeURIComponent( event.detail.query );
+                        }
+                        if ( searchOptions.newtab ) {
+                            window.open( dest, '_blank');
+                        }
+                        else {
+                            window.location.href = dest;
                         }
                     },
                     focus: () => {
@@ -154,17 +181,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     };
-    document.getElementById('options-search-google').addEventListener('click', function() {
-        let dest = 'https://www.google.com/search?q=site%3A'
-            + webSite
-            + '+'
-            + encodeURIComponent( keywords );
-        if ( searchOptions.newtab ) {
-            window.open(dest, '_blank');
-        } else {
-            window.location.href = dest;
-        }
-    });
     // Functions to open and close a modal
     function openModal($el) {
         $el.classList.add('is-active');
