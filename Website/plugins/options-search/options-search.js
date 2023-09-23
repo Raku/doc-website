@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     else {
                         resp = `<strong>No</strong> matches found for <strong>${data.query}</strong>`;
                     }
-                    resp = resp + `.   <strong>${ searchOptions.loose ? "Loose" ! "Strict" }</strong> search.`
+                    resp = resp + `.   <strong>${ searchOptions.loose ? "Loose" : "Strict" }</strong> search.`
                     info.innerHTML = resp;
                     list.prepend(info);
                     const lastItem = document.createElement("li");
