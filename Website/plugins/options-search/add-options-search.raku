@@ -28,8 +28,7 @@ sub ($pp, %processed, %options) {
         $s.subst(｢\｣, ｢%5C｣, :g)
                 .subst('"', '\"', :g)
                 .subst(｢?｣, ｢%3F｣, :g)
-                .subst(/^ \. $/, '%46')
-                .subst(/^ \.\. $/, '%46%46')
+                .subst(｢.｣, '%2E', :g)
     }
     for %processed.kv -> $fn, $podf {
         my $value = $podf.title;
