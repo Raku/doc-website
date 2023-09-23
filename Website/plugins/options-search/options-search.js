@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
             events: {
                 input: {
                     keydown: (event) => {
+                        document.querySelector('.autoComplete_wrapper ul').scrollTop = 0;
                         switch (event.keyCode) {
                             // Down/Up arrow
                             case 40:
@@ -165,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     focus: () => {
                         if (autoCompleteJS.input.value.length) autoCompleteJS.start();
+                        document.querySelector('.autoComplete_wrapper ul').scrollTop = 0;
                     }
                 }
             }
