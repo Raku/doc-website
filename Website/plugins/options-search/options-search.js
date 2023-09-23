@@ -80,18 +80,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 element: (list, data) => {
                     category = '';
                     const info = document.createElement("p");
-                    if (data.results.length > 0) {
-                        info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
-                    } else {
-                        info.innerHTML = `Did not find matches for <strong>"${data.query}"</strong>`;
-                        const lastItem = document.createElement("li");
-                        lastItem.innerHTML = `Use Google search on this site for <strong>"${data.query}"</strong>`;
-                        list.append(lastItem);
+                    let resp = '';
+                    if (data.results.length > 1) {
+                        resp = `<strong>${data.matches.length}</strong> matches found`;
                     }
+                    else if (data.results.length == 1) {
+                        resp = '<strong>One</strong> match found';
+                    }
+                    else {
+                        resp = `<strong>No</strong> matches found for <strong>${data.query}</strong>`;
+                    }
+                    info.innerHTML = resp;
                     list.prepend(info);
+                    const lastItem = document.createElement("li");
+                    lastItem.innerHTML = `Use Google search on this site for <strong>"${data.query}"</strong>`;
+                    list.append(lastItem);
                 },
                 noResults: true,
-                maxResults: 20
+                threshold: 0,
+                maxResults: undefined
             },
             resultItem: {
                 class: "autoComplete_result",
@@ -116,19 +123,26 @@ document.addEventListener('DOMContentLoaded', function () {
             events: {
                 input: {
                     keydown: (event) => {
-                        // Check pressed key
-                        if (event.keyCode === 13 ) {
+                        switch (event.keyCode) {
+                            // Down/Up arrow
+                            case 40:
+                            case 38:
+                                event.preventDefault();
+                                event.keyCode === 40 ? autoCompleteJS.next() : autoCompleteJS.previous();
+                                break;
                             // Enter
-                            // If cursor moved
-                            if (autoCompleteJS.cursor >= 0) {
-                                autoCompleteJS.select(event);
+                            case 13:
+                                event.preventDefault();
+                                if (autoCompleteJS.cursor >= 0) {
+                                    autoCompleteJS.select(event);
+                                }
+                                else {
+                                    autoCompleteJS.next();
+                                    autoCompleteJS.select(event);
+                                }
+                                break;
                             }
-                            else {
-                                autoCompleteJS.next();
-                                autoCompleteJS.select(event);
-                            }
-                        }
-                    },
+                        },
                     selection: (event) => {
                         const selection = event.detail.selection.value;
                         var dest;
