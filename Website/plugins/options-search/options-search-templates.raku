@@ -7,7 +7,7 @@ use v6.d;
             <div class="navbar-item">
                 <div class="field has-addons">
                     <div class="autoComplete_options">
-                        <input class="control input" id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="🔍 Search for ...">
+                        <input class="control input" id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="🔍 Alt-F to search for ...">
                     </div>
                     <div class="control" title="Search options">
                         <a class="button is-primary js-modal-trigger"

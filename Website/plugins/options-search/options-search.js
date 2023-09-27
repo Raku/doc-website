@@ -252,7 +252,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.code === 'Escape') {
           closeAllModals();
         }
-        if (e.ctrlKey && e.key === 'f' ) {
+        // make sure when search key is hit, the div with the search bar is made visible
+        if (e.altKey && e.key === 'f' ) {
             e.preventDefault();
             document.getElementById('navMenu').classList.add('is-active');
             document.getElementById('autoComplete').focus();
