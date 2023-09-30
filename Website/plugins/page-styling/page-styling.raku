@@ -55,7 +55,7 @@ use v6.d;
     },
     'left-bar-toggle' => sub (%prm, %tml ) {
       q:to/BLOCK/
-        <div class="left-bar-toggle" title="Toggle Table of Contents (Ctl-a)">
+        <div class="left-bar-toggle" title="Toggle Table of Contents (Alt-T)">
             <label class="chyronToggle left">
                 <input id="navbar-left-toggle" type="checkbox">
                 <span class="text">Contents</span>
@@ -119,9 +119,16 @@ use v6.d;
                       Report an issue with this site
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item has-text-red" href="https://github.com/raku/doc/issues">
+                    <a class="navbar-item" href="https://github.com/raku/doc/issues">
                       Report an issue with the documentation content
                     </a>
+                    <hr class="navbar-divider">
+                    <label class="centreToggle" title="Enable/Disable shortcuts (Alt-G)" style="--switch-width: 11">
+                       <input id="pageSettings" type="checkbox">
+                       <span class="text">Shortcuts</span>
+                       <span class="on">enabled</span>
+                       <span class="off">disabled</span>
+                    </label>
                   </div>
                 </div>
             </div>

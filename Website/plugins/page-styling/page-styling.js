@@ -2,16 +2,37 @@ var change_theme = function (theme) { return false; };
 var persisted_theme = function () { return localStorage.getItem('color-scheme') };
 var persist_theme = function (theme) { localStorage.setItem('color-scheme', theme) };
 
-var sidebar_state;
-var persisted_sidebars = function () {
-    return JSON.parse( localStorage.getItem('sidebar-state') );
+var pageOptionsState;
+var persisted_pageOptions = function () {
+    return JSON.parse( localStorage.getItem('pageOptionsState') );
 };
-var persist_sidebars = function (sidebar_state) {
-    localStorage.setItem('sidebar-state', JSON.stringify( sidebar_state ))
+var persist_pageOptions = function (pageOptionsState) {
+    localStorage.setItem('pageOptionsState', JSON.stringify( pageOptionsState ))
 };
-var set_sidebar_right;
-var set_sidebar_left;
-var initialiseSearch;
+
+var set_ToC_panel = function ( state ) {
+    if ( state === 'closed') {
+        $('#left-column').addClass('is-hidden');
+        $('#navbar-left-toggle').prop('checked', false );
+    }
+    else {
+        $('#left-column').removeClass('is-hidden');
+        $('#navbar-left-toggle').prop('checked', true );
+    }
+    pageOptionsState.toc.panel = state;
+    persist_pageOptions( pageOptionsState );
+};
+var set_settings = function ( state ) {
+    if ( state === 'enabled') {
+        $('#pageSettings').prop('checked', true );
+    }
+    else {
+        $('#pageSettings').prop('checked', false );
+    }
+    pageOptionsState.settings.shortcuts = state;
+    persist_pageOptions( pageOptionsState );
+};
+const searchFocus = new CustomEvent('focusOnSearchBar');
 
 (function generateColorSchemes() {
     const theme_links = {};
@@ -48,52 +69,28 @@ var initialiseSearch;
 // initialise if localStorage not set
 (function () {
     let theme = persisted_theme();
-    if (theme && change_theme(theme)) {
-        return;
+    if (! (theme && change_theme(theme) ) ) {
+        theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        change_theme(theme);
+        persist_theme(theme);
     }
-    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    change_theme(theme);
-    persist_theme(theme);
-})();
-(function () {
-    sidebar_state = persisted_sidebars();
-    set_sidebar_left = function ( state ) {
-        if ( state ) {
-            $('#left-column').removeClass('is-hidden');
-        }
-        else {
-            $('#left-column').addClass('is-hidden');
-        }
-        sidebar_state.left = state;
-        persist_sidebars( sidebar_state );
-    };
-    set_sidebar_right = function ( state ) {
-        if ( state ) {
-            $('#right-column').removeClass('is-hidden');
-            $('#main-column').addClass('is-hidden-mobile');
-        }
-        else {
-            $('#right-column').addClass('is-hidden');
-            $('#main-column').removeClass('is-hidden-mobile');
-        }
-        sidebar_state.right = state;
-        persist_sidebars( sidebar_state );
-    };
-    if ( sidebar_state == null ) {
-        sidebar_state = {
-            "left": false,
-            "right": false
+
+    pageOptionsState = persisted_pageOptions();
+    if ( pageOptionsState == null ) {
+        pageOptionsState = {
+            "toc": { "alt": true, "ctrl": false, "letter": 't', "panel": 'closed' },
+            "search": { "alt": true, "ctrl": false, "letter": 'f' },
+            "theme": { "alt": true, "ctrl": false, "letter": 'k' },
+            "settings": { "alt": true, "ctrl": false, "letter": 'g', "shortcuts": 'enabled' },
         };
-    }
-    else {
-        sidebar_state.right = false; // Do not persist open right bar
+        persist_pageOptions( pageOptionsState );
     }
 })();
 
 // Add listeners
 // Open navbar menu via burger button on mobiles
-$(document).ready( function() {
-    initialiseSearch = true;
+
+document.addEventListener('DOMContentLoaded', function () {
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
     // Check if there are any navbar burgers
@@ -110,54 +107,57 @@ $(document).ready( function() {
             });
         });
     };
+    // initialise window state
     $('#toggle-theme').click(function () {
         let theme = persisted_theme() === 'light' ? 'dark' : 'light';
         change_theme(theme);
         persist_theme(theme);
     });
-    // initialise state
-    set_sidebar_left( sidebar_state.left );
-    set_sidebar_right( sidebar_state.right );
-    $('#navbar-left-toggle').prop('checked', sidebar_state.left );
-    $('#navbar-right-toggle').prop('checked', sidebar_state.right );
+    set_ToC_panel( pageOptionsState.toc.panel );
+    set_settings( pageOptionsState.settings.shortcuts )
     // make left toggle invisible if not TOC
     if ( $('#No-TOC').checked = 'checked' ) {
         $('#navbar-left-toggle').css({ "visibility": "invisible" });
     }
     $('#navbar-left-toggle').change(function () {
-        if (persisted_sidebars().left) {
-            set_sidebar_left(false);
-        }
-        else {
-            set_sidebar_left(true);
-        }
+        set_ToC_panel( pageOptionsState.toc.panel === 'closed' ? 'open' : 'closed' )
     });
-    $('#navbar-right-toggle').change(function (elem) {
-        if (persisted_sidebars().right ) {
-            set_sidebar_right(false);
-        }
-        else {
-            set_sidebar_right(true);
-            if ( initialiseSearch ) {
-                // dispatch initialise search event
-                // this allows page loading to be separated from getting search data
-                elem.target.dispatchEvent( new Event( 'initRakuSearch', { bubbles: true }) );
-                initialiseSearch = false;
-            }
-        }
+    $('#pageSettings').change(function () {
+        set_settings( pageOptionsState.settings.shortcuts === 'enabled' ? 'disabled' : 'enabled' );
     });
-    // keyboard events to open / close sidebars
+    // keyboard events to change pageOptions
     document.addEventListener('keydown', e => {
-      if (e.ctrlKey && e.key === 's') {
-        // Prevent the Save dialog to open
-        e.preventDefault();
-        $('#navbar-right-toggle').trigger('click');
-      }
-      if (e.ctrlKey && e.key === 'a') {
-        // Prevent the Save dialog to open
-        e.preventDefault();
-        $('#navbar-left-toggle').trigger('click');
-      }
+        if ( pageOptionsState && pageOptionsState.settings.shortcuts !== 'disabled') {
+             Object.keys( pageOptionsState ).forEach( attr => {
+                if ( (
+                        ( e.altKey && pageOptionsState[ attr ].alt )
+                        ||
+                        ( e.ctrlKey && pageOptionsState[ attr ].ctrl )
+                      )
+                    && e.key === pageOptionsState[ attr ].letter
+                    )
+                {
+                    e.preventDefault();
+                    switch( attr ) {
+                        case 'toc':
+                            set_ToC_panel( pageOptionsState.toc.panel === 'closed' ? 'open' : 'closed' )
+                            break;
+                        case 'search':
+                            // the action should be carried out by the search plugin
+                            document.dispatchEvent( searchFocus );
+                            break;
+                        case 'theme':
+                            let theme = persisted_theme() === 'light' ? 'dark' : 'light';
+                            change_theme(theme);
+                            persist_theme(theme);
+                            break;
+                        case 'settings':
+                            set_settings( pageOptionsState.settings.shortcuts === 'enabled' ? 'disabled' : 'enabled' );
+                            break;
+                    }
+                }
+            })
+        }
     });
     // copy code block to clipboard adapted from solution at
     // https://stackoverflow.com/questions/34191780/javascript-copy-string-to-clipboard-as-text-html

@@ -11,10 +11,9 @@
 	:name<options-search>,
 	:render,
 	:template-raku<options-search-templates.raku>,
-	:version<0.1.6>,
+	:version<0.1.13>,
 	:information<css-link>,
-	:add-css<css/options-search-light.css css/options-search-dark.css
-		css/centreToggle-dark.css css/centreToggle-light.css>,
+	:add-css<css/options-search-light.css css/options-search-dark.css>,
 	:js-link(
 		['src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"', 1],
 	),

@@ -231,32 +231,35 @@ document.addEventListener('DOMContentLoaded', function () {
           closeModal($target);
         });
     });
+    // keyboard shortcuts, check that keyboard shortcuts are not disabled
     window.addEventListener('keydown', function (e) {
-        Object.keys( optionAtts ).forEach( attr => {
-            if (e.altKey && e.key === optionAtts[ attr ].letter ) {
-                // generic options
-                e.preventDefault();
-                let opp = optionAtts[ attr ].elem;
-                let togg = ! opp.checked;
-                opp.checked = togg;
-                searchOptions[ attr ] = togg;
-                persist_searchOptions( searchOptions );
-                // handle loose option separately
-                if ( attr === 'loose' ) {
-                    autoCompleteJS.searchEngine = togg ? "loose" : "strict";
+        if ( pageOptionsState && pageOptionsState.settings.shortcuts !== 'disabled') {
+            Object.keys( optionAtts ).forEach( attr => {
+                if (e.altKey && e.key === optionAtts[ attr ].letter ) {
+                    // generic options
+                    e.preventDefault();
+                    let opp = optionAtts[ attr ].elem;
+                    let togg = ! opp.checked;
+                    opp.checked = togg;
+                    searchOptions[ attr ] = togg;
+                    persist_searchOptions( searchOptions );
+                    // handle loose option separately
+                    if ( attr === 'loose' ) {
+                        autoCompleteJS.searchEngine = togg ? "loose" : "strict";
+                    }
+                    autoCompleteJS.start();
                 }
-                autoCompleteJS.start();
+            });
+            // Add a keyboard event to close all modals
+            if (e.code === 'Escape') {
+              closeAllModals();
             }
-        });
-        // Add a keyboard event to close all modals
-        if (e.code === 'Escape') {
-          closeAllModals();
-        }
-        // make sure when search key is hit, the div with the search bar is made visible
-        if (e.altKey && e.key === 'f' ) {
-            e.preventDefault();
-            document.getElementById('navMenu').classList.add('is-active');
-            document.getElementById('autoComplete').focus();
         }
     });
+});
+document.addEventListener('focusOnSearchBar', function() {
+    // make sure when search key is hit, the div with the search bar is made visible
+    document.getElementById('navMenu').classList.add('is-active');
+    document.querySelector('.navbar-burger.burger').classList.add('is-active');
+    document.getElementById('autoComplete').focus();
 });
