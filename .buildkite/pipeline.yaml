@@ -5,6 +5,7 @@ steps:
     key: build
     commands:
       - "zef install . --deps-only"
+      - "./bin_files/test-all-plugins.raku"
       - "./bin_files/build-site --without-completion --no-status"
       - "./.buildkite/archive.sh"
       - "buildkite-agent artifact upload ./raku-doc-website.tar.gz"
