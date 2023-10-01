@@ -145,6 +145,8 @@ use v6;
                 ~ "\n</fieldset>\</section>\n"
         }
     },
+    'nested' => sub ( %prm, %tml ) { '<div class="pod-nested">' ~ (%prm<contents> // '') ~ '</div>' },
+    'input' => sub ( %prm, %tml ) { '<pre class="pod-input">' ~ (%prm<contents> // '') ~ '</pre>' },
     'output' => sub ( %prm, %tml ) { '<pre class="pod-output">' ~ (%prm<contents> // '') ~ '</pre>' },
     'pod' => sub ( %prm, %tml ) {
         '<section name="'
