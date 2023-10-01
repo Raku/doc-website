@@ -10,5 +10,6 @@
 	:name<font-awesome>,
 	:render<fa-assets.raku>,
 	:template-raku<fa-template.raku>,
-	:version<0.4.1>,
+	:version<0.4.3>,
+	:information<jquery>,
 )

@@ -44,13 +44,11 @@ like $rv,
         /
         'listf-file'
         .+ 'Some file1'
-        .+ 'listf-desc'
         .+ 'A bit file1'
         /, 'Name and Description OK for file1';
 like $rv,
         /
         .+ 'file4.pod6'
-        .+ 'listf-desc'
         .+ 'not all there'
         /, 'Title and contents of no-desc given for file4';
 %pm<select> = 'kind=enum';
@@ -67,7 +65,6 @@ like $rv,
         /
         'listf-file'
         .+ 'Some file5'
-        .+ 'listf-desc'
         .+ 'A bit file5'
         /, 'regex in value worked';
 
