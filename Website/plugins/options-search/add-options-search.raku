@@ -44,7 +44,7 @@ sub ($pp, %processed, %options) {
                 :category($podf.pod-config-data<subkind>.tc),
                 :$value,
                 :$info,
-                :url(escape-json('/' ~ $fn)),
+                :url(escape-json('/' ~ $podf.path)),
                 :type<composite>,
             )
         }

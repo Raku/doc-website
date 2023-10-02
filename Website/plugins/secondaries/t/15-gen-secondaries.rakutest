@@ -173,7 +173,7 @@ with $pp {
 
 # generate hashed files
 @triples = &secondaries($pp,%processed, %(:no-status,) );
-@expected = <and ...>.map( { 'hashed/' ~ nqp::sha1($_ ) ~ '.html' } ) ;
+@expected = <routine/and routine/...>.map( { 'hashed/' ~ nqp::sha1($_ ) ~ '.html' } ) ;
 @expected.push: 'assets/prettyurls';
 is @triples.elems,@expected.elems, 'correct no of hashed secondaries generated';
 is @triples[0][0], any(@expected), 'got 1 right file';
