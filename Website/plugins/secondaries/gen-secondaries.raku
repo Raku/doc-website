@@ -91,12 +91,15 @@ sub (ProcessedPod $pp, %processed, %options) {
     for %things.kv -> $kind, %defns {
         counter(:dec) unless %options<no-status>;
         for %defns.kv -> $dn, @dn-data {
-            my $mapped-name = 'hashed/' ~ nqp::sha1($dn);
+            my $mapped-name = 'hashed/' ~ nqp::sha1( "$kind/$dn" );
             my $fn-name-old = "{ $kind.Str.lc }/{ good-name($dn) }";
             my $fn-new = "{ $kind.Str.lc }/$dn";
             $mapped-name = $fn-name-old unless $hash-urls;
             my $esc-dn = $dn.subst(/ <-[ a .. z A .. Z 0 .. 9 _ \- \. ~ ]> /,
                 *.encode>>.fmt('%%%02X').join, :g);
+            # special case '.','..','\'
+            $esc-dn ~= '_(as_name)' if $dn eq any( < . .. >);
+            $esc-dn = 'backslash character' if $dn eq '\\';
             my $url = "{ $kind.Str.lc }/$esc-dn";
             %url-maps{ $url } = $mapped-name;
             %url-maps{ $fn-new.subst(/\"/,'\"',:g) } = $mapped-name;
@@ -109,11 +112,11 @@ sub (ProcessedPod $pp, %processed, %options) {
             my @subkind;
             my @category;
             my $podf = PodFile.new(
-                name => $dn,
+                :name($dn),
                 :pod-config-data(%( :$kind, :subkind<Composite> )),
                 :$title,
-                :path('synthetic documentation'),
-                );
+                :path($url),
+            );
             my $body;
             my @toc;
             for @dn-data {

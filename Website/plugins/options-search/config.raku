@@ -11,7 +11,7 @@
 	:name<options-search>,
 	:render,
 	:template-raku<options-search-templates.raku>,
-	:version<0.1.13>,
+	:version<0.1.14>,
 	:information<css-link>,
 	:add-css<css/options-search-light.css css/options-search-dark.css>,
 	:js-link(
