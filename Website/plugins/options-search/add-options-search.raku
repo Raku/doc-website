@@ -57,14 +57,17 @@ sub ($pp, %processed, %options) {
                 :type<primary>,
             )
         }
-        for $podf.raw-toc.grep({ !(.<is-title>) }) {
-            @entries.push: %(
-                :category<Heading>,
-                :value(.<text>),
-                :info('Section in <b>' ~ $podf.title ~ '</b>'),
-                :url(escape-json('/' ~ $fn ~ '#' ~ .<target>)),
-                :type<headings>,
-            )
+        unless $podf.pod-config-data<subkind> eq 'Composite' {
+            # exclude headings from all composite files because they are duplicates
+            for $podf.raw-toc.grep({ !(.<is-title>) }) {
+                @entries.push: %(
+                    :category<Heading>,
+                    :value(.<text>),
+                    :info('Section in <b>' ~ $podf.title ~ '</b>'),
+                    :url(escape-json('/' ~ $fn ~ '#' ~ .<target>)),
+                    :type<headings>,
+                )
+            }
         }
         for $podf.raw-glossary {
             my $value = .key;
