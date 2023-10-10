@@ -17,6 +17,7 @@ var persist_searchOptions = function (searchOptions) {
 };
 var category = '';
 var autoCompleteJS;
+var openInTab = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     searchOptions = persisted_searchOptions();
@@ -114,9 +115,10 @@ document.addEventListener('DOMContentLoaded', function () {
                       // Modify Results Item Content
                       item.innerHTML = `
                       ${catSpan}
+                      <a href="${data.value.url}">
                       <span class="autoComplete-result-data">
                         ${data.match}
-                      </span>
+                      </span></a>
                       ${extraSpan}`;
                 },
                 highlight: true,
@@ -124,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
             events: {
                 input: {
                     keydown: (event) => {
-                        document.querySelector('.autoComplete_wrapper ul').scrollTop = 0;
+                        //document.querySelector('.autoComplete_wrapper ul').scrollTop = 0;
                         switch (event.keyCode) {
                             // Down/Up arrow
                             case 40:
@@ -135,13 +137,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Enter
                             case 13:
                                 event.preventDefault();
-                                if (autoCompleteJS.cursor >= 0) {
-                                    autoCompleteJS.select(event);
-                                }
-                                else {
+                                openInTab =  event.ctrlKey;
+                                if (autoCompleteJS.cursor < 0) {
                                     autoCompleteJS.next();
-                                    autoCompleteJS.select(event);
                                 }
+                                autoCompleteJS.select(autoCompleteJS.cursor)
                                 break;
                             }
                         },
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             + '+'
                             + encodeURIComponent( event.detail.query );
                         }
-                        if ( searchOptions.newtab ) {
+                        if ( searchOptions.newtab || openInTab ) {
                             window.open( dest, '_blank');
                         }
                         else {
