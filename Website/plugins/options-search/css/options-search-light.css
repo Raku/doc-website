@@ -53,9 +53,10 @@
   font-weight: 600;
   justify-self: center;
 }
-.autoComplete_result .autoComplete-result-extra {
+.autoComplete_result a span.autoComplete-result-extra {
   overflow-x: hidden;
   text-overflow: ellipsis;
   margin: 5px;
   font-style: oblique;
+  color: black;
 }
