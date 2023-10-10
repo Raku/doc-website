@@ -119,7 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
                       <span class="autoComplete-result-data">
                         ${data.match}
                       </span></a>
-                      ${extraSpan}`;
+                      <a href="${data.value.url}">
+                      ${extraSpan}</a>`;
                 },
                 highlight: true,
             },

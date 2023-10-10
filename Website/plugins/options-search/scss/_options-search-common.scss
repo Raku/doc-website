@@ -57,10 +57,11 @@ $weight-bold: 700;
         font-weight: $weight-semibold;
         justify-self: center;
     }
-    .autoComplete-result-extra {
+    a span.autoComplete-result-extra {
         overflow-x: hidden;
         text-overflow: ellipsis;
         margin: 5px;
         font-style: oblique;
+        color: darken($text, 10);
     }
 }
