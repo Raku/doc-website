@@ -160,16 +160,18 @@ use v6.d;
                         $kind = 'routine';
                         $category = 'operator'
                     }
-                    %prm<heading><defs>{$fn} = {} unless %prm<heading><defs>{$fn}:exists;
-                    %prm<heading><defs>{$fn}{$target} = %(
-                        :$name,
-                        :$kind,
-                        :$subkind,
-                        :$category,
-                        # only one category per defn
+                    if $name {
+                        %prm<heading><defs>{$fn} = {} unless %prm<heading><defs>{$fn}:exists;
+                        %prm<heading><defs>{$fn}{$target} = %(
+                            :$name,
+                            :$kind,
+                            :$subkind,
+                            :$category,
+                            # only one category per defn
 
-                    );
-                    $bookmark = "\n<!-- defnmark $target { %prm<level> // '1' } -->\n";
+                        );
+                        $bookmark = "\n<!-- defnmark $target { %prm<level> // '1' } -->\n";
+                    }
                 }
             }
         }
