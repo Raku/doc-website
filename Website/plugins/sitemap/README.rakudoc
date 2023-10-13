@@ -1,0 +1,9 @@
+=begin pod
+=TITLE sitemap is a plugin for Collection
+
+The plugin is for the report milestone
+
+It uses the collected information on all rendered files to generate a SEO
+site map
+
+=end pod
