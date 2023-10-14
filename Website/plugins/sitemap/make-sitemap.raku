@@ -1,7 +1,10 @@
 use v6.d;
 sub (%processed, @plugins-used, $processed, %options --> Array ) {
     my %config = $processed.get-data('sitemap');
-    my $root = %config<root-domain> // '';
+    exit note 'Sitemap plugin error. Must set configuration for ｢root-domain｣ and  ｢sitemap-destination｣'
+        unless %config<root-domain>:exists and %config<sitemap-destination>:exists;
+    my $root = %config<root-domain>;
+    my $dest = %config<sitemap-destination>;
     my $sitemap = q:to/START/;
     <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -26,5 +29,5 @@ sub (%processed, @plugins-used, $processed, %options --> Array ) {
     </urlset>
     END
     # return array of pairs
-    ['../../rendered_html/sitemap.xml' => $sitemap ]
+    ["$dest/sitemap.xml" => $sitemap ]
 }
