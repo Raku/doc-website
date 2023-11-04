@@ -457,4 +457,8 @@ use v6.d;
         # if there is indexedheader but no text, must still return beg. If indexh.. but text, then end
         $beg ~ ( (%prm<text>.defined and %prm<text> ne '') ?? %prm<text> ~ $end !! '' )
     },
+    table => sub (%prm, %tml) {
+        my $tb = %tml.prior('table').(%prm, %tml);
+        $tb.subst(/ '<table class="' /, '<table class="table is-bordered centered ')
+    },
 );
