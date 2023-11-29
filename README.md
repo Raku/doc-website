@@ -15,7 +15,8 @@
 ----
 (The README.md version is generated from `repo_docs/README.rakdoc`)
 
-# Installation
+# Setup
+
 The assumption for this README is that the OS is a version of Linux, or that anyone wanting to attempt this knows their own OS well enough to understand the differences.
 
 This repo can be cloned and the main dependencies can be installed with
@@ -28,6 +29,12 @@ in the cloned directory. There are a couple of C libraries that may need to be i
 Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
 Syntax highlighting of Raku code in the documentation still requires a ``node.js`` stack. See the documentation for ``Raku::Pod::Render`` for more information.
+
+We have reports of some users missing a curl dependency despite having curl available from the command line. If this
+happens to you, please add ```--exclude="curl"``` to the zef command.
+
+If you are missing ``dot``, that's part of the graphviz package, which you can install with
+```sudo apt-get install graphviz```.
 
 # Building the documentation locally
 Generic build steps:
