@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 noResults: true,
                 threshold: 0,
-                maxResults: undefined
+                maxResults: 500
             },
             resultItem: {
                 class: "autoComplete_result",
