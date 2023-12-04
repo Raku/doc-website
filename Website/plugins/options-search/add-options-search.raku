@@ -92,12 +92,12 @@ sub ($pp, %processed, %options) {
         elsif $pos.<category> ne 'Language' and $pre.<category> eq 'Language' { Order::Less }
         elsif $pre.<url>.contains('5to6') and $pos.<category> eq 'Language' and ! $pos.<url>.contains('5to6') { Order::More }
         elsif $pos.<url>.contains('5to6') and $pre.<category> eq 'Language' and ! $pre.<url>.contains('5to6') { Order::Less }
-        elsif $pre.<category> ne 'Composite' and $pos.<category> eq 'Composite' { Order::More }
-        elsif $pos.<category> ne 'Composite' and $pre.<category> eq 'Composite' { Order::Less }
         elsif $pre.<category> ne 'Indexed' and $pos.<category> eq 'Indexed' { Order::Less }
         elsif $pos.<category> ne 'Indexed' and $pre.<category> eq 'Indexed' { Order::More }
         elsif $pre.<category> ne 'Heading' and $pos.<category> eq 'Heading' { Order::Less }
         elsif $pos.<category> ne 'Heading' and $pre.<category> eq 'Heading' { Order::More }
+        elsif $pre.<category> ne 'Composite' and $pos.<category> eq 'Composite' { Order::Less }
+        elsif $pos.<category> ne 'Composite' and $pre.<category> eq 'Composite' { Order::More }
         elsif $pre.<category> ne $pos.<category> { $pre.<category> leg $pos.<category> }
         else { $pre.<value> leg $pos.<value> }
     }
