@@ -6,6 +6,7 @@ html {
 body {
   background: #fafafa;
   color: #030303;
+  font-variant-ligatures: none;
 }
 
 .navbar-logo-tm {
