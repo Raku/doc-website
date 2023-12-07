@@ -6,6 +6,8 @@ $weight-bold: 700;
   background-color: $scheme-main-bis;
   border-right: 1px solid $border;
   border-bottom: 3px solid $border;
+  overflow-y: scroll;
+  max-height: 75vh;
 
   .input::placeholder, .textarea::placeholder, .select select::placeholder {
     color: $text-dark;

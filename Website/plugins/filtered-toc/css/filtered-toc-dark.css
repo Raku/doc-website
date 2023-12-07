@@ -2,6 +2,8 @@
   background-color: #212426;
   border-right: 1px solid #3A3D4E;
   border-bottom: 3px solid #3A3D4E;
+  overflow-y: scroll;
+  max-height: 75vh;
 }
 .raku-sidebar .input::placeholder, .raku-sidebar .textarea::placeholder, .raku-sidebar .select select::placeholder {
   color: gainsboro;
