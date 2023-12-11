@@ -10,6 +10,16 @@ body {
   color: $text;
 }
 
+#left-col-inner {
+    float: none;
+    position: sticky;
+    top: 10vh;
+    max-height: 90vh;
+}
+#main-col-inner {
+    flex-grow:inherit;
+}
+
 .navbar-logo-tm {
   color: $text-strong;
 }
