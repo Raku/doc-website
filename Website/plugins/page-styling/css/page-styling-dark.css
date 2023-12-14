@@ -6,6 +6,7 @@ html {
 body {
   background: #1B1D1E;
   color: #f5f5f5;
+  font-variant-ligatures: none;
 }
 
 #left-col-inner {

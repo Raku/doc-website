@@ -8,6 +8,7 @@ html {
 body {
   background: $background;
   color: $text;
+  font-variant-ligatures: none;
 }
 
 #left-col-inner {
