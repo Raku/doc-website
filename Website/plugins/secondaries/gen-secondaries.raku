@@ -59,6 +59,8 @@ sub (ProcessedPod $pp, %processed, %options) {
     my %things = %( routine => {}, syntax => {});
     #| url mapping data
     my %url-maps;
+    #| aliases for targets
+    my %aliases;
     #| templates hash in ProcessedPod instance
     my %templates := $pp.tmpl;
     #| container for the triples describing the files to be transferred once created
@@ -69,6 +71,7 @@ sub (ProcessedPod $pp, %processed, %options) {
     for %definitions.kv -> $fn, %targets {
         counter(:dec) unless %options<no-status>;
         my $html = %processed{$fn}.pod-output;
+        my $title = %processed{$fn}.title.subst(/ ^ class \s /,'');
         while $html ~~ m:c / <defnmark> / {
             given $/<defnmark> {
                 my $targ = .<target>.Str;
@@ -79,6 +82,7 @@ sub (ProcessedPod $pp, %processed, %options) {
                 my $kind = %attr<kind>:delete;
                 %attr<target> = $targ;
                 %attr<source> = $fn;
+                %attr<src-title> = $title;
                 $level = .<level>.Str;
                 $html ~~ m:c / <chunk> /;
                 %attr<body> = $/<chunk>[0].Str.trim;
@@ -103,8 +107,10 @@ sub (ProcessedPod $pp, %processed, %options) {
             my $url = "{ $kind.Str.lc }/$esc-dn";
             %url-maps{ $url } = $mapped-name;
             %url-maps{ $fn-new.subst(/\"/,'\"',:g) } = $mapped-name;
+            %aliases{ $fn-new.subst(/\"/,'\"',:g) } = $url;
             unless $fn-name-old eq $fn-new {
-                %url-maps{ $fn-name-old.subst(/\"/,'\"',:g) } = $mapped-name
+                %url-maps{ $fn-name-old.subst(/\"/,'\"',:g) } = $mapped-name;
+                %aliases{ $fn-name-old.subst(/\"/,'\"',:g) } = $url;
             }
             my $title = $dn.trans(qw｢ &lt; &gt; &amp; &quot; ｣ => qw｢ <    >    &   " ｣);
             my $subtitle = 'Combined from primary sources listed below.';
@@ -124,8 +130,9 @@ sub (ProcessedPod $pp, %processed, %options) {
                 @subkind.append: .<subkind>;
                 @category.append: .<category>;
                 @sources.push: .<source>;
-                my $target = .<source> ~ $kind ~ .<subkind>;
-                my $text = 'In ' ~ .<source>;
+                my $target = "({.<src-title>})_{.<subkind>}_$dn".subst(/ \s /,'_',:g);
+                $podf.targets{ $target }++;
+                my $text = 'In ' ~ .<src-title>;
                 @toc.push: %( :1level, :$text, :$target );
                 $body ~= %templates<heading>.(%(
                   :1level,
@@ -176,6 +183,11 @@ sub (ProcessedPod $pp, %processed, %options) {
         %ns := $pp.get-data('tablemanager');
         %ns<dataset> = {} without %ns<dataset>;
         %ns<dataset><routines> = @routines;
+    }
+    my %let-ns;
+    if 'link-error-test' ~~ any( $pp.plugin-datakeys ) {
+        %let-ns := $pp.get-data('link-error-test');
+        %let-ns<aliases> = %aliases;
     }
     if $hash-urls {
         'prettyurls'.IO.spurt: %url-maps.fmt("\"\/%s\" \"\/%s\"").join("\n");
