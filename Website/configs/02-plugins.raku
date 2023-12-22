@@ -13,7 +13,7 @@
         >,
         :report<link-plugin-assets-report sitemap>,
         :transfer<secondaries gather-js-jq gather-css images raku-doc-setup options-search>,
-        :compilation<secondaries listfiles options-search>,
+        :compilation<secondaries listfiles link-error-test options-search>,
         :completion<cro-app>,
     ),
 )
