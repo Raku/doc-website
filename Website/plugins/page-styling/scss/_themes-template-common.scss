@@ -194,18 +194,23 @@ strong {
   color: $heading;
 }
 
-.raku.page-header .page-edit {
-  color: $grey-dark;
+.page-edit {
+    color: $grey-dark;
+    left: 95vw;
+    position: fixed;
+    top: 15vh;
+    z-index: 10;
+    opacity: 50%;
 
-  .page-edit-button {
-    background: $scheme-main-ter;
-    color: $text-dark;
-    border-color: $border;
+    .page-edit-button {
+        background: $scheme-main;
+        color: $heading;
+        border-color: $border;
 
-    &:hover {
-      background: $scheme-main-bis;
+        &:hover {
+            background: $scheme-main-ter;
+        }
     }
-  }
 }
 
 /* Raku search page */
