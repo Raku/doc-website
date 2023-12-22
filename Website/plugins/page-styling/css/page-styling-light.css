@@ -177,16 +177,21 @@ strong {
   color: #A30031;
 }
 
-.raku.page-header .page-edit {
+.page-edit {
   color: #83858D;
+  left: 95vw;
+  position: fixed;
+  top: 15vh;
+  z-index: 10;
+  opacity: 50%;
 }
-.raku.page-header .page-edit .page-edit-button {
-  background: #f5f5f5;
-  color: black;
+.page-edit .page-edit-button {
+  background: #fafafa;
+  color: #A30031;
   border-color: #cccccc;
 }
-.raku.page-header .page-edit .page-edit-button:hover {
-  background: #f2f2f2;
+.page-edit .page-edit-button:hover {
+  background: #f5f5f5;
 }
 
 /* Raku search page */
