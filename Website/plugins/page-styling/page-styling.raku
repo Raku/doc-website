@@ -149,6 +149,7 @@ use v6.d;
         else {
             qq:to/BLOCK/
             <div class="tile is-ancestor section">
+                { %tml<page-edit>.(%prm,%tml) }
                 <div id="left-column" class="tile is-parent is-2 is-hidden">
                     <div id="left-col-inner">
                         { %tml<toc-sidebar>.(%prm, %tml)  }
@@ -182,7 +183,6 @@ use v6.d;
                 <div class="raku page-subtitle has-text-centered">
                 { %prm<subtitle> }
                 </div>
-                { %tml<page-edit>.(%prm,%tml) }
             </div>
         </section>
         BLOCK
