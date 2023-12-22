@@ -444,9 +444,10 @@ use v6.d;
     'format-x' => sub (%prm, %tml) {
         my $beg;
         my $end;
+        my $indexedheader = %prm<meta>.elems ?? %prm<meta>[0].join(';') !! %prm<text>;
         my $text = %prm<text> // '';
         if %prm<context> eq 'Heading' {
-            $beg = qq[<a name="{ %prm<target> }"></a><span class="glossary-entry-heading">];
+            $beg = qq[<a name="{ %prm<target> }"{ $indexedheader ?? (' data-indexedheader="' ~ $indexedheader ~ '"') !! '' }></a><span class="glossary-entry-heading">];
             $end = '</span>';
         }
         else {
