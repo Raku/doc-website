@@ -7,6 +7,7 @@
         ),
         link-error-test => %(
             :no-remote,
+            :run-tests,
         ),
         sitemap => %(
             :root-domain<https://docs.raku.org>,
