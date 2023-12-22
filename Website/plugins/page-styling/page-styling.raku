@@ -264,10 +264,10 @@ use v6.d;
         BLOCK
     },
     heading => sub (%prm, %tml) {
-        my $txt = %prm<text> // '';
+        my $txt = %prm<text>;
         my $index-parse = $txt ~~ /
-            ( '<a name="index-entry-' .+? '</a>' )
-            '<span class="glossary-entry">' ( .+? ) '</span>'
+            ( '<a name="index-entry-' .+? '"></a>' )
+            '<span class="glossary-entry-heading">' ( .+? ) '</span>'
         /;
         my $h = 'h' ~ (%prm<level> // '1');
         my $targ = %tml<escaped>.(%prm<target>);
@@ -442,20 +442,28 @@ use v6.d;
         }
     },
     'format-x' => sub (%prm, %tml) {
-        my $indexedheader = %prm<meta>.elems ?? %prm<meta>[0].join(';') !! %prm<text>;
-        my $beg = qq[
-            <a name="{ %prm<target> // ''}" class="index-entry"
-            data-indexedheader="{ $indexedheader }"></a>
-            { (%prm<text>.defined and %prm<text> ne '') ?? '<span class="glossary-entry">' !! '' }
-        ];
-        my $end = '</span>';
+        my $beg;
+        my $end;
+        my $text = %prm<text> // '';
+        if %prm<context> eq 'Heading' {
+            $beg = qq[<a name="{ %prm<target> }"></a><span class="glossary-entry-heading">];
+            $end = '</span>';
+        }
+        else {
+            my $index-text;
+            $index-text = %prm<meta>.map( { $_.elems ?? ( "\x2983" ~ $_.map({ "\x301a$_\x301b" }) ~ "\x2984") !! "\x301a$_\x301b" })
+                if %prm<meta>.elems;
+            $beg = qq[<a name="{ %prm<target> }" class="index-entry">]
+                    ~ ($index-text && $text ?? qq[<span class="glossary-entry" data-index-text="{ $index-text }">] !! '')
+                    ;
+            $end = ($index-text && $text ?? '</span>' !! '') ~ '</a>';
+        }
         my $mark = "\xFF\xFF";
         if %prm<context>.Str eq 'InCodeBlock' {
             $beg = $mark ~ $beg ~ $mark;
             $end = $mark ~ $end ~ $mark;
         }
-        # if there is indexedheader but no text, must still return beg. If indexh.. but text, then end
-        $beg ~ ( (%prm<text>.defined and %prm<text> ne '') ?? %prm<text> ~ $end !! '' )
+        $beg ~ $text ~ $end
     },
     table => sub (%prm, %tml) {
         my $tb = %tml.prior('table').(%prm, %tml);

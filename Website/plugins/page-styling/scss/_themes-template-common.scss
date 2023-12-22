@@ -518,3 +518,31 @@ a.button.is-primary .icon {
         text-align: center;
     }
 }
+a.index-entry {
+    text-decoration: none;
+    cursor: help;
+    span.glossary-entry {
+        padding: 0 0.3em 0 0.3em;
+        border-radius: 0.5em;
+        border: 2px solid $index-border;
+        background-color: $index-background;
+        color: $text;
+        &:hover::before {
+            opacity:1;
+        }
+        &::before {
+            content: attr(data-index-text);
+            position:absolute;
+            display: inline-block;
+            transform:translateY(-100%);
+            margin-left:15px; /* and add a small left margin */
+            padding: 0.2em 0.5em 0.2em 0.5em;
+            border-radius: 10px;
+            background: $index-popup-background;
+            color: $index-popup-colour;
+            text-align:center;
+            opacity:0;
+            transition:.3s opacity;
+        }
+    }
+}

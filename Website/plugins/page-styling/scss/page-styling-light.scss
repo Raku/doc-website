@@ -130,4 +130,9 @@ $search-match: $yellow;
 
 $homepage-gradient: linear-gradient(180deg, #051A33 0.2%, #3F103A 1%, #9F0046 82.29%, #B3004F 100%);
 
+$index-background: lighten($yellow, 15);
+$index-border: $index-background;
+$index-popup-background: $grey-light;
+$index-popup-colour: $primary-dark;
+
 @import "_themes-template-common.scss";
