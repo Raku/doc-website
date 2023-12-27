@@ -14,9 +14,6 @@ Composite classes
 =for ListFiles :select<kind=Type, subkind=class, category=domain\-specific>
 Domain-specific classes
 
-=for ListFiles :select<kind=Type, subkind=class, category=composite>
-Composite classes
-
 =for ListFiles :select<kind=Type, subkind=class, category=exception>
 Exception classes
 
