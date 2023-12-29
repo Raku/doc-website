@@ -483,3 +483,15 @@ a.button.is-primary .icon {
   margin: 0 0 2em;
   text-align: center;
 }
+
+a.index-entry {
+  text-decoration: none;
+  cursor: help;
+}
+a.index-entry span.glossary-entry {
+  padding: 0 0.3em 0 0.3em;
+  border-radius: 0.5em;
+  border: 2px solid #454b4f;
+  background-color: #212426;
+  color: #f5f5f5;
+}
