@@ -158,6 +158,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
         }
+        if ( e.key === '\\' ) {
+            // the action should be carried out by the search plugin
+            document.dispatchEvent( searchFocus );
+        }
     });
     // copy code block to clipboard adapted from solution at
     // https://stackoverflow.com/questions/34191780/javascript-copy-string-to-clipboard-as-text-html
