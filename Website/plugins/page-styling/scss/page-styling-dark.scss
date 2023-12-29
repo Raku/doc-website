@@ -131,4 +131,9 @@ $search-match: $green;
 
 $homepage-gradient: linear-gradient(180deg, #030303 0.2%, #170F44 1%, #35229E 82.29%, #271974 100%);
 
+$index-background: $scheme-main-bis;
+$index-border: lighten($index-background, 15);
+$index-popup-background: $scheme-invert-bis;
+$index-popup-colour: $primary;
+
 @import "_themes-template-common.scss";
