@@ -495,20 +495,3 @@ a.index-entry span.glossary-entry {
   background-color: #212426;
   color: #f5f5f5;
 }
-a.index-entry span.glossary-entry:hover::before {
-  opacity: 1;
-}
-a.index-entry span.glossary-entry::before {
-  content: attr(data-index-text);
-  position: absolute;
-  display: inline-block;
-  transform: translateY(-100%);
-  margin-left: 15px; /* and add a small left margin */
-  padding: 0.2em 0.5em 0.2em 0.5em;
-  border-radius: 10px;
-  background: #f7f7f7;
-  color: #8DB2EB;
-  text-align: center;
-  opacity: 0;
-  transition: 0.3s opacity;
-}
