@@ -15,6 +15,19 @@ var persisted_searchOptions = function () {
 var persist_searchOptions = function (searchOptions) {
     localStorage.setItem('searchOptions', JSON.stringify( searchOptions ))
 };
+var focusOnSearchBar = function() {
+    // make sure when search key is hit, the div with the search bar is made visible
+    document.getElementById('navMenu').classList.add('is-active');
+    document.querySelector('.navbar-burger.burger').classList.add('is-active');
+    document.getElementById('autoComplete').focus();
+};
+
+var unfocusSearchBar = function() {
+    document.getElementById('navMenu').classList.remove('is-active');
+    document.querySelector('.navbar-burger.burger').classList.remove('is-active');
+    document.getElementById('autoComplete').blur();
+};
+
 var category = '';
 var autoCompleteJS;
 var openInTab = false;
@@ -129,6 +142,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     keydown: (event) => {
                         //document.querySelector('.autoComplete_wrapper ul').scrollTop = 0;
                         switch (event.keyCode) {
+                            // Escape
+                            case 27:
+                                autoCompleteJS.close();
+                                unfocusSearchBar();
+                                break;
                             // Down/Up arrow
                             case 40:
                             case 38:
@@ -259,8 +277,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 document.addEventListener('focusOnSearchBar', function() {
-    // make sure when search key is hit, the div with the search bar is made visible
-    document.getElementById('navMenu').classList.add('is-active');
-    document.querySelector('.navbar-burger.burger').classList.add('is-active');
-    document.getElementById('autoComplete').focus();
+    focusOnSearchBar();
 });

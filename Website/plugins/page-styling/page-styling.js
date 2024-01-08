@@ -79,7 +79,7 @@ const searchFocus = new CustomEvent('focusOnSearchBar');
     if ( pageOptionsState == null ) {
         pageOptionsState = {
             "toc": { "alt": true, "ctrl": false, "letter": 't', "panel": 'closed' },
-            "search": { "alt": true, "ctrl": false, "letter": 'f' },
+            "search": { "alt": false, "ctrl": false, "letter": 'f' },
             "theme": { "alt": true, "ctrl": false, "letter": 'k' },
             "settings": { "alt": true, "ctrl": false, "letter": 'g', "shortcuts": 'enabled' },
         };
@@ -127,15 +127,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // keyboard events to change pageOptions
     document.addEventListener('keydown', e => {
-        if ( pageOptionsState && pageOptionsState.settings.shortcuts !== 'disabled') {
+        if ( e.target == document.body
+             && pageOptionsState
+             && pageOptionsState.settings.shortcuts !== 'disabled') {
              Object.keys( pageOptionsState ).forEach( attr => {
-                if ( (
-                        ( e.altKey && pageOptionsState[ attr ].alt )
-                        ||
-                        ( e.ctrlKey && pageOptionsState[ attr ].ctrl )
-                      )
-                    && e.key === pageOptionsState[ attr ].letter
-                    )
+                if ( ( e.altKey === pageOptionsState[ attr ].alt )
+                     &&
+                     ( e.ctrlKey === pageOptionsState[ attr ].ctrl )
+                     &&
+                     (e.key === pageOptionsState[ attr ].letter
+                      ||
+                      e.keyCode === pageOptionsState[ attr ].letter.toUpperCase().charCodeAt(0) )
+                   )
                 {
                     e.preventDefault();
                     switch( attr ) {
@@ -158,10 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
         }
-        if ( e.key === '\\' ) {
-            // the action should be carried out by the search plugin
-            document.dispatchEvent( searchFocus );
-        }
     });
     // copy code block to clipboard adapted from solution at
     // https://stackoverflow.com/questions/34191780/javascript-copy-string-to-clipboard-as-text-html
@@ -182,5 +181,3 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.removeChild(container);
     });
 });
-
-
