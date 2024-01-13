@@ -84,6 +84,12 @@ const searchFocus = new CustomEvent('focusOnSearchBar');
             "settings": { "alt": true, "ctrl": false, "letter": 'g', "shortcuts": 'enabled' },
         };
         persist_pageOptions( pageOptionsState );
+    } else if ( pageOptionsState.search.alt ) {
+        // TODO: we need to temporarily migrate the keyboard shortcut
+        // to not use alt however, we need a way to migrate the state
+        // as we may change the other shortcuts.
+        pageOptionsState.search.alt = false;
+        persist_pageOptions( pageOptionsState );
     }
 })();
 
