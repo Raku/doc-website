@@ -65,3 +65,8 @@ $weight-bold: 700;
         color: darken($text, 10);
     }
 }
+
+kbd {
+    background-color: #0002;
+    border: solid 1px;
+}

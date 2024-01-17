@@ -79,10 +79,16 @@ const searchFocus = new CustomEvent('focusOnSearchBar');
     if ( pageOptionsState == null ) {
         pageOptionsState = {
             "toc": { "alt": true, "ctrl": false, "letter": 't', "panel": 'closed' },
-            "search": { "alt": true, "ctrl": false, "letter": 'f' },
+            "search": { "alt": false, "ctrl": false, "letter": 'f' },
             "theme": { "alt": true, "ctrl": false, "letter": 'k' },
             "settings": { "alt": true, "ctrl": false, "letter": 'g', "shortcuts": 'enabled' },
         };
+        persist_pageOptions( pageOptionsState );
+    } else if ( pageOptionsState.search.alt ) {
+        // TODO: we need to temporarily migrate the keyboard shortcut
+        // to not use alt however, we need a way to migrate the state
+        // as we may change the other shortcuts.
+        pageOptionsState.search.alt = false;
         persist_pageOptions( pageOptionsState );
     }
 })();
@@ -127,15 +133,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // keyboard events to change pageOptions
     document.addEventListener('keydown', e => {
-        if ( pageOptionsState && pageOptionsState.settings.shortcuts !== 'disabled') {
+        if ( e.target == document.body
+             && pageOptionsState
+             && pageOptionsState.settings.shortcuts !== 'disabled') {
              Object.keys( pageOptionsState ).forEach( attr => {
-                if ( (
-                        ( e.altKey && pageOptionsState[ attr ].alt )
-                        ||
-                        ( e.ctrlKey && pageOptionsState[ attr ].ctrl )
-                      )
-                    && e.key === pageOptionsState[ attr ].letter
-                    )
+                if ( ( e.altKey === pageOptionsState[ attr ].alt )
+                     &&
+                     ( e.ctrlKey === pageOptionsState[ attr ].ctrl )
+                     &&
+                     (e.key === pageOptionsState[ attr ].letter
+                      ||
+                      e.keyCode === pageOptionsState[ attr ].letter.toUpperCase().charCodeAt(0) )
+                   )
                 {
                     e.preventDefault();
                     switch( attr ) {
@@ -178,5 +187,3 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.removeChild(container);
     });
 });
-
-

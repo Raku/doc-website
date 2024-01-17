@@ -60,3 +60,8 @@
   font-style: oblique;
   color: black;
 }
+
+kbd {
+  background-color: rgba(0, 0, 0, 0.1333333333);
+  border: solid 1px;
+}

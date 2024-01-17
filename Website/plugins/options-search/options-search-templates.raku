@@ -7,7 +7,7 @@ use v6.d;
             <div class="navbar-item">
                 <div class="field has-addons">
                     <div class="autoComplete_options">
-                        <input class="control input" id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="🔍 Alt-F to search for ...">
+                        <input class="control input" id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" placeholder="🔍 Type f to search for ...">
                     </div>
                     <div class="control" title="Search options">
                         <a class="button is-primary js-modal-trigger"
@@ -25,7 +25,7 @@ use v6.d;
             <div class="modal-content">
                 <div class="box">
                     <p>The last search was: <span id="selected-candidate" class="ss-selected"></span></p>
-                    <p>The search can be accessed using Alt-F</p>
+                    <p>The search input can be selected by typing <kbd>f</kbd></p>
                     <div class="control is-grouped is-grouped-centered options-search-controls">
                         <label class="centreToggle" title="Include extra information (Alt-E)" style="--switch-width: 10.5">
                            <input id="options-search-extra" type="checkbox">
