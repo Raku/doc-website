@@ -75,8 +75,8 @@ sub ($pp, %processed, %options) {
                 next if .<is-header>;
                 @entries.push: %(
                     :category<Indexed>,
-                    :$value,
-                    :info("[ { .<place> } ] in <b>{ $podf.title }\</b>"),
+                    :value( "$value [{ .<place> }]"),
+                    :info("in <b>{ $podf.title }\</b>"),
                     :url(escape-json('/' ~ $fn ~ '#' ~ .<target>)),
                     :type<indexed>,
                 )
