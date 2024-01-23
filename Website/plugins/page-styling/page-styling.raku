@@ -249,7 +249,7 @@ use v6.d;
         </div>
         FRIGHT
     },
-    page-edit => sub (%prm, %tml) { say %prm<config><path>; say  %prm<config><path> ~~ / 'Website/structure-sources/' .+ $ / ;
+    page-edit => sub (%prm, %tml) {
         if %prm<config><path> ~~ / ^ .+ 'docs/' ( .+) $ / {
             qq:to/BLOCK/
             <div class="page-edit">
