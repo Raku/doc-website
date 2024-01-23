@@ -291,7 +291,7 @@ use v6.d;
                     <div class="modal-content">
                         <div class="box">
                             <p>This is an automatically generated page and cannot be edited directly. Text in Composite
-                            pages, (urls starting with 'routine' or 'syntax') can be edited by clicking on the
+                            pages, (URLs starting with 'routine' or 'syntax') can be edited by clicking on the
                             link labeled 'in context', and editing the text there.</p>
                             <p>Exit this popup by pressing &lt;Escape&gt;, or clicking on X or on the background.</p>
                         </div>
