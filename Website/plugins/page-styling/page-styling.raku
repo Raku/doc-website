@@ -250,18 +250,56 @@ use v6.d;
         FRIGHT
     },
     page-edit => sub (%prm, %tml) {
-        return '' unless %prm<config><path> ~~ / ^ .+ 'docs/' ( .+) $ /;
-        qq:to/BLOCK/
-        <div class="page-edit">
-            <a class="button page-edit-button"
-               href="https://github.com/Raku/doc/edit/main/{ %tml<escaped>.(~$0) }"
-               title="Edit this page.">
-              <span class="icon is-right">
-                <i class="fas fa-pen-alt is-medium"></i>
-              </span>
-            </a>
-          </div>
-        BLOCK
+        if %prm<config><path> ~~ / ^ .+ 'docs/' ( .+) $ / {
+            qq:to/BLOCK/
+            <div class="page-edit">
+                <a class="button page-edit-button"
+                   href="https://github.com/Raku/doc/edit/main/{ %tml<escaped>.(~$0) }"
+                   title="Edit this page.">
+                  <span class="icon is-right">
+                    <i class="fas fa-pen-alt is-medium"></i>
+                  </span>
+                </a>
+              </div>
+            BLOCK
+        }
+        elsif %prm<config><path> ~~ / 'Website/structure-sources/' .+ $ / {
+            qq:to/BLOCK/
+            <div class="page-edit">
+                <a class="button page-edit-button"
+                   href="https://github.com/Raku/doc-website/edit/main/{ %tml<escaped>.(~$/) }"
+                   title="Edit this page.">
+                  <span class="icon is-right">
+                    <i class="fas fa-pen-alt is-medium"></i>
+                  </span>
+                </a>
+              </div>
+            BLOCK
+        }
+        else {
+            qq:to/BLOCK/
+                <div class="page-edit">
+                    <a class="button js-modal-trigger"
+                        data-target="page-edit-info">
+                        <span class="icon">
+                            <i class="fas fa-pen-alt is-medium"></i>
+                        </span>
+                    </a>
+                </div>
+                <div id="page-edit-info" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box">
+                            <p>This is an automatically generated page and cannot be edited directly. Text in Composite
+                            pages, (URLs starting with 'routine' or 'syntax') can be edited by clicking on the
+                            link labeled 'in context', and editing the text there.</p>
+                            <p>Exit this popup by pressing &lt;Escape&gt;, or clicking on X or on the background.</p>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+            BLOCK
+        }
     },
     heading => sub (%prm, %tml) {
         my $txt = %prm<text>;
