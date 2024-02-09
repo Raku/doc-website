@@ -512,15 +512,13 @@ a.button.is-primary .icon {
     }
     &.one-col {
         column-count: 1;
-        width: 55vw;
+        width: 65vw;
         margin-left: auto;
         margin-right: auto;
     }
     display: block;
     > p {
         column-span: all;
-        margin: 0 0 2em;
-        text-align: center;
     }
 }
 a.index-entry {

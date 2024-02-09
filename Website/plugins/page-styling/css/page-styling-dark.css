@@ -474,14 +474,12 @@ a.button.is-primary .icon {
 }
 .raku:not(.links-block) .container .columns.one-col {
   column-count: 1;
-  width: 55vw;
+  width: 65vw;
   margin-left: auto;
   margin-right: auto;
 }
 .raku:not(.links-block) .container .columns > p {
   column-span: all;
-  margin: 0 0 2em;
-  text-align: center;
 }
 
 a.index-entry {

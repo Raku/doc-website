@@ -191,14 +191,14 @@ use v6.d;
         my $rv = '<section class="raku page-content">';
         with %prm<config><page-content-columns> {
             $rv ~= '<div class="container"><div class="columns listing">'
-                    ~ %prm<body> ~ '</div>';
+                    ~ %prm<body> ~ '</div></div>';
         }
         orwith %prm<config><page-content-one-col> {
             $rv ~= '<div class="container"><div class="columns one-col">'
-                ~ %prm<body> ~ '</div>';
+                ~ %prm<body> ~ '</div></div>';
         }
         else {
-            $rv ~= '<div class="container px-4">' ~ %prm<body> ~ '</div>';
+            $rv ~= '<div class="container px-4"><div class="columns one-col">' ~ %prm<body> ~ '</div></div>';
         }
         $rv ~= "</section>\n"
     },
