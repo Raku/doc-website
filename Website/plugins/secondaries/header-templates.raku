@@ -70,7 +70,7 @@ use v6.d;
             .+ 'data-indexedheader="'
             (.+?)
             '"></a>'
-            \s* '<span class="glossary-entry">'
+            \s* '<span class="glossary-entry-heading">'
             (.+?)
             '</span>'
             /;
