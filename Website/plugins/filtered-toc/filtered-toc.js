@@ -1,7 +1,9 @@
 $(document).ready( function() {
     var originalTOC = $('#toc-menu').html();
+    var originalIndex = $('#index-menu').html();
     $("#toc-filter").keyup(function () {
         $('#toc-menu').html(originalTOC);
+        $('#index-menu').html(originalIndex);
         var searchText = this.value.toLowerCase();
         if (searchText.length === 0) return;
         var $menuListElements = $('.menu-list').find("li");
@@ -26,4 +28,13 @@ $(document).ready( function() {
         });
         $matchingListElements.show();
     });
+    $('#toc-tab').click( function() { swap_toc_index('toc') });
+    $('#index-tab').click( function() { swap_toc_index('index') });
 });
+function swap_toc_index(activate ) {
+    let disactivate = (activate == 'toc') ? 'index' : 'toc';
+    $('#' + activate + '-tab').addClass('is-active');
+    $('#' + disactivate + '-menu').addClass('is-hidden');
+    $('#' + disactivate + '-tab').removeClass('is-active');
+    $('#' + activate + '-menu').removeClass('is-hidden');
+}
