@@ -414,7 +414,7 @@ fieldset[disabled] .file-name, fieldset[disabled] .select select, .select fields
   cursor: not-allowed;
 }
 
-.file, .button {
+.file, .button, .tabs {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -440,7 +440,7 @@ fieldset[disabled] .file-name, fieldset[disabled] .select select, .select fields
 }
 
 .title:not(:last-child),
-.subtitle:not(:last-child), .table-container:not(:last-child), .table:not(:last-child), .block:not(:last-child), .content:not(:last-child), .box:not(:last-child), .message:not(:last-child), .level:not(:last-child) {
+.subtitle:not(:last-child), .table-container:not(:last-child), .table:not(:last-child), .block:not(:last-child), .content:not(:last-child), .box:not(:last-child), .message:not(:last-child), .level:not(:last-child), .tabs:not(:last-child) {
   margin-bottom: 1.5rem;
 }
 
@@ -789,6 +789,143 @@ table th {
     transform: rotate(359deg);
   }
 }
+.tabs {
+  -webkit-overflow-scrolling: touch;
+  align-items: stretch;
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+  overflow: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.tabs a {
+  align-items: center;
+  border-bottom-color: hsl(0deg, 0%, 86%);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: hsl(0deg, 0%, 29%);
+  display: flex;
+  justify-content: center;
+  margin-bottom: -1px;
+  padding: 0.5em 1em;
+  vertical-align: top;
+}
+.tabs a:hover {
+  border-bottom-color: hsl(0deg, 0%, 21%);
+  color: hsl(0deg, 0%, 21%);
+}
+.tabs li {
+  display: block;
+}
+.tabs li.is-active a {
+  border-bottom-color: hsl(229deg, 53%, 53%);
+  color: hsl(229deg, 53%, 53%);
+}
+.tabs ul {
+  align-items: center;
+  border-bottom-color: hsl(0deg, 0%, 86%);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+.tabs ul.is-left {
+  padding-right: 0.75em;
+}
+.tabs ul.is-center {
+  flex: none;
+  justify-content: center;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+}
+.tabs ul.is-right {
+  justify-content: flex-end;
+  padding-left: 0.75em;
+}
+.tabs .icon:first-child {
+  margin-right: 0.5em;
+}
+.tabs .icon:last-child {
+  margin-left: 0.5em;
+}
+.tabs.is-centered ul {
+  justify-content: center;
+}
+.tabs.is-right ul {
+  justify-content: flex-end;
+}
+.tabs.is-boxed a {
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.tabs.is-boxed a:hover {
+  background-color: hsl(0deg, 0%, 96%);
+  border-bottom-color: hsl(0deg, 0%, 86%);
+}
+.tabs.is-boxed li.is-active a {
+  background-color: hsl(0deg, 0%, 100%);
+  border-color: hsl(0deg, 0%, 86%);
+  border-bottom-color: transparent !important;
+}
+.tabs.is-fullwidth li {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+.tabs.is-toggle a {
+  border-color: hsl(0deg, 0%, 86%);
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 0;
+  position: relative;
+}
+.tabs.is-toggle a:hover {
+  background-color: hsl(0deg, 0%, 96%);
+  border-color: hsl(0deg, 0%, 71%);
+  z-index: 2;
+}
+.tabs.is-toggle li + li {
+  margin-left: -1px;
+}
+.tabs.is-toggle li:first-child a {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.tabs.is-toggle li:last-child a {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.tabs.is-toggle li.is-active a {
+  background-color: hsl(229deg, 53%, 53%);
+  border-color: hsl(229deg, 53%, 53%);
+  color: #fff;
+  z-index: 1;
+}
+.tabs.is-toggle ul {
+  border-bottom: none;
+}
+.tabs.is-toggle.is-toggle-rounded li:first-child a {
+  border-bottom-left-radius: 9999px;
+  border-top-left-radius: 9999px;
+  padding-left: 1.25em;
+}
+.tabs.is-toggle.is-toggle-rounded li:last-child a {
+  border-bottom-right-radius: 9999px;
+  border-top-right-radius: 9999px;
+  padding-right: 1.25em;
+}
+.tabs.is-small {
+  font-size: 0.75rem;
+}
+.tabs.is-medium {
+  font-size: 1.25rem;
+}
+.tabs.is-large {
+  font-size: 1.5rem;
+}
+
 .card {
   background-color: hsl(0deg, 0%, 100%);
   border-radius: 0.25rem;
