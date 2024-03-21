@@ -1,6 +1,6 @@
 =begin pod :no-glossary :page-content-columns
 =TITLE Documented Types
-=SUBTITLE Built in types
+=SUBTITLE Built-in types
 
 This is a list of the built-in types that are documented, sorted by class/enum/module/role
 and by categories.
