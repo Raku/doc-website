@@ -35,7 +35,7 @@ sub ($pp, %options) {
         $css.subst-mutate(/ \n \N+ '.css.map' .+? $$/, '', :g);
         my $fn = $pp.get-data('mode-name') ~ '.css';
         $fn.IO.spurt($css);
-        $template ~= "\n" ~ '"\n" ~ ' ~ "'<link rel=\"stylesheet\" href=\"/assets/css/$fn\">'";
+        $template ~= "\n" ~ '"\n" ~ ' ~ "'<link rel=\"stylesheet\" href=\"/assets/css/$fn\"/>'";
         @move-dest.push( ("assets/css/$fn", 'myself', $fn , ) )
     }
     else { $template ~= ' "" ' } # Template is describing a subroutine that emits a string, which must be started by css

@@ -1,12 +1,12 @@
 use PrettyDump;
 sub (%processed, @plugins-used, $processedpod, %options --> Array ) {
-    #%.links{$entry}<target location>
+    #%.links{$entry}<target link-label type place>
     my @report = 'Link report', ;
     for %processed.kv -> $fn, $podf {
         next unless $podf.links and +$podf.links.keys;
         @report.append: "$fn contains links";
         for $podf.links.kv -> $entry, (:$target, :$place, :$link-label, :$type) {
-            @report.append: "\t｢$link-label｣ labels a ｢$type｣ link that points to ｢{ $place // 'top' }｣ in target ｢$target｣"
+            @report.append: "\tlink entry ｢$entry｣ has ｢$link-label｣ labels a ｢$type｣ link that points to ｢{ $place ?? $place !! 'top of file' }｣ in target ｢$target｣"
         }
     }
     my @plugs = "Plugin report" , ;
