@@ -8,4 +8,6 @@ It simply serves the static html files generated in the output directory.
 
 The host and port can be configured using the mode configuration parameters.
 
+Routes that are not files nor directories have C<$ext> appended to them.
+
 =end pod

@@ -1,7 +1,7 @@
 =begin pod
 =TITLE raku-doc-setup is plugin for Collection
 
-The plugin is for the setup milestone
+The plugin is for the setup and transfer milestones
 
 Changes source filename starting 'Language', 'Type', 'Program' to lowercase.
 

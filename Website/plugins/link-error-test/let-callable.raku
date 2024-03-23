@@ -129,6 +129,8 @@ sub ($pr, %processed, %options) {
     # test for local and internal links by matching link targets, with anchor targets registered in files
     for %links.kv -> $fn, %spec {
         for %spec.kv -> $link, %registered {
+            # hack to overcome schema type links, should be found by link registration
+            next if $link ~~ / ^ \w+ \: /;
             given %registered<type> {
                 when 'local' {
                     # skip this test if a file has already been registered as missing
