@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       ||
                       e.keyCode === pageOptionsState[ attr ].letter.toUpperCase().charCodeAt(0) )
                    )
-                {
+               {
                     e.preventDefault();
                     switch( attr ) {
                         case 'toc':
@@ -187,3 +187,4 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.removeChild(container);
     });
 });
+

@@ -55,7 +55,7 @@ use v6.d;
     },
     'left-bar-toggle' => sub (%prm, %tml ) {
       q:to/BLOCK/
-        <div class="left-bar-toggle" title="Toggle Table of Contents (Alt-T)">
+        <div class="left-bar-toggle" title="Toggle Table of Contents & Index (Alt-T)">
             <label class="chyronToggle left">
                 <input id="navbar-left-toggle" type="checkbox">
                 <span class="text">Contents</span>
@@ -152,7 +152,7 @@ use v6.d;
                 { %tml<page-edit>.(%prm,%tml) }
                 <div id="left-column" class="tile is-parent is-2 is-hidden">
                     <div id="left-col-inner">
-                        { %tml<toc-sidebar>.(%prm, %tml)  }
+                        { %tml<toc-sidebar>.(%prm, %tml)   }
                     </div>
                 </div>
                 <div id="main-column" class="tile is-parent" style="overflow-x: hidden;">
@@ -166,7 +166,7 @@ use v6.d;
     },
     'toc-sidebar' => sub (%prm, %tml) {
         if %tml<raku-toc-block>:exists { %tml<raku-toc-block>.(%prm, %tml) }
-        else { 'No Table of Contents' }
+        else { '' }
     },
     'page-main' => sub (%prm, %tml ) {
         %tml<page-header>.(%prm, %tml)
@@ -316,38 +316,6 @@ use v6.d;
             ~ ( $index-parse.so ?? $index-parse[1] !! $txt )
             ~ qq[[<a class="raku-anchor" title="direct link" href="#$targ">§</a>]]
             ~ qq[[</a></$h>\n]]
-    },
-    toc => sub (%prm, %tml) {
-        my $rv = '';
-        if %prm<toc>.defined and %prm<toc>.keys {
-            $rv = "<ul class=\"menu-list\">\n";
-            my $last-level = 1;
-            for %prm<toc>.list -> %el {
-                my $lev = %el<level>;
-                given $last-level {
-                    when $_ > $lev {
-                        while $last-level > $lev {
-                            $rv ~= "\n</ul>\n";
-                            $last-level--;
-                        }
-                    }
-                    when $_ < $lev {
-                        while $lev > $last-level {
-                            $last-level++;
-                            $rv ~= "\n<ul>\n";
-                        }
-                    }
-                }
-                $rv ~= "\n<li>"
-                    ~ '<a href="#'
-                    ~ (%el.<target>)
-                    ~ '">'
-                    ~ (%el.<text> // '')
-                    ~ '</a></li>';
-            }
-            $rv ~= "\n</ul>\n";
-        }
-        $rv
     },
     'list' => sub (%prm, %tml) {
         qq[
