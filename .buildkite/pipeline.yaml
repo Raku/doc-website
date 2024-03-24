@@ -10,12 +10,21 @@ steps:
       - "buildkite-agent artifact upload ./raku-doc-website.tar.gz"
       - rm ./raku-doc-website.tar.gz
 
-  - label: "Containerize static assets"
+  - label: "Containerize static assets (tag: latest)"
     key: container
     if: build.branch == 'main'
     depends_on:
       - build
     commands:
       - buildkite-agent artifact download --step build raku-doc-website.tar.gz .
-      - ./.buildkite/container.sh
+      - ./.buildkite/container.sh latest
+
+  - label: "Containerize static assets (tag: docs-dev)"
+    key: container-dev
+    if: build.branch == 'docs-dev'
+    depends_on:
+      - build
+    commands:
+      - buildkite-agent artifact download --step build raku-doc-website.tar.gz .
+      - ./.buildkite/container.sh docs-dev
 
