@@ -154,7 +154,8 @@ sub (ProcessedPod $pp, %processed, %options) {
                     .<category>.tc,
                     $dn,
                     .<subkind>,
-                    qq[[<a href="/{ .<source> }#{ .<target> }">{ .<source> }</a>]]
+                    .<source>,
+                    .<target>
                 ];
             }
             # Construct TOC
