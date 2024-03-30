@@ -9,7 +9,7 @@
 	:name<tablemanager>,
 	:render,
 	:template-raku<tm-temps.raku>,
-	:version<0.1.0>,
+	:version<0.2.0>,
 	:jquery<tableManager.js>,
 	:add-css<
 		tm-styling.css

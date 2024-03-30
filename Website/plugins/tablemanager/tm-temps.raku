@@ -23,9 +23,13 @@ use v6.d;
                         }
                         $head ~= "</tr>\n</thead>\n";
                         my $body = "<tbody>\n";
-                        for @rows[ 1..^$d-rows ] -> @row {
-                            $body ~= '<tr>' ~ @row.map({ "<td>$_\</td>" }).join('') ~ "</tr>\n";
-                        }
+                        $body ~= [~] @rows[ 1..^$d-rows ].map({
+                            qq:to/ROW/;
+                                <tr><td>{ .[0] }</td><td>{ .[1].trans( qw｢ <    >    &   " ｣ => qw｢ &lt; &gt; &amp; &quot; ｣) }</td>
+                                <td>{ .[2].trans(qw｢ <    >    &   " ｣ => qw｢ &lt; &gt; &amp; &quot; ｣) }</td>
+                                <td><a href="{ .[3] }#{ .[4] }">{ .[3] }</a></td></tr>
+                            ROW
+                        });
                         $body ~= "\n</tbody>\n\</table>\n</div>";
                         $rv ~= $head ~ $body ~ qq:to/SCR/
                             <script>
