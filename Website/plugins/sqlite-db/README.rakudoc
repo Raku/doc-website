@@ -1,0 +1,19 @@
+=begin rakudoc
+=TITLE sqlite-db is a plugin for Collection
+
+The plugin is for the render, compilation, & transfer milestones
+
+Relies on 'secondaries' plugin creating routines data for the 'tablemanager' plugin. So the plugin must
+follow the 'secondaries' plugin.
+
+Outputs a file for the sqlite executable. Transfers it to the directory named in the `database-dir` field.
+
+Transfer cleans up the plugin directory.
+
+=head1 Custom blocks
+None
+
+=head1 Templates
+None
+
+=end rakudoc
