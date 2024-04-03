@@ -8,10 +8,15 @@
         link-error-test => %(
             :no-remote,
             :run-tests,
+            :structure-files<introduction about index miscellaneous reference routines types>,
         ),
         sitemap => %(
             :root-domain<https://docs.raku.org>,
             :sitemap-destination<../../rendered_html>,
-        )
+        ),
+        sqlite-db => %(
+            :database-dir<../../sqlite_dir>,
+            :db-filename<sqlite-db-definition.sql>,
+        ),
     ),
 )
