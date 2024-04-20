@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         searchOptions  = {
             "loose": false,
             "headings": true,
-            "indexed": false,
+            "indexed": true,
             "primary": true,
             "composite": true,
             "newtab": false,
