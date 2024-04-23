@@ -8,10 +8,10 @@
   ],
   "auth": "zef:raku",
   "depends": [
-    "Raku::Pod::Render:ver<4.7.2+>",
-    "Pod::From::Cache:ver<0.5.0+>",
+    "Raku::Pod::Render:ver<4.10.5+>",
+    "Pod::From::Cache:ver<0.5.4+>",
     "RakuConfig:ver<0.7.3+>",
-    "Collection:ver<0.17.2+>",
+    "Collection:ver<0.17.3+>",
     "Terminal::ANSIColor:ver<0.9+>:auth<zef:lizmat>",
     "Doc::TypeGraph:ver<2.2.1.1+>",
     "Doc::TypeGraph::Viz:ver<2.2.1.1+>",
