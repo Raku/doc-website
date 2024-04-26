@@ -1,0 +1,4 @@
+.collection-generated ul {
+	list-style: disclosure-closed;
+	list-style-position: inside;
+}

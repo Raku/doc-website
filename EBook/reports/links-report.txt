@@ -1,0 +1,20 @@
+Link report
+language/101-basics contains links
+	link entry ｢/language/operators#infix_(elem),_infix_∈｣ has ｢membership operators｣ labels a ｢local｣ link that points to ｢infix_(elem),_infix_∈｣ in target ｢/language/operators｣
+	link entry ｢/language/syntax#Multi-line_/_embedded_comments｣ has ｢multi-line/embedded comments｣ labels a ｢local｣ link that points to ｢Multi-line_/_embedded_comments｣ in target ｢/language/syntax｣
+	link entry ｢/type/Array｣ has ｢Array｣ labels a ｢local｣ link that points to ｢top of file｣ in target ｢/type/Array｣
+	link entry ｢/language/operators#index-entry-qw-quote-words-quote-words｣ has ｢quote-words｣ labels a ｢local｣ link that points to ｢index-entry-qw-quote-words-quote-words｣ in target ｢/language/operators｣
+packaging/about contains links
+	link entry ｢https://docs.raku.org｣ has ｢official website｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://docs.raku.org｣
+	link entry ｢https://github.com/coke ｣ has ｢@coke｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/coke ｣
+	link entry ｢https://github.com/finanalyst｣ has ｢@finanalyst｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/finanalyst｣
+	link entry ｢https://github.com/finanalyst/collection｣ has ｢Collection module｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/finanalyst/collection｣
+	link entry ｢https://github.com/dontlaugh｣ has ｢@dontlaugh｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/dontlaugh｣
+	link entry ｢https://raw.githubusercontent.com/Raku/doc/master/CREDITS｣ has ｢Credits file｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://raw.githubusercontent.com/Raku/doc/master/CREDITS｣
+language/about contains links
+	link entry ｢https://design.raku.org/S26.html｣ has ｢Synopsis 26, Documentation｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://design.raku.org/S26.html｣
+	link entry ｢/language/pod｣ has ｢Raku Pod｣ labels a ｢local｣ link that points to ｢top of file｣ in target ｢/language/pod｣
+	link entry ｢https://github.com/Raku/doc-website｣ has ｢Raku/doc-website on GitHub｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/Raku/doc-website｣
+	link entry ｢https://docs.raku.org｣ has ｢HTML version of the documentation｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://docs.raku.org｣
+	link entry ｢https://github.com/Raku/doc｣ has ｢Raku/doc on GitHub｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/Raku/doc｣
+	link entry ｢https://github.com/Raku/doc/blob/main/CONTRIBUTING.md｣ has ｢CONTRIBUTING.md｣ labels a ｢external｣ link that points to ｢top of file｣ in target ｢https://github.com/Raku/doc/blob/main/CONTRIBUTING.md｣

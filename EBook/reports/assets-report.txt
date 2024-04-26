@@ -1,0 +1,5 @@
+Assets report
+｢images/camelia-404.png｣ is type image and is used by 
+	 nothing
+｢images/octopus_build.gif｣ is type image and is used by 
+	 nothing

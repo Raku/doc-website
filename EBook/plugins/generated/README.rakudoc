@@ -1,0 +1,18 @@
+=begin pod
+=TITLE Generated is a plugin for Collection
+
+The plugin is for the C<render> milestone.
+
+The render callable retrieves the last commit id & generation data from the
+ProcessedPod instance and makes the data available for the 'generated' template.
+
+=head1 Custom blocks
+
+GENERATED triggers the template that attaches the commit data and
+adds the build generation date/time
+
+=head1 Templates
+
+generated adds commit data and time for the build after the caption text.
+
+=end pod

@@ -1,0 +1,14 @@
+=begin pod
+=TITLE hiliter runs syntax highlighting on block code
+
+The plugin is for the render milestone.
+
+It moves the functionality from the templates directory to a plugin.
+
+=head1 Custom blocks
+
+=head1 Templates
+
+Replaces the block-code template.
+
+=end pod

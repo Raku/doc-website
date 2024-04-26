@@ -1,19 +1,16 @@
 %(
     :plugins<plugins>,
-    :plugin-format<html>,
+    :plugin-format<xhtml>,
     plugins-required => %(
         :setup<raku-doc-setup>,
         :render<
             hiliter
-            ebook-embed
-            font-awesome tablemanager rakudoc-table
-            camelia simple-extras listfiles images deprecate-span filterlines
-            typegraph generated
-            gather-js-jq gather-css
+            ebook-embed rakudoc-table
+            generated
+            gather-css
         >,
-        :report<link-plugin-assets-report>,
-        :transfer<gather-js-jq gather-css images raku-doc-setup ebook-embed>,
-        :compilation<listfiles ebook-embed>,
+        :report(),
+        :transfer<gather-css raku-doc-setup ebook-embed ebook-embed>,
         :completion<ebook-embed>,
     ),
 )

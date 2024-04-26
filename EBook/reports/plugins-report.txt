@@ -1,0 +1,172 @@
+Plugin report
+Plugins used at ｢Mode｣ milestone:
+	No plugins defined
+Plugins used at ｢Setup｣ milestone:
+	｢raku-doc-setup｣ called with: Hash={
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:license("Artistic-2.0"),
+			:name("raku-doc-setup"),
+			:setup("raku-doc-change-routes.raku"),
+			:transfer("add-deprecate.raku"),
+			:version("0.3.10")
+		}
+Plugins used at ｢Render｣ milestone:
+	｢hiliter｣ called with: Hash={
+			:add-css(List=(
+				"hiliter-dark.css",
+				"hiliter-light.css"
+			)),
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:license("Artistic-2.0"),
+			:name("hiliter"),
+			:render,
+			:version("0.2.0")
+		}
+	｢ebook-embed｣ called with: Hash={
+			:add-css("css/page.css"),
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:completion("completion-callable.raku"),
+			:ebook-path-name("../RakuDocumentation.epub"),
+			:license("Artistic-2.0"),
+			:name("ebook-embed"),
+			:render("move-files.raku"),
+			:transfer("transfer-callable.raku"),
+			:version("0.1.2")
+		}
+	｢font-awesome｣ called with: Hash={
+			:add-css("all.min.css"),
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:information("jquery"),
+			:jquery(Array=[
+				"all.min.js",
+				-1
+			]),
+			:license("Artistic-2.0"),
+			:name("font-awesome"),
+			:render("fa-assets.raku"),
+			:version("0.4.4")
+		}
+	｢rakudoc-table｣ called with: Hash={
+			:add-css(List=(
+				"css/rakudoc-table-light.css",
+				"css/rakudoc-table-dark.css"
+			)),
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:license("Artistic-2.0"),
+			:name("rakudoc-table"),
+			:render,
+			:version("0.1.2")
+		}
+	｢camelia｣ called with: Hash={
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:css("camelia-styling.css"),
+			:license("Artistic-2.0"),
+			:name("camelia"),
+			:render("move-images.raku"),
+			:version("0.4.0")
+		}
+	｢generated｣ called with: Hash={
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:commit-id("4bcbd5274"),
+			:css("generated.css"),
+			:g-date((Date): 2024-04-26),
+			:g-time("21:11:25"),
+			:license("Artistic-2.0"),
+			:mode-commit-id("Not available"),
+			:name("generated"),
+			:render("get-commit-id.raku"),
+			:version("0.1.4")
+		}
+	｢gather-css｣ called with: Hash={
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:information("template-raku"),
+			:license("Artistic-2.0"),
+			:name("gather-css"),
+			:render("css-collator.raku"),
+			:transfer("cleanup.raku"),
+			:version("0.4.0")
+		}
+Plugins used at ｢Compilation｣ milestone:
+	None
+Plugins used at ｢Transfer｣ milestone:
+	｢gather-css｣ called with: Hash={
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:custom-raku(List=()),
+			:information("template-raku"),
+			:license("Artistic-2.0"),
+			:name("gather-css"),
+			:render("css-collator.raku"),
+			:template-raku("css-templates.raku"),
+			:transfer("cleanup.raku"),
+			:version("0.4.0")
+		}
+	｢raku-doc-setup｣ called with: Hash={
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:license("Artistic-2.0"),
+			:name("raku-doc-setup"),
+			:setup("raku-doc-change-routes.raku"),
+			:transfer("add-deprecate.raku"),
+			:version("0.3.10")
+		}
+	｢ebook-embed｣ called with: Hash={
+			:add-css("css/page.css"),
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:completion("completion-callable.raku"),
+			:custom-raku(List=()),
+			:ebook-path-name("../RakuDocumentation.epub"),
+			:license("Artistic-2.0"),
+			:name("ebook-embed"),
+			:render("move-files.raku"),
+			:template-raku("ebook-styling.raku"),
+			:transfer("transfer-callable.raku"),
+			:version("0.1.2")
+		}
+	｢ebook-embed｣ called with: Hash={
+			:add-css("css/page.css"),
+			:auth("collection"),
+			:authors(List=(
+				"finanalyst"
+			)),
+			:completion("completion-callable.raku"),
+			:custom-raku(List=()),
+			:ebook-path-name("../RakuDocumentation.epub"),
+			:license("Artistic-2.0"),
+			:name("ebook-embed"),
+			:render("move-files.raku"),
+			:template-raku("ebook-styling.raku"),
+			:transfer("transfer-callable.raku"),
+			:version("0.1.2")
+		}

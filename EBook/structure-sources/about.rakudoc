@@ -1,0 +1,29 @@
+=begin rakudoc :kind("Opening") :subkind("opening") :category("opening")
+=TITLE About the EBook
+
+This ebook has been generated from the same source about
+the Raku™ language and the most current Rakudo™ compiler as the L<official website|https://docs.raku.org>.
+
+Documenting a project of this size cannot be completed or maintained without the
+input and contributions of many individuals, and the initiative and
+persistence of a core group. The many people who have contributed to writing the documentation and tooling
+can be found in a L<Credits file | https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
+
+The Epub version was generated using the EBook mode at the Raku/docs-website repository
+using the L<Collection module| https://github.com/finanalyst/collection>.
+
+Primary contributors to the Epub were:
+
+Richard Nabil Hainsworth L<@finanalyst | https://github.com/finanalyst>, who wrote the EBook mode.
+
+Coleman McFarland L<@dontlaugh| https://github.com/dontlaugh>, who created the
+infrastructure to build the ebook and web page, serve the web pages and automate updates.
+
+Will Coleda L<@coke| https://github.com/coke >, who has managed the process and brought the
+website on line.
+
+
+=for Generated  :headlevel(0)
+The epub was generated as follows:
+
+=end rakudoc
