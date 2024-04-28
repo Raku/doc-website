@@ -8,7 +8,7 @@
 	:name<page-styling>,
 	:render<move-images.raku>,
 	:template-raku<page-styling.raku>,
-	:version<0.3.1>,
+	:version<0.3.3>,
 	:add-css<
 		css/page-styling-main.css
 		css/page-styling-dark.css css/page-styling-light.css
