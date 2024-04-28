@@ -20,6 +20,8 @@ sub ($pr, %processed, %options) {
     my %targets;
     #| possible filenames that map to a real html file
     my %aliases;
+    #| page names generated after LET plugin is called
+    my @structure-files;
 
     sub failed-targets($file, Str $target) {
         my $old = $target.trim;
@@ -90,8 +92,9 @@ sub ($pr, %processed, %options) {
         $resp
     }
     %aliases = %config<aliases>.kv.map({ '/' ~ $^a => '/' ~ $^b });
+    @structure-files = %config<structure-files>.map( '/' ~ * );
     #| SetHash of files in collection
-    my SetHash $files .= new( %aliases.keys );
+    my SetHash $files .= new( %aliases.keys.Slip, @structure-files.Slip );
     #| SetHash of files found missing
     my SetHash $missing .= new;
     my @remote-links;
