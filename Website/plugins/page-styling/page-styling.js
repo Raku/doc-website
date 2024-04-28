@@ -131,43 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#pageSettings').change(function () {
         set_settings( pageOptionsState.settings.shortcuts === 'enabled' ? 'disabled' : 'enabled' );
     });
-    // keyboard events to change pageOptions
-    document.addEventListener('keydown', e => {
-        if ( e.target == document.body
-             && pageOptionsState
-             && pageOptionsState.settings.shortcuts !== 'disabled') {
-             Object.keys( pageOptionsState ).forEach( attr => {
-                if ( ( e.altKey === pageOptionsState[ attr ].alt )
-                     &&
-                     ( e.ctrlKey === pageOptionsState[ attr ].ctrl )
-                     &&
-                     (e.key === pageOptionsState[ attr ].letter
-                      ||
-                      e.keyCode === pageOptionsState[ attr ].letter.toUpperCase().charCodeAt(0) )
-                   )
-               {
-                    e.preventDefault();
-                    switch( attr ) {
-                        case 'toc':
-                            set_ToC_panel( pageOptionsState.toc.panel === 'closed' ? 'open' : 'closed' )
-                            break;
-                        case 'search':
-                            // the action should be carried out by the search plugin
-                            document.dispatchEvent( searchFocus );
-                            break;
-                        case 'theme':
-                            let theme = persisted_theme() === 'light' ? 'dark' : 'light';
-                            change_theme(theme);
-                            persist_theme(theme);
-                            break;
-                        case 'settings':
-                            set_settings( pageOptionsState.settings.shortcuts === 'enabled' ? 'disabled' : 'enabled' );
-                            break;
-                    }
-                }
-            })
-        }
-    });
     // copy code block to clipboard adapted from solution at
     // https://stackoverflow.com/questions/34191780/javascript-copy-string-to-clipboard-as-text-html
     // if behaviour problems with different browsers add stylesheet code from that solution.
