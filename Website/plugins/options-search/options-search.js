@@ -35,6 +35,7 @@ var openInTab = false;
 document.addEventListener('DOMContentLoaded', function () {
     searchOptions = persisted_searchOptions();
     var searchDataObtained = false;
+    // searchOptions will always be null, unless option changed from default and stored
     if ( searchOptions == null ) {
         searchOptions  = {
             "loose": false,
@@ -45,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
             "newtab": false,
             "extra": true
         };
-        persist_searchOptions( searchOptions );
     }
     var selectedCandidate = document.getElementById('selected-candidate');
     selectedCandidate.innerHTML = 'No page selected';
