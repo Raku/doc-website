@@ -1,0 +1,13 @@
+=begin pod
+=TITLE ebook-embed is a plugin for Collection
+
+The plugin is for the render transfer compilation completion milestones
+
+The transfer plugin must be called twice, once to create the EBook meta files,
+the second time to delete them.
+
+=head1 Templates
+
+All templates
+
+=end pod

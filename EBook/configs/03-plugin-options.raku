@@ -1,5 +1,7 @@
 %(
     plugin-options => %(
-        ebook-embed => %( :spine<introduction reference miscellaneous> ),
+        ebook-embed => %(
+           :ebook-path-name<../RakuDocumentation.epub>,
+        ),
     ),
 )

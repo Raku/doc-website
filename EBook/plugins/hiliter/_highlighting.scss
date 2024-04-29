@@ -1,0 +1,48 @@
+@import "../ogdenwebb/scss/base/_variables.scss";
+
+// Raku code highlighting
+.raku-code {
+  position: relative;
+  margin: $size-6 0;
+  border-bottom: 3px solid $border;
+  box-shadow: $shadow-below;
+  border: 1px solid $border;
+
+  button.copy-code {
+    cursor: pointer;
+    opacity: 0;
+    padding: 0 0.25rem 0.25rem 0.25rem;
+    position: absolute;
+  }
+  &:hover button.copy-code {
+    opacity: 0.5;
+  }
+
+  label {
+    float: right;
+    font-size: xx-small;
+    font-style: italic;
+  }
+
+// required to match highlights-js css with raku highlighter css
+  pre.browser-hl { padding: 7px; }
+
+  .code-name {
+    padding-top: $size-7;
+    padding-left: $size-5;
+    color: $heading;
+    font-weight: $weight-medium;
+  }
+   pre {
+    background-color: $code-background;
+    color: $code-foreground;
+  }
+  .rakudoc-in-code {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .section {
+    /* https://github.com/Raku/doc-website/issues/144 */
+    padding: 0rem;
+  }
+}

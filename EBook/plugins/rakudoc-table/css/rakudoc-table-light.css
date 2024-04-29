@@ -1,0 +1,28 @@
+/* Basic code colors */
+.rakudoc-table .rakudoc-cell-center, .rakudoc-table .rakudoc-cell-centre {
+  text-align: center;
+}
+.rakudoc-table .rakudoc-cell-left {
+  text-align: left;
+}
+.rakudoc-table .rakudoc-cell-right {
+  text-align: right;
+}
+.rakudoc-table .rakudoc-cell-top {
+  vertical-align: top;
+}
+.rakudoc-table .rakudoc-cell-bottom {
+  vertical-align: bottom;
+}
+.rakudoc-table .rakudoc-cell-middle {
+  vertical-align: middle;
+}
+.rakudoc-table .rakudoc-cell-label {
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 600;
+}
+.rakudoc-table.table tbody th {
+  text-align: center;
+  vertical-align: middle;
+}

@@ -1,0 +1,108 @@
+/* Basic code colors */
+/* Dark color theme */
+.cm-s-ayaya.CodeMirror {
+  background: #212426;
+  color: #f2f2f2;
+}
+
+.CodeMirror-gutters {
+  background-color: #212426;
+  color: #6C7292;
+  border-right: 0;
+}
+
+.CodeMirror-linenumber {
+  color: #f2f2f2;
+}
+
+.CodeMirror-selected,
+.CodeMirror-focused .CodeMirror-selected {
+  background: #393e41;
+}
+
+.cm-s-ayaya span.cm-atom, .cm-s-ayaya span.function, .cm-s-ayaya span.routine {
+  color: #978DEB;
+}
+.cm-s-ayaya span.cm-comment, .cm-s-ayaya span.comment {
+  color: #6C7292;
+}
+.cm-s-ayaya span.cm-number, .cm-s-ayaya span.numeric {
+  color: #6295E3;
+}
+.cm-s-ayaya span.cm-comment.cm-type {
+  color: #5998a6;
+}
+.cm-s-ayaya span.cm-keyword, .cm-s-ayaya span.keyword, .cm-s-ayaya span.declarator {
+  color: #8DE1EB;
+}
+.cm-s-ayaya span.cm-string, .cm-s-ayaya span.string {
+  color: #68F3CA;
+}
+.cm-s-ayaya span.cm-variable, .cm-s-ayaya span.variable {
+  color: #EED891;
+}
+.cm-s-ayaya span.cm-variable-2 {
+  color: #EED891;
+}
+.cm-s-ayaya span.cm-variable-3 {
+  color: #EED891;
+}
+.cm-s-ayaya span.cm-type, .cm-s-ayaya span.type {
+  color: #E04C86;
+}
+.cm-s-ayaya span.cm-def {
+  color: #8DE1EB;
+}
+.cm-s-ayaya span.cm-operator, .cm-s-ayaya span.assignment, .cm-s-ayaya span.operator {
+  color: #E05C4C;
+}
+
+textarea::-moz-selection {
+  background: #212426;
+}
+
+textarea::selection {
+  background: #212426;
+}
+
+.raku-code {
+  position: relative;
+  margin: 1rem 0;
+  border-bottom: 3px solid #3A3D4E;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
+  border: 1px solid #3A3D4E;
+}
+.raku-code button.copy-code {
+  cursor: pointer;
+  opacity: 0;
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  position: absolute;
+}
+.raku-code:hover button.copy-code {
+  opacity: 0.5;
+}
+.raku-code label {
+  float: right;
+  font-size: xx-small;
+  font-style: italic;
+}
+.raku-code pre.browser-hl {
+  padding: 7px;
+}
+.raku-code .code-name {
+  padding-top: 0.75rem;
+  padding-left: 1.25rem;
+  color: #EED891;
+  font-weight: 500;
+}
+.raku-code pre {
+  background-color: #212426;
+  color: #f2f2f2;
+}
+.raku-code .rakudoc-in-code {
+  padding: 1.25rem 1.5rem;
+}
+.raku-code .section {
+  /* https://github.com/Raku/doc-website/issues/144 */
+  padding: 0rem;
+}

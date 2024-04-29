@@ -1,0 +1,69 @@
+.page-title {
+    font-family: Sans;
+    font-size: 20pt;
+    font-weight: 700;
+    text-align: center;
+    margin: 1em;
+}
+.page-subtitle {
+    font-size: 12pt;
+    font-weight: 500;
+    text-align: center;
+    margin: 1em;
+}
+.index-defn {
+    margin: 0.5em;
+    a.index-entry {
+        display: block;
+        margin: 0.5vh 0 0 5vh;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+nav h1 {
+    font-family: Sans;
+    font-size: 20pt;
+    font-weight: 700;
+    text-align: center;
+    margin: 1em;
+    color: black;
+}
+li.section {
+    list-style-type: none;
+    a {
+        text-decoration: none;
+        cursor: pointer;
+        h1 {
+            font-family: Sans;
+            font-size: 18pt;
+            font-weight: 600;
+            color: black;
+            text-align: left;
+            font-style: italic;
+        }
+    }
+}
+li.chapter {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    a {
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 16pt;
+        font-weight: 600;
+        color: grey;
+    }
+}
+ol.chapter-contents li a {
+    text-decoration: unset;
+    color: unset;
+    font-size: unset;
+    font-weight: unset;
+}
+.footer-item {
+  font-size: 11pt;
+  &::before {
+      content: '___________________';
+    }
+}

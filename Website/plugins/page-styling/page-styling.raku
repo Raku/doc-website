@@ -110,6 +110,7 @@ use v6.d;
                     More
                   </a>
                   <div class="navbar-dropdown is-right is-rounded">
+                    { %tml<ebook>.( {}, {} ) }
                     <hr class="navbar-divider">
                     <a class="navbar-item" href="/about">
                       About
@@ -134,6 +135,7 @@ use v6.d;
             </div>
             { %tml<head-search>.( %prm, %tml) }
           </div>
+          { %tml<ebook-modal>({},{}) }
         BLOCK
     },
     'head-search' => sub (%prm, %tml) {q:to/BLOCK/
@@ -349,7 +351,33 @@ use v6.d;
         </ul>
         ]
     },
-
+    'ebook' => sub (%prm, %tml ) {
+        q[
+            <hr class="navbar-divider">
+            <a class="navbar-item js-modal-trigger" data-target="download-ebook">
+              Download E-Book (epub)
+            </a>
+        ]
+    },
+    'ebook-modal' => sub (%prm, %tml ) {
+        q[       <div id="download-ebook" class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box">
+                            <p><a href="/RakuDocumentation.epub" download>RakuDocumentation.epub</a> is a work in
+                            progress e-book. It targets the <a href="https://www.w3.org/publishing/epub3/">EPUB v3 specification</a>.
+                            It needs testing on a variety of ereaders (some of which may still implicitly expect
+                            compliance with EPUB v2). The CSS definitely needs enhancing (especially for code snippets).
+                            The Ebook opens in a Calibre reader, which is available on all operating systems.</p>
+                            <p>Suggestions are welcome and should be addressed by opening an issue on
+                            the Raku/doc-website repository</p>
+                            <p>Exit this popup by pressing &lt;Escape&gt;, or clicking on X or on the background.</p>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+        ]
+    },
 
     'format-b' => sub (%prm, %tml) {
         my $beg = '<strong>';
