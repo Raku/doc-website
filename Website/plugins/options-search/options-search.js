@@ -35,17 +35,17 @@ var openInTab = false;
 document.addEventListener('DOMContentLoaded', function () {
     searchOptions = persisted_searchOptions();
     var searchDataObtained = false;
+    // searchOptions will always be null, unless option changed from default and stored
     if ( searchOptions == null ) {
         searchOptions  = {
             "loose": false,
             "headings": true,
-            "indexed": false,
+            "indexed": true,
             "primary": true,
             "composite": true,
             "newtab": false,
             "extra": true
         };
-        persist_searchOptions( searchOptions );
     }
     var selectedCandidate = document.getElementById('selected-candidate');
     selectedCandidate.innerHTML = 'No page selected';
