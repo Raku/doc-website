@@ -31,13 +31,7 @@ var unfocusSearchBar = function() {
 var category = '';
 var autoCompleteJS;
 var openInTab = false;
-
-document.addEventListener('DOMContentLoaded', function () {
-    searchOptions = persisted_searchOptions();
-    var searchDataObtained = false;
-    // searchOptions will always be null, unless option changed from default and stored
-    if ( searchOptions == null ) {
-        searchOptions  = {
+var defaultOptions = {
             "loose": false,
             "headings": true,
             "indexed": true,
@@ -46,7 +40,19 @@ document.addEventListener('DOMContentLoaded', function () {
             "newtab": false,
             "extra": true
         };
+
+document.addEventListener('DOMContentLoaded', function () {
+    searchOptions = persisted_searchOptions();
+    var searchDataObtained = false;
+    // searchOptions will always be null until an option is changed from default and stored
+    if ( searchOptions == null ) {
+        searchOptions  = defaultOptions;
     }
+    document.getElementById('options-search-reset-defaults').addEventListener('click', function () {
+        localStorage.removeItem('searchOptions');
+        searchOptions = defaultOptions;
+        window.location.reload();
+    })
     var selectedCandidate = document.getElementById('selected-candidate');
     selectedCandidate.innerHTML = 'No page selected';
     document.getElementById('autoComplete').addEventListener('focus', function () {

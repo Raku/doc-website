@@ -25,7 +25,6 @@ use v6.d;
             <div class="modal-content">
                 <div class="box">
                     <p>The last search was: <span id="selected-candidate" class="ss-selected"></span></p>
-                    <p>The search input can be selected by typing <kbd>f</kbd></p>
                     <div class="control is-grouped is-grouped-centered options-search-controls">
                         <label class="centreToggle" title="Include extra information (Alt-E)" style="--switch-width: 10.5">
                            <input id="options-search-extra" type="checkbox">
@@ -80,6 +79,7 @@ use v6.d;
                         <p>Once a search candidate has been chosen, it can be opened in a new tab or in the current
                         tab (Alt-Q)</p>
                         <p>If all else fails, an item is added to use the Google search engine on the whole site</p>
+                        <button class="button is-warning" id="options-search-reset-defaults">Clear options, reset to defaults</button>
                         <p>Exit this page by pressing &lt;Escape&gt;, or clicking on X or on the background.</p>
                     </div>
                 </div>
