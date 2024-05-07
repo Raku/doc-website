@@ -4,10 +4,11 @@ steps:
   - label: "Build site"
     key: build
     commands:
-      - "zef install . --deps-only"
-      - "./bin_files/build-site --without-completion --no-status"
-      - "./.buildkite/archive.sh"
-      - "buildkite-agent artifact upload ./raku-doc-website.tar.gz"
+      - zef install . --deps-only
+      - ./bin_files/build-site --without-completion --no-status EBook
+      - mv RakuDocumentation.epub rendered_html
+      - ./.buildkite/archive.sh
+      - buildkite-agent artifact upload ./raku-doc-website.tar.gz
       - rm ./raku-doc-website.tar.gz
 
   - label: "Containerize static assets (tag: latest)"
