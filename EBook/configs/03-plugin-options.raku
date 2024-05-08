@@ -1,7 +1,7 @@
 %(
     plugin-options => %(
         ebook-embed => %(
-           :ebook-path-name<../RakuDocumentation.epub>,
+           :ebook-path-name<../rendered_html/RakuDocumentation.epub>,
         ),
     ),
 )
