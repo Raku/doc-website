@@ -6,7 +6,7 @@ steps:
     commands:
       - zef install . --deps-only
       - ./bin_files/build-site EBook --without-completion --no-status
-      - mv RakuDocumentation.epub rendered_html
+      - cp ~/RakuDocumentation.epub rendered_html
       - ./.buildkite/archive.sh
       - buildkite-agent artifact upload ./raku-doc-website.tar.gz
       - rm ./raku-doc-website.tar.gz
