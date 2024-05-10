@@ -34,6 +34,4 @@ can be found in this L<Credits file | https://raw.githubusercontent.com/Raku/doc
 =for Generated  :headlevel(0)
 The web site was generated as follows:
 
-Link errors in the documentation suite can be found at L<Error report|error-report>.
-
 =end pod
