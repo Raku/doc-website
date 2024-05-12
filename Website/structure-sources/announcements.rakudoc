@@ -1,0 +1,30 @@
+=begin rakudoc :kind<Language> :subkind<Language> :category<beginning>
+=TITLE Announcements page
+=SUBTITLE A date-stamped list of notes relevant to the Raku Documentation site.
+
+=begin Note :date<2024-05-09> :caption<New funtionality>
+An announcements page is now available. The most recent announcement will pop up when
+the website is loaded, but it will not appear again.
+
+Announcements can contain all the RakuDoc elements, including:
+=item lists as here
+=item format / markup codes such C<inline code>, B<bolded text>, I<Italics>, B<I<bolded italics>>.
+
+The only constraint is how much space is used in the popup
+=end Note
+
+=for Note :date<2024-05-03> :caption<EBook upload>
+A new EBook is available for down load
+
+=begin Note :date<2024.04.01> :caption<Rakudo April Update>
+=item Improvements:
+=item2    Make X::Syntax::Number::LiteralType a subclass of X::TypeCheck::Assignment [5b7cf94c]
+=item2    Make Rakudo up to 2x as fast on the JVM backend by using fastutil [05aae712][23a9fdbe] [955bc856]
+
+=item Additions:
+=item2    Add Allomorph.narrow [e6a28e1c]
+=item2    Add dispatch disambiguation via 'is item' parameter trait [70f16f63] [3b42de18][36901bb0][0ce55752][c02bd131]
+=end Note
+
+
+=end rakudoc
