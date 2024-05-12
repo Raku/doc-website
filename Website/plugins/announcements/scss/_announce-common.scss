@@ -1,0 +1,26 @@
+@import "../../page-styling/bulma/sass/utilities/mixins.sass";
+
+$weight-light: 300;
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+div.announce {
+    .announce-head {
+        background: $scheme-main-bis;
+        border: 1px solid $border;
+        border-bottom: 3px solid $heading;
+        color: $heading;
+        span.date {
+            font-weight: $weight-semibold;
+            font-size: large;
+        }
+    }
+    margin-bottom: 30px;
+}
+div.pop-header {
+    color: $heading;
+}
+div.pop-text {
+}

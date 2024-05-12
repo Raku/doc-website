@@ -123,12 +123,14 @@ use v6.d;
                     <a class="navbar-item" href="https://github.com/raku/doc/issues">
                       Report an issue with the documentation content
                     </a>
+                    { %tml<cancel-announcement-popup>.( {}, {} ) }
                   </div>
                 </div>
             </div>
             { %tml<head-search>.( %prm, %tml) }
           </div>
           { %tml<ebook-modal>({},{}) }
+          { %tml<announcement-modal>.( {}, {} ) }
         BLOCK
     },
     'head-search' => sub (%prm, %tml) {q:to/BLOCK/
@@ -371,6 +373,8 @@ use v6.d;
                 </div>
         ]
     },
+    'cancel-announcement-popup' => sub ( %, %) { '' }, # placeholders for plugin
+    'announcement-modal' => sub ( %, %) { '' },
 
     'format-b' => sub (%prm, %tml) {
         my $beg = '<strong>';
