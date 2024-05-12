@@ -5,6 +5,7 @@ sub ( $pr, %processed, %options) {
         return []
     }
     my @first = $pr.get-data('note')<first-item>.list;
+    return [] unless @first.elems;
     'generated.js'.IO.spurt: qq:to/JS/;
         var announceState;
         var persisted_announcements = function () \{
