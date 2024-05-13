@@ -10,7 +10,7 @@
 	:template-raku<anouncement-templates.raku>,
 	:custom-raku<announcement-blocks.raku>,
 	:transfer<generate-javascript.raku>,
-	:version<0.1.0>,
+	:version<0.1.1>,
 	:information<js-script>,
 	:js-script(['announcements.js', 4],),
 )

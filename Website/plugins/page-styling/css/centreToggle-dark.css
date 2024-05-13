@@ -2,7 +2,6 @@
   display: flex;
   width: calc(var(--switch-width) * 1rem);
   cursor: pointer;
-  background: #1B1D1E;
 }
 .centreToggle:hover {
   background: #2d3134;
@@ -13,10 +12,8 @@
   order: 1;
   padding-left: 0.3rem;
   color: #f00048;
-  font-weight: 600;
   background: inherit;
   width: 100%;
-  transform: translateY(-0.1rem);
 }
 .centreToggle .text:before {
   content: "";
