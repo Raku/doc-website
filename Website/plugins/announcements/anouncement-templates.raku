@@ -4,7 +4,7 @@ use v6.d;
     'cancel-announcement-popup' => sub ( %prm, %tml) {
         q:to/ITEM/;
             <hr class="navbar-divider">
-            <label class="centreToggle" title="Enable/Disable Announcements" style="--switch-width: 15">
+            <label class="navbar-item centreToggle" title="Enable/Disable Announcements" style="--switch-width: 18">
                <input id="cancelAnnouncements" type="checkbox">
                <span class="text">Announcements</span>
                <span class="on">suppressed</span>
