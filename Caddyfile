@@ -6,6 +6,24 @@
         output stdout
     }
 
+    @prod {
+        expression {env.PROD} == "true"
+    }
+
+    handle @prod {
+        respond /robots.txt 404
+    }
+
+    handle {
+        respond /robots.txt 200 {
+            body <<ROBOTS_TXT
+                User-agent: *
+                Disallow: /
+                ROBOTS_TXT
+            close
+        }
+    }
+
     root * /usr/share/caddy
 
     encode gzip
