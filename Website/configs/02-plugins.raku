@@ -14,7 +14,7 @@
         >,
         :report<link-plugin-assets-report sitemap>,
         :transfer<secondaries gather-js-jq gather-css images raku-doc-setup options-search sqlite-db
-        announcements announcements>,
+         announcements announcements>,
         :compilation<secondaries listfiles link-error-test options-search sqlite-db>,
         :completion<cro-app>,
     ),
