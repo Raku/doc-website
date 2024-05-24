@@ -1,3 +1,0 @@
-This directory contains only necessary content from the bulma repository. 
-Full credit and acknowledgement to the authors and maintainers of that repo.
-url = https://github.com/jgthms/bulma.git

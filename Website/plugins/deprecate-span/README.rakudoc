@@ -1,7 +1,0 @@
-=begin pod
-=TITLE Deprecate Format code
-
-A format code to add deprecate spans. V<D<text|deprecation>> The first element is shown,
-the deprecation is shown in a hover.
-
-=end pod

@@ -7,7 +7,7 @@
             hiliter font-awesome page-styling
             filtered-toc
             announcements
-            camelia simple-extras listfiles images deprecate-span filterlines
+            camelia simple-extras listfiles images filterlines
             tablemanager secondaries typegraph generated
             options-search link-error-test sqlite-db
             gather-js-jq gather-css sitemap
