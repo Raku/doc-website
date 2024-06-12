@@ -1,7 +1,7 @@
 %(
     :mode-sources<structure-sources>, # content for the website structure
     :mode-cache<structure-cache>, # cache for the above
-    :mode-ignore<search.rakudoc error-report.rakudoc language.rakudoc programs.rakudoc>, # files to ignore
+    :mode-ignore<search.rakudoc language.rakudoc programs.rakudoc>, # files to ignore
     :mode-obtain(), # not a remote repository
     :mode-refresh(), # ditto
     #| the array of strings sent to the OS by run to obtain the repo's commit-id
