@@ -1,7 +1,6 @@
 # Raku Documentation
 >The Collection files for the Raku Documentation site.
 
-
 ## Table of Contents
 [Installation](#installation)  
 [Building the documentation locally](#building-the-documentation-locally)  
