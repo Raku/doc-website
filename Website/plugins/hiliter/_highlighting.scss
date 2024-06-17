@@ -22,6 +22,8 @@
     float: right;
     font-size: xx-small;
     font-style: italic;
+    height: auto;
+    margin: 0 5px 0 0;
   }
 
 // required to match highlights-js css with raku highlighter css
@@ -36,6 +38,9 @@
    pre {
     background-color: $code-background;
     color: $code-foreground;
+    display: inline-block;
+    overflow: scroll;
+    width: 96%;
   }
   .rakudoc-in-code {
     padding: 1.25rem 1.5rem;
