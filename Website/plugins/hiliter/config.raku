@@ -8,7 +8,7 @@
 	:name<hiliter>,
 	:render,
 	:template-raku<template.raku>,
-	:version<0.1.4>,
+	:version<0.1.5>,
 	:css-link(
 		'href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css" title="light"',
 		'href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css" title="dark"',

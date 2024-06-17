@@ -85,6 +85,8 @@ textarea::selection {
   float: right;
   font-size: xx-small;
   font-style: italic;
+  height: auto;
+  margin: 0 5px 0 0;
 }
 .raku-code pre.browser-hl {
   padding: 7px;
@@ -98,6 +100,9 @@ textarea::selection {
 .raku-code pre {
   background-color: #212426;
   color: #f2f2f2;
+  display: inline-block;
+  overflow: scroll;
+  width: 96%;
 }
 .raku-code .rakudoc-in-code {
   padding: 1.25rem 1.5rem;
