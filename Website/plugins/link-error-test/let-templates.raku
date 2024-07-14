@@ -1,7 +1,7 @@
 #!/usr/bin/env perl6
 %(
     linkerrortest => sub (%prm, %tml) {
-        my $rv = '';
+        my $rv = sprintf("<p>Error tests run at %02d:%02d UTC on %s\</p>\n", .hour, .minute, .yyyy-mm-dd) with now.DateTime;
         if %prm<linkerrortest>:exists and +%prm<linkerrortest>.keys {
             my $data = %prm<linkerrortest>;
             # structure: no-file|no-target|unknown|remote
