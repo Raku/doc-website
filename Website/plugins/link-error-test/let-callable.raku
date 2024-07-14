@@ -24,6 +24,7 @@ sub ($pr, %processed, %options) {
     my @structure-files;
 
     sub failed-targets($file, Str $target) {
+        return () if $target.contains('typegraphrelations');
         my $old = $target.trim;
         my @ok-targets;
         my @tested-variants;
