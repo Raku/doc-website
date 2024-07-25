@@ -8,11 +8,11 @@
 	:name<filtered-toc>,
 	:render,
 	:template-raku<filtered-toc-template.raku>,
-	:js-script<filtered-toc.js>,
+	:jquery(['filtered-toc.js', 2], ),
 	:add-css<css/filtered-toc-dark.css css/filtered-toc-light.css>,
-	:jquery-link(
-		['src="https://rawgit.com/farzher/fuzzysort/master/fuzzysort.js"', 1],
+	:js-link(
+		['src="https://cdn.jsdelivr.net/npm/fuzzysort@2.0.4/fuzzysort.min.js"', 1],
 	),
-	:information<jquery-link>,
-	:version<0.1.3>,
+	:information<js-link script>,
+	:version<0.1.6>,
 )
