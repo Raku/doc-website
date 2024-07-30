@@ -4,7 +4,7 @@ steps:
   - label: "Build site"
     key: build
     commands:
-      - mkdir -p /home/builder/cache
+      - ./.buildkite/setup-typegraphs-cache.sh
       - zef install . --deps-only
       - ./bin_files/build-site --without-completion --no-status
       - ./bin_files/build-site --no-status EBook
