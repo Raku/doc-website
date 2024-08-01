@@ -5,7 +5,8 @@ use v6.d;
         qq:to/BLOCK/
         <!DOCTYPE html>
         <html lang="{ %prm<config><lang> }"
-            class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+            class="fontawesome-i2svg-active fontawesome-i2svg-complete"
+            style="scroll-padding-top:60px">
         { %tml<head-block>.(%prm, %tml) }
         <body class="has-navbar-fixed-top">
         { %tml<top-of-page>.(%prm, %tml) }
