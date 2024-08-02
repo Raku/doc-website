@@ -116,7 +116,7 @@ this distribution:
 =item2 render all the source documents
 
 However, if a change to a plugin has been made and it can be seen with only one or two
-source files, then it is quicker to use the C<build-site> option C<with-only>, eg
+source files, then it is quicker to use the C<build-site> option C<with-only>, e.g.
 
     bin_files/build-site --with-only='language.rakudoc operators'
 
