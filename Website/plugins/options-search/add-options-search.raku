@@ -7,7 +7,7 @@ sub ($pp, %processed, %options) {
     # This routine creates the JS data structure to be added to the JS query function
     # The data structure is an array of hashes :category, :value, :url
     # Category is used to split up items, value is what is searched for, url is where it is to be found.
-    # eg { "category": "Types", "value": "Distribution::Hash", "url": "/type/Distribution::Hash" }
+    # e.g. { "category": "Types", "value": "Distribution::Hash", "url": "/type/Distribution::Hash" }
     # The first three items are supplied for some reason.
     #| total length of search bar in char
     my $search-len = 110;

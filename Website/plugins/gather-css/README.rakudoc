@@ -27,7 +27,7 @@ A C<css-link> key's value is the url for a stylesheet.
 
 A template is generated so the the css is served with the output contents.
 
-When a C<css-link> key is included in the config of another plugin, eg ｢some reference string｣, it is included as
+When a C<css-link> key is included in the config of another plugin, e.g. ｢some reference string｣, it is included as
 C< <link rel=\"stylesheet\" $_ /> >, with C<$_> being the value I<some reference string>.
 
 =head1 Provides

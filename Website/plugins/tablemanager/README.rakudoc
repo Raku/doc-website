@@ -42,7 +42,7 @@ The following are implemented here:
 
 =head1 Custom blocks
 
-The block is C< =tablemanager> and requires the meta data C<:data>, eg
+The block is C< =tablemanager> and requires the meta data C<:data>, e.g.
 =begin code
     =for TableManager :data<routines>
     = firstSort('[[2,0]]')

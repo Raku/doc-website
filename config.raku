@@ -2,11 +2,11 @@ use v6.d;
 %(
     :cache<doc_cache>, # location relative to collection root of cached Pod
     :sources<local_raku_docs/doc>, # location of sources
-    #| the array of strings sent to the OS by run to obtain sources, eg git clone
+    #| the array of strings sent to the OS by run to obtain sources, e.g. git clone
     #| assumes CWD set to the directory of collection
     #:source-obtain(),
     :source-obtain<git clone https://github.com/Raku/doc.git local_raku_docs/>,
-    #| the array of strings run to refresh the sources, eg. git pull
+    #| the array of strings run to refresh the sources, e.g. git pull
     #| assumes CWD set to the directory of sources
     #:source-refresh(),
     :source-refresh<git -C local_raku_docs/ pull>,

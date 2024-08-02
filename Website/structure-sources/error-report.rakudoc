@@ -18,7 +18,7 @@ or some other error.
 (a file with the extension C<.pod6>). Locate the C< L<link label|link target> > that corresponds to the
 erroneous link.
 
-=item Work out what the mistake is, eg., a typo, or even the absence of an previously existing site.
+=item Work out what the mistake is, e.g., a typo, or even the absence of an previously existing site.
 
 =item Change the C< L<...> > code to one that will cure the glitch.
 
@@ -29,9 +29,9 @@ the suggested cure.
 =head2 Types of error
 
 The following types of error are common (the examples are illustrations ONLY)
-=item B<external> the link is to an external website, eg. C< L<See this blog| https://someones.xyzzzz.org/wierd_math>>
-=item B<local> the link is to another page in the Documentation, eg C< L<... operator | type/operators#... > >
-=item B<internal> the link is to another place in the same web-page, eg C< L< see funky stuff | #funky_stuff > >
+=item B<external> the link is to an external website, e.g. C< L<See this blog| https://someones.xyzzzz.org/wierd_math>>
+=item B<local> the link is to another page in the Documentation, e.g. C< L<... operator | type/operators#... > >
+=item B<internal> the link is to another place in the same web-page, e.g. C< L< see funky stuff | #funky_stuff > >
 
 =head1 Glitches found
 

@@ -12,7 +12,7 @@ content files. This requires modification of the templates, and js files in the 
 will need to be copied to the correct
 output directory.
 
-In addition, the order in which JS / ECMA libraries are loaded may be important, eg., leaflet-providers.js must
+In addition, the order in which JS / ECMA libraries are loaded may be important, e.g., leaflet-providers.js must
 load after the leaflet library. This is enabled by supplying an ordering parameter.
 The default ordering is 0. So
 any ordering a number greater than 0 will go after all 0-order files.
@@ -63,7 +63,7 @@ See local javascript files.
 The C<jquery-link> key in the other plugin's config file is assumed to be the URL to a JQuery source.
 
 If any C<jquery> or C<jquery-link> key is found, then this plugin will load the
-jquery lib specified in the config file for this plugin. (If another plugin requires a different, eg. later,
+jquery lib specified in the config file for this plugin. (If another plugin requires a different, e.g. later,
 version of JQuery, then the config for this plugin must be updated manually).
 
 =head2 Bottom
