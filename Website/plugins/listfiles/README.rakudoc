@@ -18,7 +18,7 @@ Place C<listfiles> in the C<plugins-required<compilation>> B<and> C<plugins-requ
 
 Place the C<=for ListFiles :select<...> > in the Pod6 content file. See L<below for select|ListFiles block>.
 
-In the content files that need to be listed, place meta data in the C<=begin pod> line, eg.
+In the content files that need to be listed, place meta data in the C<=begin pod> line, e.g.
 =begin code
     =begin pod :kind<Language> :category<tutorial>
 =end code
