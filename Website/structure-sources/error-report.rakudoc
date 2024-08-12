@@ -18,7 +18,7 @@ or some other error.
 (a file with the extension C<.pod6>). Locate the C< L<link label|link target> > that corresponds to the
 erroneous link.
 
-=item Work out what the mistake is, eg., a typo, or even the absence of an previously existing site.
+=item Work out what the mistake is, eg., a typo, or even the absence of a previously existing site.
 
 =item Change the C< L<...> > code to one that will cure the glitch.
 
