@@ -12,24 +12,24 @@ input and contributions of many individuals, and the initiative and
 persistence of a core group. At the time this website goes live, the
 following have contributed significantly to the project:
 
-Alexander Kiryuhin L<@Altai-man | https://github.com/Altai-man>, who adapted a web design
-by L<Ogden Webb | https://github.com/ogdenwebb > to the Raku documentation using the
+Alexander Kiryuhin L<@Altai-man|https://github.com/Altai-man>, who adapted a web design
+by L<Ogden Webb|https://github.com/ogdenwebb> to the Raku documentation using the
 Documentable tool kit.
 
-Richard Nabil Hainsworth L<@finanalyst | https://github.com/finanalyst>, who ported the work of
-@Altai-man to L<Collection| https://github.com/finanalyst/collection>.
+Richard Nabil Hainsworth L<@finanalyst|https://github.com/finanalyst>, who ported the work of
+@Altai-man to L<Collection|https://github.com/finanalyst/collection>.
 
-Coleman McFarland L<@dontlaugh| https://github.com/dontlaugh>, who created the web
+Coleman McFarland L<@dontlaugh|https://github.com/dontlaugh>, who created the web
 infrastructure to serve the web pages and automate updates.
 
-Will Coleda L<@coke| https://github.com/coke >, who has managed the process and brought the
+Will Coleda L<@coke|https://github.com/coke>, who has managed the process and brought the
 website on line.
 
 The previous website, from which this visualization has borrowed
 heavily, was designed and maintained by many people, though we mention
-Moritz Lenz L<@moritz | https://github.com/Moritz > and JJ Merelo L<@JJ | https://github.com/JJ> in
+Moritz Lenz L<@moritz|https://github.com/Moritz> and JJ Merelo L<@JJ|https://github.com/JJ> in
 particular. The many other people who have contributed to writing the documentation and tooling
-can be found in this L<Credits file | https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
+can be found in this L<Credits file|https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
 
 =for Generated  :headlevel(0)
 The web site was generated as follows:

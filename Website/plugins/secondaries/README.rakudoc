@@ -39,7 +39,7 @@ Raku documentation contains many C<=head> blocks (called headings below)
 that define routines (methods, roles, subs etc)
 operators, and syntax (infix postfix etc).
 
-Items with the same name (eg., say) may be defined and documented separately for different Types.
+Items with the same name (e.g., say) may be defined and documented separately for different Types.
 It makes sense to gather the same method name into a separate page.
 
 As the documentation was written, two types of headings were created:

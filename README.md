@@ -109,7 +109,7 @@ However, to make development here easier, there are three utilities which direct
 
 	*  render all the source documents
 
-However, if a change to a plugin has been made and it can be seen with only one or two source files, then it is quicker to use the `build-site` option `with-only`, eg
+However, if a change to a plugin has been made and it can be seen with only one or two source files, then it is quicker to use the `build-site` option `with-only`, e.g.
 
 ```
 bin_files/build-site --with-only='language.rakudoc operators'
