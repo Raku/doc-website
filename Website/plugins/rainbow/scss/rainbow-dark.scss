@@ -1,0 +1,42 @@
+/* Basic code colors */
+@import '_themes-colors.scss';
+$border:  $grey-darker;
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+$heading: $yellow;
+
+// Text colors
+$text: $white-ter;
+$text-invert: $black-ter;
+$text-light: lighten($text, 10);
+$text-dark: darken($text, 10);
+$text-strong: darken($text, 5);
+
+
+$code-background: #212426;
+$code-foreground: #f2f2f2;
+$code-selection: lighten($code-background, 10);
+
+$code-code-color:             #978DEB;
+$code-routine-color:          #978DEB;
+$code-comment-color:          #6C7292;
+$code-keyword-color:          #8DE1EB;
+$code-number-color:           #6295E3;
+$code-operator-color:         #E05C4C;
+$code-string-color:           #68F3CA;
+$code-type-color:             #E04C86;
+$code-scalar-color:           #EED891;
+$code-array-color:            #EED891;
+$code-hash-color:             #EED891;
+$code-pod-text-color:         #E04C86;
+$code-pod-markup-color:       #EED891;
+$code-string-delimiter-color: #E05C4C;
+$code-escape-color:           #E05C4C;
+$code-regex-special-color:    #6295E3;
+$code-regex-literal-color:    #6C7292;
+$code-regex-delimiter-color:  #E05C4C;
+
+// Fix selection background
+textarea::-moz-selection { background: $code-background; }
+textarea::selection { background: $code-background; }
+
+@import '_rainbow-main.scss';
