@@ -1,0 +1,12 @@
+=begin pod
+=TITLE rainbow is a plugin for Collection
+
+The plugin is for the render milestone
+
+It is a direct replacement for hiliter, but only relies on Raku.
+
+=head1 Custom blocks
+
+=head1 Templates
+
+=end pod
