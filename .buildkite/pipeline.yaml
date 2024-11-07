@@ -5,7 +5,7 @@ steps:
     key: build
     commands:
       - mkdir -p /home/builder/cache
-      - zef install . --deps-only
+      - POD_RENDER_NO_HIGHLIGHTER=1 zef install . --deps-only
       - ./bin_files/build-site --without-completion
       - ./.buildkite/archive.sh
       - buildkite-agent artifact upload ./raku-doc-website.tar.gz
