@@ -1,0 +1,35 @@
+/* Basic code colors */
+@import '_themes-colors.scss';
+$border: $grey;
+$shadow-below: 0 2px 3px 0 rgba( 0, 0, 0, 0.07 );
+$heading: $red;
+$code-background: #fafafa;
+$code-foreground: #030303;
+
+// Text colors
+$text: $black;
+$text-invert: $white-bis;
+$text-light: lighten($text, 10);
+$text-dark: darken($text, 10);
+$text-strong: darken($text, 5);
+
+$code-code-color:             #005C43;
+$code-routine-color:          #005C43;
+$code-comment-color:          #6D4F4B;
+$code-keyword-color:          #223B9E;
+$code-number-color:           #1C6301;
+$code-operator-color:         #C01823;
+$code-string-color:           #004FB3;
+$code-type-color:             #A3004F;
+$code-scalar-color:           #5503B3;
+$code-array-color:            #5503B3;
+$code-hash-color:             #5503B3;
+$code-pod-text-color:         #A3004F;
+$code-pod-markup-color:       #5503B3;
+$code-string-delimiter-color: #C01823;
+$code-escape-color:           #C01823;
+$code-regex-special-color:    #1C6301;
+$code-regex-literal-color:    #6C7292;
+$code-regex-delimiter-color:  #C01823;
+
+@import '_rainbow-main.scss';

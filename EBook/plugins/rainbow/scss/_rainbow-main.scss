@@ -1,0 +1,72 @@
+@import "_variables.scss";
+
+// Raku code highlighting
+.raku-code {
+  position: relative;
+  margin: $size-6 0;
+  border-bottom: 3px solid $border;
+  box-shadow: $shadow-below;
+  border: 1px solid $border;
+
+  button.copy-code {
+    cursor: pointer;
+    opacity: 0;
+    padding: 0 0.25rem 0.25rem 0.25rem;
+    position: absolute;
+  }
+  &:hover button.copy-code {
+    opacity: 0.5;
+  }
+
+  label {
+    float: right;
+    font-size: xx-small;
+    font-style: italic;
+    height: auto;
+    margin: 0 5px 0 0;
+  }
+
+// required to match highlights-js css with raku highlighter css
+  pre.browser-hl { padding: 7px; }
+
+  .code-name {
+    padding-top: $size-7;
+    padding-left: $size-5;
+    color: $heading;
+    font-weight: $weight-medium;
+  }
+   pre {
+    background-color: $code-background;
+    color: $code-foreground;
+    display: inline-block;
+    overflow: scroll;
+    width: 96%;
+  }
+  .rakudoc-in-code {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .section {
+    /* https://github.com/Raku/doc-website/issues/144 */
+    padding: 0rem;
+  }
+}
+/* the span classes in the code */
+.highlite-NAME_SCALAR { color: $code-scalar-color; }
+.highlite-NAME_ARRAY { color: $code-array-color; }
+.highlite-NAME_HASH { color: $code-hash-color; }
+.highlite-NAME_CODE { color: $code-code-color; }
+.highlite-KEYWORD { color: $code-keyword-color; }
+.highlite-OPERATOR { color: $code-operator-color; }
+.highlite-TYPE { color: $code-type-color; }
+.highlite-ROUTINE { color: $code-routine-color; }
+.highlite-STRING { color: $code-string-color; }
+.highlite-STRING_DELIMITER { color: $code-string-delimiter-color; }
+.highlite-ESCAPE { color: $code-escape-color; }
+.highlite-TEXT { color: $text; }
+.highlite-COMMENT { color: $code-comment-color; }
+.highlite-REGEX_SPECIAL { color: $code-regex-special-color; }
+.highlite-REGEX_LITERAL { color: $code-regex-literal-color; }
+.highlite-REGEX_DELIMITER { color: $code-regex-delimiter-color; }
+.highlite-POD_TEXT { color: $code-pod-text-color; }
+.highlite-POD_MARKUP { color: $code-pod-text-color; }
