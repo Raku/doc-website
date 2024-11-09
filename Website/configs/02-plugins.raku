@@ -4,7 +4,8 @@
     plugins-required => %(
         :setup<raku-doc-setup>,
         :render<
-            hiliter font-awesome page-styling
+            rainbow
+            font-awesome page-styling
             filtered-toc
             announcements
             camelia simple-extras listfiles images filterlines

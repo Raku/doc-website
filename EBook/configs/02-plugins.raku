@@ -4,7 +4,7 @@
     plugins-required => %(
         :setup<raku-doc-setup>,
         :render<
-            hiliter
+            rainbow
             ebook-embed rakudoc-table
             generated
             gather-css

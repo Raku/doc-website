@@ -1,0 +1,128 @@
+/* Basic code colors */
+textarea::-moz-selection {
+  background: #212426;
+}
+
+textarea::selection {
+  background: #212426;
+}
+
+.raku-code {
+  position: relative;
+  margin: 1rem 0;
+  border-bottom: 3px solid #3A3D4E;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
+  border: 1px solid #3A3D4E;
+}
+.raku-code button.copy-code {
+  cursor: pointer;
+  opacity: 0;
+  padding: 0 0.25rem 0.25rem 0.25rem;
+  position: absolute;
+}
+.raku-code:hover button.copy-code {
+  opacity: 0.5;
+}
+.raku-code label {
+  float: right;
+  font-size: xx-small;
+  font-style: italic;
+  height: auto;
+  margin: 0 5px 0 0;
+}
+.raku-code pre.browser-hl {
+  padding: 7px;
+}
+.raku-code .code-name {
+  padding-top: 0.75rem;
+  padding-left: 1.25rem;
+  color: #EED891;
+  font-weight: 500;
+}
+.raku-code pre {
+  background-color: #212426;
+  color: #f2f2f2;
+  display: inline-block;
+  overflow: scroll;
+  width: 96%;
+}
+.raku-code .rakudoc-in-code {
+  padding: 1.25rem 1.5rem;
+}
+.raku-code .section {
+  /* https://github.com/Raku/doc-website/issues/144 */
+  padding: 0rem;
+}
+
+/* the span classes in the code */
+.highlite-NAME_SCALAR {
+  color: #EED891;
+}
+
+.highlite-NAME_ARRAY {
+  color: #EED891;
+}
+
+.highlite-NAME_HASH {
+  color: #EED891;
+}
+
+.highlite-NAME_CODE {
+  color: #978DEB;
+}
+
+.highlite-KEYWORD {
+  color: #8DE1EB;
+}
+
+.highlite-OPERATOR {
+  color: #E05C4C;
+}
+
+.highlite-TYPE {
+  color: #E04C86;
+}
+
+.highlite-ROUTINE {
+  color: #978DEB;
+}
+
+.highlite-STRING {
+  color: #68F3CA;
+}
+
+.highlite-STRING_DELIMITER {
+  color: #E05C4C;
+}
+
+.highlite-ESCAPE {
+  color: #E05C4C;
+}
+
+.highlite-TEXT {
+  color: #f5f5f5;
+}
+
+.highlite-COMMENT {
+  color: #6C7292;
+}
+
+.highlite-REGEX_SPECIAL {
+  color: #6295E3;
+}
+
+.highlite-REGEX_LITERAL {
+  color: #6C7292;
+}
+
+.highlite-REGEX_DELIMITER {
+  color: #E05C4C;
+}
+
+.highlite-POD_TEXT {
+  color: #E04C86;
+}
+
+.highlite-POD_MARKUP {
+  color: #E04C86;
+}
