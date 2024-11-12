@@ -2,12 +2,11 @@
 =TITLE Raku Documentation
 =SUBTITLE The Collection files for the Raku Documentation site.
 
-(The README.md version is generated from C<repo_docs/README.rakdoc>)
+(The README.md version is generated from C<repo_docs/README.rakudoc>)
 
 =head1 Installation
 
-The assumption for this README is that the OS is a version of Linux, or that anyone
-wanting to attempt this knows their own OS well enough to understand the differences.
+These instructions assume a Unix-like system.
 
 This repo can be cloned and the main dependencies can be installed with
 
@@ -18,8 +17,10 @@ such as OpenSSL and LibArchive (make sure to install the `-dev` versions).
 
 Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
-Syntax highlighting of Raku code in the documentation still requires a `node.js` stack. See the documentation
-for `Raku::Pod::Render` for more information.
+We have reports of some users missing a curl dependency despite having curl available from the command line. If this
+happens to you, please add C<--exclude="curl"> to the zef command.
+
+If you are missing C<dot>, install the graphviz package for your OS.
 
 =head1 Building the documentation locally
 
@@ -129,42 +130,17 @@ the distribution C<raku-collection-plugin-development>.
 
 =head1 Deployment of website
 
-The Production version of the website is at C<docs.raku.org>. A regularly updated
-version is at C<docs-dev.raku.org>.
+The main branch is deployed to C<docs-dev.raku.org> every two hours. Look there
+to see your changes after they're merged.
 
-Here's how deployment works right now:
+The production version of the website is C<docs.raku.org>. Administrators update
+it manually, after verifying things look good on dev. 
 
-After a PR to the doc-website repository is reviewed, it's merged to C<main>
-The very fact that it is a merge to main is important metadata for the CI pipeline.
-See also the Buildkite docs on using conditionals in pipeline steps.
+=head1 Updates to the README
 
-What this means in practice is that the container is only built
-if the changes are happening on main:
-=item A merge to main from a PR
-=item A periodic scheduled build against main (every two hours);
-=item2 We need this one so we can pick up content changes from the other repo.
-=item The Raku scripts clone Raku/doc as a part of their build process.
+The markdown in the root of the project can be updated with this command
 
-Here is how the container build works:
-=item We start from a caddy base image
-=item The tarball of generated static source code is downloaded from Buildkite's
-temporary storage
-
-=item This tarball is added and unarchived inside the container
-=item The "Caddyfile" at the root of this repo is also added
-=item The container is "committed", tagged, and pushed to the quay.io container registry
-=item2 The tag that we use is quay.io/colemanx/raku-doc-website:latest
-=item2 The fact that we are overwriting "latest" every two hours on a
-periodic build can be seen L<here|https://quay.io/repository/colemanx/raku-doc-website?tab=history>
-
-=item Completely independent of this process is a cron job running on the
-dev server. This job simply pulls the latest container image and swaps out
-what's running. If this is working properly, the website at
-C<https://docs-dev.raku.org> is updated at most every two hours with the
-latest content, and the latest changes from this repo.
-
-Deployment to Production is similar, but not automatic. The site maintainer
-activates an agent running on the production server that pulls the latest
-container image and swaps out what's running.
+    raku --doc=MarkDown2 repo_docs/README.rakudoc > README.md
 
 =end pod
+
