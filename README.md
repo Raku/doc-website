@@ -1,4 +1,4 @@
-# Raku Documentation
+        # Raku Documentation
 >The Collection files for the Raku Documentation site.
 
 
@@ -11,13 +11,13 @@
 [Plugins and Templates](#plugins-and-templates)  
 [Working on Collection plugins](#working-on-collection-plugins)  
 [Deployment of website](#deployment-of-website)  
+[Updates to the README](#updates-to-the-readme)  
 
 ----
-(The README.md version is generated from `repo_docs/README.rakdoc`)
+(The README.md version is generated from `repo_docs/README.rakudoc`)
 
-# Setup
-
-The assumption for this README is that the OS is a version of Linux, or that anyone wanting to attempt this knows their own OS well enough to understand the differences.
+# Installation
+These instructions assume a Unix-like system.
 
 This repo can be cloned and the main dependencies can be installed with
 
@@ -28,13 +28,9 @@ in the cloned directory. There are a couple of C libraries that may need to be i
 
 Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
-Syntax highlighting of Raku code in the documentation still requires a ``node.js`` stack. See the documentation for ``Raku::Pod::Render`` for more information.
+We have reports of some users missing a curl dependency despite having curl available from the command line. If this happens to you, please add `--exclude="curl"` to the zef command.
 
-We have reports of some users missing a curl dependency despite having curl available from the command line. If this
-happens to you, please add ```--exclude="curl"``` to the zef command.
-
-If you are missing ``dot``, that's part of the graphviz package, which you can install with
-```sudo apt-get install graphviz```.
+If you are missing `dot`, install the graphviz package for your OS.
 
 # Building the documentation locally
 Generic build steps:
@@ -119,42 +115,16 @@ There is a file in `Website/structure-sources/language.rakudoc` and a file in th
 A better way, though, to tweak or add new plugins and see how they affect the website, is to install the distribution `raku-collection-plugin-development`.
 
 # Deployment of website
-The Production version of the website is at `docs.raku.org`. A regularly updated version is at `docs-dev.raku.org`.
+The main branch is deployed to `docs-dev.raku.org` every two hours. Look there to see your changes after they're merged.
 
-Here's how deployment works right now:
+The production version of the website is `docs.raku.org`. Administrators update it manually, after verifying things look good on dev. 
 
-After a PR to the doc-website repository is reviewed, it's merged to `main` The very fact that it is a merge to main is important metadata for the CI pipeline. See also the Buildkite docs on using conditionals in pipeline steps.
+# Updates to the README
+The markdown in the root of the project can be updated with this command
 
-What this means in practice is that the container is only built if the changes are happening on main:
-
-*  A merge to main from a PR
-
-*  A periodic scheduled build against main (every two hours);
-
-	*  We need this one so we can pick up content changes from the other repo.
-
-*  The Raku scripts clone Raku/doc as a part of their build process.
-
-Here is how the container build works:
-
-*  We start from a caddy base image
-
-*  The tarball of generated static source code is downloaded from Buildkite's temporary storage
-
-*  This tarball is added and unarchived inside the container
-
-*  The "Caddyfile" at the root of this repo is also added
-
-*  The container is "committed", tagged, and pushed to the quay.io container registry
-
-	*  The tag that we use is quay.io/colemanx/raku-doc-website:latest
-
-	*  The fact that we are overwriting "latest" every two hours on a periodic build can be seen [here](https://quay.io/repository/colemanx/raku-doc-website?tab=history)
-
-*  Completely independent of this process is a cron job running on the dev server. This job simply pulls the latest container image and swaps out what's running. If this is working properly, the website at `https://docs-dev.raku.org` is updated at most every two hours with the latest content, and the latest changes from this repo.
-
-Deployment to Production is similar, but not automatic. The site maintainer activates an agent running on the production server that pulls the latest container image and swaps out what's running.
-
+```
+raku --doc=MarkDown2 repo_docs/README.rakudoc > README.md
+```
 
 
 
@@ -162,4 +132,4 @@ Deployment to Production is similar, but not automatic. The site maintainer acti
 
 
 ----
-Rendered from README at 2023-09-10T19:18:22Z
+Rendered from  at 2024-11-12T02:43:57Z

@@ -17,6 +17,11 @@ such as OpenSSL and LibArchive (make sure to install the `-dev` versions).
 
 Cro is needed for serving the rendered files locally. You may wish to install it separately.
 
+We have reports of some users missing a curl dependency despite having curl available from the command line. If this
+happens to you, please add C<--exclude="curl"> to the zef command.
+
+If you are missing C<dot>, install the graphviz package for your OS.
+
 =head1 Building the documentation locally
 
 Generic build steps:
@@ -130,6 +135,12 @@ to see your changes after they're merged.
 
 The production version of the website is C<docs.raku.org>. Administrators update
 it manually, after verifying things look good on dev. 
+
+=head1 Updates to the README
+
+The markdown in the root of the project can be updated with this command
+
+    raku --doc=MarkDown2 repo_docs/README.rakudoc > README.md
 
 =end pod
 
