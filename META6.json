@@ -16,7 +16,7 @@
     "Doc::TypeGraph:ver<2.2.1.1+>",
     "Doc::TypeGraph::Viz:ver<2.2.1.1+>",
     "Cro::HTTP:ver<0.8.9>:auth<zef:cro>",
-    "Rainbow:ver<0.2.1+>:auth<zef:patrickb>"
+    "Rainbow:ver<0.3.0+>:auth<zef:patrickb>"
   ],
   "build-depends": [],
   "test-depends": [],
