@@ -146,7 +146,7 @@ sub (ProcessedPod $pp, %processed, %options) {
                    :contents(qq:to/CONT/)
                         See primary documentation
                         <a href="/{ .<source> }#{ .<target> }">in context\</a>
-                        for <b>{ .<target>.subst( / '_' / , ' ', :g ) }</b>
+                        for <b>{ .<target>.subst( / '_' / , ' ', :g ) }</b>\.
                     CONT
                 ), %templates);
                 $body ~= .<body>;
