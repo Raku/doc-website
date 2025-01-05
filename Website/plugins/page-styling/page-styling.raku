@@ -101,7 +101,7 @@ use v6.d;
                     Routines
                 </a>
                 <a class="navbar-item" href="https://raku.org" title="Home page for community">
-                    Raku™
+                    Raku<sup>®</sup>
                 </a>
                 <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku" title="IRC live chat">
                     Chat
