@@ -103,7 +103,7 @@ use v6.d;
                 <a class="navbar-item" href="https://raku.org" title="Home page for community">
                     Raku<sup>®</sup>
                 </a>
-                <a class="navbar-item" href="https://kiwiirc.com/client/irc.libera.chat/#raku" title="IRC live chat">
+                <a class="navbar-item" href="https://web.libera.chat/#raku" title="IRC live chat">
                     Chat
                 </a>
                 <div class="navbar-item has-dropdown is-hoverable">
