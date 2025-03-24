@@ -1,0 +1,15 @@
+=begin rakudoc :!toc
+=TITLE Operators in Raku
+=SUBTITLE Searchable table of documented operators
+
+Search in the table below for
+I<infix>, I<prefix>, I<postfix>, I<circumfix>, I<postcircumfix>, and I<listop> terms
+that have been documented.
+
+=for DataTable :data<operator> :!toc
+= :dt-perPageSelect([5,10,30,50,0])
+= :dt-searchable
+= :dt-fixedHeight
+Operators
+
+=end rakudoc

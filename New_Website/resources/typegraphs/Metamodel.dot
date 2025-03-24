@@ -1,0 +1,15 @@
+digraph "raku-type-graph" {
+    rankdir=LR;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "Any" [color="#000000", fontcolor="#000000", href="/type/Any", fontname="FreeSans"];
+    "Mu" [color="#000000", fontcolor="#000000", href="/type/Mu", fontname="FreeSans"];
+
+    // Superclasses
+    "Any" -> "Mu" [color="#000000"];
+
+    // Roles
+}

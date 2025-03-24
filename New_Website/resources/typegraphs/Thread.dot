@@ -1,0 +1,17 @@
+digraph "raku-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "Thread" [color="#000000", fontcolor="#000000", href="/type/Thread", fontname="FreeSans"];
+    "Mu" [color="#000000", fontcolor="#000000", href="/type/Mu", fontname="FreeSans"];
+    "Any" [color="#000000", fontcolor="#000000", href="/type/Any", fontname="FreeSans"];
+
+    // Superclasses
+    "Thread" -> "Any" [color="#000000"];
+    "Any" -> "Mu" [color="#000000"];
+
+    // Roles
+}

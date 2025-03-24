@@ -1,0 +1,23 @@
+digraph "raku-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "IO::Path::Parts" [color="#000000", fontcolor="#000000", href="/type/IO::Path::Parts", fontname="FreeSans"];
+    "Mu" [color="#000000", fontcolor="#000000", href="/type/Mu", fontname="FreeSans"];
+    "Any" [color="#000000", fontcolor="#000000", href="/type/Any", fontname="FreeSans"];
+    "Positional" [color="#6666FF", fontcolor="#6666FF", href="/type/Positional", fontname="FreeSans"];
+    "Associative" [color="#6666FF", fontcolor="#6666FF", href="/type/Associative", fontname="FreeSans"];
+    "Iterable" [color="#6666FF", fontcolor="#6666FF", href="/type/Iterable", fontname="FreeSans"];
+
+    // Superclasses
+    "IO::Path::Parts" -> "Any" [color="#000000"];
+    "Any" -> "Mu" [color="#000000"];
+
+    // Roles
+    "IO::Path::Parts" -> "Positional" [color="#6666FF"];
+    "IO::Path::Parts" -> "Associative" [color="#6666FF"];
+    "IO::Path::Parts" -> "Iterable" [color="#6666FF"];
+}

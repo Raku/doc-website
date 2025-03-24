@@ -1,0 +1,17 @@
+digraph "raku-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "Backtrace::Frame" [color="#000000", fontcolor="#000000", href="/type/Backtrace::Frame", fontname="FreeSans"];
+    "Mu" [color="#000000", fontcolor="#000000", href="/type/Mu", fontname="FreeSans"];
+    "Any" [color="#000000", fontcolor="#000000", href="/type/Any", fontname="FreeSans"];
+
+    // Superclasses
+    "Backtrace::Frame" -> "Any" [color="#000000"];
+    "Any" -> "Mu" [color="#000000"];
+
+    // Roles
+}

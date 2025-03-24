@@ -1,0 +1,13 @@
+=begin rakudoc :!toc :type<info>
+
+=TITLE 404
+
+We're sorry, but the content you tried to reach wasn't found.
+
+We recently deployed a new
+version of the site, so please feel free to
+L<report any issues|https://github.com/Raku/doc-website/issues/>.
+
+Thank you!
+
+=end rakudoc

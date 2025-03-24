@@ -1,0 +1,27 @@
+digraph "raku-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "Systemic" [color="#6666FF", fontcolor="#6666FF", href="/type/Systemic", fontname="FreeSans"];
+    "Mu" [color="#000000", fontcolor="#000000", href="/type/Mu", fontname="FreeSans"];
+    "Any" [color="#000000", fontcolor="#000000", href="/type/Any", fontname="FreeSans"];
+    "VM" [color="#000000", fontcolor="#000000", href="/type/VM", fontname="FreeSans"];
+    "Raku" [color="#000000", fontcolor="#000000", href="/type/Raku", fontname="FreeSans"];
+    "Compiler" [color="#000000", fontcolor="#000000", href="/type/Compiler", fontname="FreeSans"];
+    "Perl" [color="#000000", fontcolor="#000000", href="/type/Perl", fontname="FreeSans"];
+
+    // Superclasses
+    "Any" -> "Mu" [color="#000000"];
+    "VM" -> "Any" [color="#000000"];
+    "Raku" -> "Any" [color="#000000"];
+    "Compiler" -> "Any" [color="#000000"];
+    "Perl" -> "Raku" [color="#000000"];
+
+    // Roles
+    "VM" -> "Systemic" [color="#6666FF"];
+    "Raku" -> "Systemic" [color="#6666FF"];
+    "Compiler" -> "Systemic" [color="#6666FF"];
+}

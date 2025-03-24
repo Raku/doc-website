@@ -12,9 +12,21 @@
         RakuDoc::Plugin::HTML::SCSS
         Elucid8::Plugin::HTML::UISwitcher
         Elucid8::Plugin::HTML::AutoIndex
+        Elucid8::Plugin::HTML::SiteMap
+        Raku-Doc-Website::PageStyling
+        Raku-Doc-Website::SiteData
+        Raku-Doc-Website::DataTable
+        Raku-Doc-Website::Search
+        Raku-Doc-Website::TypeGraphs
+        Raku-Doc-Website::Edit-in-git
+        Raku-Doc-Website::RakuREPL
     >,
+    setup => (# sequence not hash because order can matter
+        RakuREPL => 'set-host-port',
+    ),
     pre-file-render => (# sequence not hash because order can matter
         SiteData => 'initialise',
+        TypeGraphs => 'add-typegraph',
     ),
     post-file-render => (# sequence not hash because order can matter
     ),
@@ -23,5 +35,6 @@
         Search => 'prepare-search-data',
     ),
     post-all-files => ( # sequence because order matters
+        SiteMap => 'create-site-map'
     )
 )

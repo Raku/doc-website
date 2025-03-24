@@ -1,0 +1,15 @@
+=begin rakudoc :!toc :!index :no-glossary :no-toc :type<info>
+=TITLE Routines in Raku
+=SUBTITLE Searchable table of documented routines
+
+Search in the table below for
+I<subs>, I<methods>, I<terms>, I<routines>, I<submethods>, and I<traits>
+that have been documented.
+
+=for DataTable :data<routine> :!toc
+= :dt-perPageSelect([5,10,30,50,0])
+= :dt-searchable
+= :dt-fixedHeight
+Routines
+
+=end rakudoc

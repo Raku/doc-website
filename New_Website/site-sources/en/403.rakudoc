@@ -1,0 +1,18 @@
+=begin rakudoc :no-toc :no-glossary :class<content_404>  :type<info>
+
+=TITLE 403
+
+=CameliaShadow
+
+=head2 403: Forbidden
+
+We're sorry, the content you tried to reach should be an implementation page and should be reachable
+using a more human readable route.
+
+Please feel free to
+L<report a Forbidden page issue|https://github.com/Raku/doc-website/issues/>.
+It will help if you copy the URL you tried and the steps you used that led to the URL.
+
+Thank you!
+
+=end rakudoc

@@ -1,0 +1,15 @@
+=begin rakudoc :!toc :!index :type<info>
+=TITLE Syntax items in Raku
+=SUBTITLE Searchable table of documented syntactic elements
+
+Search in the table below for
+I<twigil>, I<constant>, I<variable>, I<quote> and I<declarator> terms
+that have been documented.
+
+=for DataTable :data<syntax> :!toc
+= :dt-perPageSelect([5,10,30,50,0])
+= :dt-searchable
+= :dt-fixedHeight
+Syntax
+
+=end rakudoc
