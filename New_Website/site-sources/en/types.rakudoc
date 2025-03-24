@@ -1,0 +1,47 @@
+=begin pod :no-glossary :page-content-columns
+=TITLE Documented Types
+=SUBTITLE Built-in types
+
+This is a list of the built-in types that are documented, sorted by class/enum/module/role
+and by categories.
+
+=for ListFiles  :select<kind=Type, subkind=class, category=basic> :caption<Basic classes>
+Basic classes
+
+=for ListFiles  :select<kind=Type, subkind=class, category=composite> :caption<Composite classes>
+Composite classes
+
+=for ListFiles :select<kind=Type, subkind=class, category=domain\-specific> :caption<Domain-specific classes>
+Domain-specific classes
+
+=for ListFiles :select<kind=Type, subkind=class, category=exception> :caption<Exception classes>
+Exception classes
+
+=for ListFiles :select<kind=Type, subkind=class, category=metamodel> :caption<Metamodel classes>
+Metamodel classes
+
+=for ListFiles :select<kind=Type, subkind=enum, category=basic> :caption<Basic enums>
+Basic enums
+
+=for ListFiles :select<kind=Type, subkind=enum, category=domain\-specific> :caption<Domain-specific enums>
+Domain-specific enums
+
+=for ListFiles :select<kind=Type, subkind=module, category=module> :caption<Module modules>
+Module modules
+
+=for ListFiles :select<kind=Type, subkind=role, category=basic> :caption<Basic roles>
+Basic roles
+
+=for ListFiles :select<kind=Type, subkind=role, category=composite> :caption<Composite roles>
+Composite roles
+
+=for ListFiles :select<kind=Type, subkind=role, category=domain\-specific> :caption<Domain-specific roles>
+Domain-specific roles
+
+=for ListFiles :select<kind=Type, subkind=role, category=exception> :caption<Exception roles>
+Exception roles
+
+=for ListFiles :select<kind=Type, subkind=role, category=metamodel> :caption<Metamodel roles>
+Metamodel roles
+
+=end pod

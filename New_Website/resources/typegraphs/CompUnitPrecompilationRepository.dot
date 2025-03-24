@@ -1,0 +1,13 @@
+digraph "raku-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "CompUnit::PrecompilationRepository" [color="#6666FF", fontcolor="#6666FF", href="/type/CompUnit::PrecompilationRepository", fontname="FreeSans"];
+
+    // Superclasses
+
+    // Roles
+}

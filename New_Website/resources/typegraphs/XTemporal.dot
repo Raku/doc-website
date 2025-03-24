@@ -1,0 +1,28 @@
+digraph "raku-type-graph" {
+    rankdir=BT;
+    splines=polyline;
+    overlap=false;
+
+    graph [truecolor=true bgcolor="#FFFFFF"];
+    // Types
+    "X::Temporal" [color="#6666FF", fontcolor="#6666FF", href="/type/X::Temporal", fontname="FreeSans"];
+    "Mu" [color="#000000", fontcolor="#000000", href="/type/Mu", fontname="FreeSans"];
+    "Any" [color="#000000", fontcolor="#000000", href="/type/Any", fontname="FreeSans"];
+    "Exception" [color="#000000", fontcolor="#000000", href="/type/Exception", fontname="FreeSans"];
+    "X::DateTime::InvalidDeltaUnit" [color="#000000", fontcolor="#000000", href="/type/X::DateTime::InvalidDeltaUnit", fontname="FreeSans"];
+    "X::Temporal::InvalidFormat" [color="#000000", fontcolor="#000000", href="/type/X::Temporal::InvalidFormat", fontname="FreeSans"];
+    "X::DateTime::TimezoneClash" [color="#000000", fontcolor="#000000", href="/type/X::DateTime::TimezoneClash", fontname="FreeSans"];
+
+    // Superclasses
+    "X::Temporal" -> "Exception" [color="#000000"];
+    "Any" -> "Mu" [color="#000000"];
+    "Exception" -> "Any" [color="#000000"];
+    "X::DateTime::InvalidDeltaUnit" -> "Exception" [color="#000000"];
+    "X::Temporal::InvalidFormat" -> "Exception" [color="#000000"];
+    "X::DateTime::TimezoneClash" -> "Exception" [color="#000000"];
+
+    // Roles
+    "X::DateTime::InvalidDeltaUnit" -> "X::Temporal" [color="#6666FF"];
+    "X::Temporal::InvalidFormat" -> "X::Temporal" [color="#6666FF"];
+    "X::DateTime::TimezoneClash" -> "X::Temporal" [color="#6666FF"];
+}

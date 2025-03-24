@@ -1,0 +1,241 @@
+=begin pod :no-toc :no-glossary :no-meta :direct-wrap
+=TITLE English Index
+
+=begin Html :!toc
+<div id="wrapper" class="raku-webs">
+      <section class="hero is-medium is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-1 is-size-2-mobile has-text-centered">
+              Raku<sup>®</sup> documentation
+            </h1>
+            <h2 class="subtitle is-4 has-text-centered mt-3">
+              Welcome to the official documentation of the Raku<sup>®</sup> programming language!
+            </h2>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container px-4">
+          <div class="columns is-multiline">
+            <!-- Card -->
+            <div class="column is-one-half">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/introduction">
+                      <span class="icon is-large has-text-primary">
+                        <i class="fas fa-graduation-cap icon-large"></i>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/introduction">Getting started, Migration guides from other languages, &amp; Tutorials</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    Documents introducing the language for various audiences.
+                  </div>
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="/introduction">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-half">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/reference">
+                      <span class="icon is-large has-text-primary">
+                        <i class="fas fa-book icon-large"></i>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/reference">Language References</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    Documents explaining the various conceptual parts of the language.
+                  </div>
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="/reference">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/types">
+                      <span class="icon is-large has-text-primary">
+                        <i class="fas fa-layer-group icon-large"></i>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/types">Type Reference</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    Index of built-in classes, roles and enums.
+                  </div>
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="/types">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/routines">
+                      <span class="icon is-large has-text-primary">
+                        <i class="fas fa-paperclip icon-large"></i>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/routines">Routine Reference</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    Index of built-in subroutines and methods.
+                  </div>
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="/routines">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-third">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/miscellaneous">
+                      <span class="icon is-large has-text-primary">
+                        <i class="fas fa-code icon-large"></i>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/miscellaneous">Miscellaneous</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    Documents explaining experimental topics and Raku programs rather than the language itself.
+                  </div>
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="/miscellaneous">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-half">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/language/faq">
+                      <span class="icon is-large has-text-primary">
+                        <svg class="svg-inline--fa fa-question-circle fa-w-16 icon-large" aria-hidden="true" data-prefix="fas" data-icon="question-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122 17.864-22.658 30.113-35.797 57.303-35.797 20.429 0 45.698 13.148 45.698 32.958 0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667 0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46 0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"></path></svg><!-- <i class="fas fa-question-circle icon-large"></i> -->
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/language/faq">FAQs (Frequently Asked Questions)</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    A collection of questions that have cropped up often, along with answers.
+                  </div>
+                  <div class="has-text-centered">
+                    <a class="button is-primary" href="/language/faq">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-half">
+              <div class="card card-home">
+                <div class="card-content">
+                  <div class="has-text-centered">
+                    <a href="/language/community">
+                      <span class="icon is-large has-text-primary">
+                        <svg class="svg-inline--fa fa-user-friends fa-w-20 icon-large" aria-hidden="true" data-prefix="fas" data-icon="user-friends" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z"></path></svg><!-- <i class="fas fa-user-friends icon-large"></i> -->
+                      </span>
+                    </a>
+                  </div>
+                  <div class="content has-text-centered">
+                    <p class="title is-5 has-text-primary"><a href="/language/community">Community</a></p>
+                  </div>
+                  <div class="content has-text-centered">
+                    Information about the Raku development community, email lists, IRC and IRC bots, and blogs.
+                  </div>
+                    <div class="has-text-centered">
+                    <a class="button is-primary" href="/language/community">
+                      <strong>Learn more</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card ends -->
+            <!-- Columns ends -->
+          </div>
+        </div>
+      </section>
+      <div class="links-block">
+          <div class="container px-4 py-5">
+            <div class="columns is-vcentered">
+             <div class="column is-one-third has-text-centered">
+               <div class="pt-5">
+                 <span class="icon is-large">
+                   <svg class="svg-inline--fa fa-hashtag fa-w-14 icon-large" aria-hidden="true" data-prefix="fas" data-icon="hashtag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M440.667 182.109l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l14.623-81.891C377.123 38.754 371.468 32 363.997 32h-40.632a12 12 0 0 0-11.813 9.891L296.175 128H197.54l14.623-81.891C213.477 38.754 207.822 32 200.35 32h-40.632a12 12 0 0 0-11.813 9.891L132.528 128H53.432a12 12 0 0 0-11.813 9.891l-7.143 40C33.163 185.246 38.818 192 46.289 192h74.81L98.242 320H19.146a12 12 0 0 0-11.813 9.891l-7.143 40C-1.123 377.246 4.532 384 12.003 384h74.81L72.19 465.891C70.877 473.246 76.532 480 84.003 480h40.632a12 12 0 0 0 11.813-9.891L151.826 384h98.634l-14.623 81.891C234.523 473.246 240.178 480 247.65 480h40.632a12 12 0 0 0 11.813-9.891L315.472 384h79.096a12 12 0 0 0 11.813-9.891l7.143-40c1.313-7.355-4.342-14.109-11.813-14.109h-74.81l22.857-128h79.096a12 12 0 0 0 11.813-9.891zM261.889 320h-98.634l22.857-128h98.634l-22.857 128z"></path></svg><!-- <i class="fas fa-hashtag icon-large"></i> -->
+                 </span>
+               </div>
+             </div>
+             <div class="column is-two-thirds">
+               <div class="columns px-4">
+              <div class="column">
+                <p class="head">Community</p>
+                <ul>
+                  <li><a href="https://www.reddit.com/r/rakulang/">Reddit</a></li>
+                  <li><a href="https://fosstodon.org/@rakulang">Mastodon</a></li>
+                  <li><a href="https://www.facebook.com/groups/1595443877388632/">Facebook</a></li>
+                  <li><a href="https://stackoverflow.com/questions/tagged/raku">Stack Overflow</a></li>
+                </ul>
+              </div>
+              <div class="column">
+                <p class="head">Resources</p>
+                <ul>
+                  <li><a href="https://raku.guide/">The Raku Guide</a></li>
+                  <li><a href="https://perl6book.com/">Books</a></li>
+                  <li><a href="https://www.raku.org/community/rosettacode">Rosetta Code</a></li>
+                </ul>
+              </div>
+              <div class="column">
+                <p class="head">Explore</p>
+                <ul>
+                  <li><a href="https://planet.raku.org/">Raku Blog Aggregator</a></li>
+                  <li><a href="https://rakudoweekly.blog/">Rakudo Weekly</a></li>
+                  <li><a href="https://perlweeklychallenge.org/">The Weekly Challenge</a></li>
+                  <li><a href="https://raku-advent.blog/">Raku Advent Calendar</a></li>
+                </ul>
+              </div>
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+=end Html
+
+=end pod
