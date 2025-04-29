@@ -95,6 +95,7 @@ method prepare-search-data( $rdp, $lang, $to, %config ) {
     # search items pointing to Composites
     for %fd.kv -> $fn, %fdata {
         next if %fdata<type> eq <glue info>.any; # ignore contents of glue files.
+        my $route = %fdata<route>;
         my $value = %fdata<title>;
         my $info = %fdata<subtitle> // '';
         if %fdata<type> eq 'primary' {
@@ -102,7 +103,7 @@ method prepare-search-data( $rdp, $lang, $to, %config ) {
                 :category( (%fdata<config><subkind> // 'Language').tc ), # a default subkind in case one is missing.
                 :$value,
                 :$info,
-                :url(escape-json("/$lang/$fn")),
+                :url(escape-json($route)),
                 :type<primary>, # type is used to filter search candidates
             );
             # exclude headings from all composite files because they are duplicates
@@ -111,7 +112,7 @@ method prepare-search-data( $rdp, $lang, $to, %config ) {
                     :category<Heading>,
                     :value(.<caption>),
                     :info('Section in <b>' ~ $value ~ '</b>'),
-                    :url(escape-json("/$lang/$fn.html#" ~ .<target>)),
+                    :url(escape-json("$route\.html#" ~ .<target>)),
                     :type<headings>,
                 )
             }
@@ -121,7 +122,7 @@ method prepare-search-data( $rdp, $lang, $to, %config ) {
                         :category<Indexed>,
                         :value( "$label [{ .<place> }]"),
                         :info("in <b>{$value}\</b>"),
-                        :url(escape-json("/$lang/$fn.html#" ~ .<target>)),
+                        :url(escape-json("$route\.html#" ~ .<target>)),
                         :type<indexed>,
                     )
                 }
@@ -133,7 +134,7 @@ method prepare-search-data( $rdp, $lang, $to, %config ) {
                 :category<Composite>,
                 :$value,
                 :$info,
-                :url(escape-json("/$lang/$fn")),
+                :url(escape-json($route)),
                 :type<composite>,
             )
         }
@@ -268,7 +269,7 @@ method options-search {
     };
     var searchProcess = false;
     var searchBox;
-    document.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('load', function () {
         searchBox = document.getElementById('Elucid8_search_wrapper');
         searchOptions = persisted_searchOptions();
         // searchOptions will always be null until an option is changed from default and stored
@@ -423,18 +424,19 @@ method options-search {
                     }
                     el.querySelector('input').checked = searchProcess;
                 }
+                // add change listener
+                for ( const prop in searchOptions ) {
+                    let opt = document.getElementById('options-search-' + prop );
+                    opt.checked = searchOptions[ prop ];
+                    opt.addEventListener('change', function() {
+                        searchOptions[ prop ] = opt.checked;
+                        persist_searchOptions( searchOptions );
+                        autoCompleteJS.start();
+                    });
+                };
             });
         });
-        // add change listener
-        for ( const prop in searchOptions ) {
-            let opt = document.getElementById('options-search-' + prop );
-            opt.checked = searchOptions[ prop ];
-            opt.addEventListener('change', function() {
-                searchOptions[ prop ] = opt.checked;
-                persist_searchOptions( searchOptions );
-                autoCompleteJS.start();
-            });
-        };
+
         // Functions to open and close a modal
         function openModal($el) {
             $el.classList.add('is-active');

@@ -2,12 +2,23 @@
     :repository-store<repos>,
     :repository-info-file<repo-info.rakuon>,
     repositories => %(
+        for-testing => %(
+            repo-name => 'finanalyst/tmp-test',
+            description => 'testing file',
+            languages => %(
+                en => %(
+                    source-entry => '',
+                    destination => 'language',
+                    :select('TestFile',),
+                ),
+            ),
+        ),
         raku-docs => %(
             repo-name => 'Raku/doc',
             description => 'documentation of the Raku language',
             languages => %(
                 en => %(
-                    source-entry => 'doc',
+                    source-entry => 'doc/',
                     destination-modify => '*.subst(/ ^\w /, *.lc)',
                 ),
             ),
@@ -18,7 +29,7 @@
             languages => %(
                 en => %(
                     source-entry => '',
-                    destination => 'language/',
+                    destination => 'language',
                     :select('rakudoc_v2',),
                 ),
             ),
@@ -28,7 +39,7 @@
             description => 'website sources',
             languages => %(
                 en => %(
-                    source-entry => 'site-sources/en',
+                    source-entry => 'site-sources/en/',
                 ),
             ),
         ),

@@ -13,8 +13,9 @@
         Language/operators Language/REPL Language/variables Language/math Language/101-basics Type/AST
         Type/Anytype/IO/Handle Type/IO/CatHandle Type/IO/Special Type/IO/ArgFiles Type/IO/Socket
         Type/IO/Notification Type/IO/Pipe Type/IO/Spec Type/IO/Pathtype/RakuAST/Doc
-        RakuDoc_v2
+        rakudoc_v2
         about 403 404 license
+        TestFile
     >,           #| only render files in this list
     :ignore(),              #| ignore files in this list
     :publication<publication>, #| directory where rendered HTML files are placed
