@@ -11,6 +11,7 @@ has %.config =
         :scss([self.edit-scss,1],),
         ui-tokens => %(
             :EditButtonTip('Edit this page. Modified&#13; '),
+            :EditButtonTipUnable('Cannot edit this page.'),
             :EditButtonModal(q:to/MOD/),
                 This is an automatically generated page and cannot be edited directly. Text in Composite
                 pages, (URLs starting with 'routine' or 'syntax') can be edited by clicking on the
@@ -31,22 +32,36 @@ method templates {
                 when <primary glue info>.any {
                     my $commit-time = '<i class="fa fa-ban"></i>';
                     $commit-time = %sd<modified>.yyyy-mm-dd if %sd<modified>:exists;
-                    my $repo-path = %sd<path>;
-                    $repo-path = $_ with %sd<repo-path>;
-                    $repo-path = $tmpl.globals.escape.( $repo-path );
-                    qq:to/BLOCK/
-                    <div class="page-edit">
-                        <a class="button page-edit-button tooltip" href="$repo-path">
-                            <span class="icon">
-                                <i class="fas fa-pen-alt is-medium"></i>
-                            </span>
-                            <p class="tooltiptext">
-                                <span class="Elucid8-ui" data-UIToken="EditButtonTip">EditButtonTip</span>
-                                $commit-time
-                            </p>
-                        </a>
-                      </div>
-                    BLOCK
+                    if %sd<repo-name>:exists and %sd<repo-path>:exists {
+                        qq:to/BLOCK/
+                        <div class="page-edit">
+                            <a class="button page-edit-button tooltip"
+                                href="https://github.com/{%sd<repo-name>}/edit/main/{%sd<repo-path>}">
+                                <span class="icon">
+                                    <i class="fas fa-pen-alt is-medium"></i>
+                                </span>
+                                <p class="tooltiptext">
+                                    <span class="Elucid8-ui" data-UIToken="EditButtonTip">EditButtonTip</span>
+                                    $commit-time
+                                </p>
+                            </a>
+                          </div>
+                        BLOCK
+                    }
+                    else  {
+                        q:to/NOEDIT/
+                        <div class="page-edit">
+                            <a class="button page-edit-button tooltip">
+                                <span class="icon">
+                                    <i class="fas fa-pen-alt is-medium"></i>
+                                </span>
+                                <p class="tooltiptext">
+                                    <span class="Elucid8-ui" data-UIToken="EditButtonTipUnable">EditButtonTipUnable</span>
+                                </p>
+                            </a>
+                        </div>
+                        NOEDIT
+                    }
                 }
                 when 'composite'  {
                     qq:to/BLOCK/

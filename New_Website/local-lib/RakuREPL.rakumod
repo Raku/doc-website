@@ -33,7 +33,7 @@ method enable( RakuDoc::Processor:D $rdp ) {
 }
 method set-host-port( %final-config ) {
     my $js = qq:to/VARS/;
-    var websocketHost =  '{ %final-config<RakuREPL><websocket-host> // %!config<websocket-host> }';
+    var replWebsocket =  '{ %final-config<plugin-options><RakuREPL><repl-websocket> }';
     VARS
     %!config<js>.push: [  $js, 1 ] ; # the script with host/port has to be before the repl-js script
 }
@@ -49,9 +49,7 @@ method repl-js {
         const connect = function() {
             // Return a promise, which will wait for the socket to open
             return new Promise((resolve, reject) => {
-                // This calculates the link to the websocket.
-                const socketUrl = `wss://${websocketHost}/raku_repl`;
-                socket = new WebSocket(socketUrl);
+                socket = new WebSocket(replWebsocket);
 
                 // This will fire once the socket opens
                 socket.onopen = (e) => {
@@ -99,7 +97,7 @@ method repl-js {
             }
         }
         // When the document has loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('load', function() {
             var replEnabled = false;
             var barVisible = false;
             replObject = document.getElementById('raku-repl');

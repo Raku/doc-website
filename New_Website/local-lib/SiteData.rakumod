@@ -276,6 +276,7 @@ class Raku-Doc-Website::SiteData {
                 my $rv = $rdp.render($comp-ast,:source-data( %(
                     :name('&#x1F916;'),
                     :path($url),
+                    :route($url),
                     :$lang,
                     :modified(now.DateTime),
                     home-page => "/$lang/{%config<landing-page>}",
@@ -300,6 +301,7 @@ class Raku-Doc-Website::SiteData {
                     config => %( :$kind, :!index ),
                     :modified(now.DateTime),
                     :type<composite>,
+                    :route($url),
                 ).pairs;
             }
         }
