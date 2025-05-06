@@ -1,7 +1,6 @@
 %(
     # plugins in the order to be applied
     # templates in later plugins over-ride or can use those in earlier ones
-    # elucid8-build prefixes names here with 'RakuDoc::Plugin::HTML::'
     plugins => <
         RakuDoc::Plugin::HTML::Hilite
         RakuDoc::Plugin::HTML::ListFiles
@@ -20,11 +19,12 @@
         Raku-Doc-Website::TypeGraphs
         Raku-Doc-Website::Edit-In-Browser
         Raku-Doc-Website::RakuREPL
+        Raku-Doc-Website::CreditObject
     >,
     setup => (# sequence not hash because order can matter
         RakuREPL => 'set-host-port',
         Edit-In-Browser => 'set-host-port',
-#        CreditTable => 'get-repo-data',
+        CreditObject => 'get-repo-data',
     ),
     pre-file-render => (# sequence not hash because order can matter
         SiteData => 'initialise',

@@ -101,6 +101,10 @@ method templates {
                 [~] %g-data<js-link>.map({ '<script ' ~ $_ ~ "></script>\n" })
             !! ''
             }
+            {%g-data<js-module>:exists && %g-data<js-module>.elems ??
+            [~] %g-data<js-module>.map({ '<script type="module">' ~ $_ ~ "</script>\n" })
+            !! ''
+            }
             {%g-data<js>:exists && %g-data<js>.elems ??
                 [~] %g-data<js>.map({ '<script>' ~ $_ ~ "</script>\n" })
             !! ''
