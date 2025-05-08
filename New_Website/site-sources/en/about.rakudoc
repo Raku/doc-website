@@ -30,7 +30,10 @@ website on line.
 The previous website, from which this visualization has borrowed
 heavily, was designed and maintained by many people, though we mention
 Moritz Lenz L<@moritz | https://github.com/Moritz > and JJ Merelo L<@JJ | https://github.com/JJ> in
-particular. The many other people who have contributed to writing the documentation and tooling
-can be found in this L<Credits file | https://raw.githubusercontent.com/Raku/doc/master/CREDITS>.
+particular.
+
+The many other people who have contributed to writing the documentation and tooling
+are demonstrated in the following graphic:
+=CreditObject
 
 =end pod
