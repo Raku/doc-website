@@ -32,7 +32,7 @@ jobs:
         file: ./New_Website/Dockerfile
         # Only PUSH if it's a commit to main
         push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        tags: quay.io/raku-doc-website:latest
+        tags: quay.io/chroot.club/raku-doc-website:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
