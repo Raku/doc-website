@@ -1,0 +1,30 @@
+name: Build Docker Container
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./New_Website
+        file: ./New_Website/Dockerfile
+        push: false
+        tags: new-website:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
