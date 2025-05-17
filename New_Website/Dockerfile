@@ -4,6 +4,11 @@ ENV PATH="/usr/share/perl6/site/bin:$PATH"
 
 ARG rakudo=main
 
+# Registry-specific metadata to not store every
+# build indefinately
+ARG quay_expiration
+LABEL quay.expires-after=${quay_expiration}
+
 # Leave git installed for zef.
 RUN apk add --no-cache gcc git linux-headers make musl-dev perl graphviz
 RUN git clone -b $rakudo https://github.com/rakudo/rakudo       \

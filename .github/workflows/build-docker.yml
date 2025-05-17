@@ -30,8 +30,11 @@ jobs:
       with:
         context: ./New_Website
         file: ./New_Website/Dockerfile
-        push: false
+        # Only PUSH if it's a commit to main
+        push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         tags: quay.io/raku-doc-website:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        build-args: |
+          quay_expiration=8w
 
