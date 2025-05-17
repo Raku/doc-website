@@ -24,7 +24,7 @@ jobs:
         context: ./New_Website
         file: ./New_Website/Dockerfile
         push: false
-        tags: new-website:latest
+        tags: quay.io/raku-doc-website:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
