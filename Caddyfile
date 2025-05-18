@@ -7,7 +7,7 @@
     }
 
     @prod {
-        expression {env.PROD} == "true"
+        host docs.raku.org
     }
 
     handle @prod {
