@@ -3,7 +3,6 @@ agents:
 steps:
   - label: "Build site"
     key: build
-    skip: "grep -q '^New_Website/' <<< \"$BUILDKITE_CHANGED_FILES\""
     commands:
       - mkdir -p /home/builder/cache
       - POD_RENDER_NO_HIGHLIGHTER=1 zef install . --deps-only
