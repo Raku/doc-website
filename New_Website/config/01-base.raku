@@ -9,14 +9,14 @@
     :ui-dictionary<ui-dictionary.rakuon>, #| name of dictionary with ui token and translations
     :extensions<rakudoc rakumod>, #| possible extension of rakudoc source
     :!quiet,                #| no output is required if True
-    :with-only<
-        Language/operators Language/REPL Language/variables Language/math Language/101-basics Type/AST
-        Type/Anytype/IO/Handle Type/IO/CatHandle Type/IO/Special Type/IO/ArgFiles Type/IO/Socket
-        Type/IO/Notification Type/IO/Pipe Type/IO/Spec Type/IO/Pathtype/RakuAST/Doc
-        rakudoc_v2
-        about 403 404 license
-        TestFile
-    >,           #| only render files in this list
+    :with-only(),
+#        Language/operators Language/REPL Language/variables Language/math Language/101-basics Type/AST
+#        Type/Anytype/IO/Handle Type/IO/CatHandle Type/IO/Special Type/IO/ArgFiles Type/IO/Socket
+#        Type/IO/Notification Type/IO/Pipe Type/IO/Spec Type/IO/Pathtype/RakuAST/Doc
+#        rakudoc_v2
+#        about 403 404 license
+#        TestFile
+#    >,           #| only render files in this list
     :ignore(),              #| ignore files in this list
     :publication<publication>, #| directory where rendered HTML files are placed
     :landing-page<index>,   #| name of file where the web-site starts
