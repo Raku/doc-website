@@ -12,7 +12,7 @@ has %.config =
     :css-link(['href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"',1],),
 	:js-link(['src="https://rawgit.com/farzher/fuzzysort/master/fuzzysort.js"',1],),
     :js([self.js-text,9],), # make sure its called last
-    :scss([self.chyron-scss,1], [ self.toc-scss, 1],
+    :scss([self.chevron-scss,1], [ self.toc-scss, 1],
           [ self.bulma-additions-scss, 1], [ self.raku-webs-scss, 1],
           [ self.html-vanilla, 1 ]),
     ui-tokens => %(
@@ -156,10 +156,12 @@ method templates {
         toc-opener => -> %prm, $ {
             q:to/TOC/
                 <div class="navbar-start navbar-item">
-                <label class="chyronToggle tooltip">
+                <label class="chevronToggle tooltip">
                     <input id="navbar-toc-toggle" type="checkbox" />
-                    <span class="checkmark banned"><i class="fa fa-ban fa-3x"></i></span>
-                    <span class="checkmark off"><i class="far fa-list-alt"></i></span>
+                    <span class="checkmark on is-hidden-mobile"><i class="fa fa-chevron-left fa-2x"></i></span>
+                    <span class="checkmark off is-hidden-mobile"><i class="fa fa-chevron-right fa-2x"></i></span>
+                    <span class="checkmark on is-hidden-tablet"><i class="fa fa-chevron-down fa-2x"></i></span>
+                    <span class="checkmark off is-hidden-tablet"><i class="fa fa-chevron-up fa-2x"></i></span>
                     <span class="tooltiptext Elucid8-ui on" data-UIToken="TOC-close">TOC-close</span>
                     <span class="tooltiptext Elucid8-ui off" data-UIToken="TOC-open">TOC-open</span>
                 </label>
@@ -312,11 +314,9 @@ method templates {
         },
         drop-down-list => -> %prm, $tmpl {
             q:to/BLOCK/;
-                    <div class="navbar-item">
-                        <button id="changeTheme" class="button">
-                            <span class="Elucid8-ui" data-UIToken="ChangeTheme">ChangeTheme</span>
-                        </button>
-                    </div>
+                    <a id="changeTheme" class="navbar-item">
+                        <span class="Elucid8-ui" data-UIToken="ChangeTheme">ChangeTheme</span>
+                    </a>
                     <hr class="navbar-divider">
                     <a class="navbar-item tooltip" href="/about">
                         <span class="Elucid8-ui" data-UIToken="About">About</span>
@@ -346,9 +346,11 @@ method templates {
             qq:to/MODAL/;
             <div id="modal-container">
                 { $tmpl<search-modal> }
+                { $tmpl<modal-container-inner> }
             </div>
             MODAL
         },
+        'modal-container-inner' => -> %,$ {''},
         'page-edit' => -> %,$ {''},
         #| the main section of body
         main-content => -> %prm, $tmpl {
@@ -360,7 +362,7 @@ method templates {
             {
                 qq:to/END/
                 { $tmpl<page-navigation> }
-                <div id="MainText" class="panel">
+                <div id="MainText" class="panel section container">
                     { $tmpl<page-edit> }
                     { $tmpl<title-section> }
                     <div class="content px-4">
@@ -380,9 +382,11 @@ method templates {
                     <div id="TOC" class="column is-one-quarter">
                         { $tmpl<sidebar> }
                     </div>
-                    <div id="MainText" class="column">
+                    <div id="MainText" class="column section container">
                         { $tmpl<title-section> }
-                        <div class="content px-4">
+                        <div class="content px-4 {
+                            %prm<source-data><rakudoc-config><page-content-two-columns> ?? 'listing' !! ''
+                        }">
                         { %prm<body> }
                         </div>
                         <div class="content px-4">
@@ -1038,7 +1042,16 @@ method raku-webs-scss {
             color: var(--bulma-background);
         }
     }
-
+    @media screen and (min-width: 1024px) {
+        #MainText .content.listing {
+            column-count:2;
+        }
+    }
+    @media screen and (max-width: 1023px){
+        #MainText .content.listing {
+            column-count:1;
+        }
+    }
     #Camelia { max-height: 2.75em; }
     .navbar-tm-logo {
         position: absolute;
@@ -1087,12 +1100,13 @@ method raku-webs-scss {
     }
     SCSS
 }
-method chyron-scss {
-    q:to/CHYRON/;
-    // Chyron Toggle checkbox
-    label.chyronToggle {
-        top: 0.5rem;
-        left: 0.5rem;
+method chevron-scss {
+    q:to/CHEVRON/;
+    // chevron Toggle checkbox
+    label.chevronToggle {
+        top: 5rem;
+        color: var(--bulma-info);
+        &:hover { color: var(--bulma-warning-40); }
         input#navbar-toc-toggle {
             opacity: 0;
             height: 0;
@@ -1104,10 +1118,8 @@ method chyron-scss {
                     opacity: 1;
                     visibility: visible;
                     width: 1rem;
-                    bottom:1.75px;
-                    &:hover { color: var(--bulma-warning-40); }
                 }
-                &.banned {
+                &.on, &.on.overlap {
                     opacity:0;
                     visibility: hidden;
                     width: 0;
@@ -1115,15 +1127,18 @@ method chyron-scss {
             }
             &:checked ~ .checkmark {
                 &.off {
-                    opacity: 1;
-                    visibility:visible;
-                    width: 1rem;
+                    opacity: 0;
+                    visibility: hidden;
+                    width: 0;
                 }
-                &.banned {
+                &.on, &.on.overlap {
                     opacity:1;
                     visibility: visible;
+                    width: 1rem;
+                }
+                &.on.overlap {
                     color: var(--bulma-danger);
-                    left:-0.8rem;
+                    bottom:-1.75px;
                 }
             }
             &:hover ~ .tooltiptext {
@@ -1158,7 +1173,23 @@ method chyron-scss {
             }
         }
     }
-    CHYRON
+    @media screen and (min-width: 769px) {
+        label.chevronToggle .on {
+            top: 0.5rem;
+            left: calc(25vw - 3.5rem);
+        }
+        label.chevronToggle .off {
+            top: 0.5rem;
+            left: -3.5rem;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        label.chevronToggle .on, .off {
+            top: -1.5rem;
+            left: -3.5rem;
+        }
+    }
+    CHEVRON
 }
 method toc-scss {
     q:to/TOC/;
@@ -1173,6 +1204,9 @@ method toc-scss {
     #page-nav .panel-block .index {
         overflow-y:scroll;
         height:65vh;
+    }
+    #mobile-nav {
+        margin-top: 1.75rem;
     }
     .main-footer {
         z-index: 1;

@@ -17,13 +17,13 @@
         Raku-Doc-Website::DataTable
         Raku-Doc-Website::Search
         Raku-Doc-Website::TypeGraphs
-        Raku-Doc-Website::Edit-In-Browser
+        Raku-Doc-Website::ConfigEdit
         Raku-Doc-Website::RakuREPL
         Raku-Doc-Website::CreditObject
     >,
     setup => (# sequence not hash because order can matter
         RakuREPL => 'set-host-port',
-        Edit-In-Browser => 'set-host-port',
+        ConfigEdit => 'set-host-port',
         CreditObject => 'get-repo-data',
     ),
     pre-file-render => (# sequence not hash because order can matter

@@ -12,6 +12,7 @@
             :patch-limit(5120), # limit on length of patch 5k chars
         ),
         CreditObject => %(
+            :top-committer-threshold(250),
             filter => %(
                 'finanalyst' => 'Richard Hainsworth',
                 'Coke' => 'Will Coleda',

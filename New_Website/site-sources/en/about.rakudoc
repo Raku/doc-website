@@ -1,4 +1,4 @@
-=begin pod :type<info>
+=begin pod :type<info> :!toc
 =TITLE About the website
 
 This website is a testing location for new PRs to the docs.raku.org website.

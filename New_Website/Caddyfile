@@ -1,0 +1,34 @@
+# Unless the file starts with a global options block, the first
+# uncommented line is always the address of your site.
+:80 {
+        log {
+                output stdout
+        }
+
+        root * /website
+
+        map {path} {npath} {
+                import /website/assets/deprecated-urls
+                import /website/assets/prettyurls
+        }
+
+        route {
+                error /assets/hashed* 404
+                try_files {npath}.html {path}.html /en/{npath}.html /en/{path}.html /en/{path} {path}
+        }
+
+        uri /type/* replace :: /
+
+        # Enable the static file server.
+        file_server {
+            index /en/index.html
+        }
+
+        handle_errors {
+                @404 {
+                        expression {http.error.status_code} == 404
+                }
+                rewrite @404 /en/404.html
+                file_server
+        }
+}

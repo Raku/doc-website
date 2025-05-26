@@ -46,4 +46,5 @@
         "/language/independent-routines" => "/type/independent-routines",
          )
     ),
+    :regenerate-from-scratch,
 )

@@ -1,0 +1,71 @@
+=begin rakudoc :type<info> :!toc
+=TITLE Editing the website
+
+The primary website pages, including this one, are written in L<RakuDoc v2|language/rakudoc_v2>.
+Some website pages are generated automatically to gather information into a single page; these are
+called Composite pages.
+
+It is possible to edit Primary sources.
+
+=head Configuration
+
+A user must first click on B<I«More->edit configuration»>. In the modal screen, enable website editing.
+Then select one of the three options:
+=numitem B<Github page editor> By selecting this hub, a browser tab is opened in I<Github> and Github's editor
+can be used. A user who does not have C<commit> permissions within the C<Raku/doc> repository will be
+required to clone the repo and raise a Pull Request (PR). This was the old practice, and is kept for
+those who wish to continue. New documents or major changes to a document can only be done via a PR.
+=begin numitem
+B<Browser editing with suggestion bot> By selecting this option, a user may make a small change
+to the RakuDoc source code, and see a rendered version of the edited page, the differences highlighted,
+and a unified patch. Subsequently, the user may submit the change for the Raku documentation maintainers.
+A machine user will then create a PR with the modification, with the editor's name in the PR comments.
+
+The editor will not be listed as a Git author, or included in the statistics shown in
+L<the about page|en/about>.
+=end numitem
+=begin numitem
+B<Browser editing with Login> After a submission, the user is sent to GitHub's login page.
+By confirming permission for the Suggestion-Box app to use the user's name, a webtoken is generated.
+Github ensures that the token may only be used for the repository that the Suggestion-Box app is registered
+to, and no other. The webtoken lasts for 8 hours, and thereafter must be renewed. The Suggestion-Box app
+is only registered for a small number of I<Raku> organisation repositories.
+
+Once the webtoken is generated, all the PR's will be raised in the name of the Github user, and the
+user name and commits will be tracked by Github and used in the I<About> statistics.
+=end numitem
+
+=head RakuDoc editing and style
+
+There is a L<style sheet for authors|https://github.com/Raku/doc/blob/main/writing-docs/STYLEGUIDE.md>.
+
+Understanding RakuDoc is also important because any changes that do not conform to RakuDoc v2 will
+cause an error when the document is rendered. At this point, error reporting for RakuDoc errors is almost
+non-existent. Consequently, an error will cause a terse response in the I<Rendered> plane. However,
+reversing the changes made to the RakuDoc source and re-rendering will quickly yield the problem.
+
+There are some enhancements of RakuDoc v2 over v1, such as numbered entries and heading, and bullets on
+items. Try for example adding the lines
+=begin code :lang<RakuDoc>
+    =for item :bullet<<\c[beating heart]>>
+    Looking for peace
+=end code
+
+=head In-browser editor
+
+The awesome L<Ace editor|https://ace.c9.io> is used. A cheat sheet for the editor can be found in
+several places, including - as of writing - L<ACE short cut keys|https://tutorialtactic.com/blog/ace-editor-shortcuts/>
+
+Once a patch has been created, click on the I<Suggest> pane and complete the editor and comment form.
+
+The editor will need to comply with the GitHub recommendations ( 3 > length of name > 39, no blanks ).
+The name and the comments will be sanitised. They are only strings and are not used in any change of
+state.
+
+Patches may only be approximately 5k in length. The top line of the I<Patch> panel shows the calculated
+number of chars. An error is generated if the patch is too long.
+
+In the event of a user having a Github name, the I<editor> name on the submission
+form does not have to be the same as the Github user name.
+
+=end rakudoc
