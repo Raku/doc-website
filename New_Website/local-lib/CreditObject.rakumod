@@ -11,17 +11,23 @@ has %.config =
     :credit<finanalyst>,
     :authors<finanalyst>,
     :commit-data( [] ),
+    :top(10),
     :scss([self.credit-scss,1],),
     get-repo-data => -> %final-config { self.get-repo-data( %final-config ) },
     js-module => [],
     :js-link( ['src="https://unpkg.com/dygraphs@2.2.1/dist/dygraph.min.js"',2], ),
     :css-link( ['href="https://unpkg.com/dygraphs@2.2.1/dist/dygraph.min.css"',1],),
+    ui-tokens => %(
+        :CreditObjectOthers("Authors in 'Others' category:"),
+    ),
 ;
 method enable( RakuDoc::Processor:D $rdp ) {
     $rdp.add-data( %!config<name-space>, %!config );
     $rdp.add-templates($.credit-templates, :source<CreditObject plugin>)
 }
 method get-repo-data( %final-config ) {
+    my $limit = %final-config<plugin-options><CreditObject><top-committer-threshold> // 250;
+    my $per-year = 1;
     my %filter := %final-config<plugin-options><CreditObject><filter>;
     my @change = %filter.keys;
     my @repos = %final-config<repositories>.keys;
@@ -29,7 +35,6 @@ method get-repo-data( %final-config ) {
     my $repo-dir := %final-config<repository-store>;
     my @fields = [:Name<%an>, :Date<%as>];
     my @periods;
-    my $per-year = 2;
     my $n-months = (12 div $per-year) + 1;
     my $start-year = 2009;
     for ^(now.DateTime.year - $start-year + 1) -> $y {
@@ -66,10 +71,11 @@ method get-repo-data( %final-config ) {
     #consolidate accross periods
     my %auth-coms;
     @objects.map({ %auth-coms{$_<name>} += $_<commits> });
-    # sift out authors with < 10 total commits, and merge them into 'others' for the graph
+    # sift out authors with < others-limit total commits, and merge them into 'others' for the graph
     $auths .= new; # repurpose auths for others
-    %auth-coms.map({ $auths{ .key }++ if .value < 10 });
-    $auths<Others>--; #remove Others as a name with less than 10 commits
+    %auth-coms.map({ $auths{ .key }++ if .value < $limit });
+    $auths<Others>--; #remove Others as a name with less than $limit commits
+    %!config<top> = %auth-coms.elems - $auths.keys.elems;
     my $others = 0;
     # @objects is in order of periods, with 'Others' as last in each period
     @objects = gather for @objects {
@@ -94,142 +100,150 @@ method get-repo-data( %final-config ) {
             .list;
     my $js-obj = to-json(@objects, :sorted-keys)
             .subst(/ ('"date":') '"' (.+?) '"'/,{ "$0 new Date('$1')" },:g);
-    my $js = q:to/JSOBJ/ ~ $js-obj ~ ';' ~ q:to/JSOBJ2/;
-    /*----- Generated svg using d3 -----*/
-    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-    var commits =
-    JSOBJ
-    // Specify the chart’s dimensions.
-    const width = 928;
-    const height = 600;
-    const marginTop = 20;
-    const marginRight = 20;
-    const marginBottom = 30;
-    const marginLeft = 30;
+    my $js = qq:to/JSOBJ/ ~ q:to/JSOBJ2/;
+        <script type="module">
+            /*----- Generated svg using d3 -----*/
+            import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+            const commits = {$js-obj};
+            const months = { $n-months - 1};
+        JSOBJ
+            // Specify the chart’s dimensions.
+            const width = 928;
+            const height = 600;
+            const marginTop = 20;
+            const marginRight = 20;
+            const marginBottom = 30;
+            const marginLeft = 30;
 
-    // Create the positional scales.
-    const x = d3.scaleUtc()
-        .domain(d3.extent(commits, d => d.date))
-        .range([marginLeft, width - marginRight]);
+            // Create the positional scales.
+            const x = d3.scaleUtc()
+                .domain(d3.extent(commits, d => d.date))
+                .range([marginLeft, width - marginRight]);
 
-    const y = d3.scaleSymlog()
-        .domain([0, d3.max(commits, d => d.commits)]).nice()
-        .range([height - marginBottom, marginTop]);
+            const y = d3.scaleSymlog()
+                .domain([0, d3.max(commits, d => d.commits)]).nice()
+                .range([height - marginBottom, marginTop]);
 
-    // Create the SVG container.
-    const svg = d3.create("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto; overflow: visible; font: 10px sans-serif;");
+            // Create the SVG container.
+            const svg = d3.create("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("viewBox", [0, 0, width, height])
+                .attr("style", "max-width: 100%; height: auto; overflow: visible; font: 10px sans-serif;");
 
-    // Add the horizontal axis.
-    svg.append("g")
-        .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(d3.axisBottom(x).ticks(d3.utcMonth.every(6)));
+            // Add the horizontal axis.
+            svg.append("g")
+                .attr("transform", `translate(0,${height - marginBottom})`)
+                .call(d3.axisBottom(x).ticks(d3.utcMonth.every( `${months}` )));
 
-    // Add the vertical axis.
-    svg.append("g")
-      .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).tickValues([0, 1, 3, 10, 30, 100, 300, 1000, 2200]))
-      .call(g => g.select(".domain").remove())
-      .call(g => g.selectAll(".tick line").clone()
-          .attr("x2", width - marginLeft - marginRight)
-          .attr("stroke-opacity", 0.1))
-      .call(g => g.append("text")
-          .attr("x", -marginLeft)
-          .attr("y", 10)
-          .attr("fill", "currentColor")
-          .attr("text-anchor", "start")
-          .attr("font-size", "20px")
-          .text("Author commits per period"));
+            // Add the vertical axis.
+            svg.append("g")
+                .attr("transform", `translate(${marginLeft},0)`)
+                .call(d3.axisLeft(y)
+                    .tickValues([0, 1, 3, 10, 30, 100, 300, 1000, 2200])
+                )
+                .call(g => g.select(".domain").remove())
+                .call(g => g.selectAll(".tick line").clone()
+                    .attr("x2", width - marginLeft - marginRight)
+                    .attr("stroke-opacity", 0.1))
+                .call(g => g.append("text")
+                    .attr("x", -marginLeft)
+                    .attr("y", 10)
+                    .attr("fill", "currentColor")
+                    .attr("text-anchor", "start")
+                    .attr("font-size", "20px")
+                    .text("Author commits per period"));
 
-    // Compute the points in pixel space as [x, y, z], where z is the name of the series.
-    const points = commits.map((d) => [x(d.date), y(d.commits), d.name, d.commits]);
+            // Compute the points in pixel space as [x, y, z], where z is the name of the series.
+            const points = commits.map((d) => [x(d.date), y(d.commits), d.name, d.commits]);
 
-    // Group the points by series.
-    const groups = d3.rollup(points, v => Object.assign(v, {z: v[0][2]}), d => d[2]);
+            // Group the points by series.
+            const groups = d3.rollup(points, v => Object.assign(v, {z: v[0][2]}), d => d[2]);
 
-    // Draw the lines.
-    const line = d3.line();
-    const path = svg.append("g")
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1.5)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-    .selectAll("path")
-    .data(groups.values())
-    .join("path")
-        .attr("d", line);
+            // Create a color scale to identify series.
+            const col = d3.scaleOrdinal(d3.schemeCategory10).domain(points.map(d => d.name));
 
-    // Add an invisible layer for the interactive tip.
-    const dot = svg.append("g")
-        .attr("display", "none");
+            // Draw the lines.
+            const line = d3.line();
+            const path = svg.append("g")
+                .attr("fill", "none")
+                .attr("stroke-width", 1.5)
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+            .selectAll("path")
+            .data(groups.values())
+            .join("path")
+                .attr("d", line)
+                .attr("stroke", ({z}) => col(z));
 
-    dot.append("circle")
-        .attr("r", 2.5);
+            // Add an invisible layer for the interactive tip.
+            const dot = svg.append("g")
+                .attr("display", "none");
+            dot.append("circle")
+                .attr("r", 2.5);
+            dot.append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", -8)
+                .attr("font-size", "14px");
 
-    dot.append("text")
-        .attr("text-anchor", "middle")
-        .attr("y", -8);
+            svg
+                .on("pointerenter", pointerentered)
+                .on("pointermove", pointermoved)
+                .on("pointerleave", pointerleft)
+                .on("touchstart", event => event.preventDefault());
 
-    svg
-        .on("pointerenter", pointerentered)
-        .on("pointermove", pointermoved)
-        .on("pointerleave", pointerleft)
-        .on("touchstart", event => event.preventDefault());
-
-    // When the pointer moves, find the closest point, update the interactive tip, and highlight
-    // the corresponding line.
-    function pointermoved(event) {
-        const [xm, ym] = d3.pointer(event);
-        const i = d3.leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
-        const [x, y, k, c] = points[i];
-        path.style("stroke", ({z}) => z === k ? null : "#ddd").filter(({z}) => z === k).raise();
-        dot.attr("transform", `translate(${x},${y})`);
-        dot.select("text").text(k+', '+c);
-        svg.property("value", commits[i]).dispatch("input", {bubbles: true});
-    }
-    function pointerentered() {
-        path.style("stroke", "#ddd");
-        dot.attr("display", null);
-    }
-    function pointerleft() {
-        path.style("stroke", null);
-        dot.attr("display", "none");
-        svg.node().value = null;
-        svg.dispatch("input", {bubbles: true});
-    }
-    // Append the SVG element.
-    document.addEventListener("DOMContentLoaded", (event) => {
-        creditGraph.append(svg.node());
-        creditContainer.querySelectorAll('.d3-hilite').forEach( (elem) => {
-            elem.addEventListener("mouseenter", (event) => {
-                var series = event.currentTarget.innerText;
-                path.style("stroke", ({z}) => z === series ? "red" : "lightgrey" ).filter(({z}) => z === series).raise();
-            });
-            elem.addEventListener("mouseleave", (event) => {
-                path.style("stroke", null);
+            // When the pointer moves, find the closest point, update the interactive tip, and highlight
+            // the corresponding line.
+            function pointermoved(event) {
+                const [xm, ym] = d3.pointer(event);
+                const i = d3.leastIndex(points, ([x, y]) => Math.hypot(x - xm, y - ym));
+                const [x, y, k, c] = points[i];
+                path.style("stroke-width", ({z}) => z === k ? 4 : null).filter(({z}) => z === k).raise();
+                dot.attr("transform", `translate(${x},${y})`);
+                dot.select("text").text(k+', '+c);
+                svg.property("value", commits[i]).dispatch("input", {bubbles: true});
+            }
+            function pointerentered() {
+                dot.attr("display", null);
+            }
+            function pointerleft() {
+                path.style("stroke-width", null);
+                dot.attr("display", "none");
+                svg.node().value = null;
+                svg.dispatch("input", {bubbles: true});
+            }
+            // Append the SVG element.
+            creditGraph.append(svg.node());
+            creditContainer.querySelectorAll('.d3-hilite').forEach( (elem) => {
+                elem.addEventListener("mouseenter", (event) => {
+                    var series = event.currentTarget.innerText;
+                    path.style("stroke-width", ({z}) => z === series ? "4" : "1.5" ).filter(({z}) => z === series).raise();
+                });
+                elem.addEventListener("mouseleave", (event) => {
+                    path.style("stroke-width", 1.5);
+                })
             })
-        })
-    });
-    JSOBJ2
-    %!config<js-module>.push: [ $js, 1 ] ;
+        </script>
+        JSOBJ2
+    %!config<js-module-deferred> = $js;
 }
 method credit-templates { %(
     CreditObject => -> %prm, $tmpl {
-        my @auths := $tmpl.globals.data<CreditObject><commit-data>;
+        my %d := $tmpl.globals.data<CreditObject>.hash;
+        my @auths := %d<commit-data>;
+        my $top := %d<top>.Int;
         qq:to/CRDPG/
         <div id="creditContainer" class="section">
             <div id="creditTop" class="buttons">{
-                [~] @auths[^10].map({ qq[<button class="d3-hilite button is-info is-light is-small" title="{ .value }">{ .key }</button>] })
+                [~] @auths[^$top].map({ qq[<button class="d3-hilite button is-info is-light is-small" title="{ .value }">{ .key }</button>] })
             }</div>
             <div id="creditGraph" class="container">\</div>
+            <h2 class="Elucid8-ui" data-UIToken="CreditObjectOthers">CreditObjectOthers</h2>
             <div id="creditRemaining" class="buttons">{
-                [~] @auths[10..*].map({ qq[<button class="d3-hilite button is-info is-light is-small" title="{ .value }">{ .key }</button>] })
+                [~] @auths[$top..*].map({ qq[<button class="button is-info is-light is-small" title="{ .value }">{ .key }</button>] })
             }</div>
         </div>
+        { %d<js-module-deferred> }
         CRDPG
     },
 )}
