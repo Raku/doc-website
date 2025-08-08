@@ -26,8 +26,6 @@
         "Raku-Doc-Website::Search": "local-lib/Search.rakumod",
         "Raku-Doc-Website::SiteData": "local-lib/SiteData.rakumod",
         "Raku-Doc-Website::TypeGraphs": "local-lib/TypeGraphs.rakumod",
-        "Raku-Doc-Website::Edit-in-git": "local-lib/Edit-in-git.rakumod",
-        "Raku-Doc-Website::Edit-In-Browser": "local-lib/Edit-In-Browser.rakumod",
         "Raku-Doc-Website::RakuREPL": "local-lib/RakuREPL.rakumod",
         "Raku-Doc-Website::CreditObject": "local-lib/CreditObject.rakumod",
         "Raku-Doc-Website::ConfigEdit": "local-lib/ConfigEdit.rakumod"

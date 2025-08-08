@@ -1,19 +1,20 @@
-FROM docker.io/finanalyst/raku-cro-rrr-base
-# Registry-specific metadata to not store every
-# build indefinately
-ARG quay_expiration
-LABEL quay.expires-after=${quay_expiration}
-
+FROM docker.io/finanalyst/raku-cro-rrr-base AS base
 
 # install deps in stage that does not depend on copy
-RUN zef install Elucid8::Build -/test
-
-# remove unneeded dependents
-RUN apk del gcc linux-headers make musl-dev perl
-RUN addgroup -S appgroup && adduser -S rakoon -G appgroup
-
+RUN zef install -/test "Elucid8::Build"
+RUN zef install -/test "Git::Log"
+RUN zef install -/test "JSON::Fast::Hyper"
 RUN mkdir /elucid8
 WORKDIR /elucid8
+COPY . .
+RUN zef install . -/test;\
+     gather-sources;\
+     elucid8-build;
 
-USER rakoon
-CMD zef install . -/test; gather-sources; elucid8-build
+FROM docker.io/caddy AS server
+
+COPY --from=base /elucid8/publication /website
+
+COPY ./Caddyfile /etc/Caddyfile
+
+CMD caddy run --config /etc/Caddyfile --adapter caddyfile
