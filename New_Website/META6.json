@@ -12,7 +12,7 @@
         "RakuConfig",
         "PrettyDump",
         "File::Directory::Tree",
-        "Elucid8::Build",
+        "Elucid8::Build:ver<0.12.2+>",
         "Git::Log",
         "JSON::Fast::Hyper"
     ],
@@ -457,11 +457,10 @@
         "typegraphs/XSyntaxP5.dot"
     ],
     "support": {
-        "email": "richard@hainsworth.wales",
-        "bugtracker": "https://github.com/elucid8-org/build/issues",
-        "source": "https://github.com/elucid8-org/build.git"
+        "bugtracker": "https://github.com/raku/doc-website/issues",
+        "source": "https://github.com/raku/doc-website.git"
     },
     "license": "Artistic-2.0",
-    "source-url": "git://github.com/elucid8-org/sandpit.git",
+    "source-url": "git://github.com/raku/doc-website.git",
     "source-type": "git"
 }
