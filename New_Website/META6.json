@@ -1,7 +1,7 @@
 {
     "name": "Elucid8::Doc-Website",
     "description": "Renders Raku documentation sources to web site",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "raku": "6.d",
     "authors": [
         "Richard Hainsworth"
@@ -12,7 +12,7 @@
         "RakuConfig",
         "PrettyDump",
         "File::Directory::Tree",
-        "Elucid8::Build:ver<0.12.2+>",
+        "Elucid8::Build:ver<0.12.6+>",
         "Git::Log",
         "JSON::Fast::Hyper"
     ],

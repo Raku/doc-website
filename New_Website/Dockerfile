@@ -5,9 +5,9 @@ RUN zef install -/test "Elucid8::Build" "Git::Log" "JSON::Fast::Hyper"
 RUN mkdir /elucid8
 WORKDIR /elucid8
 COPY . .
-RUN zef install . -/test;\
-     gather-sources;\
-     elucid8-build;
+RUN zef install . -/test ;\
+    gather-sources;\
+    elucid8-build
 
 FROM docker.io/caddy AS server
 
