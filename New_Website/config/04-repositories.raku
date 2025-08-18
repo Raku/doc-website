@@ -35,7 +35,7 @@
             ),
         ),
         'self' => %( # meaning this repository
-            repo-name => 'elucid8-org/sandpit',
+            repo-name => 'raku-doc-website',
             description => 'website sources',
             languages => %(
                 en => %(

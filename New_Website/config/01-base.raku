@@ -9,7 +9,7 @@
     :ui-dictionary<ui-dictionary.rakuon>, #| name of dictionary with ui token and translations
     :extensions<rakudoc rakumod>, #| possible extension of rakudoc source
     :!quiet,                #| no output is required if True
-    :with-only(),
+    :with-only(),           #| render all files using repo config
 #        Language/operators Language/REPL Language/variables Language/math Language/101-basics Type/AST
 #        Type/Anytype/IO/Handle Type/IO/CatHandle Type/IO/Special Type/IO/ArgFiles Type/IO/Socket
 #        Type/IO/Notification Type/IO/Pipe Type/IO/Spec Type/IO/Pathtype/RakuAST/Doc

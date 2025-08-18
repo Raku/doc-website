@@ -74,7 +74,9 @@ method templates {
             given %sd<type> {
                 when <primary glue info>.any {
                     my $commit-time = '<i class="fa fa-ban"></i>';
-                    $commit-time = %sd<modified>.yyyy-mm-dd if %sd<modified>:exists;
+#                    note "trace: { %sd<repo-name> }, { %sd<repo-path> }, {%sd<modified> }";
+                    $commit-time = %sd<modified>.yyyy-mm-dd if %sd<modified> ~~ DateTime:D;
+#                    note "committime: $commit-time";
                     if %sd<repo-name>:exists and %sd<repo-path>:exists {
                         qq:to/BLOCK/
                         <div class="page-edit is-hidden">
