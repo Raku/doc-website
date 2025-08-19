@@ -67,16 +67,16 @@ method templates {
             <!DOCTYPE html>
             <html { $tmpl<html-root> } >
                 <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                { $tmpl<head-block> }
-                { $tmpl<favicon> }
-            </head>
-            <body class="has-navbar-fixed-top">
-                { $tmpl<top-of-page> }
-                { $tmpl<main-content> }
-                { $tmpl<footer> }
-            </body>
+                    <meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    { $tmpl<head-block> }
+                    { $tmpl<favicon> }
+                </head>
+                <body class="has-navbar-fixed-top">
+                    { $tmpl<top-of-page> }
+                    { $tmpl<main-content> }
+                    { $tmpl<footer> }
+                </body>
             </html>
             PAGE
         },
@@ -133,9 +133,9 @@ method templates {
                  </figure>
                 { # remove TOC opener if direct-wrap exists and is true, or :!toc
                   (
-                  (%prm<source-data><rakudoc-config><direct-wrap>:exists && %prm<source-data><rakudoc-config><direct-wrap>)
+                  (%prm<source-data><rakudoc-config><direct-wrap><> =:= True)
                    ||
-                   (%prm<source-data><rakudoc-config><toc>:exists && %prm<source-data><rakudoc-config><toc>.not )
+                   (%prm<source-data><rakudoc-config><toc>.not)
                    )
                    ??
                     ''
@@ -207,8 +207,7 @@ method templates {
         },
         #| Toc/Index floats below navbar except for mobile
         page-navigation => -> %prm, $tmpl {
-           ( %prm<source-data><rakudoc-config><toc>:exists
-            && %prm<source-data><rakudoc-config><toc>.not )
+           ( %prm<source-data><rakudoc-config><toc>.not )
             ?? '' !!
             Q:c:to/PAGENAV/;
             <nav class="raku-webs panel is-hidden-mobile" id="page-nav">
@@ -354,11 +353,11 @@ method templates {
         'page-edit' => -> %,$ {''},
         #| the main section of body
         main-content => -> %prm, $tmpl {
-            if %prm<source-data><rakudoc-config><direct-wrap>:exists && %prm<source-data><rakudoc-config><direct-wrap>
+            if %prm<source-data><rakudoc-config><direct-wrap><> =:= True
             { # no extra styling if direct-wrap exists and is true
                %prm<body>
             }
-            elsif ( %prm<source-data><rakudoc-config><toc>:exists && %prm<source-data><rakudoc-config><toc>.not )
+            elsif ( %prm<source-data><rakudoc-config><toc>.not )
             {
                 qq:to/END/
                 { $tmpl<page-navigation> }
