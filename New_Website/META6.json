@@ -8,7 +8,7 @@
     ],
     "auth": "zef:finanalyst",
     "depends": [
-        "Rakuast::RakuDoc::Render:ver<0.26.2+>",
+        "Rakuast::RakuDoc::Render:ver<0.26.3+>",
         "RakuConfig",
         "PrettyDump",
         "File::Directory::Tree",
