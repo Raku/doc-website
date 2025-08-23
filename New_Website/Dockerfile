@@ -1,5 +1,9 @@
 FROM docker.io/finanalyst/raku-cro-rrr-base AS base
 
+# docker build --build-arg quay_expiration="8w" -t quay.io/your-repo/your-image:tag .
+ARG quay_expiration=never
+LABEL quay.expires-after=${quay_expiration}
+
 # install deps in stage that does not depend on copy
 RUN zef install -/test "Elucid8::Build" "Git::Log" "JSON::Fast::Hyper"
 RUN mkdir /elucid8
