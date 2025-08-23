@@ -1,14 +1,14 @@
 {
     "name": "Elucid8::Doc-Website",
     "description": "Renders Raku documentation sources to web site",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "raku": "6.d",
     "authors": [
         "Richard Hainsworth"
     ],
     "auth": "zef:finanalyst",
     "depends": [
-        "Rakuast::RakuDoc::Render",
+        "Rakuast::RakuDoc::Render:ver<0.26.3+>",
         "RakuConfig",
         "PrettyDump",
         "File::Directory::Tree",
