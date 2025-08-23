@@ -25,6 +25,10 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
+    - name: Generate version tag
+      id: version
+      run: echo "TAG=v1-$(date +%Y%m%d)-${{ github.run_number }}" >> $GITHUB_OUTPUT
+
     - name: Build Docker image
       uses: docker/build-push-action@v4
       with:
@@ -32,7 +36,9 @@ jobs:
         file: ./New_Website/Dockerfile
         # Only PUSH if it's a commit to main
         push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        tags: quay.io/chroot.club/raku-doc-website:latest
+        tags: |
+          quay.io/chroot.club/raku-doc-website:latest
+          quay.io/chroot.club/raku-doc-website:${{ steps.version.outputs.TAG }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
