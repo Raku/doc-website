@@ -41,6 +41,5 @@ jobs:
           quay.io/chroot.club/raku-doc-website:${{ steps.version.outputs.TAG }}
         cache-from: type=gha
         cache-to: type=gha,mode=max
-        build-args: |
-          quay_expiration=8w
+        build-args: "quay_expiration=8w"
 
