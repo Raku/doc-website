@@ -20,3 +20,4 @@ COPY --from=base /elucid8/publication /website
 COPY ./Caddyfile /etc/Caddyfile
 
 CMD caddy run --config /etc/Caddyfile --adapter caddyfile
+
