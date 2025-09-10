@@ -1,24 +1,24 @@
 {
     "name": "Elucid8::Doc-Website",
     "description": "Renders Raku documentation sources to web site",
-    "version": "0.7.2",
+    "version": "0.7.3",
     "raku": "6.d",
     "authors": [
         "Richard Hainsworth"
     ],
     "auth": "zef:finanalyst",
     "depends": [
-        "Rakuast::RakuDoc::Render:ver<0.26.3+>",
-        "RakuConfig",
-        "PrettyDump",
-        "File::Directory::Tree",
-        "Elucid8::Build:ver<0.12.6+>",
-        "Git::Log",
-        "JSON::Fast::Hyper"
+        "Rakuast::RakuDoc::Render:ver<0.26.3+>:auth<zef:finanalyst>",
+        "RakuConfig:ver<0.8.2>:auth<zef:finanalyst>",
+        "PrettyDump:ver<1.2.3>:auth<zef:raku-community-modules>",
+        "File::Directory::Tree:ver<0.2>:auth<zef:raku-community-modules>",
+        "Elucid8::Build:ver<0.12.10>:auth<zef:finanalyst>",
+        "Git::Log:ver<0.2.1>:auth<zef:raku-community-modules>",
+        "JSON::Fast::Hyper:ver<0.0.10>:auth<zef:lizmat>"
     ],
     "test-depends": [
         "Test",
-        "Test::META"
+        "Test::METATest::META:ver<0.0.20>:auth<zef:jonathanstowe>"
     ],
     "provides": {
         "Raku-Doc-Website::PageStyling": "local-lib/Raku-doc-website.rakumod",

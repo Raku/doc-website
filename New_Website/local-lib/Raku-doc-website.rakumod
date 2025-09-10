@@ -80,8 +80,6 @@ method templates {
             </html>
             PAGE
         },
-        #| Required for index page
-        Html => -> %prm, $ { %prm<raw> },
         #| head-block, what goes in the head tab
         head-block => -> %prm, $tmpl {
             my %g-data := $tmpl.globals.data;
@@ -169,7 +167,7 @@ method templates {
             TOC
         },
         #| Side bar to hold ToC and Index
-        #| The column itself is not visible for tablets+ and is there to move the main
+        #| The column itself is not visible when the display format is for tablets or larger. The column is created to move the main
         #| content when contents toggle is checked. Actual content
         #| is in a panel that floats on top of it
         sidebar => -> %prm, $tmpl {
@@ -206,6 +204,7 @@ method templates {
             BLOCK
         },
         #| Toc/Index floats below navbar except for mobile
+        #| This section disappears on a mobile
         page-navigation => -> %prm, $tmpl {
            ( %prm<source-data><rakudoc-config><toc>.not )
             ?? '' !!
@@ -239,7 +238,7 @@ method templates {
             PAGENAV
         },
         'site-navigation' => -> %prm, $tmpl {
-            Q:c:to/BLOCK/
+            Q:c:to/SITENAV/
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start navbar-item is-hidden-touch"></div> <!-- empty item so remainder are centered -->
                 <div class="navbar-start navbar-item is-hidden-desktop">{ $tmpl<head-search> }</div> <!-- move position of search with hamburger on -->
@@ -309,7 +308,7 @@ method templates {
                     }
                 </div>
             </div>
-            BLOCK
+            SITENAV
         },
         drop-down-list => -> %prm, $tmpl {
             q:to/BLOCK/;
@@ -355,10 +354,12 @@ method templates {
         main-content => -> %prm, $tmpl {
             if %prm<source-data><rakudoc-config><direct-wrap><> =:= True
             { # no extra styling if direct-wrap exists and is true
+                # the document-level option :direct-wrap is used for a rakudoc source that contains a page manually written in HTML
                %prm<body>
             }
             elsif ( %prm<source-data><rakudoc-config><toc>.not )
-            {
+            {  # this is used for document-level :!toc option, which is used to remove a page TOC.
+                # The default is :toc, to include a TOC panel
                 qq:to/END/
                 { $tmpl<page-navigation> }
                 <div id="MainText" class="panel section container">
@@ -373,7 +374,7 @@ method templates {
                 </div>
                 END
             }
-            else {
+            else { # the normal template for a page
                 qq:to/END/
                 { $tmpl<page-navigation> }
                 <div class="columns">
@@ -384,6 +385,9 @@ method templates {
                     <div id="MainText" class="column section container">
                         { $tmpl<title-section> }
                         <div class="content px-4 {
+                    # there is a document-level option :page-content-two-columns
+                    # that will show the content in two columns if true.
+                    # The CSS class to do this is listing
                             %prm<source-data><rakudoc-config><page-content-two-columns> ?? 'listing' !! ''
                         }">
                         { %prm<body> }
@@ -433,7 +437,6 @@ method templates {
             my $rv =  qq[<div class="raku-webs index-section" data-index-level="$n" style="--level:$n">\n] ~
                     '<span class="index-entry">' ~ %prm<entry> ~ '</span>';
             %prm<refs>.list
-#                    .grep( .<is-in-heading>.not ) # do not render if in heading
                 .map({
                     $rv ~= qq[<a class="raku-webs index-ref" href="#{ .<target> }">{
                         $tmpl('escape-code', %( :contents( .<place> ) ))
@@ -458,13 +461,13 @@ method templates {
                 <div class="container px-4">
                     <nav class="level">
                         <div class="level-item">
-                            <span class="Elucid8-ui" data-UIToken="FileSource">Source</span><br><span class="footer-field">{%prm<source-data><name>}</span>
+                            <span class="Elucid8-ui" data-UIToken="FileSource">Source</span>&nbsp;<span class="footer-field">{%prm<source-data><name>}</span>
                         </div>
                         <div class="level-item">
                             <span class="Elucid8-ui" data-UIToken="Time">Time</span>
                         </div>
                         <div class="level-item">
-                            <span class="Elucid8-ui" data-UIToken="SourceModified">SourceModified</span><br>{(sprintf( " %02d:%02d UTC, %s", .hour, .minute, .yyyy-mm-dd) with %prm<source-data><modified>)}
+                            <span class="Elucid8-ui" data-UIToken="SourceModified">SourceModified</span>&nbsp;{(sprintf( " %02d:%02d UTC, %s", .hour, .minute, .yyyy-mm-dd) with %prm<source-data><modified>)}
                         </div>
                         <div class="level-right">
                             <div class="level-item">
@@ -506,6 +509,8 @@ method templates {
             %prm<classes> = 'table is-striped is-bordered' ~ (%prm<classes>:exists ?? ' ' ~ %prm<classes> !! '');
             $tmpl.prev(%prm)
         },
+        #| Required for pre-rendered HTML
+        Html => -> %prm, $ { %prm<raw> },
     )
 }
 method js-text {
@@ -1231,9 +1236,7 @@ method toc-scss {
 method bulma-additions-scss {
     q:to/GENERAL/;
     .content p + ul.item-list { margin-top: 0; }
-    // .content p:not( ul.item-list ) { margin-bottom: 0; }
     .content p + ol.item-list { margin-top: 0; }
-    // .content p:not( ol.item-list ) { margin-bottom: 0; }
     .delta:hover { border: var(--bulma-border-hover) 1px solid; }
     .navbar-start { margin-bottom: 1rem; }
     #modal-container {

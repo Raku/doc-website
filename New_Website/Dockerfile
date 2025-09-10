@@ -1,7 +1,8 @@
 FROM docker.io/finanalyst/raku-cro-rrr-base AS base
 
 # install deps in stage that does not depend on copy
-RUN zef install -/test "Elucid8::Build" "Git::Log" "JSON::Fast::Hyper"
+COPY META6.json .
+RUN zef -/test --deps-only install .
 RUN mkdir /elucid8
 WORKDIR /elucid8
 COPY . .
