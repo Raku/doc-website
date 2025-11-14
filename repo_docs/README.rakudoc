@@ -25,7 +25,7 @@ If you are missing C<dot>, install the graphviz package for your OS.
 =head1 Building the documentation locally
 
 Generic build steps:
-=item clone this repo to C<raku-doc-website/>
+=item Clone this repo to C<raku-doc-website/> into a case-sensitive file system.
 =item2 No need to clone the Raku documentation sources at C<github.com/raku/doc/doc> to
 C<local_raku_docs/doc/> as this is done automatically by the final step. However, if you
 already have a local C<raku/doc> repo, then change the relevant key in C<config.raku>. It
