@@ -4,14 +4,15 @@ on:
   push:
     branches: [ main ]
   schedule:
+    # every 8 hours
     - cron: '0 0,8,16 * * *'
 
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
     env:
-      QUAY_USERNAME: chroot.club+cro_robot_rw
-      QUAY_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
+      QUAY_USERNAME: ${{ secrets.REGISTRY_RW_USERNAME }}
+      QUAY_PASSWORD: ${{ secrets.REGISTRY_RW_PASSWORD }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
