@@ -2,7 +2,7 @@ name: Build Current Website Container
 
 on:
   push:
-    branches: [ main, build-docker-current ]
+    branches: [ main, dockerfile-current-website ]
   schedule:
     - cron: '0 0,8,16 * * *'
 
