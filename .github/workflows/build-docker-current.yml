@@ -1,6 +1,7 @@
 name: Build Current Website Container
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   schedule:
