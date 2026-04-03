@@ -67,7 +67,8 @@ use v6.d;
                     ~ '<a href="#'
                     ~ (%tml<escaped>.(%el.<target>) )
                     ~ '">'
-                    ~ (%el.<text> // '')
+                    ~
+                    ~ %tml<escaped>.(%el.<text> // '')
                     ~ '</a></li>';
             }
             $rv ~= "\n</ul>\n";
