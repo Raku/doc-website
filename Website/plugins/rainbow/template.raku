@@ -57,8 +57,7 @@ my %hilight-langs = %(
                 $syntax-label = %prm<lang>.tc ~  ' highlighting by highlight-js';
                 $code = qq:to/HILIGHT/;
                     <pre class="browser-hl">
-                    <code class="language-{ %hilight-langs{ %prm<lang>.uc } }">{ %tml<escaped>(%prm<contents>) }
-                    </code></pre>
+                    <code class="language-{ %hilight-langs{ %prm<lang>.uc } }">{ %tml<escaped>(%prm<contents>) }</code></pre>
                     HILIGHT
             }
             elsif %prm<lang> ~~ any( <Raku Rakudoc raku rakudoc> ) {
