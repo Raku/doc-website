@@ -76,19 +76,19 @@ my %hilight-langs = %(
             $syntax-label = 'Raku highlighting';
         }
         without $code {
-            $code = Rainbow::tokenize(%prm<contents>).map( -> $t {
+            $code = '<pre class="nohighlights">' ~ Rainbow::tokenize(%prm<contents>).map( -> $t {
                 if $t.type.key ne 'TEXT' {
                     qq[<span class="highlite-{$t.type.key}">{%tml<escaped>($t.text)}</span>]
                 }
                 else { %tml<escaped>($t.text) }
-            }).join;
+            }).join ~ '</pre>';
         }
         qq[
             <div class="raku-code raku-lang">
                 <button class="copy-code" title="Copy code"><i class="far fa-clipboard"></i></button>
                 <label>$syntax-label\</label>
                 <div>
-                    <pre class="nohighlights">$code\</pre>
+                    $code
                 </div>
             </div>
         ]
