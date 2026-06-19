@@ -127,9 +127,3 @@ raku --doc=MarkDown2 repo_docs/README.rakudoc > README.md
 ```
 
 
-
-
-
-
-----
-Rendered from  at 2024-11-12T02:43:57Z
