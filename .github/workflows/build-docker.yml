@@ -1,11 +1,11 @@
 name: Build Docker Container
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+  #push:
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
+  #workflow_dispatch:
   #schedule:
     # Runs at 02:00 UTC every day
    # - cron: '0 2 * * *'
