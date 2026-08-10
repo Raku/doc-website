@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  schedule:
-    # every 8 hours
-    - cron: '0 0,8,16 * * *'
+#  schedule:
+ #   # every 8 hours
+  #  - cron: '0 0,8,16 * * *'
 
 jobs:
   build_and_push:
@@ -16,6 +16,6 @@ jobs:
       QUAY_PASSWORD: ${{ secrets.REGISTRY_RW_PASSWORD }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
       - name: Build and push container
         run: ./scripts/cibuild.sh container

@@ -1,4 +1,4 @@
-FROM docker.io/finanalyst/raku-cro-rrr-base AS builder
+FROM docker.io/finanalyst/raku-doc-website-base AS builder
 RUN apk add --no-cache zip
 
 WORKDIR /build
