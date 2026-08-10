@@ -5,6 +5,7 @@ WORKDIR /build
 COPY . .
 
 # Install dependencies and build site
+RUN POD_RENDER_NO_HIGHLIGHTER=1 zef install . --deps-only -/test
 RUN ./bin_files/build-site --without-completion --no-status
 RUN ./bin_files/build-site --no-status EBook
 
