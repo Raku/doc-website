@@ -4,28 +4,10 @@ use Doc::TypeGraph::Viz;
 use Collection::Progress;
 
 sub ($pp, %options) {
-    unless (
-        ('typegraphs'.IO ~~ :e & :d)
-        and ( 'type-graph.txt'.IO.modified le 'typegraphs'.IO.modified )
-        and ( +'typegraphs'.IO.dir > 1 )
-        )
+    unless +'typegraphs'.IO.dir > 1
     {
-        note 'Generating Typegraphs' unless %options<no-status>;
-        mkdir 'typegraphs' unless 'typegraphs'.IO ~~ :e & :d;
-        my $viz = Doc::TypeGraph::Viz.new;
-        my $tg  = Doc::TypeGraph.new-from-file('type-graph.txt');
-        $viz.write-type-graph-images(path => "typegraphs",
-            :force,
-            type-graph => $tg);
-        .unlink for 'typegraphs'.IO.dir( test => *.ends-with('.dot') );
-        for 'typegraphs'.IO.dir {
-            if .Str ~~ / 'int.svg' / {
-                .rename: .Str.subst(/ 'type-graph-' /, 'native-').subst(/ \:\: /, '', :g)
-            }
-            else {
-                .rename: .Str.subst(/ 'type-graph-' /, '').subst(/ \:\: /, '', :g)
-            }
-        }
+        note 'No typegraphs. They need to be generated with bin_files/generate-typegraph-images.raku'' unless %options<no-status>;
+        return ()
     }
     my %ns;
     my @files = 'typegraphs'.IO.dir(test => *.ends-with('.svg'))>>.relative('typegraphs')>>.IO>>.extension('');

@@ -12,10 +12,11 @@
         "RakuConfig:ver<0.7.3+>",
         "Collection:ver<0.17.3+>",
         "Terminal::ANSIColor:ver<0.9+>:auth<zef:lizmat>",
-        "Doc::TypeGraph:ver<2.2.1.1+>",
-        "Doc::TypeGraph::Viz:ver<2.2.1.1+>",
+        "Doc::TypeGraph:ver<2.3.0+>:auth<zef:finanalyst>",
+        "Doc::TypeGraph::Viz:ver<2.3.0+>:auth<zef:finanalyst>",
         "Cro::HTTP:ver<0.8.9>:auth<zef:cro>",
-        "Rainbow:ver<0.3.0+>:auth<zef:patrickb>"
+        "Rainbow:ver<0.3.0+>:auth<zef:patrickb>",
+        "File::Directory::Tree"
     ],
     "build-depends": [],
     "support": {
