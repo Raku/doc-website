@@ -6,7 +6,7 @@ use Collection::Progress;
 sub ($pp, %options) {
     unless +'typegraphs'.IO.dir > 1
     {
-        note 'No typegraphs. They need to be generated with bin_files/generate-typegraph-images.raku'' unless %options<no-status>;
+        note 'No typegraphs. They need to be generated with bin_files/generate-typegraph-images.raku' unless %options<no-status>;
         return ()
     }
     my %ns;
