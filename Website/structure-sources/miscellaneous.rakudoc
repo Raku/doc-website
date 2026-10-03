@@ -7,9 +7,6 @@
 =for ListFiles :select<kind=Module>
 Modules in Core requiring explicit C<use>, eg C<use Test>
 
-=for ListFiles :select<kind=Language, category=advanced>
-Advanced topics
-
 =for ListFiles :select<kind=Programs>
 Programs
 
