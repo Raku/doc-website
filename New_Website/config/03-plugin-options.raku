@@ -1,14 +1,7 @@
 %(
     plugin-options => %(
         SiteMap => %(
-            :root-domain<https://docs.raku.org>,
-        ),
-        RakuREPL => %(
-            :repl-websocket('wss://finanalyst.org/raku_repl'),
-        ),
-        ConfigEdit => %(
-            :suggestion-websocket('wss:finanalyst.org/suggestion_box'),
-            :patch-limit(5120), # limit on length of patch 5k chars
+            :root-domain<https://new-raku.finanalyst.org>,
         ),
         CreditObject => %(
             :top-committer-threshold(250),

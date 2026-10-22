@@ -1,9 +1,9 @@
 use v6.d;
 use RakuDoc::Render;
 use JSON::Fast;
-use Elucid8-Build;
+use Elucid8-Utilities;
 
-unit class Raku-Doc-Website::Search;
+unit class Doc-Website::Plugin::Search;
 has %.config =
     :name-space<Search>,
 	:version<0.1.0>,
@@ -54,8 +54,8 @@ has %.config =
 ;
 
 method enable( RakuDoc::Processor:D $rdp ) {
-    $rdp.add-templates( $.search-templates, :source<Search plugin> );
     $rdp.add-data( %!config<name-space>, %!config );
+    $rdp.add-templates( $.search-templates, :source<Search plugin> );
 }
 
 sub escape(Str $s) is export {
@@ -68,7 +68,7 @@ sub escape-json(Str $s) is export {
             .subst(｢.｣, '%2E', :g)
 }
 method prepare-search-data( $rdp, $lang, $to, %config ) {
-    say 'Preparing Search data';
+    stage 'Preparing Search data';
     # This routine creates the JS data structure to be added to the JS query function
     # The data structure is an array of hashes each having keys
     # :category, :value, :url, :info, :type
@@ -156,7 +156,7 @@ method prepare-search-data( $rdp, $lang, $to, %config ) {
         elsif $pre.<category> ne $pos.<category> { $pre.<category> leg $pos.<category> }
         else { $pre.<value> leg $pos.<value> }
     }
-    ("$to/" ~ NAV_DIR ~ "/searchData.json").IO.spurt: JSON::Fast::to-json( @entries.sort( $search-order ) );
+    "$to/assets/searchData.json".IO.spurt: JSON::Fast::to-json( @entries.sort( $search-order ) );
 }
 
 method search-templates {

@@ -2,7 +2,7 @@ use v6.d;
 use RakuDoc::Render;
 use JSON::Fast;
 
-unit class Raku-Doc-Website::DataTable;
+unit class Doc-Website::Plugin::DataTable;
 
 has %.config =
     :name-space<DataTable>,
@@ -59,7 +59,7 @@ method templates {
                         <tr><td>{ .value[0]<subkind> }</td>
                             <td>{ .key }</td>
                             <td>{   .value
-                                    .map({ '<a href="' ~ .<source> ~ '.html' ~ ( .<targ-in-fn> ?? ('#' ~ .<targ-in-fn> ) !! '' ) ~ '">' ~ .<src-caption> ~ '</a>' })
+                                    .map({ '<a href="' ~ .<route> ~ '.html' ~ ( .<targ-in-fn> ?? ('#' ~ .<targ-in-fn> ) !! '' ) ~ '">' ~ .<src-caption> ~ '</a>' })
                                     .join('<br>')
                                 }</td>
                         </tr>

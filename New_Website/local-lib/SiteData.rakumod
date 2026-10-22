@@ -3,7 +3,7 @@ use RakuDoc::Render;
 use RakuDoc::Processed;
 use nqp;
 use PrettyDump;
-use Elucid8-Build;
+use Elucid8-Utilities;
 use File::Directory::Tree;
 
 grammar DefinitionHeading {
@@ -52,7 +52,7 @@ class DefinitionHeadingActions {
         $!dkind     = 'syntax';
     }
 }
-class Raku-Doc-Website::SiteData {
+class Doc-Website::Plugin::SiteData {
     has %.fd;
     #| data from file data and refreshed when other files are rendered
     has %.definitions;
@@ -183,10 +183,17 @@ class Raku-Doc-Website::SiteData {
         }
         $name;
     }
+    my sub better-name( $fn ) {
+        # this needs improving because the % coding format is only useful after some threshold
+        # see https://en.wikipedia.org/wiki/Percent-encoding
+        $fn.subst(/ <-[ a .. z A .. Z 0 .. 9 _ \- \. ~ ]> /,
+                *.encode>>.fmt('%%%02X').join, :g)
+    }
     method generate-composites( $rdp, $lang, $to, %config ) {
-        say 'Generating composites';
+        stage 'Generating composites';
+
         #| create a directory for the composites
-        my $prefix = "/{ NAV_DIR }/hashed/";
+        my $prefix = "/assets/hashed/";
         mktree $to ~ $prefix;
         #| get the files by language
         %!fd := $rdp.file-data{ $lang };
@@ -195,8 +202,6 @@ class Raku-Doc-Website::SiteData {
         %things = %( routine => {}, syntax => {}, operator => {} );
         #| url mapping for HTML server 'external ref' => 'website name'
         my %url-maps;
-        #| aliases for targets to be checked for internal link consistency
-        my %aliases;
         for %!fd.kv -> $fn, %info {
             next unless %info<defns>.elems;
             #| caption to be associated with file name
@@ -211,6 +216,7 @@ class Raku-Doc-Website::SiteData {
                         :subkind( .<subkind> ),
                         :snip( .<snip> ),
                         :source( "$lang/$fn" ),
+                        :route( %info<route> ), # the route to the html eg Type/ -> type/
                         :$src-caption,
                         :targ-in-fn( .<targ-in-fn> ),
                     )
@@ -222,24 +228,23 @@ class Raku-Doc-Website::SiteData {
             for %defns.kv -> $dn, @dn-data {
                 # Only generate Composite if more than one item per name
                 next unless @dn-data.elems > 1;
-                say "Rendering composite for ｢$lang/$kind/$dn｣";
+                say "Rendering composite for ｢$lang/$kind/$dn｣"
+                    if %config<trace> and %config<trace> ~~ / << <{ %!config<name-space> }> >> /;
                 my $mapped-name = $prefix ~ nqp::sha1( "$lang/$kind/$dn" );
                 my $fn-new = "/{ $kind.Str.lc }/$dn";
-                my $esc-dn = $dn.subst(/ <-[ a .. z A .. Z 0 .. 9 _ \- \. ~ ]> /,
-                    *.encode>>.fmt('%%%02X').join, :g);
+                my $esc-dn = better-name($dn);
                 # special case '.','..','\'
                 $esc-dn ~= '_(as_name)' if $dn eq any( < . .. >);
                 $esc-dn = 'backslash character' if $dn eq '\\';
                 my $url = "/$lang/{ $kind.Str.lc }/$esc-dn";
                 %url-maps{ $url } = $mapped-name;
-                %url-maps{ $fn-new.subst(/\"/,'\"',:g) } = $mapped-name;
-                %aliases{ $fn-new.subst(/\"/,'\"',:g) } = $url;
-                #| legacy name for old URLs, will not have lang prefix
+                %url-maps{ "/$lang" ~ $fn-new.subst(/\"/,'\"',:g) } = $mapped-name;
+#                %aliases{ $fn-new.subst(/\"/,'\"',:g) } = $url;
+                #| legacy name for old URLs, will not have lang prefix, so put in only for lang = en
                 my $fn-name-old = good-name($dn);
                 unless $fn-name-old eq $dn {
                     $fn-name-old = '/' ~ $kind.Str.lc ~ '/' ~ $fn-name-old.subst(/\"/,'\"',:g);
-                    %url-maps{ $fn-name-old } = $mapped-name;
-                    %aliases{ $fn-name-old } = $url;
+                    %url-maps{ $fn-name-old } = $mapped-name if $lang eq 'en'
                 }
                 #| subtitle variable is attached to file data for search function
                 #| but shortened for actual file SUBTITLE
@@ -265,7 +270,7 @@ class Raku-Doc-Website::SiteData {
                         RakuAST::Doc::Markup.new(
                           :letter<L>,
                           :atoms('in context'),
-                          :meta( '/' ~ .<source> ~  $int-targ)
+                          :meta( .<route> ~ $int-targ)
                         ),
                         ' for ',
                         RakuAST::Doc::Markup.new(:letter<B>, :atoms( .<subkind> ~ " $dn")),
@@ -274,7 +279,7 @@ class Raku-Doc-Website::SiteData {
                     $ast-paras.add-paragraph( .<snip> );
                 }
                 my $rv = $rdp.render($comp-ast,:source-data( %(
-                    :name('&#x1F916;'),
+                    :name('&#x1F916;'), # a robot icon indicating automatic generation
                     :path($url),
                     :route($url),
                     :$lang,
@@ -306,6 +311,6 @@ class Raku-Doc-Website::SiteData {
             }
         }
         # store the mapped URLs
-        "$to/{NAV_DIR}/prettyurls".IO.spurt: %url-maps.pairs.map({ .key.raku ~ ' ' ~ .value.raku }).join("\n")
+        "$to/assets/prettyurls".IO.spurt: %url-maps.pairs.map({ .key.raku ~ ' ' ~ .value.raku }).join("\n")
     }
 }

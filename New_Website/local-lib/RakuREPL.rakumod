@@ -1,7 +1,7 @@
 use v6.d;
 use RakuDoc::Render;
 
-unit class Raku-Doc-Website::RakuREPL;
+unit class Doc-Website::Plugin::RakuREPL;
 has %.config =
         :name-space<RakuREPL>,
         :version<0.1.0>,
