@@ -1,0 +1,20 @@
+=begin rakudoc
+=TITLE A distribution intended for testing Elucid8
+
+=head Assumptions
+
+The Build component of Elucid8 assumes the following structure.
+
+=for code :lang<text>
+sandpit                      # a test bed for a web site built with elucid8
+    - config/                 # contains the website configuration
+    - L10N/                  # contains the dictionaries from the canonical to derived languages
+    - sources/
+      - canonical/          # RakuDoc content in canonical language
+      - xx/                     # content in language with code xx
+      - xx-YY/               # regional content in language with code xx-YY
+
+All names in the structure, except for C<config/>, may be modified by changing fields in
+the files in C<config/>.
+
+=end rakudoc

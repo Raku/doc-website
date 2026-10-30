@@ -1,0 +1,20 @@
+use v6.d;
+use Test;
+my @modules = <
+    PageStyling
+    SiteData
+    DataTable
+    Search
+    TypeGraphs
+    BrowserREPL
+    CreditObject
+    Edit-in-github
+>;
+
+plan @modules.elems;
+
+for @modules {
+    use-ok "Doc-Website::Plugin::$_", "Module $_ can be used";
+}
+
+done-testing;

@@ -1,7 +1,7 @@
 use v6.d;
 use RakuDoc::Render;
 
-unit class Raku-Doc-Website::ConfigEdit;
+unit class Doc-Website::Plugin::ConfigEdit;
 has %.config =
         :name-space<ConfigEdit>,
         :version<0.1.0>,
@@ -74,9 +74,7 @@ method templates {
             given %sd<type> {
                 when <primary glue info>.any {
                     my $commit-time = '<i class="fa fa-ban"></i>';
-#                    note "trace: { %sd<repo-name> }, { %sd<repo-path> }, {%sd<modified> }";
-                    $commit-time = %sd<modified>.yyyy-mm-dd if %sd<modified> ~~ DateTime:D;
-#                    note "committime: $commit-time";
+                    $commit-time = %sd<modified>.yyyy-mm-dd if %sd<modified>:exists;
                     if %sd<repo-name>:exists and %sd<repo-path>:exists {
                         qq:to/BLOCK/
                         <div class="page-edit is-hidden">

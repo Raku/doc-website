@@ -2,8 +2,9 @@ use v6.d;
 use RakuDoc::Render;
 use Git::Log;
 use JSON::Fast::Hyper;
+use Elucid8-Utilities;
 
-unit class Raku-Doc-Website::CreditObject;
+unit class Doc-Website::Plugin::CreditObject;
 has %.config =
     :name-space<CreditObject>,
     :version<0.1.0>,
@@ -21,11 +22,13 @@ has %.config =
         :CreditObjectOthers("Authors in 'Others' category:"),
     ),
 ;
+
 method enable( RakuDoc::Processor:D $rdp ) {
     $rdp.add-data( %!config<name-space>, %!config );
-    $rdp.add-templates($.credit-templates, :source<CreditObject plugin>)
+    $rdp.add-templates($.credit-templates, :source<CreditObject plugin>);
 }
 method get-repo-data( %final-config ) {
+    stage "Creating credit table";
     my $limit = %final-config<plugin-options><CreditObject><top-committer-threshold> // 250;
     my $per-year = 1;
     my %filter := %final-config<plugin-options><CreditObject><filter>;
@@ -100,13 +103,14 @@ method get-repo-data( %final-config ) {
             .list;
     my $js-obj = to-json(@objects, :sorted-keys)
             .subst(/ ('"date":') '"' (.+?) '"'/,{ "$0 new Date('$1')" },:g);
-    my $js = qq:to/JSOBJ/ ~ q:to/JSOBJ2/;
+    my $js = qq:to/JSOBJ/;
         <script type="module">
             /*----- Generated svg using d3 -----*/
             import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
             const commits = {$js-obj};
             const months = { $n-months - 1};
         JSOBJ
+    $js ~= q:to/JSOBJ2/;
             // Specify the chart’s dimensions.
             const width = 928;
             const height = 600;

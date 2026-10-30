@@ -1,0 +1,30 @@
+=begin rakudoc
+=TITLE DataTables for Elucid8
+=SUBTITLE Exposing the simple-datatables library for Elucid8
+=for AUTHOR :hidden
+Richard Hainsworth, aka finanalyst
+=for LICENSE :hidden
+Artistic-2.0
+taking into account LPLG license of library
+
+=head Overview
+
+The L<simple-DataTables library|https://github.com/fiduswriter/Simple-DataTables?tab=readme-ov-file>
+is used to create sortable searchable tables from data collected by the SiteData plugin.
+
+All options specified by the simple-DataTables documentation can be accessed by prefixing 'dt-' to the
+option name (see the example below).
+
+The custom block name is C<DataTable>.
+
+For example,
+=begin code
+=for DataTable :data<routine> :!toc
+= :dt-perPageSelect([5,10,30,50,0])
+= :dt-searchable
+= :dt-fixedHeight
+Routines
+=end code
+=place semantic:AUTHOR :caption<Plugin author>
+=place semantic:LICENSE :caption<Licensing>
+=end rakudoc

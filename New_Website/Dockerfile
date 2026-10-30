@@ -1,14 +1,11 @@
 FROM docker.io/finanalyst/raku-cro-rrr-base AS base
 
-# install deps in stage that does not depend on copy
-COPY META6.json .
-RUN zef -/test --deps-only install .
 RUN mkdir /elucid8
+COPY . /elucid8
 WORKDIR /elucid8
-COPY . .
-RUN zef install . -/test ;\
-    gather-sources;\
-    elucid8-build
+RUN zef install .
+RUN gather-sources
+RUN elucid8-build
 
 FROM docker.io/caddy AS server
 
