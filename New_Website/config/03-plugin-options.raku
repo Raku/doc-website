@@ -1,7 +1,7 @@
 %(
     plugin-options => %(
         SiteMap => %(
-            :root-domain<https://new-raku.finanalyst.org>,
+            :root-domain<https://docs.raku.org>,
         ),
         CreditObject => %(
             :top-committer-threshold(250),
