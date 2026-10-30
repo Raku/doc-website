@@ -36,7 +36,7 @@ method templates {
                         qq:to/BLOCK/
                         <div class="page-edit">
                             <a class="button page-edit-button tooltip"
-                                href="https://github.com/{%sd<repo-name>}/edit/main/{%sd<edit-path>??%sd<edit-path> ~ '/' !!''}{%sd<repo-path>}">
+                                href="https://github.com/{%sd<repo-name>}/edit/main/{%sd<repo-edit-stem>}{%sd<repo-path>}">
                                 <span class="icon">
                                     <i class="fas fa-pen-alt is-medium"></i>
                                 </span>
