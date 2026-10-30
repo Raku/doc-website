@@ -24,11 +24,12 @@
             ),
         ),
         'self' => %( # meaning this repository
-            repo-name => 'raku-doc-website',
+            repo-name => 'Raku/doc-website',
             description => 'website sources',
             languages => %(
                 en => %(
                     source-entry => 'site-sources/en/',
+                    edit-path => 'New_Website',
                 ),
             ),
         ),

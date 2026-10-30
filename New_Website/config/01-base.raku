@@ -14,14 +14,14 @@
     :!quiet,                # no trace if True, over-rides trace
     :trace(),               # a list of plugins to toggle debug output, all if empty
     # typically, a plugin or stage will emit an entrance message
-    :with-only<
-        Language/operators Language/REPL Language/variables Language/math Language/101-basics
-        Type/AST Type/Any Type/IO/Handle Type/IO/CatHandle Type/IO/Special
-        Type/IO/ArgFiles Type/IO/Socket Type/IO/Notification Type/IO/Pipe
-        Type/IO/Spec Type/IO/Path Type/RakuAST/Doc
-        rakudoc_v2_specification
-        about 403 404 license
-    >,           # only render files in this list
+    :with-only(),  #<
+#        Language/operators Language/REPL Language/variables Language/math Language/101-basics
+#        Type/AST Type/Any Type/IO/Handle Type/IO/CatHandle Type/IO/Special
+#        Type/IO/ArgFiles Type/IO/Socket Type/IO/Notification Type/IO/Pipe
+#        Type/IO/Spec Type/IO/Path Type/RakuAST/Doc
+#        rakudoc_v2_specification
+#        about 403 404 license
+#    >,           # only render files in this list :with-only() for all
     :ignore(),              # ignore files in this list
     :publication<publication>, # directory where rendered HTML files are placed
     :landing-page<index>,   # name of file where the web-site starts
