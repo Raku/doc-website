@@ -117,6 +117,8 @@ A better way, though, to tweak or add new plugins and see how they affect the we
 # Deployment of website
 The main branch is deployed to `docs-dev.raku.org` every two hours. Look there to see your changes after they're merged.
 
+The new website in `New_Website/` is built separately (daily, and on pushes to main that touch it) into `quay.io/chroot.club/raku-doc-website` and deployed to `dev.docs.raku.org`.
+
 The production version of the website is `docs.raku.org`. Administrators update it manually, after verifying things look good on dev. 
 
 # Updates to the README

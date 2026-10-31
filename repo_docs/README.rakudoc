@@ -133,6 +133,10 @@ the distribution C<raku-collection-plugin-development>.
 The main branch is deployed to C<docs-dev.raku.org> every two hours. Look there
 to see your changes after they're merged.
 
+The new website in C<New_Website/> is built separately (daily, and on pushes to
+main that touch it) into C<quay.io/chroot.club/raku-doc-website> and deployed to
+C<dev.docs.raku.org>.
+
 The production version of the website is C<docs.raku.org>. Administrators update
 it manually, after verifying things look good on dev. 
 
