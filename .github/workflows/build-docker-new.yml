@@ -1,0 +1,25 @@
+name: Build New Website Container
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'New_Website/**'
+      - 'scripts/cibuild.sh'
+      - '.github/workflows/build-docker-new.yml'
+  schedule:
+    # daily at 02:00 UTC; doc sources come from Raku/doc, so rebuild even without commits here
+    - cron: '0 2 * * *'
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    env:
+      QUAY_USERNAME: ${{ secrets.REGISTRY_RW_USERNAME }}
+      QUAY_PASSWORD: ${{ secrets.REGISTRY_RW_PASSWORD }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Build and push container
+        run: ./scripts/cibuild.sh new-website
