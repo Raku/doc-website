@@ -95,20 +95,20 @@
               <div class="card card-home">
                 <div class="card-content">
                   <div class="has-text-centered">
-                    <a href="/routines">
+                    <a href="/all-routines">
                       <span class="icon is-large has-text-primary">
                         <i class="fas fa-paperclip icon-large"></i>
                       </span>
                     </a>
                   </div>
                   <div class="content has-text-centered">
-                    <p class="title is-5 has-text-primary"><a href="/routines">Routine Reference</a></p>
+                    <p class="title is-5 has-text-primary"><a href="/all-routines">Routine Reference</a></p>
                   </div>
                   <div class="content has-text-centered">
                     Index of built-in subroutines and methods.
                   </div>
                   <div class="has-text-centered">
-                    <a class="button is-primary" href="/routines">
+                    <a class="button is-primary" href="/all-routines">
                       <strong>Learn more</strong>
                     </a>
                   </div>
