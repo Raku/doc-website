@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+    # The build context is the repo root (Website/Dockerfile COPYs .), so
+    # almost any change is relevant; only skip New_Website-specific ones.
+    paths-ignore:
+      - 'New_Website/**'
+      - '.github/workflows/build-docker-new.yml'
   schedule:
     # every 8 hours
     - cron: '0 0,8,16 * * *'
