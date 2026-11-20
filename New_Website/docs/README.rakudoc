@@ -1,20 +1,44 @@
 =begin rakudoc
-=TITLE A distribution intended for testing Elucid8
+=TITLE The Raku documentation suite built using Elucid8
 
-=head Assumptions
+=head General deployment
 
-The Build component of Elucid8 assumes the following structure.
+Obtain an container image by running I<Podman> | I<Docker> using C<New_Website/Dockerfile>.
+=item During the image generation, the document sources are pulled into the workspace from their
+repos;
+=item the HTML files and other assets are generated
+=item the HTML & assets are packaged with Caddy
+=item a CMD is set so that caddy serves the HTML in answer to HTTP messages on :80
 
+=head Local deployment
+
+Local deployment is intended for those who wish to contribute to this repository by modifying
+the index files in C<site-sources> or the plugins in C<local-lib>.
+
+=item Clone the repo with C<git clone https://github.com/raku/doc-website.git raku-doc-website>
+=item Modify files in repo as need be
+=item create image (see below)
+=item run a container using image (see below)
+=item inspect generated website by pointing browser at C<localhost:3000>
+
+For local deployment, it is better to use a Cro app rather than Caddy.
+
+head2 Create image & run a container
+=item assuming the current working directory in your local terminal is raku-doc-wehsite as cloned using git
+=begin numitem
+Create an image called RakuDocumentation by running I<Podman> using C<New_Website/LocalContainer.dockerfile>.
 =for code :lang<text>
-sandpit                      # a test bed for a web site built with elucid8
-    - config/                 # contains the website configuration
-    - L10N/                  # contains the dictionaries from the canonical to derived languages
-    - sources/
-      - canonical/          # RakuDoc content in canonical language
-      - xx/                     # content in language with code xx
-      - xx-YY/               # regional content in language with code xx-YY
+cd New_Website
+podman build -f=LocalContainer.dockerfile -t=RakuDocumentation .
+=end numitem
 
-All names in the structure, except for C<config/>, may be modified by changing fields in
-the files in C<config/>.
+=head2 Running the image as a container
 
+Assuming the image is RakuDocumentation
+=code podman run --rm -d --name=rdw  --network=host RakuDocumentation
+
+Point the browser to C<localhost:3000>, which means that in the browser's URL window, type C<localhost:3000>.
+
+Once inspecting is complete, the container will need to be removed, eg.
+=code podman stop rdw
 =end rakudoc
