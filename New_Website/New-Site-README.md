@@ -1,6 +1,6 @@
 # Getting this to work
 
-Obtain an image by running Podman using DockerFile.
+Obtain an image by running Podman using Dockerfile.
 
 Run a container based on the image with volume 
 setting `New_Website` directory in repo to `/elucid8` in container.
@@ -10,7 +10,6 @@ The following directories are created:
 - repo - which contain clones of three Github repos:
   - rakudoc - The current Rakudoc specification
   - raku-doc - The raku documentation repo
-  - for-testing - the finanalyt/tmp-test repo
 
 Next steps:
 - containerise it with a script like
